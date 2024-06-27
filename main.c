@@ -120,3 +120,6 @@ int main(int ac,char **av,char **env)
     // while(arr[i])
         printf("%s\n",str);
 }
+//first should if u find a pipe in the first or last throw an error o|| if u find  || two pipes throw an error
+//should firstly make a just split by space and then fill the node based at the pipes or redirections or quotations
+//make a list for the envirement with two members name and value
