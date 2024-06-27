@@ -33,7 +33,7 @@ char ** cmdtrim(char *str)
     int end=0;
     int i=0;
     char string=malloc(sizeof(char *))
-
+ 
 while (*str)
 	{
 		while (*str && *str == ' ')
