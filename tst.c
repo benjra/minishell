@@ -1,3 +1,4 @@
+#include "mini.h"
 char *ft_strncpy(char *s1, char *s2, int n)
 {
     int i = -1;
@@ -25,7 +26,7 @@ char    **ft_split(char *str)
             i++;
     }
     
-    char **out = (char **)malloc(sizeof(char *) * (wc));
+    char **out = (char **)malloc(sizeof(char *) * (wc + 1));
     i = 0;
     
     while (str[i])
@@ -43,11 +44,11 @@ char    **ft_split(char *str)
     }
     return (out);
 }
-int main()
-{
-    char *str="hi hello everyone";
-    char **strtrim=ft_split(str);
-    int i=0;
-    while(strtrim)
-        printf("%s",strtrim[i++]);
-    }
+// int main()
+// {
+//     char *str="hi hello everyone";
+//     char **strtrim=ft_split(str);
+//     int i=0;
+//     while(strtrim)
+//         printf("%s",strtrim[i++]);
+//     }

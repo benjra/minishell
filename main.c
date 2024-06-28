@@ -1,4 +1,4 @@
-//#include "mini.h"
+#include "mini.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,28 +27,28 @@ int arrlen(char **av)
     return (len);
 }
 
-char ** cmdtrim(char *str)
-{
-    int start=0;
-    int end=0;
-    int i=0;
-    char string=malloc(sizeof(char *))
+// char ** cmdtrim(char *str)
+// {
+//     int start=0;
+//     int end=0;
+//     int i=0;
+//     char *string=malloc(sizeof(char *));
  
-while (*str)
-	{
-		while (*str && *str == ' ')
-			str++;
-		if (*str)
-		{
-			string[index_string] = alloc((char *)s, c);
-			if (!string[index_string])
-				return (free_split(string, index_string));
-			index_string++;
-		}
-		while (*s && *s != c)
-			s++;
-	}
-}
+// while (*str)
+// 	{
+// 		while (*str && *str == ' ')
+// 			str++;
+// 		if (*str)
+// 		{
+// 			string[index_string] = alloc((char *)s, c);
+// 			if (!string[index_string])
+// 				return (free_split(string, index_string));
+// 			index_string++;
+// 		}
+// 		while (*s && *s != c)
+// 			s++;
+// 	}
+// }
 // char	**ft_strtrim(char  **str)
 // {
 //     char **arr;
@@ -113,12 +113,14 @@ char	*tstring(char **av, int len)
 	return (str);
 }
 
-int main(int ac,char **av,char **env)
+int main(int ac,char **av)//,char **env)
 {
+	(void)ac;
     char *str=tstring(av,arrlen(av));
     int i=0;
-    // while(arr[i])
-        printf("%s\n",str);
+	char **arr=ft_split(str);
+    while(arr[i])
+        printf("%s\n",arr[i++]);
 }
 //first should if u find a pipe in the first or last throw an error o|| if u find  || two pipes throw an error
 //should firstly make a just split by space and then fill the node based at the pipes or redirections or quotations
