@@ -8,3 +8,4 @@ typedef struct list1
 } t_list1;
 
 char    **ft_split(char *str);
+int ft_strlen(char *str);

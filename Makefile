@@ -1,9 +1,10 @@
 NAME = mini
 
-CCFLGS = -Wall -Wextra -Werror  -fsanitize=address -g
+CCFLGS = -Wall -Wextra -Werror  #-fsanitize=address -g
 CC = cc
 SRC_FILE =main.c \
-	tst.c
+	tst.c \
+	utils.c
 OBJ = $(SRC_FILE : .o:.c)
 
 

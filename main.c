@@ -27,61 +27,6 @@ int arrlen(char **av)
     return (len);
 }
 
-// char ** cmdtrim(char *str)
-// {
-//     int start=0;
-//     int end=0;
-//     int i=0;
-//     char *string=malloc(sizeof(char *));
- 
-// while (*str)
-// 	{
-// 		while (*str && *str == ' ')
-// 			str++;
-// 		if (*str)
-// 		{
-// 			string[index_string] = alloc((char *)s, c);
-// 			if (!string[index_string])
-// 				return (free_split(string, index_string));
-// 			index_string++;
-// 		}
-// 		while (*s && *s != c)
-// 			s++;
-// 	}
-// }
-// char	**ft_strtrim(char  **str)
-// {
-//     char **arr;
-//     int i=0;
-//     int j=0;
-    
-//     while(*str)
-//     {
-//         if(*str!=' ')
-//             i++;
-//         str++;
-//     }
-//     arr=malloc(i+1);
-//     i=0;
-//     if(!arr)
-//         return(NULL);
-//     while(*str)
-//     {
-//         arr[i][j]=*str;
-//         if(*str==' ')
-//         {
-//             j++;
-//             i=0;
-//         } 
-//         while(*str==' ')
-//         {
-//             str++;
-//         }
-//         str++;
-//     }
-//     return (arr);
-// }
-
 char	*tstring(char **av, int len)
 {
 	int		i;
@@ -112,15 +57,30 @@ char	*tstring(char **av, int len)
 	str[k - 1] = '\0';
 	return (str);
 }
-
+int pipe_frst(char *str)
+{
+    int i=0;
+    while(str[i] && (str[i] == ' ' || str[i] == '\t' ))
+        i++;
+    if(str[i]=='|')
+        return 0;
+    //how to access to the last
+    i=ft_strlen(str);
+    if((str[i-2] != ' ' && str[i-2] != '\t' ) && str[i-1]=='|' && str[i]=='\0' )
+        return 0;
+    return 1;
+}
 int main(int ac,char **av)//,char **env)
 {
 	(void)ac;
     char *str=tstring(av,arrlen(av));
-    int i=0;
+    
 	char **arr=ft_split(str);
-    while(arr[i])
-        printf("%s\n",arr[i++]);
+    if(pipe_frst(str)==0)//should know why it doesnt work
+        printf("zsh: parse error near `|'");
+    free(str);
+    printf("%s",arr[0]);
+    // free(arr);
 }
 //first should if u find a pipe in the first or last throw an error o|| if u find  || two pipes throw an error
 //should firstly make a just split by space and then fill the node based at the pipes or redirections or quotations
