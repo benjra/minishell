@@ -66,21 +66,22 @@ int pipe_frst(char *str)
         return 0;
     //how to access to the last
     i=ft_strlen(str);
-    if((str[i-2] != ' ' && str[i-2] != '\t' ) && str[i-1]=='|' && str[i]=='\0' )
+    if((str[i-2] != ' ' && str[i-2] != '\t' ) && str[i-1]=='|' && str[i]=='\0' )//this is doesnt work
         return 0;
     return 1;
 }
-int main(int ac,char **av)//,char **env)
+int main(int ac,char **av) //,char **env)
 {
 	(void)ac;
     char *str=tstring(av,arrlen(av));
     
 	char **arr=ft_split(str);
-    if(pipe_frst(str)==0)//should know why it doesnt work
-        printf("zsh: parse error near `|'");
+    if(pipe_frst(str)==0)//should know why it doesnt work with some cases and work with case like this "|hell "
+        printf("error near `|' ");
+    else 
+        printf("good");
     free(str);
-    printf("%s",arr[0]);
-    // free(arr);
+    free(arr);
 }
 //first should if u find a pipe in the first or last throw an error o|| if u find  || two pipes throw an error
 //should firstly make a just split by space and then fill the node based at the pipes or redirections or quotations
