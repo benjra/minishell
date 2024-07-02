@@ -40,11 +40,19 @@ t_name *fill_env(char **env)
 {
     char *name;
     char *value;
+	char *tmp;
     int i=0;
     t_name *lst;
     lst=NULL;
     while(env[i])
     {
-        
+        tmp=ft_strdup(env[i]);
+		name=tmp;
+		value=ft_strchr(env[i],'=');
+		*value = 0;
+        value++;
+		ft_lstadd_back(&lst,ft_lstnew(name,value));
+		i++;
     }
+	return(lst);
 }
