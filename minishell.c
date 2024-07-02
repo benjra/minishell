@@ -4,8 +4,8 @@ int main(int ac,char **av,char **env)
 {
     if(ac!=1)
     {
-        printf("there is no need of arguments here");
-        exit(0);
+        write(1,"there is no need of arguments here",35);
+        return 1;
     }
     // ignore_signals();
     signal(SIGINT, SIG_IGN);
