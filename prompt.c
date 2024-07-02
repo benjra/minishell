@@ -1,6 +1,6 @@
 void prompt()
 {
-    char **
+    char **ptr;
     while(1)
     {
 
