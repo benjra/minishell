@@ -70,19 +70,19 @@ int pipe_frst(char *str)
         return 0;
     return 1;
 }
-int main(int ac,char **av) //,char **env)
-{
-	(void)ac;
-    char *str=tstring(av,arrlen(av));
+// int main(int ac,char **av) //,char **env)
+// {
+// 	(void)ac;
+//     char *str=tstring(av,arrlen(av));
     
-	char **arr=ft_split(str);
-    if(pipe_frst(str)==0)//should know why it doesnt work with some cases and work with case like this "|hell "
-        printf("error near `|' ");
-    else 
-        printf("good");
-    free(str);
-    free(arr);
-}
+// 	char **arr=ft_split(str);
+//     if(pipe_frst(str)==0)//should know why it doesnt work with some cases and work with case like this "|hell "
+//         printf("error near `|' ");
+//     else 
+//         printf("good");
+//     free(str);
+//     free(arr);
+// }
 //first should if u find a pipe in the first or last throw an error o|| if u find  || two pipes throw an error
 //should firstly make a just split by space and then fill the node based at the pipes or redirections or quotations
 //make a list for the envirement with two members name and value

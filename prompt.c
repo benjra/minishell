@@ -1,8 +1,7 @@
+#include "mini.h"
+char *gethost()
 void prompt()
 {
-    char **ptr;
-    while(1)
-    {
-
-    }
+    char *ptr;
+    ptr=ft_strdup()
 }
