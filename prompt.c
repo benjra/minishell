@@ -1,5 +1,6 @@
 #include "mini.h"
-char *gethost()
+
+// char *gethost()
 void prompt()
 {
     char *ptr;

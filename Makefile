@@ -1,24 +1,26 @@
 NAME = mini
 
-CCFLGS = -Wall -Wextra -Werror  #-fsanitize=address -g
+CCFLGS = -Wall -Wextra -Werror #-fsanitize=address -g
 CC = cc
-SRC_FILE =main.c \
-	tst.c \
+SRC_FILES = minishell.c \
+	program.c \
+	get_env.c \
 	utils.c
-OBJ = $(SRC_FILE : .o:.c)
 
+OBJ_FILES = $(SRC_FILES:.c=.o)
 
 %.o: %.c
-	 $(CC) $(CCFLGS) 
+	$(CC) $(CCFLGS) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME):  $(SRC_FILE) $(OBJ)
-	 $(CC) $(CCFLGS) $(SRC_FILE) $(OBJ)  -o $(NAME)
+$(NAME): $(OBJ_FILES)
+	$(CC) $(CCFLGS) $(OBJ_FILES)  -lreadline -o $(NAME)
 
+clean:
+	rm -f $(OBJ_FILES)
 
-clean: $(OBJ) 
-	rm -rf $(OBJ) 
 fclean: clean
-	rm -rf $(NAME) 
-re:fclean all
+	rm -f $(NAME)
+
+re: fclean all

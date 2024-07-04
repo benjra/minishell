@@ -1,7 +1,7 @@
 #include "mini.h"
-#include <signal.h>
 int main(int ac,char **av,char **env)
 {
+    (void) av;
     if(ac!=1)
     {
         write(1,"there is no need of arguments here",35);
