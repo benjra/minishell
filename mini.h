@@ -47,5 +47,6 @@ void    program_name(char **en);
 t_name *fill_env(char **env);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
+char *join(char *s1,char *s2);
 
 #endif

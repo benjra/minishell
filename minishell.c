@@ -9,6 +9,6 @@ int main(int ac,char **av,char **env)
     }
     // ignore_signals();
     signal(SIGINT, SIG_IGN);
-    signal(SIGQUIT, SIG_IGN);
+    signal(SIGQUIT, SIG_IGN);//shouldnt make it here
     program_name(env);
 }

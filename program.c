@@ -9,7 +9,8 @@ void    program_name(char **en)
     while(1)
     {
 
-        // prom=ft_strdup(BGreen);
+        prom=ft_strdup(BGreen);
+        prom=join(prom,">>")
         cmd=readline("hi put somthing ");//u should know how to work with readline 
         if(!cmd)
             break;
