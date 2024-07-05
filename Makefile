@@ -1,11 +1,14 @@
 NAME = mini
 
-CCFLGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CCFLGS = -Wall -Wextra -Werror -fsanitize=address -g
 CC = cc
 SRC_FILES = minishell.c \
 	program.c \
 	get_env.c \
-	utils.c
+	prompt.c \
+	utils.c \
+	parsing.c \
+	main.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

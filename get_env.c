@@ -30,7 +30,11 @@ t_name	*ft_lstnew(char *name, char *value)
 
 	linked_lst = malloc(sizeof(t_name));
 	if (!linked_lst)
+	{
+		free(linked_lst);
 		return (NULL);
+	}
+		
 	linked_lst->name = name;
 	linked_lst->value = value;
 	linked_lst->next = NULL;

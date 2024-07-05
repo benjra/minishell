@@ -57,19 +57,19 @@ char	*tstring(char **av, int len)
 	str[k - 1] = '\0';
 	return (str);
 }
-int pipe_frst(char *str)
-{
-    int i=0;
-    while(str[i] && (str[i] == ' ' || str[i] == '\t' ))
-        i++;
-    if(str[i]=='|')
-        return 0;
-    //how to access to the last
-    i=ft_strlen(str);
-    if((str[i-2] != ' ' && str[i-2] != '\t' ) && str[i-1]=='|' && str[i]=='\0' )//this is doesnt work
-        return 0;
-    return 1;
-}
+// int pipe_frst(char *str)
+// {
+//     int i=0;
+//     while(str[i] && (str[i] == ' ' || str[i] == '\t' ))
+//         i++;
+//     if(str[i]=='|')
+//         return 0;
+//     //how to access to the last
+//     i=ft_strlen(str);
+//     if((str[i-2] != ' ' && str[i-2] != '\t' ) && str[i-1]=='|' && str[i]=='\0' )//this is doesnt work
+//         return 0;
+//     return 1;
+// }
 // int main(int ac,char **av) //,char **env)
 // {
 // 	(void)ac;

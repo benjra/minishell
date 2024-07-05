@@ -3,6 +3,8 @@
 int ft_strlen(char *str)
 {
     int i=0;
+	if(!str)
+		return 0; 	
     while(str[i])
         i++;
     return i;
@@ -32,7 +34,11 @@ char	*ft_strdup(const char *s1)
 	i = 0;
 	str = malloc(sizeof(char) * ft_strlen(s2) + 1);
 	if (str == 0)
+	{
+		free(str);
 		return (0);
+	}
+		
 	while (s2[i])
 	{
 		str[i] = s2[i];
@@ -41,6 +47,7 @@ char	*ft_strdup(const char *s1)
 	str[i] = '\0';
 	return (str);
 }
+
 char *join(char *s1,char *s2)
 {
     int i=0;
@@ -50,7 +57,7 @@ char *join(char *s1,char *s2)
     char *join=malloc(len1+len2+1);
     if(!join)
         return NULL;
-    if(s1 || s2)
+    if(!s1 || !s2)
         return NULL;
     while (s1[i])
 	{
@@ -63,4 +70,11 @@ char *join(char *s1,char *s2)
 	}
     join[j]='\0';
     return (join);
+}
+void get_prompt(char **dst,char *str)
+{
+	char *tmp;
+	tmp=join(*dst,str);
+	free(*dst);
+	*dst=tmp;
 }
