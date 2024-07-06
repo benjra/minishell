@@ -2,7 +2,7 @@ NAME = mini
 
 CCFLGS = -Wall -Wextra -Werror -fsanitize=address -g
 CC = cc
-LIBFT=libft/libft.a
+LIBFT = ./libft/libft.a
 SRC_FILES = minishell.c \
 	program.c \
 	get_env.c \
@@ -19,10 +19,10 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
-	$(CC) $(CCFLGS) $(OBJ_FILES)  -lreadline $(LIBFT) -o $(NAME)
+	$(CC) $(CCFLGS) $(OBJ_FILES) $(LIBFT)  -lreadline  -o $(NAME)
 
 $(LIBFT):
-	make -C /.libft
+	make -C ./libft
 clean:
 	rm -f $(OBJ_FILES)
 
