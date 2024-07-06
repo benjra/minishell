@@ -15,7 +15,7 @@ t_name	*tail(t_name *list)
 }
 
 
-void	ft_lstadd_back(t_name **lst, t_name *new)
+void	lstadd_back(t_name **lst, t_name *new)
 {
 	if (!lst || !new)
 		return ;
@@ -24,7 +24,7 @@ void	ft_lstadd_back(t_name **lst, t_name *new)
 	else
 		tail(*lst)->next = new;
 }
-t_name	*ft_lstnew(char *name, char *value)
+t_name	*lstnew(char *name, char *value)
 {
 	t_name	*linked_lst;
 
@@ -53,7 +53,7 @@ t_name *fill_env(char **env)
 		*value = 0;
         value++;
 		name=ft_strdup(env[i]);
-		ft_lstadd_back(&lst,ft_lstnew(name,value));
+		lstadd_back(&lst,lstnew(name,value));
 		i++;
     }
 	return(lst);
