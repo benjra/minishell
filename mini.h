@@ -38,14 +38,15 @@ typedef struct list1
     char *str;
     struct list1 *next;
 } t_list1;
-
-// char    **ft_split(char *str);
-// int ft_strlen(char *str);
+typedef struct commands
+{
+    char *caracters;
+    int *tokens;
+    struct commands *next;
+}t_commands;
 char *prompt();
 void    program_name(char **en);
 t_name *fill_env(char **env);
-// char	*ft_strchr(const char *s, int c);
-// char	*ft_strdup(const char *s1);
 char *join(char *s1,char *s2);
 void get_prompt(char **dst,char *str);
 void parsing(char *str);

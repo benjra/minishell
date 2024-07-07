@@ -1,4 +1,4 @@
-NAME = mini
+NAME = minishell
 
 CCFLGS = -Wall -Wextra -Werror -fsanitize=address -g
 CC = cc

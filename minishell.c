@@ -8,7 +8,7 @@ int main(int ac,char **av,char **env)
         return 1;
     }
     // ignore_signals();
-    signal(SIGINT, SIG_IGN);
+    signal(SIGINT, handler);//create a function that print \n and handle this y using somme functs
     signal(SIGQUIT, SIG_IGN);//shouldnt make it here
     program_name(env);
 }
