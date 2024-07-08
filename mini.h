@@ -33,17 +33,37 @@ typedef struct s_name
     struct s_name *next;
 }t_name;
 
-typedef struct list1
+
+typedef enum e_token_type
 {
-    char *str;
-    struct list1 *next;
-} t_list1;
-typedef struct commands
+    TOKEN_WORD,      // For commands and arguments
+    TOKEN_PIPE,      // For '|'
+    TOKEN_REDIR_IN,  // For '<'
+    TOKEN_REDIR_OUT, // For '>'
+    TOKEN_REDIR_APPEND, // For '>>'
+    TOKEN_REDIR_HEREDOC, // For '<<'
+    TOKEN_ENV_VAR, // For environment variables
+}   t_token_type;
+
+typedef struct s_token
 {
-    char *caracters;
-    int *tokens;
-    struct commands *next;
-}t_commands;
+    t_token_type type;
+    char        *value;
+    struct s_token *next;
+}   t_token;
+
+// typedef struct list1
+// {
+//     char *str;
+//     struct list1 *next;
+// } t_list1;
+
+// typedef struct commands
+// {
+//     char *caracters;
+//     int *tokens;
+//     struct commands *next;
+// }t_commands;
 char *prompt();
 void    program_name(char **en);
 t_name *fill_env(char **env);
