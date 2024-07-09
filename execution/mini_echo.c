@@ -6,8 +6,22 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:56:13 by amabchou          #+#    #+#             */
-/*   Updated: 2024/07/09 20:56:49 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/07/09 21:05:29 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing/mini.h"
+
+void   ft_echo(char *str, int n)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        write(1, &str[i], 1);
+        i++;
+    }
+    if (n == 0)
+        write(1, "\n", 1);
+}
