@@ -1,4 +1,5 @@
 #include "../parsing/mini.h"
+
 int ft_pwd(void);
 
 int main() {
