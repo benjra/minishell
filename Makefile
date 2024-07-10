@@ -9,7 +9,8 @@ SRC_FILES = minishell.c \
 	prompt.c \
 	utils.c \
 	parsing.c \
-	main.c
+	main.c \
+	tst.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

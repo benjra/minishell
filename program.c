@@ -19,4 +19,6 @@ void    program_name(char **en)
         // printf("%s\n",cmd);
         free(prom);
     }
+    rl_clear_history();
+    //free_env() should add this func
 }

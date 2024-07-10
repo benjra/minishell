@@ -36,7 +36,7 @@ typedef struct s_name
 
 typedef enum e_token_type
 {
-    TOKEN_WORD,      // For commands and arguments
+    TOKEN_WORD ,      // For commands and arguments
     TOKEN_PIPE,      // For '|'
     TOKEN_REDIR_IN,  // For '<'
     TOKEN_REDIR_OUT, // For '>'
@@ -71,5 +71,9 @@ char *join(char *s1,char *s2);
 void get_prompt(char **dst,char *str);
 void parsing(char *str);
 int pipe_frst(char *str);
+
+
+//test
+char	**my_split(char const *s, char c);
 
 #endif
