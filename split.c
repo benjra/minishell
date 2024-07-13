@@ -1,22 +1,21 @@
 #include "mini.h"
 #define MAX_TOKENS 100
-size_t	ft_strlcpy(char *dst, char *src, size_t n)
+char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
-	size_t	i;
-	size_t	srclen;
+	unsigned int	i;
 
 	i = 0;
-	srclen = ft_strlen(src);
-	if (n != 0)
+	while (src[i] != '\0' && i < n)
 	{
-		while (src[i] && i < n -1)
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
+		dest[i] = src[i];
+		i++;
 	}
-	return (srclen);
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
 }
 
 int is_space(char str)
@@ -33,7 +32,7 @@ char **split_string(char *str, int *count) {
     char *token;
     
     while (*str) {
-        if (*str == '"') {
+        if (*str == '"' || *str=='\'') {
             in_quotes = !in_quotes;
         } else if (is_space(*str) && !in_quotes) {
             if (start != str) {
@@ -51,7 +50,7 @@ char **split_string(char *str, int *count) {
     if (start != str) {
         size_t len = str - start;
         token = malloc(len + 1);
-        ft_strlcpy(token, start, len);//strncpy a problem of not returning the last caracter
+        ft_strncpy(token, start, len);
         token[len] = '\0';
         tokens[token_count++] = token;
     }

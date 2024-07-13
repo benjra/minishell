@@ -50,24 +50,24 @@ t_token *fill_list(char **lst)
     lst=NULL;
     while(lst[i])
     {
-		if(ft_strchr(lst[i],'"') || ft_strchr(lst[i],'\''))
-
+		if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'<') || ft_strchr(lst[i])=='>' || ft_strchr(lst[i])=='<<' || ft_strchr(lst[i])=='>>')
+		{
+			int j=0;
+			while(lst[i][j])
+			{
+				//for each symbols you sould make a node + make her type too here 
+			}
+		}
         else
         {
             value=ft_strdup(lst[i]);
-            if(*value=='|')
-                type=TOKEN_PIPE;
-            else if(*value=='>')
-                type=TOKEN_REDIR_IN;
-            else if(*value=='<')
-                type=TOKEN_REDIR_OUT;
-            else
-                type=TOKEN_WORD;
+			if(ft_strncmp(value,"|"))
+				type=
 
         } 
 		lstadd_back(&lst,lstnew(type,value));
 		i++;
     }
-	return(lst);
+	return(lst); 
 }
 // if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'>') || ft_strchr(lst[i],'<'))
