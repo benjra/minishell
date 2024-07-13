@@ -31,7 +31,7 @@ t_token	*lstnew(t_token_type type, char *value)
 	linked_lst = malloc(sizeof(t_token));
 	if (!linked_lst)
 	{
-		free((linked_lst);
+		free(linked_lst);
 		return (NULL);
 	}
 		
@@ -40,7 +40,8 @@ t_token	*lstnew(t_token_type type, char *value)
 	linked_lst->next = NULL;
 	return (linked_lst);
 }
-t_token *fill_env(char **lst)
+
+t_token *fill_list(char **lst)
 {
     t_token_type type;
     char *value;
@@ -53,7 +54,6 @@ t_token *fill_env(char **lst)
 
         else
         {
-            // if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'>') || ft_strchr(lst[i],'<'))
             value=ft_strdup(lst[i]);
             if(*value=='|')
                 type=TOKEN_PIPE;
@@ -64,10 +64,10 @@ t_token *fill_env(char **lst)
             else
                 type=TOKEN_WORD;
 
-        }
-		    
+        } 
 		lstadd_back(&lst,lstnew(type,value));
 		i++;
     }
 	return(lst);
 }
+// if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'>') || ft_strchr(lst[i],'<'))

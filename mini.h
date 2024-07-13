@@ -71,6 +71,7 @@ char *join(char *s1,char *s2);
 void get_prompt(char **dst,char *str);
 void parsing(char *str);
 int pipe_frst(char *str);
+char **split_string(char *str, int *count);
 
 
 //test

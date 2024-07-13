@@ -84,10 +84,11 @@ void parsing(char *str)
 {
     // char **arr=ft_split(str);
 	char **string ;
-	string=my_split(str,' ');
+	int count=0;
+	string=split_string(str,&count);
 	int i=0;
 	while(string[i])
-		printf("%s",string[i]);
+		printf("%s\n",string[i++]);
 	//syntax error
     if(pipe_frst(str)==0 || double_pipe(str)==0)
         printf("error near `|' \n");
