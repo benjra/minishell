@@ -1,8 +1,8 @@
 #include "mini.h"
 
-t_name	*tail(t_name *list)
+t_token	*tails(t_token *list)
 {
-	t_name	*temp;
+	t_token	*temp;
 
 	temp = list;
 	if (!list)
@@ -15,16 +15,16 @@ t_name	*tail(t_name *list)
 }
 
 
-void	lstadd_back(t_name **lst, t_name *new)
+void	lstadd_backs(t_token **lst, t_token *new)
 {
 	if (!lst || !new)
 		return ;
 	if (*lst == NULL)
 		*lst = new;
 	else
-		tail(*lst)->next = new;
+		tails(*lst)->next = new;
 }
-t_token	*lstnew(t_token_type type, char *value)
+t_token	*lstnews(int type, char *value)
 {
 	t_token	*linked_lst;
 
@@ -43,31 +43,33 @@ t_token	*lstnew(t_token_type type, char *value)
 
 t_token *fill_list(char **lst)
 {
-    t_token_type type;
+    int type;
     char *value;
     int i=0;
-    t_token *lst;
-    lst=NULL;
+    t_token *list;
+    list=NULL;
     while(lst[i])
     {
-		if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'<') || ft_strchr(lst[i])=='>' || ft_strchr(lst[i])=='<<' || ft_strchr(lst[i])=='>>')
+		if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'<') || ft_strchr(lst[i],'>'))
 		{
 			int j=0;
 			while(lst[i][j])
 			{
-				//for each symbols you sould make a node + make her type too here 
+				//should do somethin here 
+				// if()
+				//for each symbols you should make a node + make her type too here 
 			}
 		}
         else
         {
             value=ft_strdup(lst[i]);
-			if(ft_strncmp(value,"|"))
-				type=
+			// if(ft_strncmp(value,"|"))
+				type=1;
 
         } 
-		lstadd_back(&lst,lstnew(type,value));
+		lstadd_backs(&list,lstnews(type,value));
 		i++;
     }
-	return(lst); 
+	return(list); 
 }
 // if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'>') || ft_strchr(lst[i],'<'))

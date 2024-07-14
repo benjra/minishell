@@ -34,20 +34,27 @@ typedef struct s_name
 }t_name;
 
 
-typedef enum e_token_type
-{
-    TOKEN_WORD ,      // For commands and arguments
-    TOKEN_PIPE,      // For '|'
-    TOKEN_REDIR_IN,  // For '<'
-    TOKEN_REDIR_OUT, // For '>'
-    TOKEN_REDIR_APPEND, // For '>>'
-    TOKEN_REDIR_HEREDOC, // For '<<'
-    TOKEN_ENV_VAR, // For environment variables
-}   t_token_type;
+#define  TOKEN_WORD 1,      // For commands and arguments
+#define    TOKEN_PIPE 2,      // For '|'
+#define    TOKEN_REDIR_IN 3,  // For '<'
+#define    TOKEN_REDIR_OUT 4, // For '>'
+#define    TOKEN_REDIR_APPEND 5, // For '>>'
+#define    TOKEN_REDIR_HEREDOC 6, // For '<<'
+#define    TOKEN_ENV_VAR 7, // For environment variables
+// typedef enum e_token_type
+// {
+//     TOKEN_WORD ,      // For commands and arguments
+//     TOKEN_PIPE,      // For '|'
+//     TOKEN_REDIR_IN,  // For '<'
+//     TOKEN_REDIR_OUT, // For '>'
+//     TOKEN_REDIR_APPEND, // For '>>'
+//     TOKEN_REDIR_HEREDOC, // For '<<'
+//     TOKEN_ENV_VAR, // For environment variables
+// }   t_token_type;
 
 typedef struct s_token
 {
-    t_token_type type;
+    int type;
     char        *value;
     struct s_token *next;
 }   t_token;
@@ -72,7 +79,7 @@ void get_prompt(char **dst,char *str);
 void parsing(char *str);
 int pipe_frst(char *str);
 char **split_string(char *str, int *count);
-
+t_token *fill_list(char **lst);
 
 //test
 char	**my_split(char const *s, char c);
