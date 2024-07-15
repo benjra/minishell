@@ -49,9 +49,10 @@ t_token *fill_list(char **lst)
     t_token *list;
     list=NULL;
 	int j=0;
+	//should change the strchr to another one skipp the symbols inside quotes 
     while(lst[i])
     {		
-		if(!(lst[i][j]=='"' && lst[i][j]=='\'') && (ft_strchr(lst[i],'|') || ft_strchr(lst[i],'<') || ft_strchr(lst[i],'>') || ft_strnstr(lst[i],"<<",-1) || ft_strnstr(lst[i],">>",-1)))
+		if((lst[i][j]!='"' && lst[i][j]!='\'') && (ft_strchr(lst[i],'|') || ft_strchr(lst[i],'<') || ft_strchr(lst[i],'>') || ft_strnstr(lst[i],"<<",-1) || ft_strnstr(lst[i],">>",-1)))
 		{
 						char *new=NULL;
 						if(ft_strchr(lst[i],'|'))

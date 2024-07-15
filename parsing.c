@@ -46,7 +46,7 @@ void parsing(char *str)
 	t_token *list = fill_list(string);
 t_token *current = list; // Start with the head of the list
 
-while (current->next != NULL ) {
+while (current!= NULL ) {
     printf("%s : %d\n", current->value, current->type);
     // i++; // Increment i regardless of whether we move to the next node
     current = current->next; // Move to the next node
