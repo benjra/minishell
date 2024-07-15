@@ -50,15 +50,59 @@ t_token *fill_list(char **lst)
     list=NULL;
     while(lst[i])
     {
-		if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'<') || ft_strchr(lst[i],'>'))
+		if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'<') || ft_strchr(lst[i],'>') || ft_strnstr(lst[i],"<<",-1) || ft_strnstr(lst[i],">>",-1))
 		{
-			int j=0;
-			while(lst[i][j])
-			{
+			// int j=0;
+			char *new=NULL;
+			if(ft_strchr(lst[i],'|'))
+{				
+			new=ft_strdup("|");
+			type=2;
+			lstadd_backs(&list,lstnews(type,new));
+			// free(new);	
+			new=ft_strchr(lst[i],'|');
+			type=1;
+}			else if(ft_strchr(lst[i],'<'))
+{	
+				new=ft_strdup("<");
+				type=3;
+				lstadd_backs(&list,lstnews(type,new));
+				// free(new);	
+				new=ft_strchr(lst[i],'<');
+				type=1;
+
+}			else if(ft_strchr(lst[i],'>'))
+{				
+			new=ft_strdup(">");
+			type=4;
+			lstadd_backs(&list,lstnews(type,new));
+			// free(new);	
+			new=ft_strchr(lst[i],'>');
+			type=1;
+}			else if(ft_strnstr(lst[i],"<<",-1))
+{	
+			new=ft_strdup("<<");
+			type=6;
+			lstadd_backs(&list,lstnews(type,new));
+			// free(new);				
+			new=ft_strnstr(lst[i],"<<",-1);
+				type=1;
+
+}			else if(ft_strnstr(lst[i],">>",-1))
+{				
+			new=ft_strdup(">>");
+			type=5;
+			lstadd_backs(&list,lstnews(type,new));	
+			// free(new);
+			new=ft_strnstr(lst[i],">>",-1);
+				type=1;
+}			
+	 		*new=0;
+			new++;
+		lstadd_backs(&list,lstnews(type,new));
 				//should do somethin here 
 				// if()
 				//for each symbols you should make a node + make her type too here 
-			}
 		}
         else
         {
