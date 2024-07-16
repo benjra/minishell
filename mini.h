@@ -41,16 +41,6 @@ typedef struct s_name
 #define    TOKEN_REDIR_APPEND 5, // For '>>'
 #define    TOKEN_REDIR_HEREDOC 6, // For '<<'
 #define    TOKEN_ENV_VAR 7, // For environment variables
-// typedef enum e_token_type
-// {
-//     TOKEN_WORD ,      // For commands and arguments
-//     TOKEN_PIPE,      // For '|'
-//     TOKEN_REDIR_IN,  // For '<'
-//     TOKEN_REDIR_OUT, // For '>'
-//     TOKEN_REDIR_APPEND, // For '>>'
-//     TOKEN_REDIR_HEREDOC, // For '<<'
-//     TOKEN_ENV_VAR, // For environment variables
-// }   t_token_type;
 
 typedef struct s_token
 {
