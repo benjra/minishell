@@ -31,7 +31,8 @@ char **split_string(char *str, int *count) {
      char *start = str;
     char *token;
     
-    while (*str) {
+    while (*str) 
+    {
         if (*str == '"' || *str=='\'') {
             in_quotes = !in_quotes;
         } else if (is_space(*str) && !in_quotes) {
