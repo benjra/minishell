@@ -9,28 +9,29 @@
 //     }
 //     return i;
 // }
-// char	*ft_strchr(const char *s, int c)
+
+// char *new_strchr(char *s, int c)
 // {
 // 	int	i;
 
 // 	i = 0;
-//     while(s[i])
-//     {
-//         if(s[i]=='"' || s[i]=='\'')
-//             i=skip((char *)s,i);
-//         while(s[i] != (const char)c)
+// 	while (s[i])
+// 	{
+//         if (s[i] == '\'' || s[i] == '"')
 //         {
-//             if (s[i] == '\0')
-//             {
-//                 return (0);
-//             }
 //             i++;
+//             while (s[i] && s[i] != '\'' && s[i] != '"')
+//                 i++;
 //         }
-//     }
-	
-// 	return ((char *)s + i);
+//         else if ((char)c == s[i])
+// 			return ((char *)(&s[i]));
+// 		else
+//             i++;
+// 	}
+// 	if ((char)c == s[i])
+// 		return ((char *)(&s[i]));
+// 	return (NULL);
 // }
-
 char *join(char *s1,char *s2)
 {
     int i=0;
