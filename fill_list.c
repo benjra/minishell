@@ -40,6 +40,17 @@ t_token	*lstnews(int type, char *value)
 	linked_lst->next = NULL;
 	return (linked_lst);
 }
+// void fill_node(char *new,char **lst,t_token *list)
+// {
+// 	int i=0;
+// 						new=ft_strchr(lst[i],'|');
+// 						*new = 0 ;
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(lst[i])));
+// 						lstadd_backs(&list,lstnews(2,ft_strdup("|")));
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(new + 1)));
+// }
+// if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'>') || ft_strchr(lst[i],'<'))
+
 
 t_token *fill_list(char **lst)
 {
@@ -50,6 +61,8 @@ t_token *fill_list(char **lst)
     list=NULL;
 	// int j=0;
 	//should change the strchr to another one skipp the symbols inside quotes 
+	if (!lst || !*lst)
+		return NULL;
     while(lst[i])
     {		
 		if((ft_strchr(lst[i],'|')
@@ -113,4 +126,3 @@ t_token *fill_list(char **lst)
     }
 	return(list); 
 }
-// if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'>') || ft_strchr(lst[i],'<'))

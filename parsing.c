@@ -4,7 +4,11 @@ int pipe_frst(char *tmp)
 {
     int i=0;
     char *str;
+	if (!tmp || !*tmp)
+		return 1;
     str = ft_strtrim(tmp , "\t " );
+	if (!str || !*str)
+		return 1;
     i=ft_strlen(str);
     if(str[i-1]=='|' || str[0]=='|')
     {

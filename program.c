@@ -13,10 +13,17 @@ void    program_name(char **en)
         prom=join(prom,">>"); //why it doesnt work
         prom=prompt();
         cmd=readline(prom);//u should know how to work with readline 
-        add_history(cmd);
-        parsing(cmd);
         if(!cmd)
             break;
+        if (ft_strncmp(cmd, "", -1))
+        {
+            add_history(cmd);
+            parsing(cmd);
+        }
+            
+
+        
+        
         // printf("%s\n",cmd);
         free(prom);
     }

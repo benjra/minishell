@@ -86,3 +86,76 @@ char	*tstring(char **av, int len)
 //first should if u find a pipe in the first or last throw an error o|| if u find  || two pipes throw an error
 //should firstly make a just split by space and then fill the node based at the pipes or redirections or quotations
 //make a list for the envirement with two members name and value
+
+// t_token *fill_list(char **lst)
+// {
+//     int type;
+//     char *value;
+//     int i=0;
+//     t_token *list;
+//     list=NULL;
+// 	// int j=0;
+// 	//should change the strchr to another one skipp the symbols inside quotes 
+//     while(lst[i])
+//     {		
+// 		if((ft_strchr(lst[i],'|')
+// 			|| ft_strchr(lst[i],'<') 
+// 			|| ft_strchr(lst[i],'>') 
+// 			|| ft_strnstr(lst[i],"<<",-1) 
+// 			|| ft_strnstr(lst[i],">>",-1)))
+// 		 {
+// 						char *new=NULL;
+// 			if(ft_strchr(lst[i],'|') && ft_strncmp(lst[i] , "|", 2))
+// 			{				
+
+// 						new=ft_strchr(lst[i],'|');
+// 						*new = 0 ;
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(lst[i])));
+// 						lstadd_backs(&list,lstnews(2,ft_strdup("|")));
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(new + 1)));
+						
+// 			}			else if(ft_strchr(lst[i],'<') && ft_strncmp(lst[i] , "<", 2))
+// 			{	
+// 								new=ft_strchr(lst[i],'<');
+// 						*new = 0 ;
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(lst[i])));
+// 						lstadd_backs(&list,lstnews(3,ft_strdup("<")));
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(new + 1)));
+
+// 			}			else if(ft_strchr(lst[i],'>') && ft_strncmp(lst[i] , ">", 2))
+// 			{				
+// 							new=ft_strchr(lst[i],'>');
+// 						*new = 0 ;
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(lst[i])));
+// 						lstadd_backs(&list,lstnews(4,ft_strdup(">")));
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(new + 1)));
+// 			}			else if(ft_strnstr(lst[i],"<<",-1) && ft_strncmp(lst[i] , "<<", 2))
+// 			{	
+// 							new=ft_strnstr(lst[i],"<<",-1);
+// 						*new = 0 ;
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(lst[i])));
+// 						lstadd_backs(&list,lstnews(6,ft_strdup("<<")));
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(new + 2)));
+
+// 			}			else if(ft_strnstr(lst[i],">>",-1) && ft_strncmp(lst[i] , ">>", 2))
+// 			{				
+// 						new=ft_strnstr(lst[i],">>",-1);
+// 						*new = 0 ;//handle thhis case it doesnt work 
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(lst[i])));
+// 						lstadd_backs(&list,lstnews(5,ft_strdup(">>")));
+// 						lstadd_backs(&list,lstnews(1,ft_strdup(new + 2)));
+// 			}			
+// 	 		*new=0;
+// 			new++;
+// 			lstadd_backs(&list,lstnews(type,new));
+// 			}
+// 			else
+// 			{
+// 				value=ft_strdup(lst[i]);
+// 				type=1;
+// 				lstadd_backs(&list,lstnews(type,value));
+// 			} 
+// 		i++;
+//     }
+// 	return(list); 
+// }
