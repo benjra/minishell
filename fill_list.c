@@ -52,77 +52,45 @@ t_token	*lstnews(int type, char *value)
 // if(ft_strchr(lst[i],'|') || ft_strchr(lst[i],'>') || ft_strchr(lst[i],'<'))
 
 
-t_token *fill_list(char **lst)
-{
-    int type;
-    char *value;
-    int i=0;
-    t_token *list;
-    list=NULL;
-	// int j=0;
-	//should change the strchr to another one skipp the symbols inside quotes 
-	if (!lst || !*lst)
-		return NULL;
-    while(lst[i])
-    {		
-		if((ft_strchr(lst[i],'|')
-			|| ft_strchr(lst[i],'<') 
-			|| ft_strchr(lst[i],'>') 
-			|| ft_strnstr(lst[i],"<<",-1) 
-			|| ft_strnstr(lst[i],">>",-1)))
-		 {
-						char *new=NULL;
-			if(ft_strchr(lst[i],'|') && ft_strncmp(lst[i] , "|", 2))
-			{				
-
-						new=ft_strchr(lst[i],'|');
-						*new = 0 ;
-						lstadd_backs(&list,lstnews(1,ft_strdup(lst[i])));
-						lstadd_backs(&list,lstnews(2,ft_strdup("|")));
-						lstadd_backs(&list,lstnews(1,ft_strdup(new + 1)));
-						
-			}			else if(ft_strchr(lst[i],'<') && ft_strncmp(lst[i] , "<", 2))
-			{	
-								new=ft_strchr(lst[i],'<');
-						*new = 0 ;
-						lstadd_backs(&list,lstnews(1,ft_strdup(lst[i])));
-						lstadd_backs(&list,lstnews(3,ft_strdup("<")));
-						lstadd_backs(&list,lstnews(1,ft_strdup(new + 1)));
-
-			}			else if(ft_strchr(lst[i],'>') && ft_strncmp(lst[i] , ">", 2))
-			{				
-							new=ft_strchr(lst[i],'>');
-						*new = 0 ;
-						lstadd_backs(&list,lstnews(1,ft_strdup(lst[i])));
-						lstadd_backs(&list,lstnews(4,ft_strdup(">")));
-						lstadd_backs(&list,lstnews(1,ft_strdup(new + 1)));
-			}			else if(ft_strnstr(lst[i],"<<",-1) && ft_strncmp(lst[i] , "<<", 2))
-			{	
-							new=ft_strnstr(lst[i],"<<",-1);
-						*new = 0 ;
-						lstadd_backs(&list,lstnews(1,ft_strdup(lst[i])));
-						lstadd_backs(&list,lstnews(6,ft_strdup("<<")));
-						lstadd_backs(&list,lstnews(1,ft_strdup(new + 2)));
-
-			}			else if(ft_strnstr(lst[i],">>",-1) && ft_strncmp(lst[i] , ">>", 2))
-			{				
-						new=ft_strnstr(lst[i],">>",-1);
-						*new = 0 ;//handle thhis case it doesnt work 
-						lstadd_backs(&list,lstnews(1,ft_strdup(lst[i])));
-						lstadd_backs(&list,lstnews(5,ft_strdup(">>")));
-						lstadd_backs(&list,lstnews(1,ft_strdup(new + 2)));
-			}			
-	 		*new=0;
-			new++;
-			lstadd_backs(&list,lstnews(type,new));
-			}
-			else
-			{
-				value=ft_strdup(lst[i]);
-				type=1;
-				lstadd_backs(&list,lstnews(type,value));
-			} 
-		i++;
+char *ft_strchr_skip_quotes(const char *str, char c) {
+    int in_quotes = 0;
+    while (*str) {
+        if (*str == '"') {
+            in_quotes = !in_quotes;
+        } else if (*str == c && !in_quotes) {
+            return (char *)str;
+        }
+        str++;
     }
-	return(list); 
+    return NULL;
+}
+
+void parse_and_add_token(t_token **list, char *str, char c, int type) {
+    char *new = ft_strchr_skip_quotes(str, c);
+    if (new && strncmp(str, &c, 1)) {
+        *new = '\0';
+        lstadd_backs(list, lstnews(1, strdup(str)));
+        lstadd_backs(list, lstnews(type, strndup(&c, 1)));
+        lstadd_backs(list, lstnews(1, strdup(new + 1)));
+    }
+}
+t_token *fill_list(char **lst) {
+    int i = 0;
+    t_token *list = NULL;
+
+    while (lst[i]) {
+        if (strchr(lst[i], '|') || strchr(lst[i], '<') || strchr(lst[i], '>')) {
+            if (strchr(lst[i], '|')) {
+                parse_and_add_token(&list, lst[i], '|', 2);
+            } else if (strchr(lst[i], '<')) {
+                parse_and_add_token(&list, lst[i], '<', 3);
+            } else if (strchr(lst[i], '>')) {
+                parse_and_add_token(&list, lst[i], '>', 4);
+            }
+        } else {
+            lstadd_backs(&list, lstnews(1, strdup(lst[i])));
+        }
+        i++;
+    }
+    return list;
 }
