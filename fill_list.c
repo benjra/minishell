@@ -53,16 +53,23 @@ char *ft_strchr_skip_quotes(const char *str, char c) {
     }
     return NULL;
 }
-void parse_and_add_token(t_token **list, char *str, char c, int type) {
-    char *new = ft_strchr_skip_quotes(str, c);
-    if (new && strncmp(str, &c, 1)) {
+void parse_and_add_token(t_token **list, char *str, char *c, int type) {
+    char *new = ft_strchr_skip_quotes(str, *c);
+    if (new && ft_strncmp(str, c, 1)) {
         *new = '\0';
-        lstadd_backs(list, lstnews(1, strdup(str)));
-        lstadd_backs(list, lstnews(type, strndup(&c, 1)));
-        lstadd_backs(list, lstnews(1, strdup(new + 1)));
+        if (*(str))
+            lstadd_backs(list, lstnews(1, ft_strdup(str)));
+        lstadd_backs(list, lstnews(type, ft_strdup(c)));
+        if (*(new +1))
+        {
+            if(type==5 || type==6)
+                lstadd_backs(list, lstnews(1, ft_strdup(new + 2)));
+            else
+                lstadd_backs(list, lstnews(1, ft_strdup(new + 1)));
+        }
     }
     else if (!new) 
-            lstadd_backs(list, lstnews(1, strdup(str)));
+            lstadd_backs(list, lstnews(1, ft_strdup(str)));
      
 }
  
@@ -71,18 +78,23 @@ t_token *fill_list(char **lst) {
     int i = 0;
     t_token *list = NULL;
     while (lst[i]) {
-        if (strchr(lst[i], '|') || strchr(lst[i], '<') || strchr(lst[i], '>')) {
-           
-                if (strchr(lst[i], '|')) {
-                parse_and_add_token(&list, lst[i],'|', 2);
-                } else if (strchr(lst[i], '<')) {
-                    parse_and_add_token(&list, lst[i], '<', 3);
-                } else if (strchr(lst[i], '>')) {
-                    parse_and_add_token(&list, lst[i], '>', 4);
-                }
+        if (ft_strchr(lst[i], '|') || ft_strchr(lst[i], '<') || ft_strchr(lst[i], '>')) {
+
+                if (ft_strnstr(lst[i], ">>",-1) && ft_strncmp(lst[i], ">>", -1)) 
+                    parse_and_add_token(&list, lst[i], ">>", 5);
+                else if (ft_strnstr(lst[i], "<<",-1) && ft_strncmp(lst[i], "<<", -1)) 
+                    parse_and_add_token(&list, lst[i], "<<", 6);
+                else if (ft_strchr(lst[i], '|') && ft_strncmp(lst[i], "|", -1)) 
+                    parse_and_add_token(&list, lst[i],"|", 2);
+                else if (ft_strchr(lst[i], '<') && ft_strncmp(lst[i], "<", -1)) 
+                    parse_and_add_token(&list, lst[i], "<", 3);
+                else if (ft_strchr(lst[i], '>') && ft_strncmp(lst[i], ">", -1)) 
+                    parse_and_add_token(&list, lst[i], ">", 4);
+                else
+                    lstadd_backs(&list, lstnews(1, ft_strdup(lst[i])));
             
         } else {
-            lstadd_backs(&list, lstnews(1, strdup(lst[i])));
+            lstadd_backs(&list, lstnews(1, ft_strdup(lst[i])));
         }
         i++;
     }
