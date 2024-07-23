@@ -8,7 +8,7 @@ void    program_name(char **en)
     env=fill_env(en);
     while(1)
     {
-
+        
         prom=ft_strdup(BGreen);
         prom=join(prom,">>"); //why it doesnt work
         prom=prompt();
@@ -20,11 +20,6 @@ void    program_name(char **en)
             add_history(cmd);
             parsing(cmd);
         }
-            
-
-        
-        
-        // printf("%s\n",cmd);
         free(prom);
     }
     rl_clear_history();

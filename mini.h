@@ -49,18 +49,6 @@ typedef struct s_token
     struct s_token *next;
 }   t_token;
 
-// typedef struct list1
-// {
-//     char *str;
-//     struct list1 *next;
-// } t_list1;
-
-// typedef struct commands
-// {
-//     char *caracters;
-//     int *tokens;
-//     struct commands *next;
-// }t_commands;
 char *prompt();
 void    program_name(char **en);
 t_name *fill_env(char **env);

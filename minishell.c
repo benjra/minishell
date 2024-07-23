@@ -22,7 +22,4 @@ int main(int ac,char **av,char **env)
     signal(SIGINT, handler);
     signal(SIGQUIT, SIG_IGN);
     program_name(env);
-    //should firstly handle double quotes and njme3hom 
-    //and then njme3hom in a linked list but split in it by pipe and redirections 
-    //
 }

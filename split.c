@@ -41,11 +41,6 @@ char **split_string(char *str, int *count) {
             if (start != str) {
                 size_t len = str - start;
                 token = malloc(len + 1);
-                // if (!token) {
-                //     // Handle malloc failure
-                //     free(tokens);
-                //     return NULL;
-                // }
                 ft_strncpy(token, start, len);
                 token[len] = '\0';
                 tokens[token_count++] = token;

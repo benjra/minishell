@@ -1,37 +1,5 @@
 #include "mini.h"
-// int skip(char *s,int i)
-// {
-//     i++;
-//     while(s[i])
-//     {
-//         if(s[i]!='"' && s[i]!='\'')
-//             i++;
-//     }
-//     return i;
-// }
 
-// char *new_strchr(char *s, int c)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (s[i])
-// 	{
-//         if (s[i] == '\'' || s[i] == '"')
-//         {
-//             i++;
-//             while (s[i] && s[i] != '\'' && s[i] != '"')
-//                 i++;
-//         }
-//         else if ((char)c == s[i])
-// 			return ((char *)(&s[i]));
-// 		else
-//             i++;
-// 	}
-// 	if ((char)c == s[i])
-// 		return ((char *)(&s[i]));
-// 	return (NULL);
-// }
 char *join(char *s1,char *s2)
 {
     int i=0;

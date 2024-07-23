@@ -48,15 +48,13 @@ void parsing(char *str)
 	string=split_string(str,&count);
 	// int i=0;
 	t_token *list = fill_list(string);
-t_token *current = list; // Start with the head of the list
+	t_token *current = list; // Start with the head of the list
 
 while (current!= NULL ) {
     printf("%s : %d\n", current->value, current->type);
-    // i++; // Increment i regardless of whether we move to the next node
     current = current->next; // Move to the next node
 }
 		
-	//syntax error
     if(pipe_frst(str)==0 || double_pipe(str)==0)
         printf("error near `|' \n");
     else 
