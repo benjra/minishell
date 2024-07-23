@@ -62,10 +62,8 @@ void parse_and_add_token(t_token **list, char *str, char *c, int type) {
         lstadd_backs(list, lstnews(type, ft_strdup(c)));
         if (*(new +1))
         {
-            if(type==5 || type==6)
-                lstadd_backs(list, lstnews(1, ft_strdup(new + 2)));
-            else
-                lstadd_backs(list, lstnews(1, ft_strdup(new + 1)));
+            new += ft_strlen(c);
+            lstadd_backs(list, lstnews(1, ft_strdup(new + ft_strlen(c)))); //i need to add a recursion for check if theris more then symbol
         }
     }
     else if (!new) 
@@ -77,7 +75,7 @@ void parse_and_add_token(t_token **list, char *str, char *c, int type) {
 t_token *fill_list(char **lst) {
     int i = 0;
     t_token *list = NULL;
-    while (lst[i]) {
+    while (lst[i]) {              
         if (ft_strchr(lst[i], '|') || ft_strchr(lst[i], '<') || ft_strchr(lst[i], '>')) {
 
                 if (ft_strnstr(lst[i], ">>",-1) && ft_strncmp(lst[i], ">>", -1)) 
@@ -86,9 +84,9 @@ t_token *fill_list(char **lst) {
                     parse_and_add_token(&list, lst[i], "<<", 6);
                 else if (ft_strchr(lst[i], '|') && ft_strncmp(lst[i], "|", -1)) 
                     parse_and_add_token(&list, lst[i],"|", 2);
-                else if (ft_strchr(lst[i], '<') && ft_strncmp(lst[i], "<", -1)) 
+                else if (ft_strchr(lst[i], '<') && ft_strncmp(lst[i], "<", -1) && ft_strncmp(lst[i], "<<", -1)) 
                     parse_and_add_token(&list, lst[i], "<", 3);
-                else if (ft_strchr(lst[i], '>') && ft_strncmp(lst[i], ">", -1)) 
+                else if (ft_strchr(lst[i], '>') && ft_strncmp(lst[i], ">", -1) && ft_strncmp(lst[i], ">>", -1)) 
                     parse_and_add_token(&list, lst[i], ">", 4);
                 else
                     lstadd_backs(&list, lstnews(1, ft_strdup(lst[i])));
