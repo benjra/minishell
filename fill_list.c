@@ -59,7 +59,7 @@ void parse_and_add_token(t_token **list, char *str, char *c, int type) {
         *new = '\0';
         if (*(str))
             lstadd_backs(list, lstnews(1, ft_strdup(str)));
-        lstadd_backs(list, lstnews(type, ft_strdup(c)));
+        // lstadd_backs(list, lstnews(type, ft_strdup(c)));
         if (*(new +1))
         {
             new += ft_strlen(c);
@@ -70,7 +70,6 @@ void parse_and_add_token(t_token **list, char *str, char *c, int type) {
             lstadd_backs(list, lstnews(1, ft_strdup(str)));
      
 }
- 
 
 t_token *fill_list(char **lst) {
     int i = 0;
