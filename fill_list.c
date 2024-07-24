@@ -53,24 +53,45 @@ char *ft_strchr_skip_quotes(const char *str, char c) {
     }
     return NULL;
 }
-
-void parse_and_add_token(t_token **list, char *str, char *c, int type) {
+void parse_and_add_token(t_token **list, const char *str, char *c, int type) {
+    (void)type;
     char *new = ft_strchr_skip_quotes(str, *c);
     if (new && ft_strncmp(str, c, 1)) {
-        *new = '\0';
-        if (*(str))
+        *new = '\0'; // Null-terminate the token
+        if (*(str)) {
+            // Add the token before the symbol as a new node
             lstadd_backs(list, lstnews(1, ft_strdup(str)));
-        // lstadd_backs(list, lstnews(type, ft_strdup(c)));
-        if (*(new +1))
-        {
-            new += ft_strlen(c);
-            lstadd_backs(list, lstnews(1, ft_strdup(new + ft_strlen(c)))); //i need to add a recursion for check if theris more then symbol
         }
+        // Check if there's more content after the symbol
+        if (*(new + 1)) {
+            new += ft_strlen(c);
+            // Add the rest of the string as a new node
+            lstadd_backs(list, lstnews(1, ft_strdup(new + ft_strlen(c))));
+        }
+    } else if (!new) {
+        // If no symbol was found, add the whole string as a single token
+        lstadd_backs(list, lstnews(1, ft_strdup(str)));
     }
-    else if (!new) 
-            lstadd_backs(list, lstnews(1, ft_strdup(str)));
-     
 }
+
+// void parse_and_add_token(t_token **list, char *str, char *c, int type) {
+//     (void)type;
+//     char *new = ft_strchr_skip_quotes(str, *c);
+//     if (new && ft_strncmp(str, c, 1)) {
+//         *new = '\0';
+//         if (*(str))
+//             lstadd_backs(list, lstnews(1, ft_strdup(str)));
+//         // lstadd_backs(list, lstnews(type, ft_strdup(c)));
+//         if (*(new +1))
+//         {
+//             new += ft_strlen(c);
+//             lstadd_backs(list, lstnews(1, ft_strdup(new + ft_strlen(c)))); //i need to add a recursion for check if theris more then symbol
+//         }
+//     }
+//     else if (!new) 
+//             lstadd_backs(list, lstnews(1, ft_strdup(str)));
+     
+// }
 
 t_token *fill_list(char **lst) {
     int i = 0;
