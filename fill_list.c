@@ -53,6 +53,7 @@ char *ft_strchr_skip_quotes(const char *str, char c) {
     }
     return NULL;
 }
+
 void parse_and_add_token(t_token **list, char *str, char *c, int type) {
     char *new = ft_strchr_skip_quotes(str, *c);
     if (new && ft_strncmp(str, c, 1)) {
