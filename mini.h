@@ -34,7 +34,7 @@ typedef struct s_name
 }t_name;
 
 
-#define  TOKEN_WORD 1,      // For commands and arguments
+#define  TOKEN_WORD 1,      // For Commands
 #define    TOKEN_PIPE 2,      // For '|'
 #define    TOKEN_REDIR_IN 3,  // For '<'
 #define    TOKEN_REDIR_OUT 4, // For '>'
@@ -49,6 +49,13 @@ typedef struct s_token
     struct s_token *next;
 }   t_token;
 
+typedef struct s_lsttoken
+{
+    int type;
+    char *vale;
+    struct s_lsttoken *previous;
+    struct s_lsttoken *next;
+}t_lsttoken;
 char *prompt();
 void    program_name(char **en);
 t_name *fill_env(char **env);
