@@ -49,13 +49,26 @@ typedef struct s_token
     struct s_token *next;
 }   t_token;
 
+typedef struct s_redir
+{
+	int				type;
+	struct s_redir	*next;
+	struct s_redir	*prev;
+}	t_redir;
+
 typedef struct s_lsttoken
 {
     int type;
-    char *vale;
+    char *command;
+    char **args;
+    t_redir *redirections;
     struct s_lsttoken *previous;
     struct s_lsttoken *next;
 }t_lsttoken;
+
+
+
+
 char *prompt();
 void    program_name(char **en);
 t_name *fill_env(char **env);
