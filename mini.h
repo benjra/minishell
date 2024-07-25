@@ -58,7 +58,7 @@ void parsing(char *str);
 int pipe_frst(char *str);
 char **split_string(char *str, int *count);
 t_token *fill_list(char **lst);
-
+void parse_and_add_token(t_token **list, const char *str, char *c, int type);
 //test
 char	**my_split(char const *s, char c);
 

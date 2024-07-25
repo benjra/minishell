@@ -40,13 +40,27 @@ t_token	*lstnews(int type, char *value)
 	linked_lst->next = NULL;
 	return (linked_lst);
 }
-
-char *ft_strchr_skip_quotes(const char *str, char c) {
+void check_symbols(const char *str,t_token **list)
+{
+            if (ft_strnstr(str, ">>",-1) && ft_strncmp(str, ">>", -1)) 
+                    parse_and_add_token(list, str, ">>", 5);
+            else if (ft_strnstr(str, "<<",-1) && ft_strncmp(str, "<<", -1)) 
+                parse_and_add_token(list, str, "<<", 6);
+            else if (ft_strchr(str, '|') && ft_strncmp(str, "|", -1)) 
+                parse_and_add_token(list, str,"|", 2);
+            else if (ft_strchr(str, '<') && ft_strncmp(str, "<", -1) && ft_strncmp(str, "<<", -1)) 
+                parse_and_add_token(list, str, "<", 3);
+            else if (ft_strchr(str, '>') && ft_strncmp(str, ">", -1) && ft_strncmp(str, ">>", -1)) 
+                parse_and_add_token(list, str, ">", 4);
+            else
+                lstadd_backs(list, lstnews(1, ft_strdup(str)));
+}
+char *ft_strchr_skip_quotes(const char *str, char *c) {
     int in_quotes = 0;
     while (*str) {
         if (*str == '"' || *str=='\'') {
             in_quotes = !in_quotes;
-        } else if (*str == c && !in_quotes) {
+        } else if (!ft_strncmp(str, c, ft_strlen(c)) && !in_quotes) {//to avoid the cases like when u want to search for an string 
             return (char *)str;
         }
         str++;
@@ -54,43 +68,25 @@ char *ft_strchr_skip_quotes(const char *str, char c) {
     return NULL;
 }
 void parse_and_add_token(t_token **list, const char *str, char *c, int type) {
-    (void)type;
-    char *new = ft_strchr_skip_quotes(str, *c);
-    if (new && ft_strncmp(str, c, 1)) {
+
+    char *new = ft_strchr_skip_quotes(str, c);
+    if (new && ft_strncmp(str, c, -1)) {
         *new = '\0'; // Null-terminate the token
         if (*(str))
-            // Add the token before the symbol as a new node
-            lstadd_backs(list, lstnews(1, ft_strdup(str)));
+        {
+            check_symbols(str,list);   
+        }
         // Check if there's more content after the symbol
-        if (*(new + 1)) {
-            // new += ft_strlen(c);
-            // Add the rest of the string as a new node
-            lstadd_backs(list, lstnews(1, ft_strdup(new + ft_strlen(c))));
+        lstadd_backs(list, lstnews(type, ft_strdup(c)));
+        new += ft_strlen(c);
+        if (*new) {
+            check_symbols(new,list);
         }
     } else if (!new) {
         // If no symbol was found, add the whole string as a single token
         lstadd_backs(list, lstnews(1, ft_strdup(str)));
     }
 }
-
-// void parse_and_add_token(t_token **list, char *str, char *c, int type) {
-//     (void)type;
-//     char *new = ft_strchr_skip_quotes(str, *c);
-//     if (new && ft_strncmp(str, c, 1)) {
-//         *new = '\0';
-//         if (*(str))
-//             lstadd_backs(list, lstnews(1, ft_strdup(str)));
-//         // lstadd_backs(list, lstnews(type, ft_strdup(c)));
-//         if (*(new +1))
-//         {
-//             new += ft_strlen(c);
-//             lstadd_backs(list, lstnews(1, ft_strdup(new + ft_strlen(c)))); //i need to add a recursion for check if theris more then symbol
-//         }
-//     }
-//     else if (!new) 
-//             lstadd_backs(list, lstnews(1, ft_strdup(str)));
-     
-// }
 
 t_token *fill_list(char **lst) {
     int i = 0;
@@ -118,4 +114,4 @@ t_token *fill_list(char **lst) {
     }
     return list;
 }
-//should solve blan of if i dont have spaces around the symbol it doenst added to the node 
+
