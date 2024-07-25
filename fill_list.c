@@ -58,13 +58,12 @@ void parse_and_add_token(t_token **list, const char *str, char *c, int type) {
     char *new = ft_strchr_skip_quotes(str, *c);
     if (new && ft_strncmp(str, c, 1)) {
         *new = '\0'; // Null-terminate the token
-        if (*(str)) {
+        if (*(str))
             // Add the token before the symbol as a new node
             lstadd_backs(list, lstnews(1, ft_strdup(str)));
-        }
         // Check if there's more content after the symbol
         if (*(new + 1)) {
-            new += ft_strlen(c);
+            // new += ft_strlen(c);
             // Add the rest of the string as a new node
             lstadd_backs(list, lstnews(1, ft_strdup(new + ft_strlen(c))));
         }
@@ -119,4 +118,4 @@ t_token *fill_list(char **lst) {
     }
     return list;
 }
-
+//should solve blan of if i dont have spaces around the symbol it doenst added to the node 
