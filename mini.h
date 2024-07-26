@@ -59,7 +59,6 @@ typedef struct s_redir
 typedef struct s_lsttoken
 {
     int type;
-    char *command;
     char **args;
     t_redir *redirections;
     struct s_lsttoken *previous;
