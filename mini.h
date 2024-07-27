@@ -26,6 +26,8 @@
 # define BWhite "\033[1;37m"       //# White
 
 
+// typedef struct s_redir;
+
 typedef struct s_name
 {
     char *name;
@@ -54,7 +56,7 @@ typedef struct s_redir
 	int				type;
     char *red;
 	struct s_redir	*next;
-	struct s_redir	*prev;
+	struct s_redir	*previous;
 }	t_redir;
 
 typedef struct s_lsttoken
@@ -79,6 +81,7 @@ int pipe_frst(char *str);
 char **split_string(char *str, int *count);
 t_token *fill_list(char **lst);
 void parse_and_add_token(t_token **list, const char *str, char *c, int type);
+t_lsttoken *fill_token(t_token list);
 //test
 char	**my_split(char const *s, char c);
 

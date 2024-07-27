@@ -90,7 +90,7 @@ t_lsttoken	*newnode(int type, char **args,t_redir *redirection)
     linked_lst->previous= NULL;
 	return (linked_lst);
 }
-int len(t_token lst)
+int len(t_token *lst)
 {
 	int	i;
 
@@ -115,15 +115,16 @@ t_lsttoken *fill_token(t_token list)
 	t_lsttoken *token1=NULL;
 	t_redir redirections;
 	char **args;
-	args=malloc(len(list)+1*sizeof(char ));
+	int i=0;
+	args=malloc(len(&list)+1*sizeof(char ));
 	if(!args)
 		return NULL;//free
-	temp = list;
+	temp = &list;
 	token=ft_calloc(sizeof(t_lsttoken),1);
 	if(!token)
 		free(token);
-	if (!list)
-		return (NULL);
+	// if (!list)
+	// 	return (NULL);
 //should know moore about the struct of arguments tommorow inchallah
 	token1 =  token;
 	while(temp->next!=NULL)
@@ -135,9 +136,9 @@ t_lsttoken *fill_token(t_token list)
 			red_addback(&(token->redirections),new_red(temp->type,ft_strdup(temp->next->value)));
 			temp = temp->next;
 		}
-		if(temp->type=2)
+		if(temp->type==2)
 		{
-			add_back(&token,newnode(temp->type,args,redirections));
+			add_back(&token,newnode(temp->type,args,&redirections));
 			token = token->next;
 		}
 		else
