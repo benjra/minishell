@@ -40,7 +40,7 @@ typedef struct s_name
 #define    TOKEN_REDIR_OUT 4, // For '>'
 #define    TOKEN_REDIR_APPEND 5, // For '>>'
 #define    TOKEN_REDIR_HEREDOC 6, // For '<<'
-#define    TOKEN_ENV_VAR 7, // For environment variables
+// #define    TOKEN_ENV_VAR 7, // For environment variables
 
 typedef struct s_token
 {
@@ -52,6 +52,7 @@ typedef struct s_token
 typedef struct s_redir
 {
 	int				type;
+    char *red;
 	struct s_redir	*next;
 	struct s_redir	*prev;
 }	t_redir;
