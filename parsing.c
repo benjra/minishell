@@ -48,11 +48,11 @@ void parsing(char *str)
 	string=split_string(str,&count);
 	// int i=0;
 	t_token *list = fill_list(string);
-	t_lsttoken *list2=fill_token(*(list));
+	t_lsttoken *list2=fill_token(list);
 	t_lsttoken *current = list2; // Start with the head of the list
 int i=0;
 while (current!= NULL ) {
-    printf("%s \n %s\n %d \n", current->args[i++], current->redirections->red ,current->redirections->type);
+    printf("%s \n%s ", current->args[i++],current->redirections->red);
     current = current->next; // Move to the next node
 }
 		

@@ -71,7 +71,7 @@ void parse_and_add_token(t_token **list, const char *str, char *c, int type) {
 
     char *new = ft_strchr_skip_quotes(str, c);
     if (new && ft_strncmp(str, c, -1)) {
-        *new = '\0'; // Null-terminate the token
+        *new = '\0'; 
         if (*(str))
         {
             check_symbols(str,list);   
@@ -87,6 +87,28 @@ void parse_and_add_token(t_token **list, const char *str, char *c, int type) {
         lstadd_backs(list, lstnews(1, ft_strdup(str)));
     }
 }
+
+int get_type(char *lst)
+{
+    if (ft_strncmp(lst, ">", 1) == 0 || ft_strncmp(lst, "<", 1) == 0 ||
+        ft_strncmp(lst, "|", 1) == 0 || ft_strncmp(lst, "<<", 2) == 0 ||
+        ft_strncmp(lst, ">>", 2) == 0)
+    {
+        
+        if (ft_strncmp(lst, "|", 1) == 0)
+            return 2;
+        else if (ft_strncmp(lst, "<<", 2) == 0)
+            return 6;
+        else if (ft_strncmp(lst, ">>", 2) == 0)
+            return 5;
+        if (ft_strncmp(lst, ">", 1) == 0)
+            return 4;
+        else if (ft_strncmp(lst, "<", 1) == 0)
+            return 5;
+    }
+    return 1;
+}
+
 
 t_token *fill_list(char **lst) {
     int i = 0;
@@ -105,13 +127,13 @@ t_token *fill_list(char **lst) {
                 else if (ft_strchr(lst[i], '>') && ft_strncmp(lst[i], ">", -1) && ft_strncmp(lst[i], ">>", -1)) 
                     parse_and_add_token(&list, lst[i], ">", 4);
                 else
-                    lstadd_backs(&list, lstnews(1, ft_strdup(lst[i])));
+                    lstadd_backs(&list, lstnews(get_type(lst[i]), ft_strdup(lst[i])));//function that gettype
             
         } else {
             lstadd_backs(&list, lstnews(1, ft_strdup(lst[i])));
         }
         i++;
-    }
+    } 
     return list;
 }
 
