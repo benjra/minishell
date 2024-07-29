@@ -83,6 +83,5 @@ t_token *fill_list(char **lst);
 void parse_and_add_token(t_token **list, const char *str, char *c, int type);
 t_lsttoken *fill_token(t_token *list);
 //test
-char	**my_split(char const *s, char c);
 
 #endif

@@ -43,6 +43,7 @@ int double_pipe(char *tmp)
 
 void parsing(char *str)
 {
+	
 	char **string ;
 	int count=0;
 	string=split_string(str,&count);
@@ -50,14 +51,37 @@ void parsing(char *str)
 	t_token *list = fill_list(string);
 	t_lsttoken *list2=fill_token(list);
 	t_lsttoken *current = list2; // Start with the head of the list
+
 int i=0;
-while (current!= NULL ) {
-    printf("%s \n%s ", current->args[i++],current->redirections->red);
-    current = current->next; // Move to the next node
+while(list!=NULL)
+{
+	printf("-----------------\n");
+	printf("| token: ---- %s|\n| type: ---- %d|\n",list->value,list->type);
+	printf("-----------------\n");
+	
+	list=list->next;
+}
+while (current) 
+{
+	
+	i = 0;
+	while (current->args != NULL && current->args[i] != NULL)
+	    printf("args : -- %s  ", current->args[i++]);
+	printf("\n");
+	while (current->redirections != NULL)
+	{
+	    printf("red : -- %s \n", current->redirections->red);
+		current->redirections = current->redirections->next;
+
+	}
+	// printf("\n");
+    current = current->next; 
 }
 		
-    if(pipe_frst(str)==0 || double_pipe(str)==0)
-        printf("error near `|' \n");
-    else 
-        printf("good\n");
-}
+    // if(pipe_frst(str)==0 || double_pipe(str)==0)
+    //     printf("error near `|' \n");
+    // else 
+    //     printf("good\n");
+
+	//syntax errors
+} 
