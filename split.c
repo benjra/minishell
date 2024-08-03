@@ -63,7 +63,8 @@ char **split_string(char *str, int *count) {
     return tokens;
 }
 
-void free_tokens(char **tokens, int count) {
+void free_tokens(char **tokens, int count) 
+{
     for (int i = 0; i < count; i++) {
         free(tokens[i]);
     }

@@ -5,9 +5,9 @@ void	handler(int signum)
 	(void)signum;
 	write(0, "\n", 1);
 	rl_on_new_line();
-	// Replace the current line with new_text
+	// replace the current line with newone
 	rl_replace_line("", 0);
-	// Redisplay the input line to show the changes
+	// redisplay the input line 
 	rl_redisplay();
 }
 int	main(int ac, char **av, char **env)

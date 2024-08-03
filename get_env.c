@@ -58,3 +58,11 @@ t_name *fill_env(char **env)
     }
 	return(lst);
 }
+
+// void free_env(t_name *env) 
+// {
+//     for (int i = 0; i < count; i++) {
+//         free(tokens[i]);
+//     }
+//     free(tokens);
+// }

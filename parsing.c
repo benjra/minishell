@@ -49,18 +49,12 @@ void parsing(char *str)
 	string=split_string(str,&count);
 	// int i=0;
 	t_token *list = fill_list(string);
+	free_tokens(string,count);
 	t_lsttoken *list2=fill_token(list);
+	freelist1(list);
 	t_lsttoken *current = list2; // Start with the head of the list
 
 int i=0;
-while(list!=NULL)
-{
-	printf("-----------------\n");
-	printf("| token: ---- %s|\n| type: ---- %d|\n",list->value,list->type);
-	printf("-----------------\n");
-	
-	list=list->next;
-}
 while (current) 
 {
 	
@@ -72,9 +66,7 @@ while (current)
 	{
 	    printf("red : -- %s \n", current->redirections->red);
 		current->redirections = current->redirections->next;
-
 	}
-	// printf("\n");
     current = current->next; 
 }
 		

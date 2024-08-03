@@ -69,8 +69,6 @@ typedef struct s_lsttoken
 }t_lsttoken;
 
 
-
-
 char *prompt();
 void    program_name(char **en);
 t_name *fill_env(char **env);
@@ -79,7 +77,9 @@ void get_prompt(char **dst,char *str);
 void parsing(char *str);
 int pipe_frst(char *str);
 char **split_string(char *str, int *count);
+void free_tokens(char **tokens, int count) ;
 t_token *fill_list(char **lst);
+void freelist1(t_token *list);
 void parse_and_add_token(t_token **list, const char *str, char *c, int type);
 t_lsttoken *fill_token(t_token *list);
 //test
