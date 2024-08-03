@@ -13,7 +13,8 @@ SRC_FILES = minishell.c \
 	split.c \
 	fill_list.c \
 	tokens.c \
-	clear.c
+	clear.c \
+	errors.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

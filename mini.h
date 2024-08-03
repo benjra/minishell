@@ -82,6 +82,9 @@ t_token *fill_list(char **lst);
 void freelist1(t_token *list);
 void parse_and_add_token(t_token **list, const char *str, char *c, int type);
 t_lsttoken *fill_token(t_token *list);
-//test
+//errors functions
+int pipes_err(t_token *list);
+t_token	*tails(t_token *list);
+void printf_err(t_token *list);
 
 #endif
