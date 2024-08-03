@@ -98,14 +98,17 @@ int len(t_token *lst)
 	i = 0;
 	while (lst != NULL)
 	{
-		if (lst->type ==2)
-			break;
-		if((lst->type>=3 && lst->type<=6))
-		{
-			lst = lst->next;
+		if(lst->next!=NULL){
+			if (lst->type ==2)
+				break;
+			if((lst->type>=3 && lst->type<=6))
+			{
+				lst = lst->next;
+			}
+			else
+				i++;
+			
 		}
-		else
-			i++;
 		lst = lst->next;
 	}
 	return (i);
@@ -130,24 +133,27 @@ t_lsttoken *fill_token(t_token *list)
 	token1 =  token;
 	while(temp!=NULL)
 	{	
-		if(temp->type>2 && temp->type<=6)
+		if(temp->next!=NULL)//this is for handle the segf but it make the while loop infini
 		{
-			redirections = new_red(temp->type,ft_strdup(temp->next->value));
-			red_addback(&(token->redirections),redirections);
-			temp = temp->next;
-		}
-		else if(temp->type==2)
-		{
-			add_back(&token1,newnode(temp->type,token->args));
-			token = token->next;
-			token->args = ft_calloc(len(temp->next) + 1, sizeof(char *));
-			token->args[len(temp->next)] = NULL;
-			token->redirections = NULL;
-			i=0;
-		}
-		else
-		{
-			token->args[i++]=ft_strdup(temp->value);
+			if(temp->type>2 && temp->type<=6)
+			{
+				redirections = new_red(temp->type,ft_strdup(temp->next->value));
+				red_addback(&(token->redirections),redirections);
+				temp = temp->next;
+			}
+			else if(temp->type==2)
+			{
+				add_back(&token1,newnode(temp->type,token->args));
+				token = token->next;
+				token->args = ft_calloc(len(temp->next) + 1, sizeof(char *));
+				token->args[len(temp->next)] = NULL;
+				token->redirections = NULL;
+				i=0;
+			}
+			else
+			{
+				token->args[i++]=ft_strdup(temp->value);
+			}
 		}
 		if (temp != NULL)
 			temp = temp->next;
