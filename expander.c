@@ -1,19 +1,15 @@
 #include "mini.h"
 
-char	*get_variable(char *s)
+char	*get_specialcar(char *s)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] != (char)c)
+	while (s[i] && s[i] !=' ' && ft_isalnum(s[i]))//case of - underscore
 	{
-		if (s[i] == '\0')
-		{
-			return (0);
-		}
 		i++;
 	}
-	return ((char *)s + i);
+	return (s + i);
 }
 void search(char *arg)
 {
@@ -26,12 +22,12 @@ void search(char *arg)
     afterdol=ft_strchr(arg,'$');
     *afterdol='\0';
     afterdol++;
-    var=get_variable(afterdol);//return the name of variable to a special caracters
-    befordoll=ft_strdup(arg);
     totallen=ft_strlen(arg);
     ln_befdoll=totallen-ft_strlen(afterdol);
     ln_aftdoll=totallen-ln_befdoll;
-    printf("\n<<<<  after $=> %s  >>>>\nBEFORE %s\n",afterdol,befordoll);
+    var=ft_substr(afterdol,0,ln_aftdoll-ft_strlen(get_specialcar(afterdol)));//return the name of variable to a special caracters
+    befordoll=ft_strdup(arg);
+    printf("\n<<<<  after $=> %s  >>>>\nBEFORE %s\n ==> var: %s\n",afterdol,befordoll,var);
     
 }
 // char *env_search(t_name *env,char **args)
