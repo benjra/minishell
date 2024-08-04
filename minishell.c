@@ -18,7 +18,7 @@ int	main(int ac, char **av, char **env)
 		write(1, "there is no need of arguments here", 35);
 		return (1);
 	}
-	signal(SIGINT, handler);
-	signal(SIGQUIT, SIG_IGN);
+	// signal(SIGINT, handler);
+	// signal(SIGQUIT, SIG_IGN);
 	program_name(env);
 }

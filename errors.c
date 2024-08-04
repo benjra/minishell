@@ -13,16 +13,20 @@ int double_symb(t_token *list)
     int nextp;
     while(tmp!=NULL)
     {
-        if(tmp->next!=NULL){
+            // printf("%s: %d\n",tmp->value,tmp->type);
+
+        if(tmp->next!=NULL)
+        {
             typo=tmp->type;
+            // printf("%s: %d\n",tmp->value,tmp->type);
             nextp=tmp->next->type;
-            if(typo==3 || typo==4 || typo==5 || typo==6)
+            if(typo==3 || typo==4 || typo==5 || typo==6) // this case "ls <| ls" it return 0 in this case why ?
             {
-                if(nextp==3 || nextp==4 || nextp==5 || nextp==6)
+                if(nextp==2 || nextp==3 || nextp==4 || nextp==5 || nextp==6 )
                     return 1;
             }
-            tmp=tmp->next;
-        }
+        }        
+        tmp=tmp->next;
     }
     return 0;
 }
@@ -36,7 +40,7 @@ int pipes_err(t_token *list)
         return (2);
     while (tmp!=NULL)
     {
-        if(tmp->type==2 && tmp->next->type==2)
+        if(tmp->type==2 && (!tmp->next || tmp->next->type==2))
             return (1);
         tmp=tmp->next;
     }
@@ -44,6 +48,7 @@ int pipes_err(t_token *list)
 }
 void printf_err(t_token *list)
 {
+    printf("%d\n", double_symb(list));
     if(pipes_err(list)==1)
         printf("error near `|' \n");
     if(pipes_err(list)==2 || double_symb(list)==1)

@@ -1,5 +1,26 @@
 #include "mini.h"
 
+int get_type(char *lst)
+{
+    if (ft_strncmp(lst, ">", 1) == 0 || ft_strncmp(lst, "<", 1) == 0 ||
+        ft_strncmp(lst, "|", 1) == 0 || ft_strncmp(lst, "<<", 2) == 0 ||
+        ft_strncmp(lst, ">>", 2) == 0)
+    {
+        
+        if (ft_strncmp(lst, "|", 1) == 0)
+            return 2;
+        else if (ft_strncmp(lst, "<<", 2) == 0)
+            return 6;
+        else if (ft_strncmp(lst, ">>", 2) == 0)
+            return 5;
+        if (ft_strncmp(lst, ">", 1) == 0)
+            return 4;
+        else if (ft_strncmp(lst, "<", 1) == 0)
+            return 5;
+    }
+    return 1;
+}
+
 t_token	*tails(t_token *list)
 {
 	t_token	*temp;
@@ -40,7 +61,7 @@ t_token	*lstnews(int type, char *value)
 	linked_lst->next = NULL;
 	return (linked_lst);
 }
-void check_symbols(const char *str,t_token **list)
+void check_symbols(char *str,t_token **list)
 {
             if (ft_strnstr(str, ">>",-1) && ft_strncmp(str, ">>", -1)) 
                     parse_and_add_token(list, str, ">>", 5);
@@ -53,7 +74,7 @@ void check_symbols(const char *str,t_token **list)
             else if (ft_strchr(str, '>') && ft_strncmp(str, ">", -1) && ft_strncmp(str, ">>", -1)) 
                 parse_and_add_token(list, str, ">", 4);
             else
-                lstadd_backs(list, lstnews(1, ft_strdup(str)));
+                lstadd_backs(list, lstnews(get_type(str), ft_strdup(str)));
 }
 char *ft_strchr_skip_quotes(const char *str, char *c) {
     int in_quotes = 0;
@@ -67,7 +88,7 @@ char *ft_strchr_skip_quotes(const char *str, char *c) {
     }
     return NULL;
 }
-void parse_and_add_token(t_token **list, const char *str, char *c, int type) {
+void parse_and_add_token(t_token **list,  char *str, char *c, int type) {
 
     char *new = ft_strchr_skip_quotes(str, c);
     if (new && ft_strncmp(str, c, -1)) {
@@ -84,30 +105,11 @@ void parse_and_add_token(t_token **list, const char *str, char *c, int type) {
         }
     } else if (!new) {
         // If no symbol was found, add the whole string as a single token
-        lstadd_backs(list, lstnews(1, ft_strdup(str)));
+        lstadd_backs(list, lstnews(get_type(str), ft_strdup(str)));
     }
 }
 
-int get_type(char *lst)
-{
-    if (ft_strncmp(lst, ">", 1) == 0 || ft_strncmp(lst, "<", 1) == 0 ||
-        ft_strncmp(lst, "|", 1) == 0 || ft_strncmp(lst, "<<", 2) == 0 ||
-        ft_strncmp(lst, ">>", 2) == 0)
-    {
-        
-        if (ft_strncmp(lst, "|", 1) == 0)
-            return 2;
-        else if (ft_strncmp(lst, "<<", 2) == 0)
-            return 6;
-        else if (ft_strncmp(lst, ">>", 2) == 0)
-            return 5;
-        if (ft_strncmp(lst, ">", 1) == 0)
-            return 4;
-        else if (ft_strncmp(lst, "<", 1) == 0)
-            return 5;
-    }
-    return 1;
-}
+
 
 
 t_token *fill_list(char **lst) {

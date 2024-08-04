@@ -4,23 +4,24 @@ void    program_name(char **en)
     char *prom;
     t_name *env;
     char *cmd;
-    (void)en;
     // char buffer[1024];
     env=fill_env(en);
     while(1)
     {
         prom=ft_strdup(BGreen);
-        prom=join(prom,"$>");
+        prom=join(prom,"minishell$ ");
+        prom=join(prom, RESET_COLOR);
         if(!prom)
-            free(prom);        
-        prom=prompt();
+            exit(1);
+        // prom=prompt();
         cmd=readline(prom);//u should know how to work with readline 
         if(!cmd)
             break;
         if (ft_strncmp(cmd, "", -1))
         {
             add_history(cmd);
-            parsing(cmd);
+            parsing(cmd,env);
+	       
             // if(getcwd(buffer,104)==NULL)
             //     printf("null buffer");
             // else

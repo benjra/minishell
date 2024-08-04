@@ -24,7 +24,7 @@
 # define BPurple "\033[1;35m"       //# Purple
 # define BCyan "\033[1;36m"       //# Cyan
 # define BWhite "\033[1;37m"       //# White
-
+#define RESET_COLOR "\e[m"
 
 // typedef struct s_redir;
 
@@ -74,17 +74,19 @@ void    program_name(char **en);
 t_name *fill_env(char **env);
 char *join(char *s1,char *s2);
 void get_prompt(char **dst,char *str);
-void parsing(char *str);
+void parsing(char *str,t_name *env);
 int pipe_frst(char *str);
 char **split_string(char *str, int *count);
 void free_tokens(char **tokens, int count) ;
 t_token *fill_list(char **lst);
 void freelist1(t_token *list);
-void parse_and_add_token(t_token **list, const char *str, char *c, int type);
+void parse_and_add_token(t_token **list, char *str, char *c, int type);
 t_lsttoken *fill_token(t_token *list);
 //errors functions
 int pipes_err(t_token *list);
 t_token	*tails(t_token *list);
 void printf_err(t_token *list);
+//expand 
+void expander(t_lsttoken *tokens,t_name *env);
 
 #endif
