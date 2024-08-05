@@ -13,12 +13,9 @@ int double_symb(t_token *list)
     int nextp;
     while(tmp!=NULL)
     {
-            // printf("%s: %d\n",tmp->value,tmp->type);
-
         if(tmp->next!=NULL)
         {
             typo=tmp->type;
-            // printf("%s: %d\n",tmp->value,tmp->type);
             nextp=tmp->next->type;
             if(typo==3 || typo==4 || typo==5 || typo==6) // this case "ls <| ls" it return 0 in this case why ?
             {
@@ -46,11 +43,51 @@ int pipes_err(t_token *list)
     }
     return (0);
 }
+int handle_quotes(t_token *list)
+{
+    t_token *tmp;
+    int i;
+    tmp=list;
+    while (tmp)
+    {
+        if(ft_strchr(tmp->value,'\'') || ft_strchr(tmp->value,'"'))
+        {   
+            char *first_quote;
+            if(ft_strchr(tmp->value,'\''))
+            {
+                first_quote=ft_strchr(tmp->value,'"');
+                first_quote++;
+                    i=0;
+                while(first_quote[i])
+                {
+                    if((first_quote[i])=='\'')
+                        return (0);
+                    i++;
+                }
+            }
+            else if(ft_strchr(tmp->value,'"'))
+            {
+                first_quote=ft_strchr(tmp->value,'"');
+                first_quote++;
+                    i=0;
+               while(first_quote[i])
+                {
+                    if((first_quote[i])=='"')
+                        return (0);
+                    i++;
+                }
+            }
+        }
+        tmp=tmp->next;
+    }
+    return (1);
+    
+}
 void printf_err(t_token *list)
 {
     printf("%d\n", double_symb(list));
     if(pipes_err(list)==1)
         printf("error near `|' \n");
-    if(pipes_err(list)==2 || double_symb(list)==1)
+    if(pipes_err(list)==2 || double_symb(list)==1 || handle_quotes(list))
         printf("syntax error! \n");
 }

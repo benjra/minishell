@@ -25,7 +25,7 @@ char *search_env(int len,char *afterdoll,t_name *env)
     var=get_var(len,afterdoll);
 
     replace=ft_env(env,var);
-    printf("---replace: %s---",replace);
+    // printf("---replace: %s---",replace);
     *afterdoll+=ft_strlen(var);
     if(ft_strchr(afterdoll,'$'))
       search_env(ft_strlen(afterdoll),afterdoll,env);
@@ -48,9 +48,8 @@ void search(char *arg,t_name *env)
     // var=get_var(ln_aftdoll,afterdol);//return the name of variable to a special caracters
     befordoll=ft_strdup(arg);
     char *replace=search_env(ln_aftdoll,afterdol,env);
-    
+    printf("totallen: %lu",ln_befdoll+ft_strlen(get_specialcar(afterdol))+ft_strlen(replace));//problem of afterdoll 
     printf("\n<<<<  after $=> %s  >>>>\nBEFORE %s\n<<rep: %s>>",afterdol,befordoll,replace);
-    
 }
 // char *env_search(t_name *env,char **args)
 // {
@@ -75,7 +74,5 @@ void expander(t_lsttoken *tokens,t_name *env)
             i++;
         }
         tmp=tmp->next;
-        
     }
-    
 }
