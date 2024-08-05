@@ -6,13 +6,13 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 20:56:18 by amabchou          #+#    #+#             */
-/*   Updated: 2024/07/09 21:10:18 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:04:40 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing/mini.h"
 
-void    ft_exit(void)
+void    ft_exit(int i)
 {
-    exit(0);
+    exit(i);
 }

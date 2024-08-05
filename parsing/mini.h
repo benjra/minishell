@@ -12,7 +12,7 @@
 # include <fcntl.h>
 # include <signal.h>
 #include <sys/wait.h>
-
+#include <errno.h>
 
 # define DCOLORB "\033[49m"
 # define GREENB  "\033[42m"
@@ -51,6 +51,27 @@ typedef struct s_token
     char        *value;
     struct s_token *next;
 }   t_token;
+
+typedef struct t_file
+{
+    char *file;
+    int infile;
+    int outfile;
+    int herdoc;
+    int apend;
+    struct t_file *next;
+}t_file;
+
+typedef struct t_data
+{
+    char **cmd;
+    char *oldpwd;
+    char *newpwd;
+    t_file *file;
+    struct t_data *next;
+}t_data;
+
+char *ft_strjoinn(char *s1, char *ss2);
 
 // typedef struct list1
 // {
