@@ -43,46 +43,79 @@ int pipes_err(t_token *list)
     }
     return (0);
 }
+// int handle_quotes(t_token *list)
+// {
+//     t_token *tmp;
+//     int i;
+//     tmp=list;
+//     while (tmp)
+//     {
+//         if(ft_strchr(tmp->value,'\'') || ft_strchr(tmp->value,'"'))
+//         {   
+//             char *first_quote;
+//             else if(ft_strchr(tmp->value,'"'))
+//             {
+//                 first_quote=ft_strchr(tmp->value,'"');
+//                 first_quote++;
+//                     i=0;
+//                while(first_quote[i])
+//                 {
+//                     if((first_quote[i])=='"')
+//                         return (0);
+//                     i++;
+//                 }
+//             }
+//         }
+//         tmp=tmp->next;
+//     }
+//     return (1);
+// }
 int handle_quotes(t_token *list)
 {
     t_token *tmp;
     int i;
-    tmp=list;
+    tmp = list;
     while (tmp)
     {
-        if(ft_strchr(tmp->value,'\'') || ft_strchr(tmp->value,'"'))
+        if (ft_strchr(tmp->value, '\'') || ft_strchr(tmp->value, '"'))
         {   
             char *first_quote;
-            if(ft_strchr(tmp->value,'\''))
-            {
-                first_quote=ft_strchr(tmp->value,'"');
-                first_quote++;
-                    i=0;
-                while(first_quote[i])
+            bool has_open_quote = false; // Track if we've seen an opening quote
+            
+            // First, check for an opening quote
+            if (ft_strchr(tmp->value, '\'')) {
+                first_quote = ft_strchr(tmp->value, '\'');
+                has_open_quote = true;
+            } else if (ft_strchr(tmp->value, '"')) {
+                first_quote = ft_strchr(tmp->value, '"');
+                has_open_quote = true;
+            }
+
+            // If we found an opening quote, now check for a closing quote
+            if (has_open_quote) {
+                first_quote++; // Move to the next character
+                i = 0;
+                while (first_quote[i])
                 {
-                    if((first_quote[i])=='\'')
-                        return (0);
+                    if ((first_quote[i]) == '\'' && has_open_quote) {
+                        has_open_quote = false; // Reset flag for single quotes
+                    } else if ((first_quote[i]) == '"' && !has_open_quote) {
+                        return (0); // Found a closing quote without a matching opening quote
+                    }
                     i++;
                 }
-            }
-            else if(ft_strchr(tmp->value,'"'))
-            {
-                first_quote=ft_strchr(tmp->value,'"');
-                first_quote++;
-                    i=0;
-               while(first_quote[i])
-                {
-                    if((first_quote[i])=='"')
-                        return (0);
-                    i++;
+                
+                // If we exited the loop normally, it means we didn't find a matching closing quote
+                if (has_open_quote) {
+                    return (0); // Still have an unmatched opening quote
                 }
             }
         }
-        tmp=tmp->next;
+        tmp = tmp->next;
     }
     return (1);
-    
 }
+
 void printf_err(t_token *list)
 {
     printf("%d\n", double_symb(list));
