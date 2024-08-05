@@ -88,5 +88,6 @@ t_token	*tails(t_token *list);
 void printf_err(t_token *list);
 //expand 
 void expander(t_lsttoken *tokens,t_name *env);
+char *ft_env(t_name *env,char *var);
 
 #endif

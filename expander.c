@@ -1,5 +1,6 @@
 #include "mini.h"
 
+
 char	*get_specialcar(char *s)
 {
 	int	i;
@@ -11,13 +12,32 @@ char	*get_specialcar(char *s)
 	}
 	return (s + i);
 }
-void search(char *arg)
+char *get_var(int len,char *afterdoll)
+{
+    char *var;
+    var=ft_substr(afterdoll,0,len-ft_strlen(get_specialcar(afterdoll)));
+    return (var);
+}
+char *search_env(int len,char *afterdoll,t_name *env)
+{
+    char *replace;
+    char *var;
+    var=get_var(len,afterdoll);
+
+    replace=ft_env(env,var);
+    printf("---replace: %s---",replace);
+    *afterdoll+=ft_strlen(var);
+    if(ft_strchr(afterdoll,'$'))
+      search_env(ft_strlen(afterdoll),afterdoll,env);
+    return (replace);
+}
+void search(char *arg,t_name *env)
 {
     int totallen;
     int ln_aftdoll;
     int ln_befdoll;
     char *afterdol;
-    char *var;
+    // char *var;
     char *befordoll;
     afterdol=ft_strchr(arg,'$');
     *afterdol='\0';
@@ -25,9 +45,11 @@ void search(char *arg)
     totallen=ft_strlen(arg);
     ln_befdoll=totallen-ft_strlen(afterdol);
     ln_aftdoll=totallen-ln_befdoll;
-    var=ft_substr(afterdol,0,ln_aftdoll-ft_strlen(get_specialcar(afterdol)));//return the name of variable to a special caracters
+    // var=get_var(ln_aftdoll,afterdol);//return the name of variable to a special caracters
     befordoll=ft_strdup(arg);
-    printf("\n<<<<  after $=> %s  >>>>\nBEFORE %s\n ==> var: %s\n",afterdol,befordoll,var);
+    char *replace=search_env(ln_aftdoll,afterdol,env);
+    
+    printf("\n<<<<  after $=> %s  >>>>\nBEFORE %s\n<<rep: %s>>",afterdol,befordoll,replace);
     
 }
 // char *env_search(t_name *env,char **args)
@@ -39,7 +61,7 @@ void search(char *arg)
 void expander(t_lsttoken *tokens,t_name *env)
 {
     t_lsttoken *tmp;
-    (void)env;
+    // (void)env;
     tmp=tokens;
     while (tmp)
     {
@@ -48,7 +70,7 @@ void expander(t_lsttoken *tokens,t_name *env)
         {
             if(ft_strchr(tmp->args[i],'$'))
             {
-               search(tmp->args[i]);
+               search(tmp->args[i],env);
             }
             i++;
         }
