@@ -77,9 +77,7 @@ void get_prompt(char **dst,char *str);
 void parsing(char *str,t_name *env);
 int pipe_frst(char *str);
 char **split_string(char *str, int *count);
-void free_tokens(char **tokens, int count) ;
 t_token *fill_list(char **lst);
-void freelist1(t_token *list);
 void parse_and_add_token(t_token **list, char *str, char *c, int type);
 t_lsttoken *fill_token(t_token *list);
 //errors functions
@@ -89,5 +87,8 @@ void printf_err(t_token *list);
 //expand 
 void expander(t_lsttoken *tokens,t_name *env);
 char *ft_env(t_name *env,char *var);
-
+//free
+void free_tokens(char **tokens, int count) ;
+void free_env(t_name *env);
+void freelist1(t_token *list);
 #endif

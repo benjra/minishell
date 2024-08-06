@@ -38,11 +38,4 @@ while (current)
 	}
 	    current = current->next; 
 }
-		
-    // if(pipe_frst(str)==0 || double_pipe(str)==0)
-    //     printf("error near `|' \n");
-    // else 
-    //     printf("good\n");
-
-	//syntax errors
 } 

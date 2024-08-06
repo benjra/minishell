@@ -9,7 +9,6 @@ SRC_FILES = minishell.c \
 	prompt.c \
 	utils.c \
 	parsing.c \
-	main.c \
 	split.c \
 	fill_list.c \
 	tokens.c \
