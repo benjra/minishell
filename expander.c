@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/06 11:26:11 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/07 13:29:00 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,13 @@ char	*search(char *arg, t_name *env)
 	char	*expander;
 
 	afterdol = ft_strchr(arg, '$');
-	if (!afterdol)
-	{
-		printf("No dollar sign found.\n");
-		return (NULL);
-	}
-	*afterdol = '\0';
+	*afterdol= '\0';
 	afterdol++;
 	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
 	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
 	befordoll = ft_strdup(arg);
 	replace = search_env(ln_aftdoll, afterdol, env);
 	expander = ft_strjoin(expander, befordoll);
-	// having a garbage value before first join
 	expander = ft_strjoin(expander, replace);
 	expander = ft_strjoin(expander, get_specialcar(afterdol));
 	printf("ft_strlen(arg): %lu", ft_strlen(befordoll)
@@ -79,6 +73,33 @@ char	*search(char *arg, t_name *env)
 	return (expander);
 }
 
+char *get_word(char *str)
+{
+	int i;
+	char c;
+	char *res;
+	int first;
+	i=0;
+	while(str[i])
+	{
+		if(str[i]=='"' || str[i]=='\'')
+		{
+			c=str[i++];
+			first=i;
+		}
+		while(str[i] && c!=str[i])
+			i++;
+		if(str[i-1]==c)
+		{
+			res=ft_strdup(ft_substr(str,first,i));
+			return res;
+		}
+		if(!str[i])
+			return ;
+		i++;
+	}
+	return NULL;
+}
 void	expander(t_lsttoken *tokens, t_name *env)
 {
 	t_lsttoken	*tmp;
@@ -90,6 +111,7 @@ void	expander(t_lsttoken *tokens, t_name *env)
 		i = 0;
 		while (tmp->args[i])
 		{
+			char *str=get_word(tmp->args[i]);//should get the first of args
 			if (ft_strchr(tmp->args[i], '$'))
 			{
 				tmp->args[i] = ft_strdup(search(tmp->args[i], env));
@@ -99,3 +121,47 @@ void	expander(t_lsttoken *tokens, t_name *env)
 		tmp = tmp->next;
 	}
 }
+// void	expander(t_lsttoken *tokens, t_name *env)
+// {
+// 	t_lsttoken	*tmp;
+// 	int			i;
+// 	char c;
+// 	char close='n';
+// 	tmp = tokens;
+// 	while (tmp)
+// 	{
+// 		i = 0;
+// 		while (tmp->args[i])
+// 		{
+// 			char *str=tmp->args[i];
+// 			if (ft_strchr(tmp->args[i], '$'))
+// 			{
+// 				int j = 0;
+// 				while (str[j])
+// 				{
+// 					if (str[j] == '"' || str[j] == '\'')
+// 					{
+// 						c = str[j++];
+// 						while (str[j] && c != str[j])
+// 						{
+// 							if ((c == '"' && str[j] == '"') || (c == '\'' && str[j] == '\''))
+// 							{
+// 								close=str[i];
+// 							}
+// 							if (ft_strchr(str, '$') && c == '"' && str[i+1]=='\0' && close=='"')
+// 								tmp->args[i] = ft_strdup(search(tmp->args[i], env));
+// 							else if (ft_strchr(str, '$') && c == '\'' && close!='n')
+// 								return; //should handle this case 
+// 							else
+// 								tmp->args[i] = ft_strdup(search(tmp->args[i], env));
+// 						}
+// 					}
+// 					j++;
+// 				}
+// 			}
+// 			i++;
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// }
+

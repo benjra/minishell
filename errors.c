@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/06 15:10:09 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/07 09:09:02 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,26 @@ int	double_symb(t_token *list)
 	return (0);
 }
 
+int	pipes_err(t_token *list)
+{
+	t_token	*tmp;
+
+	tmp = list;
+	if (list->type == 2)
+		return (1);
+	if (tails(list)->type == 2 || tails(list)->type == 3
+		|| tails(list)->type == 4 || tails(list)->type == 5
+		|| tails(list)->type == 6)
+		return (2);
+	while (tmp != NULL)
+	{
+		if (tmp->type == 2 && (!tmp->next || tmp->next->type == 2))
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 int qoute(char *str)
 {
 	int i;
@@ -65,31 +85,10 @@ int qoute(char *str)
 	}
 	return (0);
 }
-int	pipes_err(t_token *list)
-{
-	t_token	*tmp;
-
-	tmp = list;
-	if (list->type == 2)
-		return (1);
-	if (tails(list)->type == 2 || tails(list)->type == 3
-		|| tails(list)->type == 4 || tails(list)->type == 5
-		|| tails(list)->type == 6)
-		return (2);
-	while (tmp != NULL)
-	{
-		if (tmp->type == 2 && (!tmp->next || tmp->next->type == 2))
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
 
 int	handle_quotes(t_token *list)
 {
 	t_token	*tmp;
-	// int		i;
-	// char	*first_quote;
 	int quote_exist;
 	
 	quote_exist=0;
