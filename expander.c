@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/07 13:29:00 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/07 21:27:11 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 	*afterdoll += ft_strlen(var);
 	if (ft_strchr(afterdoll, '$'))
 		search_env(ft_strlen(afterdoll), afterdoll, env);
+	// free(var);
 	return (replace);
 }
 
@@ -62,6 +63,7 @@ char	*search(char *arg, t_name *env)
 	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
 	befordoll = ft_strdup(arg);
 	replace = search_env(ln_aftdoll, afterdol, env);
+	expander=ft_strdup("");
 	expander = ft_strjoin(expander, befordoll);
 	expander = ft_strjoin(expander, replace);
 	expander = ft_strjoin(expander, get_specialcar(afterdol));
@@ -76,34 +78,34 @@ char	*search(char *arg, t_name *env)
 char *get_word(char *str)
 {
 	int i;
-	char c;
+	char c=0;
 	char *res;
 	int first;
-	i=0;
+	
+	first=0;
+	i=first;
 	while(str[i])
 	{
-		if(str[i]=='"' || str[i]=='\'')
+		if(str[i]=='$' || str[i]=='"' || str[i]=='\'')
 		{
-			c=str[i++];
-			first=i;
+			if(str[i]=='$')
+				i++;
+			else if( str[i]=='"' || str[i]=='\'')
+				c=str[i++];
 		}
 		while(str[i] && c!=str[i])
 			i++;
-		if(str[i-1]==c)
-		{
-			res=ft_strdup(ft_substr(str,first,i));
-			return res;
-		}
-		if(!str[i])
-			return ;
 		i++;
 	}
-	return NULL;
+	res=ft_strdup(ft_substr(str,first,i));
+	return res;
 }
 void	expander(t_lsttoken *tokens, t_name *env)
 {
 	t_lsttoken	*tmp;
 	int			i;
+	int j;
+	
 
 	tmp = tokens;
 	while (tmp)
@@ -112,15 +114,33 @@ void	expander(t_lsttoken *tokens, t_name *env)
 		while (tmp->args[i])
 		{
 			char *str=get_word(tmp->args[i]);//should get the first of args
-			if (ft_strchr(tmp->args[i], '$'))
-			{
-				tmp->args[i] = ft_strdup(search(tmp->args[i], env));
-			}
+			while(str[j])
+				{
+					if (ft_strchr(str, '$') && str[j]!='\'')
+					{
+						tmp->args[i] = ft_strdup(search(tmp->args[i], env));
+					}
+				}
 			i++;
 		}
 		tmp = tmp->next;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // void	expander(t_lsttoken *tokens, t_name *env)
 // {
 // 	t_lsttoken	*tmp;
@@ -164,4 +184,6 @@ void	expander(t_lsttoken *tokens, t_name *env)
 // 		tmp = tmp->next;
 // 	}
 // }
+
+
 
