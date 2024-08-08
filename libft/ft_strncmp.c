@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bouchrabenjraife07@gmail.com>    +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:49:55 by bbenjrai          #+#    #+#             */
-/*   Updated: 2023/11/24 11:50:55 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/08 18:38:56 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 			i++;
 		}
 	}
-	return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:30 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/08 14:27:36 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/08 21:29:06 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_name	*lstnew(char *name, char *value)
 		free(linked_lst);
 		return (NULL);
 	}
-	linked_lst->name = name;
-	linked_lst->value = value;
+	linked_lst->name = ft_strdup(name);
+	linked_lst->value = ft_strdup(value);
 	linked_lst->next = NULL;
 	return (linked_lst);
 }
@@ -56,6 +56,7 @@ t_name	*fill_env(char **env)
 {
 	char	*name;
 	char	*value;
+	char	*en;
 	int		i;
 	t_name	*lst;
 
@@ -63,13 +64,14 @@ t_name	*fill_env(char **env)
 	lst = NULL;
 	while (env[i])
 	{
-		value = ft_strchr(env[i], '=');
+		en = ft_strdup(env[i]);
+		value = ft_strchr(en, '=');
 		*value = 0;
 		value++;
-		name = ft_strdup(env[i]);
+		name = en;
 		lstadd_back(&lst, lstnew(name, value));
 		i++;
+		free(en);
 	}
-	free(name);
 	return (lst);
 }

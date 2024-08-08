@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:03 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/06 11:25:15 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/08 21:24:17 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	free_env(t_name *env)
 	{
 		temp = env;
 		env = env->next;
+		free(temp->name);
+		free(temp->value);	
 		free(temp);
 	}
 }

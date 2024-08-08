@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/08 12:12:17 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/08 21:38:34 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,3 +95,36 @@ void free_tokens(char **tokens, int count)
     }
     free(tokens);
 }
+
+
+// size_t	ft_len2(char **s)
+// {
+// 	size_t	i;
+
+// 	i = 0;
+// 	if (!s)
+// 		return (0);
+// 	while (s[i])
+// 		i++;
+// 	return (i);
+// }
+
+// char	**join2pointer(char **com, char *str)
+// {
+// 	size_t	len2;
+// 	char	**new_com;
+// 	int		i;
+
+// 	len2 = ft_len2(com);
+// 	new_com = ft_calloc((len2 + 2), sizeof(char *));
+// 	i = 0;
+// 	while (com && com[i])
+// 	{
+// 		new_com[i] = com[i];
+// 		i++;
+// 	}
+// 	new_com[i++] = str;
+// 	new_com[i] = NULL;
+// 	free(com);
+// 	return (new_com);
+// }

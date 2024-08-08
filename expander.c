@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/08 15:14:17 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/08 21:16:34 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*search(char *arg, t_name *env)
 	int		ln_aftdoll;
 	int		ln_befdoll;
 	char	*afterdol;
-	char	*befordoll;
+	// char	*befordoll;
 	char	*replace;
 	char	*expander;
 
@@ -59,18 +59,10 @@ char	*search(char *arg, t_name *env)
 	afterdol++;
 	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
 	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
-	befordoll = ft_strdup(arg);
+	// befordoll = ft_strdup(arg);
 	replace = search_env(ln_aftdoll, afterdol, env);
 	expander=ft_strdup("");
-	expander = ft_strjoin(expander, befordoll);
 	expander = ft_strjoin(expander, replace);
-	expander = ft_strjoin(expander, get_specialcar(afterdol));
-	
-	printf("ft_strlen(arg): %lu", ft_strlen(befordoll)
-		+ ft_strlen(get_specialcar(afterdol)) + ft_strlen(replace));
-	printf("\n<<<<  after $=> %s  >>>>\nBEFORE %s\n<<rep: %s>>\n specia : %s",
-		afterdol, befordoll, replace, get_specialcar(afterdol));
-	printf("\nexpander: %s\n", expander);
 	return (expander);
 }
 char *get_word(char *str,int *i) {
@@ -80,18 +72,20 @@ char *get_word(char *str,int *i) {
 	
     while (str[last])
 	{
-		// if((str[last] == '"' && str[last+1]=='"') || (str[last] == '\'' && str[last+1]=='"'))
-		// 	last+=2;
+		if ((str[last] == '"' && str[last+1]=='"') || (str[last] == '\''  && str[last+1]=='\''))
+			last+=2;
 		if (str[last] == '"' || str[last] == '\'') 
 		{
             c = str[last++]; 
 			while (str[last] && (str[last] != c))
 	            last++;
+			if (str[last])
+				last++;
 			break;
         }
 		else
 		{
-			if (str[last] == '$')
+			if (str[last] == '$' || !ft_isalnum(str[last]))
 				last++;
             while (str[last] && (ft_isalnum(str[last]) || str[last] == '_'))
                 last++;
@@ -99,7 +93,7 @@ char *get_word(char *str,int *i) {
         }
     }
 	
-	res = ft_strdup(ft_substr(str, *i, last - *i + 1));
+	res = ft_strdup(ft_substr(str, *i, last - *i));
 	*i = last;
     return res;
 }
@@ -111,27 +105,33 @@ void	expander(t_lsttoken *tokens, t_name *env)
 	
 
 	tmp = tokens;
+	char *exp_ = ft_strdup("");
 	while (tmp)
 	{
 		i = 0;
 		while (tmp->args[i])
 		{
-			j=0;
+			j= 0;
 			char *s=ft_strdup(tmp->args[i]);
 			while(s[j])
 			{
-				char *str=get_word(tmp->args[i],&j);//should get the first of args
+				char *str=get_word(s, &j);//should get the first of args
+				printf("word: %s\n", str);
 				if (ft_strchr(str, '$') && str[0] !='\'')
-					tmp->args[i] = ft_strdup(search(tmp->args[i], env));
-				if (s[j])
-					j++;
+					exp_ = ft_strjoin(exp_, ft_strdup(search(str, env)));
+				else
+					exp_ = ft_strjoin(exp_, str);
+				printf("word: %s\n", exp_);
+				if (!s[j])
+					break;
 			}
+			tmp->args[i] = exp_;
+			printf("expanded: %s\n", exp_);
 			i++;
 		}
 		tmp = tmp->next;
 	}
 }
-
 
 
 
