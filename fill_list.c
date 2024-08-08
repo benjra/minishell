@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/06 11:26:33 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/08 11:41:28 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 		{
 			check_symbols(str, list);
 		}
-		// Check if there's more content after the symbol
 		lstadd_backs(list, lstnews(type, ft_strdup(c)));
 		new += ft_strlen(c);
 		if (*new)
@@ -132,7 +131,6 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 	}
 	else if (!new)
 	{
-		// If no symbol was found, add the whole string as a single token
 		lstadd_backs(list, lstnews(get_type(str), ft_strdup(str)));
 	}
 }
@@ -165,7 +163,6 @@ t_token	*fill_list(char **lst)
 			else
 				lstadd_backs(&list, lstnews(get_type(lst[i]),
 											ft_strdup(lst[i])));
-												// function that gettype
 		}
 		else
 		{

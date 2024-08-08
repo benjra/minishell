@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/07 09:09:02 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/08 11:40:10 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	handle_quotes(t_token *list)
 	{
 		if (qoute(tmp->value))
 		{
-			ft_putendl_fd("syntax error!", 2);
 			return(1);
 		}
 		tmp = tmp->next;
@@ -107,10 +106,15 @@ int	handle_quotes(t_token *list)
 
 void	printf_err(t_token *list)
 {
-	printf("%d\n", double_symb(list));
 	if (pipes_err(list) == 1)
-		printf("error near `|' \n");
+		{
+		ft_putendl_fd("syntax error!", 2);
+		return ;
+		}
 	if (pipes_err(list) == 2 || double_symb(list) == 1
 		|| handle_quotes(list) == 1)
-		printf("syntax error! \n");
+		{
+		ft_putendl_fd("syntax error!", 2);
+			return ;
+		}
 }

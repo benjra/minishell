@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/06 15:14:10 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:12:17 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 
 int	is_space(char str)
 {
-	if (str == ' ')
+	if (str == ' ' || str=='\n' || str=='\t' || str=='\v' || str=='\f' || str=='\r')
 		return (1);
 	return (0);
 }
@@ -47,7 +47,7 @@ char	**split_string(char *str, int *count)
 	char	*token;
 	size_t	len;
 
-	tokens = malloc(MAX_TOKENS * sizeof(char *));//should modify the max tokens
+	tokens = malloc(ft_strlen(str) * sizeof(char *));//should modify the max tokens
 	token_count = 0;
 	in_quotes = 0;
 	start = str;

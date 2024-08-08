@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/06 11:28:12 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:26:03 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ t_lsttoken	*fill_token(t_token *list)
 	token = ft_calloc(1, sizeof(t_lsttoken));
 	if (!token)
 		return (NULL);
-	token->args = ft_calloc(len(temp) + 1, sizeof(char *));
+	token->args = malloc((len(temp) + 1)* sizeof(char *));
 	token->args[len(temp)] = NULL;
 	token->redirections = NULL;
 	token1 = token;

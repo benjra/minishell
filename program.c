@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/06 11:32:08 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:19:21 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	program_name(char **en)
 		prom = join(prom, RESET_COLOR);
 		if (!prom)
 			exit(1);
-		// prom=prompt();
 		cmd = readline(prom); // u should know how to work with readline
 		if (!cmd)
 			break ;
@@ -36,6 +35,7 @@ void	program_name(char **en)
 			parsing(cmd, env);
 		}
 	}
+	free(env);
 	rl_clear_history();
 	// free_env() //should add this func
 }

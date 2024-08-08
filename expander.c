@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/08 11:06:17 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:14:17 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ char *get_word(char *str,int *i) {
 	
     while (str[last])
 	{
-        if (str[last] == '"' || str[last] == '\'') 
+		// if((str[last] == '"' && str[last+1]=='"') || (str[last] == '\'' && str[last+1]=='"'))
+		// 	last+=2;
+		if (str[last] == '"' || str[last] == '\'') 
 		{
             c = str[last++]; 
 			while (str[last] && (str[last] != c))
@@ -99,10 +101,8 @@ char *get_word(char *str,int *i) {
 	
 	res = ft_strdup(ft_substr(str, *i, last - *i + 1));
 	*i = last;
-	printf("\n\nstr == %s\n\n", res);
     return res;
 }
-
 void	expander(t_lsttoken *tokens, t_name *env)
 {
 	t_lsttoken	*tmp;
@@ -122,9 +122,7 @@ void	expander(t_lsttoken *tokens, t_name *env)
 			{
 				char *str=get_word(tmp->args[i],&j);//should get the first of args
 				if (ft_strchr(str, '$') && str[0] !='\'')
-				{
 					tmp->args[i] = ft_strdup(search(tmp->args[i], env));
-				}
 				if (s[j])
 					j++;
 			}
