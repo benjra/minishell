@@ -27,7 +27,7 @@ while (current)
 	
 	i = 0;
 	while (current->args != NULL && current->args[i] != NULL)
-	    printf("args : -- %s  ", current->args[i++]);
+	    printf("args :  %s  ", current->args[i++]);
 	printf("\n");
 	while (current->redirections != NULL)
 	{

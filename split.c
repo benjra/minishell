@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/09 13:00:15 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/09 21:34:14 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,17 @@ int countwrd(char *str)
             i++;
             while (str[i] && !(str[i] == '"' || str[i] == '\''))
                 i++;
+			if (str[i])
+				i++;
         }
-        if (is_space(str[i]) || str[i] == '\0')
+        else if (is_space(str[i]) || str[i] == '\0')
         {
-            if (!isspace(str[i - 1]) && !in_quotes)
-                len++;
+            len++;
+			while (str[i] && is_space(str[i]))
+				i++;
         }
-        i++;
+		else if(str[i])
+        	i++;
     }
     return len + 1;
 }
@@ -66,13 +70,13 @@ char	**split_string(char *str, int *count)
 {
 	char	**tokens;
 	int		token_count;
-	int		in_quotes;
+	char		in_quotes;
 	char	*start;
 	char	*token;
 	size_t	len;
 	int length=(countwrd(str)+ 1);
 
-	tokens = malloc(length * sizeof(char *));//should modify the max tokens
+	tokens = malloc((length)* sizeof(char *));//should modify the max tokens
 	token_count = 0;
 	in_quotes = 0;
 	start = str;
@@ -82,9 +86,9 @@ char	**split_string(char *str, int *count)
 	{
 		if (*str == '"' || *str == '\'')
 		{
-			in_quotes = !in_quotes;
+			in_quotes = *str;
 		}
-		else if (is_space(*str) && !in_quotes)
+		else if (is_space(*str) && in_quotes!=*str)
 		{
 			if (start != str)
 			{
@@ -106,7 +110,7 @@ char	**split_string(char *str, int *count)
 		token[len] = '\0';
 		tokens[token_count++] = token;
 	}
-	tokens[token_count] = NULL;
+	tokens[token_count] = NULL; //heap buffer overflow in this case  "ls       hi "
 	*count = token_count;
 	return (tokens);
 }
