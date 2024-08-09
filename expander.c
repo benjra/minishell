@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/08 21:16:34 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:38:37 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,12 @@ void	expander(t_lsttoken *tokens, t_name *env)
 					break;
 			}
 			tmp->args[i] = exp_;
-			printf("expanded: %s\n", exp_);
+			// printf("expanded: %s\n", exp_);
 			i++;
 		}
 		tmp = tmp->next;
 	}
+	
 }
 
 

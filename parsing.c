@@ -13,7 +13,7 @@ void parsing(char *str,t_name *env)
 	freelist1(list);
 	expander(list2,env);
 
-	// t_lsttoken *current = list2; // Start with the head of the list
+	t_lsttoken *current = list2; // Start with the head of the list
 	
 	// while (list)
 	// {
@@ -21,19 +21,19 @@ void parsing(char *str,t_name *env)
 	// 	list=list->next;
 	// }
 
-// int i=0;
-// while (current) 
-// {
+int i=0;
+while (current) 
+{
 	
-// 	i = 0;
-// 	while (current->args != NULL && current->args[i] != NULL)
-// 	    printf("args : -- %s  ", current->args[i++]);
-// 	printf("\n");
-// 	while (current->redirections != NULL)
-// 	{
-// 	    printf("red : -- %s \n", current->redirections->red);
-// 		current->redirections = current->redirections->next;
-// 	}
-// 	    current = current->next; 
-// }
+	i = 0;
+	while (current->args != NULL && current->args[i] != NULL)
+	    printf("args : -- %s  ", current->args[i++]);
+	printf("\n");
+	while (current->redirections != NULL)
+	{
+	    printf("red : -- %s \n", current->redirections->red);
+		current->redirections = current->redirections->next;
+	}
+	    current = current->next; 
+}
 } 

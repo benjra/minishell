@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/08 21:38:34 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/09 13:00:15 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,30 @@ int	is_space(char str)
 		return (1);
 	return (0);
 }
+int countwrd(char *str)
+{
+    int i = 0;
+    int len = 0;
+    int in_quotes = 0;
+
+    while (str[i])
+    {
+        if (str[i] == '"' || str[i] == '\'')
+        {
+            in_quotes = !in_quotes;
+            i++;
+            while (str[i] && !(str[i] == '"' || str[i] == '\''))
+                i++;
+        }
+        if (is_space(str[i]) || str[i] == '\0')
+        {
+            if (!isspace(str[i - 1]) && !in_quotes)
+                len++;
+        }
+        i++;
+    }
+    return len + 1;
+}
 
 char	**split_string(char *str, int *count)
 {
@@ -46,8 +70,9 @@ char	**split_string(char *str, int *count)
 	char	*start;
 	char	*token;
 	size_t	len;
+	int length=(countwrd(str)+ 1);
 
-	tokens = malloc(ft_strlen(str) * sizeof(char *));//should modify the max tokens
+	tokens = malloc(length * sizeof(char *));//should modify the max tokens
 	token_count = 0;
 	in_quotes = 0;
 	start = str;
