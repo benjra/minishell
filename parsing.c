@@ -12,30 +12,32 @@ void parsing(char *str,t_name *env)
 	t_lsttoken *list2=fill_token(list);
 	// freelist1(list);
 	expander(list2,env);
+	// rm_quotes(list2); //correct this
 
-	// t_lsttoken *current = list2; // Start with the head of the list
 	
-	while (list)
-	{
-		printf("%s: %d\n",list->value,list->type);
-		list=list->next;
-	}
+	// while (list)
+	// {
+	// 	printf("%s: %d\n",list->value,list->type);
+	// 	list=list->next;
+	// }
 
-// int i=0;
+int i=0;
 // while(string[i])
 // 	printf("string: %s\n",string[i++]);
-// while (current) 
-// {
+
+t_lsttoken *current = list2; // Start with the head of the list
+while (current) 
+{
 	
-// 	i = 0;
-// 	while (current->args != NULL && current->args[i] != NULL)
-// 	    printf("args : --- %s  ", current->args[i++]);
-// 	printf("\n");
-// 	while (current->redirections != NULL)
-// 	{
-// 	    printf("red : -- %s \n", current->redirections->red);
-// 		current->redirections = current->redirections->next;
-// 	}
-// 	    current = current->next; 
-// }
+	i = 0;
+	while (current->args != NULL && current->args[i] != NULL)
+	    printf("args : --- %s  ", current->args[i++]);
+	printf("\n");
+	while (current->redirections != NULL)
+	{
+	    printf("red : -- %s \n", current->redirections->red);
+		current->redirections = current->redirections->next;
+	}
+	    current = current->next; 
+}
 } 

@@ -1,7 +1,7 @@
 #include "mini.h"
 char *ins_quote(char *str)
 {
-    char *ins_quote=NULL;
+    // char *ins_quote=NULL;
     int i;
     int len;
     char c;
@@ -19,12 +19,14 @@ char *ins_quote(char *str)
             {
                 len++;
             }
-            len++;
+            // if(str[i] && (str[len]=='"' || str[len]=='\''))
+            //     len++;
         }
         if(str[i])
             len++;
     }
-    res=ft_substr(str,i,len);
+    res=ft_substr(str,i,len-2);
+    return res;
 }
 void rm_quotes(t_lsttoken *tokens)
 {
@@ -36,9 +38,10 @@ void rm_quotes(t_lsttoken *tokens)
         i=0;
         while (tmp->args[i])
         {
-            if(ft_strncmp(tmp->args[i],"'",1)==0 || ft_strncmp(tmp->args[i],"'",1)==0)
+            if((ft_strchr(tmp->args[i],'\'') && ft_strncmp(tmp->args[i],"\'",2)==0 ) || (ft_strchr(tmp->args[i],'"') && ft_strncmp(tmp->args[i],"\"",2) ))
                 tmp->args[i]=ft_strdup(ins_quote(tmp->args[i]));
             i++;
         }
+        tmp=tmp->next;
     }
 }

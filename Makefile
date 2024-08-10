@@ -15,7 +15,8 @@ SRC_FILES = minishell.c \
 	clear.c \
 	errors.c \
 	expander.c \
-	envirement.c
+	envirement.c \
+	rm_quotes.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

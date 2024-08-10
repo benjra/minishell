@@ -86,6 +86,7 @@ void printf_err(t_token *list);
 //expand 
 void expander(t_lsttoken *tokens,t_name *env);
 char *ft_env(t_name *env,char *var);
+void rm_quotes(t_lsttoken *tokens);
 //free
 void free_tokens(char **tokens, int count) ;
 void free_env(t_name *env);
