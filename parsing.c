@@ -8,32 +8,34 @@ void parsing(char *str,t_name *env)
 	string=split_string(str,&count);
 	t_token *list = fill_list(string);
 	printf_err(list);//SHOULD handle single and double quotes
-	free_tokens(string,count);
+	// free_tokens(string,count);
 	t_lsttoken *list2=fill_token(list);
-	freelist1(list);
+	// freelist1(list);
 	expander(list2,env);
 
-	t_lsttoken *current = list2; // Start with the head of the list
+	// t_lsttoken *current = list2; // Start with the head of the list
 	
-	// while (list)
-	// {
-	// 	printf("%s: %d\n",list->value,list->type);
-	// 	list=list->next;
-	// }
-
-int i=0;
-while (current) 
-{
-	
-	i = 0;
-	while (current->args != NULL && current->args[i] != NULL)
-	    printf("args :  %s  ", current->args[i++]);
-	printf("\n");
-	while (current->redirections != NULL)
+	while (list)
 	{
-	    printf("red : -- %s \n", current->redirections->red);
-		current->redirections = current->redirections->next;
+		printf("%s: %d\n",list->value,list->type);
+		list=list->next;
 	}
-	    current = current->next; 
-}
+
+// int i=0;
+// while(string[i])
+// 	printf("string: %s\n",string[i++]);
+// while (current) 
+// {
+	
+// 	i = 0;
+// 	while (current->args != NULL && current->args[i] != NULL)
+// 	    printf("args : --- %s  ", current->args[i++]);
+// 	printf("\n");
+// 	while (current->redirections != NULL)
+// 	{
+// 	    printf("red : -- %s \n", current->redirections->red);
+// 		current->redirections = current->redirections->next;
+// 	}
+// 	    current = current->next; 
+// }
 } 

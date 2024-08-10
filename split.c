@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/09 21:34:14 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/10 12:48:45 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ char	**split_string(char *str, int *count)
 {
 	char	**tokens;
 	int		token_count;
-	char		in_quotes;
+	int		in_quotes;
+	char c;
 	char	*start;
 	char	*token;
 	size_t	len;
@@ -86,9 +87,12 @@ char	**split_string(char *str, int *count)
 	{
 		if (*str == '"' || *str == '\'')
 		{
-			in_quotes = *str;
+			in_quotes = !in_quotes;
+			c=*str++;
+			while(*str  && *str!=c)
+				str++;
 		}
-		else if (is_space(*str) && in_quotes!=*str)
+		else if (is_space(*str) && !in_quotes)
 		{
 			if (start != str)
 			{
@@ -100,7 +104,8 @@ char	**split_string(char *str, int *count)
 			}
 			start = str + 1;
 		}
-		str++;
+		if(*str)		
+			str++;
 	}
 	if (start != str)
 	{

@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/09 21:18:20 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/10 10:48:08 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,17 +116,15 @@ void	expander(t_lsttoken *tokens, t_name *env)
 			while(s[j])
 			{
 				char *str=get_word(s, &j);//should get the first of args
-				// printf("word: %s\n", str);
 				if (ft_strchr(str, '$') && str[0] !='\'')
 					exp_ = ft_strjoin(exp_, ft_strdup(search(str, env)));
 				else
 					exp_ = ft_strjoin(exp_, str);
-				// printf("word: %s\n", exp_);
 				if (!s[j])
 					break;
 			}
 			tmp->args[i] = exp_;
-			// printf("expanded: %s\n", exp_);
+			// free(exp_);
 			i++;
 		}
 		tmp = tmp->next;
