@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/10 10:48:08 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/11 08:47:44 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void	expander(t_lsttoken *tokens, t_name *env)
 					break;
 			}
 			tmp->args[i] = exp_;
+			exp_ = ft_strdup("");
 			// free(exp_);
 			i++;
 		}

@@ -82,7 +82,7 @@ t_lsttoken *fill_token(t_token *list);
 //errors functions
 int pipes_err(t_token *list);
 t_token	*tails(t_token *list);
-void printf_err(t_token *list);
+int printf_err(t_token *list);
 //expand 
 void expander(t_lsttoken *tokens,t_name *env);
 char *ft_env(t_name *env,char *var);

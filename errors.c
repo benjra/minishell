@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/08 11:40:10 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/11 09:50:17 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,17 +104,18 @@ int	handle_quotes(t_token *list)
 	return (0);
 }
 
-void	printf_err(t_token *list)
+int	printf_err(t_token *list)
 {
 	if (pipes_err(list) == 1)
 		{
 		ft_putendl_fd("syntax error!", 2);
-		return ;
+		return 1;
 		}
 	if (pipes_err(list) == 2 || double_symb(list) == 1
 		|| handle_quotes(list) == 1)
 		{
 		ft_putendl_fd("syntax error!", 2);
-			return ;
+			return 1;
 		}
+	return 0;
 }

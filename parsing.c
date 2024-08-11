@@ -2,17 +2,17 @@
 
 void parsing(char *str,t_name *env)
 {
-	
+	(void)env;
 	char **string ;
 	int count=0;
 	string=split_string(str,&count);
 	t_token *list = fill_list(string);
 	printf_err(list);//SHOULD handle single and double quotes
-	// free_tokens(string,count);
+	free_tokens(string,count);
 	t_lsttoken *list2=fill_token(list);
-	// freelist1(list);
+	freelist1(list);
 	expander(list2,env);
-	// rm_quotes(list2); //correct this
+	rm_quotes(list2); //correct this
 
 	
 	// while (list)
@@ -31,7 +31,7 @@ while (current)
 	
 	i = 0;
 	while (current->args != NULL && current->args[i] != NULL)
-	    printf("args : --- %s  ", current->args[i++]);
+	    printf("args : ----%s  ", current->args[i++]);
 	printf("\n");
 	while (current->redirections != NULL)
 	{
@@ -40,4 +40,6 @@ while (current)
 	}
 	    current = current->next; 
 }
+
+
 } 
