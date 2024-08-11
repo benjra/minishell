@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/11 08:47:44 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:49:58 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_specialcar(char *s)
 	int	i;
 
 	i = 0;
-	while (s[i] && s[i] != ' ' && (ft_isalnum(s[i]) || s[i]=='_')) // case of - underscore
+	while (s[i] &&(( s[i] != ' ' && (ft_isalnum(s[i]))) || s[i]=='_' || s[i]=='?')) // case of - underscore
 	{
 		i++;
 	}
@@ -38,6 +38,7 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 	char	*var;
 
 	var = get_var(len, afterdoll);
+	
 	replace = ft_env(env, var);
 	*afterdoll += ft_strlen(var);
 	if (ft_strchr(afterdoll, '$'))
@@ -87,7 +88,7 @@ char *get_word(char *str,int *i) {
 		{
 			if (str[last] == '$' || !ft_isalnum(str[last]))
 				last++;
-            while (str[last] && (ft_isalnum(str[last]) || str[last] == '_'))
+            while (str[last] && (ft_isalnum(str[last]) || str[last] == '_' || str[last] == '?'))
                 last++;
             break;
         }
@@ -125,9 +126,9 @@ void	expander(t_lsttoken *tokens, t_name *env)
 			}
 			tmp->args[i] = exp_;
 			exp_ = ft_strdup("");
-			// free(exp_);
 			i++;
 		}
+	// free(exp_);
 		tmp = tmp->next;
 	}
 	

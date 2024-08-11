@@ -91,4 +91,5 @@ void rm_quotes(t_lsttoken *tokens);
 void free_tokens(char **tokens, int count) ;
 void free_env(t_name *env);
 void freelist1(t_token *list);
+void	free_all(t_lsttoken *token);
 #endif

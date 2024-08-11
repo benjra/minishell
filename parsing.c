@@ -40,6 +40,6 @@ while (current)
 	}
 	    current = current->next; 
 }
-
+free_all(current);
 
 } 
