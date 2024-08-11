@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/11 15:49:58 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:04:12 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	*search(char *arg, t_name *env)
 	int		ln_aftdoll;
 	int		ln_befdoll;
 	char	*afterdol;
-	// char	*befordoll;
 	char	*replace;
 	char	*expander;
 
@@ -60,7 +59,7 @@ char	*search(char *arg, t_name *env)
 	afterdol++;
 	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
 	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
-	// befordoll = ft_strdup(arg);
+
 	replace = search_env(ln_aftdoll, afterdol, env);
 	expander=ft_strdup("");
 	expander = ft_strjoin(expander, replace);
