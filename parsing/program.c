@@ -6,13 +6,13 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/08 21:32:07 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/13 09:58:42 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	program_name(char **en)
+void	program_name(char **en)//this function is for displaying the promt and read from the readline 
 {
 	// char	*prom;
 	t_name	*env;
@@ -26,7 +26,7 @@ void	program_name(char **en)
 		// prom = join(prom, RESET_COLOR);
 		// if (!prom)
 			// exit(1);
-		cmd = readline("\033[1;32mminishell$ \e[m"); // u should know how to work with readline
+		cmd = readline("\033[1;32mminishell$ \e[m"); 
 		if (!cmd)
 			break ;
 		if (ft_strncmp(cmd, "", -1))
@@ -38,5 +38,4 @@ void	program_name(char **en)
 	}
 	free_env(env);
 	rl_clear_history();
-	// free_env() //should add this func
 }

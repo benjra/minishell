@@ -6,13 +6,13 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:10 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/11 15:48:56 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/13 09:15:33 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-char	*ft_env(t_name *env, char *var)
+char	*ft_env(t_name *env, char *var)//this function is used for get a variable from the envirement list if exist if not it return empty value else if the var=? it return 0
 {
 	t_name	*temp;
 	char	*replace;

@@ -36,7 +36,7 @@ char *ins_quote(char *str)
     return res;
 }
 
-void rm_quotes(t_lsttoken *tokens)
+void rm_quotes(t_lsttoken *tokens)//func for removing the quotes 
 {
     t_lsttoken *tmp;
     int i;
@@ -53,52 +53,3 @@ void rm_quotes(t_lsttoken *tokens)
         tmp=tmp->next;
     }
 }
-
-
-
-
-
-
-
-
-
-// char *ins_quote(char *str)
-// {
-//     // char *ins_quote=NULL;
-//     int i;
-//     int len;
-//     char c;
-//     char *res;
-//     char *f;
-//     char *r;
-//     i=0;
-//     len=i;
-//     f = ft_strdup(" ");
-//     res = ft_strdup("");
-//     while(str[len])
-//     {
-//         if(str[len]=='"' || str[len]=='\'')
-//         {
-//             c=str[len++];
-//             i=len;
-//             while(str[len] && str[len]!=c)
-//             {
-//                 len++;
-//             }
-//             r=ft_substr(str,i ,len - 3);
-//             res = ft_strjoin(res, r);
-            
-//             // if(str[i] && (str[len]=='"' || str[len]=='\''))
-//             //     len++;
-//         }
-//         else    
-//         {
-//             f[0] = str[len];
-//             res = ft_strjoin(res, f);
-//         }   
-//         if(str[i])
-//             len++;
-//     }
-//     // res=ft_substr(str,i,len);
-//     return res;
-// }

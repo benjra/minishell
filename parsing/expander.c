@@ -6,13 +6,13 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/11 20:04:12 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/13 09:51:55 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-char	*get_specialcar(char *s)
+char	*get_specialcar(char *s)//this fun get from a special caracter to end
 {
 	int	i;
 
@@ -24,7 +24,7 @@ char	*get_specialcar(char *s)
 	return (s + i);
 }
 
-char	*get_var(int len, char *afterdoll)
+char	*get_var(int len, char *afterdoll)// function foe getting the variable after dollar sign $
 {
 	char	*var;
 	var =ft_strdup("");
@@ -32,21 +32,21 @@ char	*get_var(int len, char *afterdoll)
 	return (var);
 }
 
-char	*search_env(int len, char *afterdoll, t_name *env)
+char	*search_env(int len, char *afterdoll, t_name *env)//function for retur the value of the variable inside the envierement else empty or 0
 {
 	char	*replace;
 	char	*var;
 
 	var = get_var(len, afterdoll);
 	
-	replace = ft_env(env, var);
+	replace = ft_env(env, var);//get from envirement
 	*afterdoll += ft_strlen(var);
 	if (ft_strchr(afterdoll, '$'))
-		search_env(ft_strlen(afterdoll), afterdoll, env);
+		search_env(ft_strlen(afterdoll), afterdoll, env);//recursion if a dollar sign exist in the rest of the string 
 	return (replace);
 }
 
-char	*search(char *arg, t_name *env)
+char	*search(char *arg, t_name *env)//this function expande the variable from the env
 {
 	int		ln_aftdoll;
 	int		ln_befdoll;
@@ -65,9 +65,10 @@ char	*search(char *arg, t_name *env)
 	expander = ft_strjoin(expander, replace);
 	return (expander);
 }
-char *get_word(char *str,int *i) {
+char *get_word(char *str,int *i) //this function get every word 
+{
     char c = 0;
-    char *res = NULL;
+    char *res = ft_strdup("");
     int last = *i;
 	
     while (str[last])
@@ -85,19 +86,22 @@ char *get_word(char *str,int *i) {
         }
 		else
 		{
+			if(str[last])
+			{
 			if (str[last] == '$' || !ft_isalnum(str[last]))
 				last++;
             while (str[last] && (ft_isalnum(str[last]) || str[last] == '_' || str[last] == '?'))
-                last++;
+                		last++;
+			}
             break;
         }
     }
-	
 	res = ft_strdup(ft_substr(str, *i, last - *i));
 	*i = last;
     return res;
 }
-void	expander(t_lsttoken *tokens, t_name *env)
+
+void	expander(t_lsttoken *tokens, t_name *env)//the main function of expander it expand exept inside the single quotes
 {
 	t_lsttoken	*tmp;
 	int			i;
@@ -109,24 +113,24 @@ void	expander(t_lsttoken *tokens, t_name *env)
 	while (tmp)
 	{
 		i = 0;
-		while (tmp->args[i])
-		{
-			j= 0;
-			char *s=ft_strdup(tmp->args[i]);
-			while(s[j])
+			while (tmp->args[i])
 			{
-				char *str=get_word(s, &j);//should get the first of args
-				if (ft_strchr(str, '$') && str[0] !='\'')
-					exp_ = ft_strjoin(exp_, ft_strdup(search(str, env)));
-				else
-					exp_ = ft_strjoin(exp_, str);
-				if (!s[j])
-					break;
+				j= 0;
+				char *s=ft_strdup(tmp->args[i]);
+				while(s[j])
+				{
+					char *str=get_word(s, &j);
+					if (ft_strchr(str, '$') && str[0] !='\'')
+						exp_ = ft_strjoin(exp_, ft_strdup(search(str, env)));
+					else
+						exp_ = ft_strjoin(exp_, str);
+					if (!s[j])
+						break;
+				}
+				tmp->args[i] = exp_;
+				exp_ = ft_strdup("");
+				i++;
 			}
-			tmp->args[i] = exp_;
-			exp_ = ft_strdup("");
-			i++;
-		}
 	// free(exp_);
 		tmp = tmp->next;
 	}

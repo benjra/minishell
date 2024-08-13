@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/10 19:25:58 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:08:48 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int countwrd(char *str)
     return len + 1;
 }
 
-char	**split_string(char *str, int *count)
+char	**split_string(char *str, int *count)//this fun it split the commonde based on spaces and it skipp the spaces inside quotes 
 {
 	char	**tokens;
 	int		token_count;
@@ -77,7 +77,7 @@ char	**split_string(char *str, int *count)
 	size_t	len;
 	int length=(countwrd(str)+ 1);
 
-	tokens = malloc((length)* sizeof(char *));//should modify the max tokens
+	tokens = malloc((length)* sizeof(char *));
 	token_count = 0;
 	in_quotes = 0;
 	start = str;
@@ -115,7 +115,7 @@ char	**split_string(char *str, int *count)
 		token[len] = '\0';
 		tokens[token_count++] = token;
 	}
-	tokens[token_count] = NULL; //heap buffer overflow in this case  "ls       hi "
+	tokens[token_count] = NULL;
 	*count = token_count;
 	return (tokens);
 }

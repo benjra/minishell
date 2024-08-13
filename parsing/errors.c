@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/11 09:50:17 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/13 09:26:17 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // should handle all syntax errors
 #include "mini.h"
 
-int	double_symb(t_token *list)
+int	double_symb(t_token *list)// this function handle the double symbol inside a commande
 {
 	t_token	*tmp;
 	int		typo;
@@ -31,7 +31,6 @@ int	double_symb(t_token *list)
 			typo = tmp->type;
 			nextp = tmp->next->type;
 			if (typo == 3 || typo == 4 || typo == 5 || typo == 6)
-			// this case "ls <| ls" it return 0 in this case why ?
 			{
 				if (nextp == 2 || nextp == 3 || nextp == 4 || nextp == 5
 					|| nextp == 6)
@@ -48,11 +47,11 @@ int	pipes_err(t_token *list)
 	t_token	*tmp;
 
 	tmp = list;
-	if (list->type == 2)
+	if (list && list->type == 2)
 		return (1);
-	if (tails(list)->type == 2 || tails(list)->type == 3
+	if (list && (tails(list)->type == 2 || tails(list)->type == 3
 		|| tails(list)->type == 4 || tails(list)->type == 5
-		|| tails(list)->type == 6)
+		|| tails(list)->type == 6))
 		return (2);
 	while (tmp != NULL)
 	{
@@ -86,7 +85,7 @@ int qoute(char *str)
 	return (0);
 }
 
-int	handle_quotes(t_token *list)
+int	handle_quotes(t_token *list)//this function handle if the clos quotes exist or not 
 {
 	t_token	*tmp;
 	int quote_exist;
@@ -104,7 +103,7 @@ int	handle_quotes(t_token *list)
 	return (0);
 }
 
-int	printf_err(t_token *list)
+int	printf_err(t_token *list)//this function for handle syntax errors 
 {
 	if (pipes_err(list) == 1)
 		{

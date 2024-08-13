@@ -3,7 +3,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
@@ -24,7 +24,7 @@
 # define BPurple "\033[1;35m"       //# Purple
 # define BCyan "\033[1;36m"       //# Cyan
 # define BWhite "\033[1;37m"       //# White
-#define RESET_COLOR "\e[m"
+# define RESET_COLOR "\e[m"
 
 // typedef struct s_redir;
 
@@ -92,4 +92,10 @@ void free_tokens(char **tokens, int count) ;
 void free_env(t_name *env);
 void freelist1(t_token *list);
 void	free_all(t_lsttoken *token);
+
+//node list
+t_token	*lstnews(int type, char *value);
+void	lstadd_backs(t_token **lst, t_token *new);
+t_token	*tails(t_token *list);
+
 #endif

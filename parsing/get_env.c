@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:30 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/08 21:29:06 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/13 09:56:00 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_name	*lstnew(char *name, char *value)
 	return (linked_lst);
 }
 
-t_name	*fill_env(char **env)
+t_name	*fill_env(char **env)//this func fill alist from the double pointer **env and return the list 
 {
 	char	*name;
 	char	*value;

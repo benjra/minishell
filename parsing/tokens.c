@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/11 08:42:20 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:12:51 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	len(t_token *lst)
 	return (i);
 }
 
-t_lsttoken	*fill_token(t_token *list)
+t_lsttoken	*fill_token(t_token *list)//this function fillling the last list from a normal list
 {
 	t_token		*temp;
 	t_lsttoken	*token;
@@ -145,13 +145,13 @@ t_lsttoken	*fill_token(t_token *list)
 	token1 = token;
 	while (temp != NULL)
 	{
-		if (temp->next != NULL && temp->type > 2 && temp->type <= 6)
+		if (temp->next != NULL && temp->type > 2 && temp->type <= 6)//here we create redirections nodes and add them to redirection list if we find  the type between(3-6)
 		{
 			redirections = new_red(temp->type, ft_strdup(temp->next->value));
 			red_addback(&(token->redirections), redirections);
 			temp = temp->next;
 		}
-		else if (temp->next != NULL && temp->type == 2)
+		else if (temp->next != NULL && temp->type == 2) //here we create a node if we find a pipe (type==2) every pipe represent a node=command
 		{
 			add_back(&token1, newnode(temp->type, token->args));
 			token = token->next;

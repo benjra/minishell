@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/08 11:41:28 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/13 09:54:21 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,11 @@ char	*ft_strchr_skip_quotes(const char *str, char *c)
 	return (NULL);
 }
 
-void	parse_and_add_token(t_token **list, char *str, char *c, int type)
+void	parse_and_add_token(t_token **list, char *str, char *c, int type)//this function add eavh word inside the linked list 
 {
 	char	*new;
 
-	new = ft_strchr_skip_quotes(str, c);
+	new = ft_strchr_skip_quotes(str, c);//skipp symbols inside quotes
 	if (new &&ft_strncmp(str, c, -1))
 	{
 		*new = '\0';
@@ -135,7 +135,8 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 	}
 }
 
-t_token	*fill_list(char **lst)
+
+t_token	*fill_list(char **lst)//filling the list every word and its type 
 {
 	int		i;
 	t_token	*list;
@@ -172,3 +173,58 @@ t_token	*fill_list(char **lst)
 	}
 	return (list);
 }
+
+
+
+
+// char *get_quoted_word(char *str)
+// {
+// 	int i = 0;
+// 	int quote = 0;
+// 	if (str[i++] == '\'' || str[i] == '"')
+// 		quote = str[i];
+// 	while(str && str[i] && str[i] != quote)
+// 		i++;
+// 	if (str[i] == quote)
+// 		i++;
+// 	return (ft_substr(str, 0, i));
+// }
+
+// char *get_token(char *str,int i)
+// {
+// 	// int i = 0;
+// 	int specila = 0;
+// 	if (str[i] && ft_strchr("'\"<|>", str[i]))
+// 	{
+// 		specila = str[i];
+// 		while(str && str[i] == specila)
+// 			i++;
+// 		return (ft_substr(str, 0, i));
+// 	}
+// 	while(str && str[i])
+// 	{
+// 		if (ft_strchr("'\"<|>", str[i]))
+// 			break;
+// 		i++;
+// 	}
+// 	return (ft_substr(str, 0, i));
+// }
+
+// void parse_token(t_token **list, char *str)
+// {
+// 	int i = -1;
+// 	while(str && str[++i])
+// 	{
+// 		t_token *tok = NULL;
+// 		if (str[i] == '\'' || str[i] == '"')
+// 		{
+// 			tok = lstnews(1, get_quoted_word(&str[i]));
+// 			lstadd_backs(list, tok);
+// 		}
+// 		else
+// 		{
+// 			tok = lstnews(1, get_token(&str[i],i));
+// 			lstadd_backs(list, tok);
+// 		}
+// 	}
+// }

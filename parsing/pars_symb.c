@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   pars_symb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 11:24:46 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/06 11:27:38 by bbenjrai         ###   ########.fr       */
+/*   Created: 2024/08/12 12:53:48 by bbenjrai          #+#    #+#             */
+/*   Updated: 2024/08/13 09:56:37 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-// char *gethost()
-char	*prompt(void)
-{
-	char	*ptr;
-
-	ptr = ft_strdup(BGreen);
-	get_prompt(&ptr, ">>>");
-	get_prompt(&ptr, BWhite);
-	return (ptr);
-}
+// void parse_by_symb(t_token *list,char *str)
+// {
+//     int i=0;
+//     while(str[i])
+//     {
+        
+//     }
+// }
