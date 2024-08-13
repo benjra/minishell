@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/13 09:54:21 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:43:55 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type)//this fun
 	char	*new;
 
 	new = ft_strchr_skip_quotes(str, c);//skipp symbols inside quotes
-	if (new &&ft_strncmp(str, c, -1))
+	if (new && ft_strncmp(str, c, -1))
 	{
 		*new = '\0';
 		if (*(str))
@@ -173,8 +173,6 @@ t_token	*fill_list(char **lst)//filling the list every word and its type
 	}
 	return (list);
 }
-
-
 
 
 // char *get_quoted_word(char *str)
