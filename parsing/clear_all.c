@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 11:16:19 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/11 11:27:59 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/13 13:20:32 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	free_red(t_redir *redi)
 	{
 		temp = redi;
 		redi = redi->next;
-		// free(temp->type);
 		free(temp->red);	
 		free(temp);
 	}
@@ -42,7 +41,6 @@ void	free_all(t_lsttoken *token)
 	{
 		temp = token;
 		token = token->next;
-		// free(temp->type);
 		free_red(temp->redirections);
         free_arg(temp->args);
 		free(temp);
