@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/13 09:51:55 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:00:52 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	expander(t_lsttoken *tokens, t_name *env)//the main function of expander it
 					if (!s[j])
 						break;
 				}
-				tmp->args[i] = exp_;
+				tmp->args[i] = exp_;//should remove the quotqtions here
 				exp_ = ft_strdup("");
 				i++;
 			}

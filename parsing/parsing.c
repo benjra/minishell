@@ -15,11 +15,11 @@ void parsing(char *str,t_name *env)
 	rm_quotes(list2); //correct this
 
 	
-	// while (list)
-	// {
-	// 	printf("%s: %d\n",list->value,list->type);
-	// 	list=list->next;
-	// }
+	while (list)
+	{
+		printf("%s: %d\n",list->value,list->type);
+		list=list->next;
+	}
 
 // int i=0;
 // while(string[i])
