@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/14 13:27:25 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:36:54 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,16 @@ void	check_symbols(char *str, t_token **list)
 
 char	*ft_strchr_skip_quotes(const char *str, char *c)
 {
-	char	in_quotes;
+	int	in_quotes;
 
 	in_quotes = 0;
-	int i=0;
-	int end=0;
 	while (*str)
 	{
 		if (*str == '"' || *str == '\'')
 		{
-			in_quotes = *str;
-			while(*str++ && *str!=in_quotes)
-			{
-				str++;
-				end++;
-				if(*str==in_quotes)
-				{
-					in_quotes=0;
-					return(ft_substr(str,i,end));
-				}
-			}
+			in_quotes = !in_quotes;
 		}
-		else if (ft_strncmp(str, c, ft_strlen(c)) && *str!=in_quotes )
+		else if (!ft_strncmp(str, c, ft_strlen(c)) && !in_quotes)
 		{ // to avoid the cases like when u want to search for an string
 			return ((char *)str);
 		}
@@ -122,24 +110,18 @@ char	*ft_strchr_skip_quotes(const char *str, char *c)
 	return (NULL);
 }
 
-
-
 void	parse_and_add_token(t_token **list, char *str, char *c, int type)//this function add eavh word inside the linked list 
 {
 	char	*new;
-	int i=0;
-	int last=0;
-	(void)type;
 //should change this function to being adaptate with cases like ls>cat
 	new = ft_strchr_skip_quotes(str, c);//skipp symbols inside quotes
-	if (new && ft_strnstr(str,c,ft_strlen(str))!=NULL)
+	if (new && ft_strncmp(str, c, -1))
 	{
 		*new = '\0';
 		if (*(str))
 		{
 			check_symbols(str, list);
 		}
-		// if(ft_strncmp(str,c,ft_strlen(c)))
 		lstadd_backs(list, lstnews(type, ft_strdup(c)));
 		new += ft_strlen(c);
 		if (*new)
@@ -149,17 +131,7 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type)//this fun
 	}
 	else if (!new)
 	{
-		if(!ft_strncmp(str,c,ft_strlen(c)))
-		{
-			while(ft_strnstr(str+last,c,ft_strlen(c))!=NULL)
-			{
-				last++;
-			}
-			lstadd_backs(list, lstnews(get_type(str), ft_substr(str,i,last)));
-		}
-		else 
-			lstadd_backs(list, lstnews(get_type(str), ft_strdup(str)));
-		
+		lstadd_backs(list, lstnews(get_type(str), ft_strdup(str)));
 	}
 }
 
