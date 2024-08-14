@@ -36,12 +36,12 @@ typedef struct s_name
 }t_name;
 
 
-#define  TOKEN_WORD 1,      // For Commands
-#define    TOKEN_PIPE 2,      // For '|'
-#define    TOKEN_REDIR_IN 3,  // For '<'
-#define    TOKEN_REDIR_OUT 4, // For '>'
-#define    TOKEN_REDIR_APPEND 5, // For '>>'
-#define    TOKEN_REDIR_HEREDOC 6, // For '<<'
+#define     TOKEN_WORD          1      // For Commands
+#define    TOKEN_PIPE           2      // For '|'
+#define    TOKEN_REDIR_IN       3  // For '<'
+#define    TOKEN_REDIR_OUT      4 // For '>'
+#define    TOKEN_REDIR_APPEND   5 // For '>>'
+#define    TOKEN_REDIR_HEREDOC  6 // For '<<'
 
 typedef struct s_token
 {

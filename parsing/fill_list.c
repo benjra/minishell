@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/14 13:13:27 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/14 17:12:36 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,12 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type)//this fun
 	new = ft_strchr_skip_quotes(str, c);//skipp symbols inside quotes
 	if (new && ft_strnstr(str,c,ft_strlen(str))!=NULL)
 	{
+		new=ft_strnstr(str,c,-1);
 		*new = '\0';
 		if (*(str))
 		{
 			check_symbols(str, list);
 		}
-		// if(ft_strncmp(str,c,ft_strlen(c)))
 		lstadd_backs(list, lstnews(type, ft_strdup(c)));
 		new += ft_strlen(c);
 		if (*new)
@@ -176,18 +176,18 @@ t_token	*fill_list(char **lst)//filling the list every word and its type
 			|| ft_strchr(lst[i], '>'))
 		{
 			if (ft_strnstr(lst[i], ">>", -1) && ft_strncmp(lst[i], ">>", -1))
-				parse_and_add_token(&list, lst[i], ">>", 5);
+				parse_and_add_token(&list, lst[i], ">>", TOKEN_REDIR_APPEND); // 5
 			else if (ft_strnstr(lst[i], "<<", -1) && ft_strncmp(lst[i], "<<",
 					-1))
-				parse_and_add_token(&list, lst[i], "<<", 6);
+				parse_and_add_token(&list, lst[i], "<<", TOKEN_REDIR_HEREDOC);
 			else if (ft_strchr(lst[i], '|') && ft_strncmp(lst[i], "|", -1))
-				parse_and_add_token(&list, lst[i], "|", 2);
+				parse_and_add_token(&list, lst[i], "|", TOKEN_PIPE);
 			else if (ft_strchr(lst[i], '<') && ft_strncmp(lst[i], "<", -1)
 				&& ft_strncmp(lst[i], "<<", -1))
-				parse_and_add_token(&list, lst[i], "<", 3);
+				parse_and_add_token(&list, lst[i], "<", TOKEN_REDIR_IN);
 			else if (ft_strchr(lst[i], '>') && ft_strncmp(lst[i], ">", -1)
 				&& ft_strncmp(lst[i], ">>", -1))
-				parse_and_add_token(&list, lst[i], ">", 4);
+				parse_and_add_token(&list, lst[i], ">", TOKEN_REDIR_OUT);
 			else
 				lstadd_backs(&list, lstnews(get_type(lst[i]),
 											ft_strdup(lst[i])));
