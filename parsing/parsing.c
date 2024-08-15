@@ -8,11 +8,11 @@ void parsing(char *str,t_name *env)
 	string=split_string(str,&count);
 	t_token *list = fill_list(string);
 	printf_err(list);
-	// free_tokens(string,count);
+	free_tokens(string,count);
 	t_lsttoken *list2=fill_token(list);
-	// freelist1(list);
+	freelist1(list);
 	expander(list2,env);// segf in "" && 
-	rm_quotes(list2); //correct this
+	// rm_quotes(list2); //correct this
 
 	
 	// while (list)

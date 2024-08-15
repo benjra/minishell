@@ -36,20 +36,20 @@ char *ins_quote(char *str)
     return res;
 }
 
-void rm_quotes(t_lsttoken *tokens)//func for removing the quotes 
-{
-    t_lsttoken *tmp;
-    int i;
-    tmp=tokens;
-    while (tmp)
-    {
-        i=0;
-        while (tmp->args[i])
-        {
-            if((ft_strchr(tmp->args[i],'\'') ) || (ft_strchr(tmp->args[i],'"') ))
-                tmp->args[i]=ft_strdup(ins_quote(tmp->args[i]));
-            i++;
-        }
-        tmp=tmp->next;
-    }
-}
+// void rm_quotes(t_lsttoken *tokens)//func for removing the quotes 
+// {
+//     t_lsttoken *tmp;
+//     int i;
+//     tmp=tokens;
+//     while (tmp)
+//     {
+//         i=0;
+//         while (tmp->args[i])
+//         {
+//             if((ft_strchr(tmp->args[i],'\'') ) || (ft_strchr(tmp->args[i],'"') ))
+//                 tmp->args[i]=ft_strdup(ins_quote(tmp->args[i]));
+//             i++;
+//         }
+//         tmp=tmp->next;
+//     }
+// }
