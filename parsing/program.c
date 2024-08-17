@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/13 09:58:42 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:40:59 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	program_name(char **en)//this function is for displaying the promt and read
 		// prom = join(prom, RESET_COLOR);
 		// if (!prom)
 			// exit(1);
+		gl_var=0;
 		cmd = readline("\033[1;32mminishell$ \e[m"); 
 		if (!cmd)
 			break ;

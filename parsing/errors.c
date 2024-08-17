@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/17 12:49:09 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:02:21 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,35 @@ int	handle_quotes(t_token *list)//this function handle if the clos quotes exist 
 	}
 	return (0);
 }
-
+void ft_ambigious(t_lsttoken *list)
+{
+	t_lsttoken *temp;
+	temp=list;
+	int ambigius=0;
+	while(temp)
+	{
+		while (temp->redirections)
+		
+		{
+			if(temp->redirections->type== 5 && !*(temp->redirections->red))
+				ambigius=1;
+			else if(temp->redirections->type== 6 && !*(temp->redirections->red))
+				ambigius=1;
+			else if(temp->redirections->type== 3 && !*(temp->redirections->red))
+				ambigius=1;
+			else if(temp->redirections->type== 4 && !*(temp->redirections->red))
+				ambigius=1;
+		temp->redirections=temp->redirections->next;		
+		}
+		temp=temp->next;
+	}
+	if(ambigius==1)
+	{
+		gl_var=1;
+		ft_putendl_fd("ambigious redirect!\n",2);
+		return ;
+	}
+}
 int	printf_err(t_token *list)//this function for handle syntax errors 
 {
 	//if a redirection exitst and folllowd by and expande=null (ambigious redirect global_var=1)
@@ -115,9 +143,15 @@ int	printf_err(t_token *list)//this function for handle syntax errors
 	if (pipes_err(list) == 2 || double_symb(list) == 1
 		|| handle_quotes(list) == 1)
 		{
-		gl_var=2;
+		gl_var=2;// why it doesnt work
 		ft_putendl_fd("syntax error!", 2);
 			return 1;
 		}
+	// if(ft_ambigious(list)==1)
+	// {
+	// 	gl_var=1;
+	// 	ft_putendl_fd("ambigious  redirect!", 2);
+	// 	return 1;
+	// }
 	return 0;
 }

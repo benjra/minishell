@@ -11,6 +11,7 @@ void parsing(char *str,t_name *env)
 	free_tokens(string,count);
 	t_lsttoken *list2=fill_token(list);
 	freelist1(list);
+	ft_ambigious(list2);
 	expander(list2,env);// segf in "" && 
 	// rm_quotes(list2); //correct this
 
