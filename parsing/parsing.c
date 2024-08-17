@@ -11,7 +11,7 @@ void parsing(char *str,t_name *env)
 	free_tokens(string,count);
 	t_lsttoken *list2=fill_token(list);
 	// freelist1(list);
-	expander(list2,env);
+	expander(list2,env);// should expand also redirections in the opening of files
 	// ft_ambigious(list2);// segf in "" && 
 
 	
