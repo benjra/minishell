@@ -6,12 +6,12 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:36 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/13 11:06:52 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/17 12:35:10 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
+int gl_var=0;
 void	handler(int signum)
 {
 	(void)signum;
@@ -19,6 +19,7 @@ void	handler(int signum)
 	rl_on_new_line();//its make u to write on newline
 	rl_replace_line("", 0);//its make u to replace the newline with string input
 	rl_redisplay();//it 
+	gl_var=130;
 }
 
 int	main(int ac, char **av, char **env)

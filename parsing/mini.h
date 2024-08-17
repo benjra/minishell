@@ -13,6 +13,8 @@
 # include <signal.h>
 #include <sys/wait.h>
 
+extern int gl_var;
+
 
 # define DCOLORB "\033[49m"
 # define GREENB  "\033[42m"

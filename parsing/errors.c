@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/13 09:26:17 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/17 12:49:09 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,17 @@ int	handle_quotes(t_token *list)//this function handle if the clos quotes exist 
 
 int	printf_err(t_token *list)//this function for handle syntax errors 
 {
+	//if a redirection exitst and folllowd by and expande=null (ambigious redirect global_var=1)
 	if (pipes_err(list) == 1)
 		{
+			gl_var=2;
 		ft_putendl_fd("syntax error!", 2);
 		return 1;
 		}
 	if (pipes_err(list) == 2 || double_symb(list) == 1
 		|| handle_quotes(list) == 1)
 		{
+		gl_var=2;
 		ft_putendl_fd("syntax error!", 2);
 			return 1;
 		}
