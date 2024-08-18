@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/15 09:27:25 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:47:46 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	expander(t_lsttoken *tokens, t_name *env)//the main function of expander it
 		i = 0;
 			while (tmp->args[i])
 			{
+				//inside this while can be a function separated 
 				j= 0;
 				char *s=ft_strdup(tmp->args[i]);
 				while(s[j])
@@ -123,7 +124,7 @@ void	expander(t_lsttoken *tokens, t_name *env)//the main function of expander it
 					if (*str == '"')
 						ins_quote(str);
 					if (ft_strchr(str, '$') && str[0] !='\'')
-						exp_ = ft_strjoin(exp_, ft_strdup((search(str, env))));
+						exp_ = ft_strjoin(exp_, ft_strdup((search(str, env))));//handle this case "'$'"
 					else
 						exp_ = ft_strjoin(exp_, ins_quote(str));
 					if (!s[j])
