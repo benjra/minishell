@@ -7,7 +7,8 @@ void parsing(char *str,t_name *env)
 	int count=0;
 	string=split_string(str,&count);
 	t_token *list = fill_list(string);
-	printf_err(list);
+	if (printf_err(list))
+		return ;
 	free_tokens(string,count);
 	t_lsttoken *list2=fill_token(list);
 	// freelist1(list);
@@ -38,9 +39,10 @@ while (current)
 		current->redirections = current->redirections->next;
 	}
 	    current = current->next; 
-
-// free_all(current);
-}
+	
+	// free_all(current);
+	}
+	gl_var = 0;
 } 
 
   
