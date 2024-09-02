@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/18 21:47:46 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:15:22 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,38 +100,41 @@ char *get_word(char *str,int *i) //this function get every word
 	*i = last;
     return res;
 }
-
-void	expander(t_lsttoken *tokens, t_name *env)//the main function of expander it expand exept inside the single quotes
+char	*small_expand(char *args, t_name *env)//this function is the core of expander it expand a string 
+{
+	int j;
+	// int index=*i;
+	char *exp_ = ft_strdup("");
+	j= 0;
+	char *s=ft_strdup(args);
+	while(s[j])
+	{
+		char *str=get_word(s, &j);
+		if (*str == '"')
+			ins_quote(str);
+		if (ft_strchr(str, '$') && str[0] !='\'')
+			exp_ = ft_strjoin(exp_, ft_strdup((search(str, env))));//handle this case "'$'"
+		else
+			exp_ = ft_strjoin(exp_, ins_quote(str));
+		if (!s[j])
+			break;
+	}
+	return exp_;
+}
+void	expander(t_lsttoken *tokens, t_name *env)//the main function of expander it expand exept inside the single quotes but it expand just the arguments of the command
 {
 	t_lsttoken	*tmp;
 	int			i;
-	int j;
 	
 
 	tmp = tokens;
-	char *exp_ = ft_strdup("");
 	while (tmp)
 	{
 		i = 0;
 			while (tmp->args[i])
 			{
 				//inside this while can be a function separated 
-				j= 0;
-				char *s=ft_strdup(tmp->args[i]);
-				while(s[j])
-				{
-					char *str=get_word(s, &j);
-					if (*str == '"')
-						ins_quote(str);
-					if (ft_strchr(str, '$') && str[0] !='\'')
-						exp_ = ft_strjoin(exp_, ft_strdup((search(str, env))));//handle this case "'$'"
-					else
-						exp_ = ft_strjoin(exp_, ins_quote(str));
-					if (!s[j])
-						break;
-				}
-				tmp->args[i] = exp_;//should remove the quotqtions here
-				exp_ = ft_strdup("");
+				tmp->args[i]=small_expand(tmp->args[i],env);//this function u can use it to expand any string not just the args
 				i++;
 			}
 	// free(exp_);

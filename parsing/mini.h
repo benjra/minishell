@@ -15,17 +15,8 @@
 
 extern int gl_var;
 
-
-# define DCOLORB "\033[49m"
-# define GREENB  "\033[42m"
-# define BBlack "\033[1;30m"       //# Black
-# define BRed "\033[1;31m"         //# Red
-# define BGreen "\033[1;32m"       //# Green
-# define BYellow "\033[1;33m"      //# Yellow
-# define BBlue "\033[1;34m"        //# Blue
-# define BPurple "\033[1;35m"       //# Purple
-# define BCyan "\033[1;36m"       //# Cyan
-# define BWhite "\033[1;37m"       //# White
+# define GREENB  "\033[42m"       //# Red
+# define BGreen "\033[1;32m"       //# Green      //# White
 # define RESET_COLOR "\e[m"
 
 // typedef struct s_redir;
