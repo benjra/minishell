@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/14 17:12:36 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:59:57 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,6 @@ t_token	*fill_list(char **lst)//filling the list every word and its type
 	}
 	return (list);
 }
-
 
 // char *get_quoted_word(char *str)
 // {

@@ -67,7 +67,7 @@ t_name *fill_env(char **env);
 char *join(char *s1,char *s2);
 void get_prompt(char **dst,char *str);
 void parsing(char *str,t_name *env);
-int pipe_frst(char *str);
+// int pipe_frst(char *str);
 char **split_string(char *str, int *count);
 t_token *fill_list(char **lst);
 void parse_and_add_token(t_token **list, char *str, char *c, int type);
@@ -80,7 +80,6 @@ void ft_ambigious(t_lsttoken *list);
 //expand 
 void expander(t_lsttoken *tokens,t_name *env);
 char *ft_env(t_name *env,char *var);
-void rm_quotes(t_lsttoken *tokens);
 char *ins_quote(char *str);
 //free
 void free_tokens(char **tokens, int count) ;

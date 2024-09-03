@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/02 16:15:22 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:10:17 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ char *get_word(char *str,int *i) //this function get every word
 char	*small_expand(char *args, t_name *env)//this function is the core of expander it expand a string 
 {
 	int j;
-	// int index=*i;
 	char *exp_ = ft_strdup("");
 	j= 0;
 	char *s=ft_strdup(args);
@@ -111,9 +110,9 @@ char	*small_expand(char *args, t_name *env)//this function is the core of expand
 	{
 		char *str=get_word(s, &j);
 		if (*str == '"')
-			ins_quote(str);
+			ins_quote(str);//this function remove quotes if u want use it or not when u expand 
 		if (ft_strchr(str, '$') && str[0] !='\'')
-			exp_ = ft_strjoin(exp_, ft_strdup((search(str, env))));//handle this case "'$'"
+			exp_ = ft_strjoin(exp_, ft_strdup((search(str, env))));
 		else
 			exp_ = ft_strjoin(exp_, ins_quote(str));
 		if (!s[j])
