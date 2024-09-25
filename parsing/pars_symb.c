@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_exit.c                                        :+:      :+:    :+:   */
+/*   pars_symb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/09 20:56:18 by amabchou          #+#    #+#             */
-/*   Updated: 2024/07/11 12:04:40 by amabchou         ###   ########.fr       */
+/*   Created: 2024/08/12 12:53:48 by bbenjrai          #+#    #+#             */
+/*   Updated: 2024/08/13 09:56:37 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parsing/mini.h"
-
-void    ft_exit(int i)
-{
-    exit(i);
-}
+#include "mini.h"
+// void parse_by_symb(t_token *list,char *str)
+// {
+//     int i=0;
+//     while(str[i])
+//     {
+        
+//     }
+// }

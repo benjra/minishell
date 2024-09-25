@@ -1,92 +1,61 @@
 #include "mini.h"
-
-// size_t	ft_strlcpy(char *dst, char *src, size_t n)
-// {
-// 	size_t	i;
-// 	size_t	srclen;
-
-// 	i = 0;
-// 	srclen = ft_strlen(src);
-// 	if (n != 0)
-// 	{
-// 		while (src[i] && i < n - 1)
-// 		{
-// 			dst[i] = src[i];
-// 			i++;
-// 		}
-// 		dst[i] = '\0';
-// 	}
-// 	return (srclen);
-// }
-
-
-// char	*ft_strtrim(char const *s1, char const *set)
-// {
-// 	int		len;
-// 	int		i;
-// 	char	*str;
-
-// 	if (!s1 || !set)
-// 		return (NULL);
-// 	i = 0;
-// 	len = ft_strlen((char *)s1) - 1;
-// 	while (ft_strchr(set, s1[i]) && i <= len)
-// 		i++;
-// 	if (i >= len)
-// 		return (ft_strdup(""));
-// 	while (ft_strchr(set, s1[len]) && len >= 0)
-// 		len--;
-// 	str = malloc((len - i + 2) * sizeof(char));
-// 	if (!str)
-// 		return (NULL);
-// 	ft_strlcpy(str, (char *)&s1[i], len - i + 2);
-// 	return (str);
-// }
-
-int pipe_frst(char *tmp)
+int count_args(char **args)
 {
-    int i=0;
-    char *str;
-    str = ft_strtrim(tmp , "\t " );
-    i=ft_strlen(str);
-    if(str[i-1]=='|' || str[0]=='|')
+    int count = 0;
+    while (args[count] != NULL)
     {
-		return 0;
-	}
-    return 1;
+        count++;
+    }
+    return count;
 }
 
-int double_pipe(char *tmp)
+void set_num_cmds(t_lsttoken *lsttoken)
 {
-	int i=0;
-    char *str; 
-    str = ft_strtrim(tmp , "\t " );
-	while(str[i])
-	{
-		if(str[i]=='|' )
-		{
-				if(str[i+1]=='|')
-					return 0;
-				while(str[i+1] && (str[i+1]!=' ' || str[i+1]!='\t'))
-				{
-					i++;
-					if(str[i+1]=='|' )
-						return 0;
-				}
-		}
-		i++;
-	}
-	return 1;
+    if (lsttoken && lsttoken->args)
+    {
+        lsttoken->num_cmds = count_args(lsttoken->args);
+    }
 }
 
-
-void parsing(char *str)
+void parsing(char *str,t_name *env)
 {
-    // char **arr=ft_split(str);
+	(void)env;
 	char **string ;
-	string=ft_split(str,' ');
-    if(pipe_frst(str)==0 || double_pipe(str)==0)
-        printf("error near `|' \n");
-    else 
-        printf("good\n");
+	int count=0;
+	string=split_string(str,&count);
+	t_token *list = fill_list(string);
+	if (printf_err(list))
+		return ;
+	free_tokens(string,count);
+	t_lsttoken *list2=fill_token(list);
+	freelist1(list);
+	expander(list2,env);// should expand also redirections in the opening of files
+	// ft_ambigious(list2);// segf in "" && 
+	
+	// while (list)
+	// {
+	// 	printf("%s: %d\n",list->value,list->type);
+	// 	list=list->next;
+	// }
+
+// int i=0;
+// // while(string[i])
+// // 	printf("string: %s\n",string[i++]);
+
+t_lsttoken *current= list2; // Start with the head of the list
+// while (current) 
+// {
+	
+// 	i = 0;
+// 	while (current->args != NULL && current->args[i] != NULL)
+// 	    printf("args : ----%s  \n", current->args[i++]);
+// 		current = current->next;
+
+// }
+	set_num_cmds(current);
+	//printf("Number of commands: %d\n", current->num_cmds);
+	execute_args(*current, env); //builtins
+
 }
+
+//  make comments for the executor && change the errors messages: ----fggr"fje  

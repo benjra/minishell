@@ -1,28 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/06 11:24:36 by bbenjrai          #+#    #+#             */
+/*   Updated: 2024/09/21 18:13:57 by assia            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini.h"
-void handler(int signum)
+int gl_var=0;
+int ex = 0;
+void	handler(int signum)
 {
-    (void)signum;
-    write(0,"\n",1);
-    rl_on_new_line();
-
-    // Replace the current line with new_text
-    rl_replace_line("", 0);
-
-    // Redisplay the input line to show the changes
-    rl_redisplay();
+	(void)signum;
+	write(0, "\n", 1);
+	rl_on_new_line();//its make u to write on newline
+	rl_replace_line("", 0);//its make u to replace the newline with string input
+	rl_redisplay();//it 
+	gl_var=130;
 }
-int main(int ac,char **av,char **env)
+
+int	main(int ac, char **av, char **env)
 {
-    (void) av;
-    if(ac!=1)
-    {
-        write(1,"there is no need of arguments here",35);
-        return 1;
-    }
-    signal(SIGINT, handler);
-    signal(SIGQUIT, SIG_IGN);
-    program_name(env);
-    //should firstly handle double quotes and njme3hom 
-    //and then njme3hom in a linked list but split in it by pipe and redirections 
-    //
+	(void)av;
+	if (ac != 1)
+	{
+		write(1, "there is no need of arguments here", 35);
+		return (1);
+	}
+	signal(SIGINT, handler);
+	signal(SIGQUIT, SIG_IGN);
+	program_name(env);
 }
