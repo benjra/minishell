@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/25 20:44:09 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:31:36 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ char	*search_env(int len, char *afterdoll, t_name *env)//function for retur the 
 {
 	char	*replace;
 	char	*var;
-
-	var = get_var(len, afterdoll);
+	char *tmp;
 	
-	replace = ft_env(env, var);//get from envirement
-	*afterdoll += ft_strlen(var);
+	var = get_var(len, afterdoll);
+	tmp=var;
+	replace = ft_env(env, tmp);//get from envirement
+	*afterdoll += ft_strlen(tmp);
+	free(tmp);
 	if (ft_strchr(afterdoll, '$'))
 		search_env(ft_strlen(afterdoll), afterdoll, env);//recursion if a dollar sign exist in the rest of the string 
 	return (replace);
@@ -70,9 +72,10 @@ char *get_word(char *str,int *i) //this function get every word
 	
     while (str[last])
 	{
-		if ((str[last] == '"' && str[last+1]=='"') || (str[last] == '\''  && str[last+1]=='\''))
+		//(str[last] == '"' && str[last+1]=='"') || str[last] == '"' ||
+		if ((str[last] == '\''  && str[last+1]=='\''))
 			last+=2;
-		if (str[last] == '"' || str[last] == '\'') 
+		if ( str[last] == '\'') 
 		{
             c = str[last++]; 
 			while (str[last] && (str[last] != c))
@@ -95,6 +98,7 @@ char *get_word(char *str,int *i) //this function get every word
     }
 	res = ft_substr(str, *i, last - *i);
 	*i = last;
+	// printf("{%s}\n", res);
     return res;
 }
 char	*small_expand(char *args, t_name *env)//this function is the core of expander it expand a string 
@@ -102,17 +106,25 @@ char	*small_expand(char *args, t_name *env)//this function is the core of expand
 	int j;
 	char * tmp;
 	char *tmp2;
+	char *search_tmp;
 	char *exp_ = ft_strdup("");
-	j= 0;
 	char *s=ft_strdup(args);
+	j= 0;
 	while(s[j])
 	{
 		char *str=get_word(s, &j);
 		if (*str == '"')
-			ins_quote(str);//this function remove quotes if u want use it or not when u expand 
+		{
+			tmp2 =ins_quote(str);//this function remove quotes if u want use it or not when u expand 
+			free(tmp2);
+		}
 		tmp = exp_;
 		if (ft_strchr(str, '$') && str[0] !='\'')
-			exp_ = ft_strjoin(exp_, search(str, env));
+		{
+			search_tmp=search(str,env);
+			exp_ = ft_strjoin(exp_, search_tmp);
+			free(search_tmp);
+		}
 		else
 		{
 			tmp2 = ins_quote(str);
@@ -124,6 +136,7 @@ char	*small_expand(char *args, t_name *env)//this function is the core of expand
 		if (!s[j])
 			break;
 	}
+	free(args);
 	free(s);
 	return exp_;
 }

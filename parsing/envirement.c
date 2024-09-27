@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:10 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/27 10:02:33 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:24:29 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ char	*ft_env(t_name *env, char *var)//this function is used for get a variable f
 			replace = ft_strdup("$");
 			return (replace);
 		}
-		if (ft_strncmp(temp->name, var, ft_strlen(var)) == 0)
+		if (ft_strncmp(temp->name, var,  ft_strlen(var)) == 0)
 		{
 			replace = ft_strdup(temp->value);
 			return (replace);
 		}
-		else if(ft_strncmp("?",var,ft_strlen(var))==0)
+		else if(ft_strncmp("?",var,  ft_strlen(var))==0)
 			{
 				replace=ft_strdup(ft_itoa(gl_var));
 				return (replace);
 			}
 		temp = temp->next;
 	}
-	return (ft_strdup(""));
+	return (NULL);
 }
