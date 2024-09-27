@@ -6,18 +6,19 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/13 10:08:48 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/25 20:33:31 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-#define MAX_TOKENS 100
 
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int	i;
 
 	i = 0;
+	if (dest == NULL || src == NULL)
+        return NULL;
 	while (src[i] != '\0' && i < n)
 	{
 		dest[i] = src[i];
@@ -87,12 +88,23 @@ char	**split_string(char *str, int *count)//this fun it split the commonde based
 	{
 		if (*str == '"' || *str == '\'')
 		{
-			in_quotes = !in_quotes;
+			// in_quotes = !in_quotes;
 			c=*str++;
 			while(*str  && *str!=c)
 				str++;
+			if (*str == c)
+				str++;
+			if (start != str)
+			{
+				len = str - start;
+				token = malloc(len + 1);
+				ft_strncpy(token, start, len);
+				token[len] = '\0';
+				tokens[token_count++] = token;
+			}
+			start = str + 1;
 		}
-		else if (is_space(*str) && !in_quotes)
+		else if (is_space(*str) )
 		{
 			if (start != str)
 			{
@@ -109,11 +121,14 @@ char	**split_string(char *str, int *count)//this fun it split the commonde based
 	}
 	if (start != str)
 	{
-		len = str - start;
-		token = malloc(len + 1);
-		ft_strncpy(token, start, len);
-		token[len] = '\0';
-		tokens[token_count++] = token;
+		len = str - start + 1;
+		if (len > 0)
+		{
+			token = malloc(len + 1);
+			ft_strncpy(token, start, len);//u  should check the len in the line before 
+			token[len] = '\0';
+			tokens[token_count++] = token;
+		}
 	}
 	tokens[token_count] = NULL;
 	*count = token_count;

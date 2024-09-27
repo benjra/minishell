@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:03 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/08 21:24:17 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/22 09:49:58 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	freelist1(t_token *list)
 	{
 		temp = list;
 		list = list->next;
+		free(temp->value);
 		free(temp);
 	}
 }

@@ -64,7 +64,6 @@ typedef struct s_lsttoken
 }   t_lsttoken;
 
 
-char *prompt();
 void    program_name(char **en);
 t_name *fill_env(char **env);
 char *join(char *s1,char *s2);
@@ -94,6 +93,7 @@ void	free_all(t_lsttoken *token);
 t_token	*lstnews(int type, char *value);
 void	lstadd_backs(t_token **lst, t_token *new);
 t_token	*tails(t_token *list);
+
 
 
 //builtins
@@ -127,5 +127,4 @@ void	error(const char *s, int ss);
 void	ft_free(char **av);
 char	*skipp(char *str);
 int is_builtin(char **args, t_name *env);
-
 #endif

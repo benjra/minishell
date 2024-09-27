@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/03 18:10:17 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/25 20:44:09 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_specialcar(char *s)//this fun get from a special caracter to end
 char	*get_var(int len, char *afterdoll)// function foe getting the variable after dollar sign $
 {
 	char	*var;
-	var =ft_strdup("");
+	// var =ft_strdup("");
 	var = ft_substr(afterdoll, 0, len - ft_strlen(get_specialcar(afterdoll)));
 	return (var);
 }
@@ -52,7 +52,6 @@ char	*search(char *arg, t_name *env)//this function expande the variable from th
 	int		ln_befdoll;
 	char	*afterdol;
 	char	*replace;
-	char	*expander;
 
 	afterdol = ft_strchr(arg, '$');
 	*afterdol= '\0';
@@ -61,14 +60,12 @@ char	*search(char *arg, t_name *env)//this function expande the variable from th
 	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
 
 	replace = search_env(ln_aftdoll, afterdol, env);
-	expander=ft_strdup("");
-	expander = ft_strjoin(expander, replace);
-	return (expander);
+	return (replace);
 }
 char *get_word(char *str,int *i) //this function get every word 
 {
     char c = 0;
-    char *res = ft_strdup("");
+    char *res ;
     int last = *i;
 	
     while (str[last])
@@ -96,13 +93,15 @@ char *get_word(char *str,int *i) //this function get every word
             break;
         }
     }
-	res = ft_strdup(ft_substr(str, *i, last - *i));
+	res = ft_substr(str, *i, last - *i);
 	*i = last;
     return res;
 }
 char	*small_expand(char *args, t_name *env)//this function is the core of expander it expand a string 
 {
 	int j;
+	char * tmp;
+	char *tmp2;
 	char *exp_ = ft_strdup("");
 	j= 0;
 	char *s=ft_strdup(args);
@@ -111,21 +110,29 @@ char	*small_expand(char *args, t_name *env)//this function is the core of expand
 		char *str=get_word(s, &j);
 		if (*str == '"')
 			ins_quote(str);//this function remove quotes if u want use it or not when u expand 
+		tmp = exp_;
 		if (ft_strchr(str, '$') && str[0] !='\'')
-			exp_ = ft_strjoin(exp_, ft_strdup((search(str, env))));
+			exp_ = ft_strjoin(exp_, search(str, env));
 		else
-			exp_ = ft_strjoin(exp_, ins_quote(str));
+		{
+			tmp2 = ins_quote(str);
+			exp_ = ft_strjoin(exp_, tmp2);
+			free(tmp2);
+		}
+		free(tmp);
+		free(str);
 		if (!s[j])
 			break;
 	}
+	free(s);
 	return exp_;
 }
 void	expander(t_lsttoken *tokens, t_name *env)//the main function of expander it expand exept inside the single quotes but it expand just the arguments of the command
 {
 	t_lsttoken	*tmp;
+	t_redir * tm;
 	int			i;
 	
-
 	tmp = tokens;
 	while (tmp)
 	{
@@ -136,68 +143,17 @@ void	expander(t_lsttoken *tokens, t_name *env)//the main function of expander it
 				tmp->args[i]=small_expand(tmp->args[i],env);//this function u can use it to expand any string not just the args
 				i++;
 			}
-	// free(exp_);
+			///
+			tm = tmp->redirections;
+			while(tm)
+			{
+				if (tm->type != TOKEN_REDIR_HEREDOC)
+					tm->red=small_expand(tm->red,env);
+				else
+					tm->red=ins_quote(tm->red);
+				tm=tm->next;
+			}
 		tmp = tmp->next;
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// void	expander(t_lsttoken *tokens, t_name *env)
-// {
-// 	t_lsttoken	*tmp;
-// 	int			i;
-// 	char c;
-// 	char close='n';
-// 	tmp = tokens;
-// 	while (tmp)
-// 	{
-// 		i = 0;
-// 		while (tmp->args[i])
-// 		{
-// 			char *str=tmp->args[i];
-// 			if (ft_strchr(tmp->args[i], '$'))
-// 			{
-// 				int j = 0;
-// 				while (str[j])
-// 				{
-// 					if (str[j] == '"' || str[j] == '\'')
-// 					{
-// 						c = str[j++];
-// 						while (str[j] && c != str[j])
-// 						{
-// 							if ((c == '"' && str[j] == '"') || (c == '\'' && str[j] == '\''))
-// 							{
-// 								close=str[i];
-// 							}
-// 							if (ft_strchr(str, '$') && c == '"' && str[i+1]=='\0' && close=='"')
-// 								tmp->args[i] = ft_strdup(search(tmp->args[i], env));
-// 							else if (ft_strchr(str, '$') && c == '\'' && close!='n')
-// 								return; //should handle this case 
-// 							else
-// 								tmp->args[i] = ft_strdup(search(tmp->args[i], env));
-// 						}
-// 					}
-// 					j++;
-// 				}
-// 			}
-// 			i++;
-// 		}
-// 		tmp = tmp->next;
-// 	}
-// }
-
-
-

@@ -24,9 +24,15 @@ void parsing(char *str,t_name *env)
 	int count=0;
 	string=split_string(str,&count);
 	t_token *list = fill_list(string);
-	if (printf_err(list))
-		return ;
+	// int i=0;
+	// while(string[i])
+	// 	printf("string: %s\n",string[i++]);
 	free_tokens(string,count);
+	if (printf_err(list))
+	{
+		freelist1(list);
+		return ;
+	}
 	t_lsttoken *list2=fill_token(list);
 	freelist1(list);
 	expander(list2,env);// should expand also redirections in the opening of files
@@ -38,23 +44,27 @@ void parsing(char *str,t_name *env)
 	// 	list=list->next;
 	// }
 
-// int i=0;
-// // while(string[i])
-// // 	printf("string: %s\n",string[i++]);
+
 
 t_lsttoken *current= list2; // Start with the head of the list
 // while (current) 
 // {
 	
-// 	i = 0;
+// 	int i = 0;
 // 	while (current->args != NULL && current->args[i] != NULL)
 // 	    printf("args : ----%s  \n", current->args[i++]);
-// 		current = current->next;
+// 	while (current->redirections)
+// 	{
+// 	    printf("red : -- %s \n", current->redirections->red);
+// 		current->redirections = current->redirections->next;
+// 	}
+// 	current = current->next;
 
 // }
 	set_num_cmds(current);
 	//printf("Number of commands: %d\n", current->num_cmds);
 	execute_args(*current, env); //builtins
+	free_all(current);
 
 }
 
