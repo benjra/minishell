@@ -18,7 +18,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 
 	i = 0;
 	if (dest == NULL || src == NULL)
-        return NULL;
+		return (NULL);
 	while (src[i] != '\0' && i < n)
 	{
 		dest[i] = src[i];
@@ -34,51 +34,56 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 
 int	is_space(char str)
 {
-	if (str == ' ' || str=='\n' || str=='\t' || str=='\v' || str=='\f' || str=='\r')
+	if (str == ' ' || str == '\n' || str == '\t' || str == '\v' || str == '\f'
+		|| str == '\r')
 		return (1);
 	return (0);
 }
-int countwrd(char *str)
+int	countwrd(char *str)
 {
-    int i = 0;
-    int len = 0;
-    int in_quotes = 0;
+	int	i;
+	int	len;
+	int	in_quotes;
 
-    while (str[i])
-    {
-        if (str[i] == '"' || str[i] == '\'')
-        {
-            in_quotes = !in_quotes;
-            i++;
-            while (str[i] && !(str[i] == '"' || str[i] == '\''))
-                i++;
+	i = 0;
+	len = 0;
+	in_quotes = 0;
+	while (str[i])
+	{
+		if (str[i] == '"' || str[i] == '\'')
+		{
+			in_quotes = !in_quotes;
+			i++;
+			while (str[i] && !(str[i] == '"' || str[i] == '\''))
+				i++;
 			if (str[i])
 				i++;
-        }
-        else if (is_space(str[i]) || str[i] == '\0')
-        {
-            len++;
+		}
+		else if (is_space(str[i]) || str[i] == '\0')
+		{
+			len++;
 			while (str[i] && is_space(str[i]))
 				i++;
-        }
-		else if(str[i])
-        	i++;
-    }
-    return len + 1;
+		}
+		else if (str[i])
+			i++;
+	}
+	return (len + 1);
 }
 
-char	**split_string(char *str, int *count)//this fun it split the commonde based on spaces and it skipp the spaces inside quotes 
+char	**split_string(char *str, int *count)
+// this fun it split the commonde based on spaces and it skipp the spaces inside quotes
 {
-	char	**tokens;
-	int		token_count;
-	int		in_quotes;
+	char **tokens;
+	int token_count;
+	int in_quotes;
 	char c;
-	char	*start;
-	char	*token;
-	size_t	len;
-	int length=(countwrd(str)+ 1);
+	char *start;
+	char *token;
+	size_t len;
+	int length = (countwrd(str) + 1);
 
-	tokens = malloc((length)* sizeof(char *));
+	tokens = malloc((length) * sizeof(char *));
 	token_count = 0;
 	in_quotes = 0;
 	start = str;
@@ -89,8 +94,8 @@ char	**split_string(char *str, int *count)//this fun it split the commonde based
 		if (*str == '"' || *str == '\'')
 		{
 			// in_quotes = !in_quotes;
-			c=*str++;
-			while(*str  && *str!=c)
+			c = *str++;
+			while (*str && *str != c)
 				str++;
 			if (*str == c)
 				str++;
@@ -104,7 +109,7 @@ char	**split_string(char *str, int *count)//this fun it split the commonde based
 			}
 			start = str + 1;
 		}
-		else if (is_space(*str) )
+		else if (is_space(*str))
 		{
 			if (start != str)
 			{
@@ -116,7 +121,7 @@ char	**split_string(char *str, int *count)//this fun it split the commonde based
 			}
 			start = str + 1;
 		}
-		if(*str)		
+		if (*str)
 			str++;
 	}
 	if (start != str)
@@ -125,7 +130,8 @@ char	**split_string(char *str, int *count)//this fun it split the commonde based
 		if (len > 0)
 		{
 			token = malloc(len + 1);
-			ft_strncpy(token, start, len);//u  should check the len in the line before 
+			ft_strncpy(token, start, len);
+			// u  should check the len in the line before
 			token[len] = '\0';
 			tokens[token_count++] = token;
 		}
@@ -135,16 +141,18 @@ char	**split_string(char *str, int *count)//this fun it split the commonde based
 	return (tokens);
 }
 
-void free_tokens(char **tokens, int count) 
+void	free_tokens(char **tokens, int count)
 {
-    int i = 0; 
-    while (i < count) {
-        free(tokens[i]);
-        i++;
-    }
-    free(tokens);
-}
+	int	i;
 
+	i = 0;
+	while (i < count)
+	{
+		free(tokens[i]);
+		i++;
+	}
+	free(tokens);
+}
 
 // size_t	ft_len2(char **s)
 // {

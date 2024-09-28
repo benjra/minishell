@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/27 13:32:22 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:44:15 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,14 @@ int	len(t_token *lst)
 	return (i);
 }
 
-t_lsttoken	*fill_token(t_token *list)//this function fillling the last list from a normal list
+t_lsttoken	*fill_token(t_token *list)
+// this function fillling the last list from a normal list
 {
-	t_token		*temp;
-	t_lsttoken	*token[2];
-	// char	*tmp;
-	t_redir		*redirections;
-	int			i;
+	t_token *temp;
+	t_lsttoken *token[2];
+	// t_redir	*tmp;
+	t_redir *redirections;
+	int i;
 
 	token[0] = NULL;
 	token[1] = NULL;
@@ -139,19 +140,21 @@ t_lsttoken	*fill_token(t_token *list)//this function fillling the last list from
 	token[0] = ft_calloc(1, sizeof(t_lsttoken));
 	if (!token[0])
 		return (NULL);
-	token[0]->args = malloc((len(temp) + 1)* sizeof(char *));
+	token[0]->args = malloc((len(temp) + 1) * sizeof(char *));
 	token[0]->args[len(temp)] = NULL;
 	token[0]->redirections = NULL;
 	token[1] = token[0];
 	while (temp != NULL)
 	{
-		if (temp->next != NULL && temp->type > 2 && temp->type <= 6)//here we create redirections nodes and add them to redirection list if we find  the type between(3-6)
+		if (temp->next != NULL && temp->type > 2 && temp->type <= 6)
+		// here we create redirections nodes and add them to redirection list if we find  the type between(3-6)
 		{
 			redirections = new_red(temp->type, ft_strdup(temp->next->value));
 			red_addback(&(token[0]->redirections), redirections);
 			temp = temp->next;
 		}
-		else if (temp->next != NULL && temp->type == 2) //here we create a node if we find a pipe (type==2) every pipe represent a node=command
+		else if (temp->next != NULL && temp->type == 2)
+		// here we create a node if we find a pipe (type==2) every pipe represent a node=command
 		{
 			add_back(&token[1], newnode(temp->type, token[0]->args));
 			token[0] = token[0]->next;
@@ -163,8 +166,6 @@ t_lsttoken	*fill_token(t_token *list)//this function fillling the last list from
 		else
 		{
 			token[0]->args[i++] = ft_strdup(temp->value);
-			// free(temp->value);
-			// free(tmp);
 		}
 		if (temp != NULL)
 			temp = temp->next;

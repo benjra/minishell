@@ -52,13 +52,14 @@ t_name	*lstnew(char *name, char *value)
 	return (linked_lst);
 }
 
-t_name	*fill_env(char **env)//this func fill alist from the double pointer **env and return the list 
+t_name	*fill_env(char **env)
+// this func fill alist from the double pointer **env and return the list
 {
-	char	*name;
-	char	*value;
-	char	*en;
-	int		i;
-	t_name	*lst;
+	char *name;
+	char *value;
+	char *en;
+	int i;
+	t_name *lst;
 
 	i = 0;
 	lst = NULL;

@@ -93,27 +93,29 @@ void	check_symbols(char *str, t_token **list)
 char	*ft_strchr_skip_quotes(const char *str, char *c)
 {
 	char	in_quotes;
+	int		i;
+	int		end;
 
 	in_quotes = 0;
-	int i=0;
-	int end=0;
+	i = 0;
+	end = 0;
 	while (*str)
 	{
 		if (*str == '"' || *str == '\'')
 		{
 			in_quotes = *str;
-			while(*str++ && *str!=in_quotes)
+			while (*str++ && *str != in_quotes)
 			{
 				str++;
 				end++;
-				if(*str==in_quotes)
+				if (*str == in_quotes)
 				{
-					in_quotes=0;
-					return(ft_substr(str,i,end));
+					in_quotes = 0;
+					return (ft_substr(str, i, end));
 				}
 			}
 		}
-		else if (ft_strncmp(str, c, ft_strlen(c)) && *str!=in_quotes )
+		else if (ft_strncmp(str, c, ft_strlen(c)) && *str != in_quotes)
 		{ // to avoid the cases like when u want to search for an string
 			return ((char *)str);
 		}
@@ -122,19 +124,18 @@ char	*ft_strchr_skip_quotes(const char *str, char *c)
 	return (NULL);
 }
 
-
-
-void	parse_and_add_token(t_token **list, char *str, char *c, int type)//this function add eavh word inside the linked list 
+void	parse_and_add_token(t_token **list, char *str, char *c, int type)
+// this function add eavh word inside the linked list
 {
-	char	*new;
-	int i=0;
-	int last=0;
+	char *new;
+	int i = 0;
+	int last = 0;
 	(void)type;
-//should change this function to being adaptate with cases like ls>cat
-	new = ft_strchr_skip_quotes(str, c);//skipp symbols inside quotes
-	if (new && ft_strnstr(str,c,ft_strlen(str))!=NULL)
+	// should change this function to being adaptate with cases like ls>cat
+	new = ft_strchr_skip_quotes(str, c); // skipp symbols inside quotes
+	if (new &&ft_strnstr(str, c, ft_strlen(str)) != NULL)
 	{
-		new=ft_strnstr(str,c,-1);
+		new = ft_strnstr(str, c, -1);
 		*new = '\0';
 		if (*(str))
 		{
@@ -149,24 +150,24 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type)//this fun
 	}
 	else if (!new)
 	{
-		if(!ft_strncmp(str,c,ft_strlen(c)))// i want if just a normal word add it all not char by char 
+		if (!ft_strncmp(str, c, ft_strlen(c)))
+		// i want if just a normal word add it all not char by char
 		{
-			while(ft_strnstr(str+last,c,ft_strlen(c))!=NULL)
+			while (ft_strnstr(str + last, c, ft_strlen(c)) != NULL)
 			{
 				last++;
 			}
-			lstadd_backs(list, lstnews(get_type(str), ft_substr(str,i,last)));
+			lstadd_backs(list, lstnews(get_type(str), ft_substr(str, i, last)));
 		}
-		else 
+		else
 			lstadd_backs(list, lstnews(get_type(str), ft_strdup(str)));
 	}
 }
 
-
-t_token	*fill_list(char **lst)//filling the list every word and its type 
+t_token	*fill_list(char **lst) // filling the list every word and its type
 {
-	int		i;
-	t_token	*list;
+	int i;
+	t_token *list;
 
 	i = 0;
 	list = NULL;
@@ -176,7 +177,8 @@ t_token	*fill_list(char **lst)//filling the list every word and its type
 			|| ft_strchr(lst[i], '>'))
 		{
 			if (ft_strnstr(lst[i], ">>", -1) && ft_strncmp(lst[i], ">>", -1))
-				parse_and_add_token(&list, lst[i], ">>", TOKEN_REDIR_APPEND); // 5
+				parse_and_add_token(&list, lst[i], ">>", TOKEN_REDIR_APPEND);
+			// 5
 			else if (ft_strnstr(lst[i], "<<", -1) && ft_strncmp(lst[i], "<<",
 					-1))
 				parse_and_add_token(&list, lst[i], "<<", TOKEN_REDIR_HEREDOC);
@@ -190,13 +192,13 @@ t_token	*fill_list(char **lst)//filling the list every word and its type
 				parse_and_add_token(&list, lst[i], ">", TOKEN_REDIR_OUT);
 			else
 				lstadd_backs(&list, lstnews(get_type(lst[i]),
-											ft_strdup(lst[i])));
+						ft_strdup(lst[i])));
 		}
 		else
 		{
 			lstadd_backs(&list, lstnews(1, ft_strdup(lst[i])));
 		}
-		
+
 		i++;
 	}
 	return (list);
@@ -229,7 +231,7 @@ t_token	*fill_list(char **lst)//filling the list every word and its type
 // 	while(str && str[i])
 // 	{
 // 		if (ft_strchr("'\"<|>", str[i]))
-// 			break;
+// 			break ;
 // 		i++;
 // 	}
 // 	return (ft_substr(str, 0, i));

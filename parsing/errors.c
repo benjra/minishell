@@ -6,22 +6,18 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/08/17 17:02:21 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:46:40 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// two case in ambiguis errors when
-// $var doesnt exist ==null
-// or when we export a variable like $var="ac ch" found space inside
-
-// should handle all syntax errors
 #include "mini.h"
 
-int	double_symb(t_token *list)// this function handle the double symbol inside a commande
+int	double_symb(t_token *list)
+// this function handle the double symbol inside a commande
 {
-	t_token	*tmp;
-	int		typo;
-	int		nextp;
+	t_token *tmp;
+	int typo;
+	int nextp;
 
 	tmp = list;
 	while (tmp != NULL)
@@ -50,8 +46,8 @@ int	pipes_err(t_token *list)
 	if (list && list->type == 2)
 		return (1);
 	if (list && (tails(list)->type == 2 || tails(list)->type == 3
-		|| tails(list)->type == 4 || tails(list)->type == 5
-		|| tails(list)->type == 6))
+			|| tails(list)->type == 4 || tails(list)->type == 5
+			|| tails(list)->type == 6))
 		return (2);
 	while (tmp != NULL)
 	{
@@ -62,13 +58,13 @@ int	pipes_err(t_token *list)
 	return (0);
 }
 
-int qoute(char *str)
+int	qoute(char *str)
 {
-	int i;
-	char c;
-	
+	int		i;
+	char	c;
+
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '"' || str[i] == '\'')
 		{
@@ -85,73 +81,79 @@ int qoute(char *str)
 	return (0);
 }
 
-int	handle_quotes(t_token *list)//this function handle if the clos quotes exist or not 
+int	handle_quotes(t_token *list)
+// this function handle if the clos quotes exist or not
 {
-	t_token	*tmp;
+	t_token *tmp;
 	int quote_exist;
-	
-	quote_exist=0;
+
+	quote_exist = 0;
 	tmp = list;
-	while (tmp && quote_exist==0)
+	while (tmp && quote_exist == 0)
 	{
 		if (qoute(tmp->value))
 		{
-			return(1);
+			return (1);
 		}
 		tmp = tmp->next;
 	}
 	return (0);
 }
-void ft_ambigious(t_lsttoken *list)
+
+void	ft_ambigious(t_lsttoken *list)
 {
-	t_lsttoken *temp;
-	temp=list;
-	int ambigius=0;
-	while(temp)
+	t_lsttoken	*temp;
+	int			ambigius;
+
+	temp = list;
+	ambigius = 0;
+	while (temp)
 	{
 		while (temp->redirections)
-		
 		{
-			if(temp->redirections->type== 5 && !*(temp->redirections->red))
-				ambigius=1;
-			else if(temp->redirections->type== 6 && !*(temp->redirections->red))
-				ambigius=1;
-			else if(temp->redirections->type== 3 && !*(temp->redirections->red))
-				ambigius=1;
-			else if(temp->redirections->type== 4 && !*(temp->redirections->red))
-				ambigius=1;
-		temp->redirections=temp->redirections->next;		
+			if (temp->redirections->type == 5 && !*(temp->redirections->red))
+				ambigius = 1;
+			else if (temp->redirections->type == 6
+				&& !*(temp->redirections->red))
+				ambigius = 1;
+			else if (temp->redirections->type == 3
+				&& !*(temp->redirections->red))
+				ambigius = 1;
+			else if (temp->redirections->type == 4
+				&& !*(temp->redirections->red))
+				ambigius = 1;
+			temp->redirections = temp->redirections->next;
 		}
-		temp=temp->next;
+		temp = temp->next;
 	}
-	if(ambigius==1)
+	if (ambigius == 1)
 	{
-		gl_var=1;
-		ft_putendl_fd("ambigious redirect!\n",2);
+		gl_var = 1;
+		ft_putendl_fd("ambigious redirect!\n", 2);
 		return ;
 	}
 }
-int	printf_err(t_token *list)//this function for handle syntax errors 
+
+int	printf_err(t_token *list) // this function for handle syntax errors
 {
-	//if a redirection exitst and folllowd by and expande=null (ambigious redirect global_var=1)
 	if (pipes_err(list) == 1)
-		{
-			gl_var=2;
+	{
+		gl_var = 2;
 		ft_putendl_fd("syntax error!", 2);
-		return 1;
-		}
+		return (1);
+	}
 	if (pipes_err(list) == 2 || double_symb(list) == 1
 		|| handle_quotes(list) == 1)
-		{
-		gl_var=2;// why it doesnt work
+	{
+		gl_var = 2; // why it doesnt work
 		ft_putendl_fd("syntax error!", 2);
-			return 1;
-		}
+		return (1);
+	}
 	// if(ft_ambigious(list)==1)
 	// {
 	// 	gl_var=1;
 	// 	ft_putendl_fd("ambigious  redirect!", 2);
-	// 	return 1;
+	// 	return (1);
 	// }
-	return 0;
+	return (0);
 }

@@ -7,7 +7,6 @@ LIBFT = libft/libft.a
 SRC_FILES = parsing/minishell.c \
 	parsing/program.c \
 	parsing/get_env.c \
-	parsing/utils.c \
 	parsing/parsing.c \
 	parsing/split.c \
 	parsing/fill_list.c \

@@ -34,7 +34,7 @@ void	free_env(t_name *env)
 		temp = env;
 		env = env->next;
 		free(temp->name);
-		free(temp->value);	
+		free(temp->value);
 		free(temp);
 	}
 }

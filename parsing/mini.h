@@ -66,8 +66,6 @@ typedef struct s_lsttoken
 
 void    program_name(char **en);
 t_name *fill_env(char **env);
-char *join(char *s1,char *s2);
-void get_prompt(char **dst,char *str);
 void parsing(char *str,t_name *env);
 // int pipe_frst(char *str);
 char **split_string(char *str, int *count);

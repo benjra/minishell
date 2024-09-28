@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   program.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/15 14:18:21 by assia            ###   ########.fr       */
+/*   Updated: 2024/09/28 16:07:16 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-void	program_name(char **en)//this function is for displaying the promt and read from the readline 
+void	program_name(char **en)
+// this function is for displaying the promt and read from the readline
 {
-	// char	*prom;
-	t_name	*env;
-	char	*cmd;
+	t_name *env;
+	char *cmd;
 
 	env = fill_env(en);
 	env->ev = en;
 	while (1)
 	{
-		// prom = ft_strdup(BGreen);
-		// prom = join(prom, "minishell$ ");
-		// prom = join(prom, RESET_COLOR);
-		// if (!prom)
-			// exit(1);
-		cmd = readline("\033[1;32mminishell$ \e[m"); 
+		cmd = readline("minishell$ ");
 		if (!cmd)
-			break ;
+		{
+			printf("exit\n");
+			free_env(env);
+			free(cmd);
+			exit(0); // should use exit_status && free all the variables before
+		}
 		if (ft_strncmp(cmd, "", -1))
 		{
 			add_history(cmd);
