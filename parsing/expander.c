@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/27 14:31:36 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:54:51 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ char	*small_expand(char *args, t_name *env)
 		{
 			search_tmp = search(str, env);
 			exp_ = ft_strjoin(exp_, search_tmp);
-			free(search_tmp);
+			free(search_tmp);//i have here double free 
 		}
 		else
 		{

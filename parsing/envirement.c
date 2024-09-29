@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:10 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/28 18:36:27 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/29 20:11:12 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ char	*ft_env(t_name *env, char *var)
 		}
 		else if (ft_strncmp("?", var, ft_strlen(var)) == 0)
 		{
-			replace = ft_strdup(ft_itoa(gl_var));
+			replace = ft_strdup(ft_itoa(ex));
 			return (replace);
 		}
 		temp = temp->next;
 	}
-	return (NULL);
+	return (ft_strdup(""));//
 }

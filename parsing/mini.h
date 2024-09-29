@@ -15,7 +15,6 @@
 #include <errno.h>
 # include <string.h>
 
-extern int gl_var;
 extern int ex;
 # define GREENB  "\033[42m"       //# Red
 # define BGreen "\033[1;32m"       //# Green      //# White

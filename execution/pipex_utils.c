@@ -11,6 +11,8 @@ char	*trim_spaces(char *str)
 {
     char	*end;
 
+    // if (!str)
+    //     return (ft_strdup("")); // u should protect the str  if it null
     while (ft_isspace((unsigned char)*str))
         str++;
     if (*str == 0)

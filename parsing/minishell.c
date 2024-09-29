@@ -6,13 +6,13 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:36 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/28 16:11:44 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/29 14:06:07 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int		gl_var = 0;
+// int		gl_var = 0;
 int		ex = 0;
 void	handler(int signum)
 {
@@ -22,7 +22,7 @@ void	handler(int signum)
 	rl_replace_line("", 0);
 	// its make u to replace the newline with string input
 	rl_redisplay(); // it
-	gl_var = 130;
+	ex = 130;
 }
 
 int	main(int ac, char **av, char **env)

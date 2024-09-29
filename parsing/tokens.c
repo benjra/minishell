@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/28 17:44:15 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:55:47 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,8 @@ t_lsttoken	*fill_token(t_token *list)
 		else
 		{
 			token[0]->args[i++] = ft_strdup(temp->value);
-		}
+			token[0]->args[i] = NULL;
+ 		}
 		if (temp != NULL)
 			temp = temp->next;
 	}

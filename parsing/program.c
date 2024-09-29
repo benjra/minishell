@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/28 16:07:16 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:57:40 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	program_name(char **en)
 			printf("exit\n");
 			free_env(env);
 			free(cmd);
-			exit(0); // should use exit_status && free all the variables before
+			rl_clear_history();
+			exit(ex); // should use exit_status && free all the variables before
 		}
 		if (ft_strncmp(cmd, "", -1))
 		{

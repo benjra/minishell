@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/28 18:46:40 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/29 14:05:52 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	ft_ambigious(t_lsttoken *list)
 	}
 	if (ambigius == 1)
 	{
-		gl_var = 1;
+		ex = 1;
 		ft_putendl_fd("ambigious redirect!\n", 2);
 		return ;
 	}
@@ -138,20 +138,20 @@ int	printf_err(t_token *list) // this function for handle syntax errors
 {
 	if (pipes_err(list) == 1)
 	{
-		gl_var = 2;
+		ex = 2;
 		ft_putendl_fd("syntax error!", 2);
 		return (1);
 	}
 	if (pipes_err(list) == 2 || double_symb(list) == 1
 		|| handle_quotes(list) == 1)
 	{
-		gl_var = 2; // why it doesnt work
+		ex = 2; // why it doesnt work
 		ft_putendl_fd("syntax error!", 2);
 		return (1);
 	}
 	// if(ft_ambigious(list)==1)
 	// {
-	// 	gl_var=1;
+	//	ex =1;
 	// 	ft_putendl_fd("ambigious  redirect!", 2);
 	// 	return (1);
 	// }

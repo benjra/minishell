@@ -132,16 +132,16 @@ void	execute_pipeline(t_lsttoken *commands, t_name *ev)
             if (pipe(pipefd) == -1)
             {
                 perror("pipe");
-                gl_var = 1;
-                exit(gl_var);
+                ex = 1;
+                exit(ex);
             }
         }
         pid = fork();
         if (pid == -1)
         {
             perror("fork");
-            gl_var = 1;
-            exit(gl_var);
+            ex = 1;
+            exit(ex);
         }
         if (pid == 0)
         {
@@ -159,7 +159,7 @@ void	execute_pipeline(t_lsttoken *commands, t_name *ev)
             if (is_builtin(cmd->args, ev) == 0)
             {
                 if (cmd->next != NULL)
-                    exit(gl_var);
+                    exit(ex);
             }
             else
             {
@@ -168,16 +168,16 @@ void	execute_pipeline(t_lsttoken *commands, t_name *ev)
                 {
                     execve(resolved_cmd, cmd->args, ev->ev);
                     perror("execve");
-                    gl_var = 1;
-                    exit(gl_var);
+                    ex = 1;
+                    exit(ex);
                 }
                 else
                 {
                     ft_putstr_fd(cmd->args[0], STDERR_FILENO);
                     ft_putstr_fd(": command not found", STDERR_FILENO);
                     ft_putstr_fd("\n", STDERR_FILENO);
-                    gl_var = 1;
-                    exit(gl_var);
+                    ex = 1;
+                    exit(ex);
                 }
             }
         }
@@ -202,7 +202,7 @@ int	execute_args(t_lsttoken token, t_name *env)
     int		saved_stdout;
 
     args = token.args;
-    gl_var = 0;
+    ex = 0;
     saved_stdin = dup(STDIN_FILENO);
     saved_stdout = dup(STDOUT_FILENO);
     handle_redirections(&token);
