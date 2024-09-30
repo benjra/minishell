@@ -21,15 +21,10 @@ char	*ins_quote(char *str)
 			while (str[len] && str[len] != c)
 				len++;
 			tmp[1] = ft_substr(str, i, len - i);
-			if (str[len])
-			{
+			if (str[len++])
 				res = ft_strjoin(res, tmp[1]);
-				len++;
-			}
 			else
-			{
 				res = ft_strjoin(res, tmp[1]);
-			}
 		}
 		else
 		{

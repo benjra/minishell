@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/22 09:48:56 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:30:02 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ char	*ft_strchr_skip_quotes(const char *str, char *c)
 	int		i;
 	int		end;
 
-	in_quotes = 0;
 	i = 0;
 	end = 0;
 	while (*str)
@@ -109,54 +108,44 @@ char	*ft_strchr_skip_quotes(const char *str, char *c)
 				str++;
 				end++;
 				if (*str == in_quotes)
-				{
-					in_quotes = 0;
 					return (ft_substr(str, i, end));
-				}
 			}
 		}
-		else if (ft_strncmp(str, c, ft_strlen(c)) && *str != in_quotes)
-		{ // to avoid the cases like when u want to search for an string
+		else if (ft_strncmp(str, c, ft_strlen(c)) && *str != in_quotes) // to avoid the cases like when u want to search for an string
 			return ((char *)str);
-		}
 		str++;
 	}
 	return (NULL);
 }
 
-void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 // this function add eavh word inside the linked list
+void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 {
 	char *new;
-	int i = 0;
-	int last = 0;
+	int i;
+	int last;
+
+	last = 0;
+	i = 0;
 	(void)type;
-	// should change this function to being adaptate with cases like ls>cat
 	new = ft_strchr_skip_quotes(str, c); // skipp symbols inside quotes
 	if (new &&ft_strnstr(str, c, ft_strlen(str)) != NULL)
 	{
 		new = ft_strnstr(str, c, -1);
 		*new = '\0';
 		if (*(str))
-		{
 			check_symbols(str, list);
-		}
 		lstadd_backs(list, lstnews(type, ft_strdup(c)));
 		new += ft_strlen(c);
 		if (*new)
-		{
 			check_symbols(new, list);
-		}
 	}
 	else if (!new)
 	{
-		if (!ft_strncmp(str, c, ft_strlen(c)))
-		// i want if just a normal word add it all not char by char
+		if (!ft_strncmp(str, c, ft_strlen(c)))// i want if just a normal word add it all not char by char
 		{
 			while (ft_strnstr(str + last, c, ft_strlen(c)) != NULL)
-			{
 				last++;
-			}
 			lstadd_backs(list, lstnews(get_type(str), ft_substr(str, i, last)));
 		}
 		else
@@ -178,7 +167,6 @@ t_token	*fill_list(char **lst) // filling the list every word and its type
 		{
 			if (ft_strnstr(lst[i], ">>", -1) && ft_strncmp(lst[i], ">>", -1))
 				parse_and_add_token(&list, lst[i], ">>", TOKEN_REDIR_APPEND);
-			// 5
 			else if (ft_strnstr(lst[i], "<<", -1) && ft_strncmp(lst[i], "<<",
 					-1))
 				parse_and_add_token(&list, lst[i], "<<", TOKEN_REDIR_HEREDOC);
@@ -195,63 +183,8 @@ t_token	*fill_list(char **lst) // filling the list every word and its type
 						ft_strdup(lst[i])));
 		}
 		else
-		{
 			lstadd_backs(&list, lstnews(1, ft_strdup(lst[i])));
-		}
-
 		i++;
 	}
 	return (list);
 }
-
-// char *get_quoted_word(char *str)
-// {
-// 	int i = 0;
-// 	int quote = 0;
-// 	if (str[i++] == '\'' || str[i] == '"')
-// 		quote = str[i];
-// 	while(str && str[i] && str[i] != quote)
-// 		i++;
-// 	if (str[i] == quote)
-// 		i++;
-// 	return (ft_substr(str, 0, i));
-// }
-
-// char *get_token(char *str,int i)
-// {
-// 	// int i = 0;
-// 	int specila = 0;
-// 	if (str[i] && ft_strchr("'\"<|>", str[i]))
-// 	{
-// 		specila = str[i];
-// 		while(str && str[i] == specila)
-// 			i++;
-// 		return (ft_substr(str, 0, i));
-// 	}
-// 	while(str && str[i])
-// 	{
-// 		if (ft_strchr("'\"<|>", str[i]))
-// 			break ;
-// 		i++;
-// 	}
-// 	return (ft_substr(str, 0, i));
-// }
-
-// void parse_token(t_token **list, char *str)
-// {
-// 	int i = -1;
-// 	while(str && str[++i])
-// 	{
-// 		t_token *tok = NULL;
-// 		if (str[i] == '\'' || str[i] == '"')
-// 		{
-// 			tok = lstnews(1, get_quoted_word(&str[i]));
-// 			lstadd_backs(list, tok);
-// 		}
-// 		else
-// 		{
-// 			tok = lstnews(1, get_token(&str[i],i));
-// 			lstadd_backs(list, tok);
-// 		}
-// 	}
-// }

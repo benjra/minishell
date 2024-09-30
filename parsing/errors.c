@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/29 14:05:52 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/30 09:56:06 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,38 +100,31 @@ int	handle_quotes(t_token *list)
 	return (0);
 }
 
-void	ft_ambigious(t_lsttoken *list)
+int	ft_ambigious(t_lsttoken *list)
 {
 	t_lsttoken	*temp;
-	int			ambigius;
 
 	temp = list;
-	ambigius = 0;
 	while (temp)
 	{
 		while (temp->redirections)
 		{
 			if (temp->redirections->type == 5 && !*(temp->redirections->red))
-				ambigius = 1;
+				return 1;
 			else if (temp->redirections->type == 6
 				&& !*(temp->redirections->red))
-				ambigius = 1;
+				return 1;
 			else if (temp->redirections->type == 3
 				&& !*(temp->redirections->red))
-				ambigius = 1;
+				return 1;
 			else if (temp->redirections->type == 4
 				&& !*(temp->redirections->red))
-				ambigius = 1;
+				return 1;
 			temp->redirections = temp->redirections->next;
 		}
 		temp = temp->next;
 	}
-	if (ambigius == 1)
-	{
-		ex = 1;
-		ft_putendl_fd("ambigious redirect!\n", 2);
-		return ;
-	}
+	return (0);
 }
 
 int	printf_err(t_token *list) // this function for handle syntax errors

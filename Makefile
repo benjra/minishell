@@ -10,6 +10,7 @@ SRC_FILES = parsing/minishell.c \
 	parsing/parsing.c \
 	parsing/split.c \
 	parsing/fill_list.c \
+	parsing/redirection_node.c \
 	parsing/tokens.c \
 	parsing/clear.c \
 	parsing/errors.c \

@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_env.c                                          :+:      :+:    :+:   */
+/*   redirection_node.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 11:24:30 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/30 11:31:36 by bbenjrai         ###   ########.fr       */
+/*   Created: 2024/09/30 11:56:54 by bbenjrai          #+#    #+#             */
+/*   Updated: 2024/09/30 11:57:05 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-t_name	*tail(t_name *list)
+t_redir	*last_red(t_redir *list)
 {
-	t_name	*temp;
+	t_redir	*temp;
 
-	temp = list;
 	if (!list)
 		return (NULL);
+	temp = list;
 	while (temp->next != NULL)
 	{
 		temp = temp->next;
@@ -26,53 +26,33 @@ t_name	*tail(t_name *list)
 	return (temp);
 }
 
-void	lstadd_back(t_name **lst, t_name *new)
+void	red_addback(t_redir **lst, t_redir *new)
 {
 	if (!lst || !new)
 		return ;
 	if (*lst == NULL)
 		*lst = new;
 	else
-		tail(*lst)->next = new;
+	{
+		last_red(*lst)->next = new;
+		new->next = NULL;
+		new->previous = last_red(*lst);
+	}
 }
 
-t_name	*lstnew(char *name, char *value)
+t_redir	*new_red(int type, char *red)
 {
-	t_name	*linked_lst;
+	t_redir	*linked_lst;
 
-	linked_lst = malloc(sizeof(t_name));
+	linked_lst = malloc(sizeof(t_redir));
 	if (!linked_lst)
 	{
 		free(linked_lst);
 		return (NULL);
 	}
-	linked_lst->name = ft_strdup(name);
-	linked_lst->value = ft_strdup(value);
+	linked_lst->type = type;
+	linked_lst->red = red;
 	linked_lst->next = NULL;
+	linked_lst->previous = NULL;
 	return (linked_lst);
-}
-
-// this func fill alist from the double pointer **env and return the list
-t_name	*fill_env(char **env)
-{
-	char *name;
-	char *value;
-	char *en;
-	int i;
-	t_name *lst;
-
-	i = 0;
-	lst = NULL;
-	while (env[i])
-	{
-		en = ft_strdup(env[i]);
-		value = ft_strchr(en, '=');
-		*value = 0;
-		value++;
-		name = en;
-		lstadd_back(&lst, lstnew(name, value));
-		i++;
-		free(en);
-	}
-	return (lst);
 }

@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/25 20:33:31 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:54:14 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int	countwrd(char *str)
 	return (len + 1);
 }
 
-char	**split_string(char *str, int *count)
 // this fun it split the commonde based on spaces and it skipp the spaces inside quotes
+char	**split_string(char *str, int *count)
 {
 	char **tokens;
 	int token_count;
@@ -93,7 +93,6 @@ char	**split_string(char *str, int *count)
 	{
 		if (*str == '"' || *str == '\'')
 		{
-			// in_quotes = !in_quotes;
 			c = *str++;
 			while (*str && *str != c)
 				str++;
@@ -131,12 +130,11 @@ char	**split_string(char *str, int *count)
 		{
 			token = malloc(len + 1);
 			ft_strncpy(token, start, len);
-			// u  should check the len in the line before
 			token[len] = '\0';
 			tokens[token_count++] = token;
 		}
 	}
-	tokens[token_count] = NULL;
+	tokens[token_count] = NULL;//heap buffer overflow here
 	*count = token_count;
 	return (tokens);
 }
@@ -153,35 +151,3 @@ void	free_tokens(char **tokens, int count)
 	}
 	free(tokens);
 }
-
-// size_t	ft_len2(char **s)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	if (!s)
-// 		return (0);
-// 	while (s[i])
-// 		i++;
-// 	return (i);
-// }
-
-// char	**join2pointer(char **com, char *str)
-// {
-// 	size_t	len2;
-// 	char	**new_com;
-// 	int		i;
-
-// 	len2 = ft_len2(com);
-// 	new_com = ft_calloc((len2 + 2), sizeof(char *));
-// 	i = 0;
-// 	while (com && com[i])
-// 	{
-// 		new_com[i] = com[i];
-// 		i++;
-// 	}
-// 	new_com[i++] = str;
-// 	new_com[i] = NULL;
-// 	free(com);
-// 	return (new_com);
-// }

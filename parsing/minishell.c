@@ -6,13 +6,12 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:36 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/29 14:06:07 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:32:02 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-// int		gl_var = 0;
 int		ex = 0;
 void	handler(int signum)
 {

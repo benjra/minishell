@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/29 16:54:51 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/30 10:41:13 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,49 +107,51 @@ char	*get_word(char *str, int *i) // this function get every word
 	// printf("{%s}\n", res);
 	return (res);
 }
-char	*small_expand(char *args, t_name *env)
 // this function is the core of expander it expand a string
+char	*small_expand(char *args, t_name *env)
 {
 	int j;
-	char *tmp;
-	char *tmp2;
+	char *tmp[3];
 	char *search_tmp;
-	char *exp_ = ft_strdup("");
-	char *s = ft_strdup(args);
+	char *exp_ ;
+	char *str;
+	
+	exp_ = ft_strdup("");
+	tmp[2] = ft_strdup(args);
 	j = 0;
-	while (s[j])
+	while (tmp[2][j])
 	{
-		char *str = get_word(s, &j);
+		str = get_word(tmp[2], &j);
 		if (*str == '"')
 		{
-			tmp2 = ins_quote(str);
-			// this function remove quotes if u want use it or not when u expand
-			free(tmp2);
+			tmp[0] = ins_quote(str);
+			free(tmp[0]);
 		}
-		tmp = exp_;
+		tmp[1] = exp_;
 		if (ft_strchr(str, '$') && str[0] != '\'')
 		{
 			search_tmp = search(str, env);
 			exp_ = ft_strjoin(exp_, search_tmp);
-			free(search_tmp);//i have here double free 
+			free(search_tmp);
 		}
 		else
 		{
-			tmp2 = ins_quote(str);
-			exp_ = ft_strjoin(exp_, tmp2);
-			free(tmp2);
+			tmp[0] = ins_quote(str);
+			exp_ = ft_strjoin(exp_, tmp[0]);
+			free(tmp[0]);
 		}
-		free(tmp);
+		free(tmp[1]);
 		free(str);
-		if (!s[j])
+		if (!tmp[2][j])
 			break ;
 	}
 	free(args);
-	free(s);
+	free(tmp[2]);
 	return (exp_);
 }
-void	expander(t_lsttoken *tokens, t_name *env)
+
 // the main function of expander it expand exept inside the single quotes but it expand just the arguments of the command
+void	expander(t_lsttoken *tokens, t_name *env)
 {
 	t_lsttoken *tmp;
 	t_redir *tm;
@@ -161,12 +163,9 @@ void	expander(t_lsttoken *tokens, t_name *env)
 		i = 0;
 		while (tmp->args[i])
 		{
-			// inside this while can be a function separated
 			tmp->args[i] = small_expand(tmp->args[i], env);
-			// this function u can use it to expand any string not just the args
 			i++;
 		}
-		///
 		tm = tmp->redirections;
 		while (tm)
 		{

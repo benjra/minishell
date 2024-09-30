@@ -75,7 +75,7 @@ t_lsttoken *fill_token(t_token *list);
 int pipes_err(t_token *list);
 t_token	*tails(t_token *list);
 int printf_err(t_token *list);
-void ft_ambigious(t_lsttoken *list);
+int ft_ambigious(t_lsttoken *list);
 //expand 
 void expander(t_lsttoken *tokens,t_name *env);
 char *ft_env(t_name *env,char *var);
@@ -90,7 +90,9 @@ void	free_all(t_lsttoken *token);
 t_token	*lstnews(int type, char *value);
 void	lstadd_backs(t_token **lst, t_token *new);
 t_token	*tails(t_token *list);
-
+t_redir	*new_red(int type, char *red);
+void	red_addback(t_redir **lst, t_redir *new);
+t_redir	*last_red(t_redir *list);
 
 
 //builtins

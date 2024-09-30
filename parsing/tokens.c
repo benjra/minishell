@@ -6,56 +6,11 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/29 16:55:47 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:59:07 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-t_redir	*last_red(t_redir *list)
-{
-	t_redir	*temp;
-
-	if (!list)
-		return (NULL);
-	temp = list;
-	while (temp->next != NULL)
-	{
-		temp = temp->next;
-	}
-	return (temp);
-}
-
-void	red_addback(t_redir **lst, t_redir *new)
-{
-	if (!lst || !new)
-		return ;
-	if (*lst == NULL)
-		*lst = new;
-	else
-	{
-		last_red(*lst)->next = new;
-		new->next = NULL;
-		new->previous = last_red(*lst);
-	}
-}
-
-t_redir	*new_red(int type, char *red)
-{
-	t_redir	*linked_lst;
-
-	linked_lst = malloc(sizeof(t_redir));
-	if (!linked_lst)
-	{
-		free(linked_lst);
-		return (NULL);
-	}
-	linked_lst->type = type;
-	linked_lst->red = red;
-	linked_lst->next = NULL;
-	linked_lst->previous = NULL;
-	return (linked_lst);
-}
 
 t_lsttoken	*last(t_lsttoken *list)
 {
@@ -124,12 +79,11 @@ int	len(t_token *lst)
 	return (i);
 }
 
-t_lsttoken	*fill_token(t_token *list)
 // this function fillling the last list from a normal list
+t_lsttoken	*fill_token(t_token *list)
 {
 	t_token *temp;
 	t_lsttoken *token[2];
-	// t_redir	*tmp;
 	t_redir *redirections;
 	int i;
 
@@ -146,15 +100,13 @@ t_lsttoken	*fill_token(t_token *list)
 	token[1] = token[0];
 	while (temp != NULL)
 	{
-		if (temp->next != NULL && temp->type > 2 && temp->type <= 6)
-		// here we create redirections nodes and add them to redirection list if we find  the type between(3-6)
+		if (temp->next != NULL && temp->type > 2 && temp->type <= 6)// here we create redirections nodes and add them to redirection list if we find  the type between(3-6)
 		{
 			redirections = new_red(temp->type, ft_strdup(temp->next->value));
 			red_addback(&(token[0]->redirections), redirections);
 			temp = temp->next;
 		}
-		else if (temp->next != NULL && temp->type == 2)
-		// here we create a node if we find a pipe (type==2) every pipe represent a node=command
+		else if (temp->next != NULL && temp->type == 2)// here we create a node if we find a pipe (type==2) every pipe represent a node=command
 		{
 			add_back(&token[1], newnode(temp->type, token[0]->args));
 			token[0] = token[0]->next;
