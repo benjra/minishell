@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   program.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/29 16:57:40 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:22:23 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
 void	program_name(char **en)
-// this function is for displaying the promt and read from the readline
 {
 	t_name *env;
 	char *cmd;

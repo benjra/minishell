@@ -1,6 +1,6 @@
 NAME = minishell
 #-g -fsanitize=address
-CCFLGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CCFLGS = -Wall -Wextra -Werror
 
 CC = cc
 LIBFT = libft/libft.a
@@ -15,7 +15,7 @@ SRC_FILES = parsing/minishell.c \
 	parsing/clear.c \
 	parsing/errors.c \
 	parsing/expander.c \
-	parsing/envirement.c \
+	parsing/environment.c \
 	parsing/rm_quotes.c \
 	parsing/clear_all.c \
 	builtins/mini_echo.c \

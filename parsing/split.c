@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/30 11:54:14 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:24:23 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,13 @@ int	countwrd(char *str)
 {
 	int	i;
 	int	len;
-	int	in_quotes;
-
+	
 	i = 0;
 	len = 0;
-	in_quotes = 0;
 	while (str[i])
 	{
 		if (str[i] == '"' || str[i] == '\'')
 		{
-			in_quotes = !in_quotes;
 			i++;
 			while (str[i] && !(str[i] == '"' || str[i] == '\''))
 				i++;
@@ -76,7 +73,6 @@ char	**split_string(char *str, int *count)
 {
 	char **tokens;
 	int token_count;
-	int in_quotes;
 	char c;
 	char *start;
 	char *token;
@@ -85,7 +81,6 @@ char	**split_string(char *str, int *count)
 
 	tokens = malloc((length) * sizeof(char *));
 	token_count = 0;
-	in_quotes = 0;
 	start = str;
 	if (!str || !*str)
 		return (NULL);
