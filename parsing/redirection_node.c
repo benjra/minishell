@@ -42,7 +42,7 @@ void	red_addback(t_redir **lst, t_redir *new)
 
 t_redir	*new_red(int type, char *red)
 {
-	t_redir	*linked_lst;
+	t_redir *linked_lst;
 
 	linked_lst = malloc(sizeof(t_redir));
 	if (!linked_lst)

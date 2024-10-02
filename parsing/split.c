@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/01 12:24:23 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/02 17:21:21 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,45 @@ int	countwrd(char *str)
 {
 	int	i;
 	int	len;
-	
+	char c;
+	int flag;
+
+	flag=0;
 	i = 0;
 	len = 0;
 	while (str[i])
 	{
-		if (str[i] == '"' || str[i] == '\'')
+		if (str[i] == '"' || str[i] == '\'')//should handle this function to count correctly 
 		{
-			i++;
-			while (str[i] && !(str[i] == '"' || str[i] == '\''))
+			flag=1;
+			len++;
+			c = str[i++];
+			while (str[i] && str[i] != c)
 				i++;
-			if (str[i])
+			if (str[i] == c)
 				i++;
 		}
-		else if (is_space(str[i]) || str[i] == '\0')
+		else if (is_space(str[i]))
 		{
+			flag=1;
 			len++;
-			while (str[i] && is_space(str[i]))
+			i++;
+			while (str[i] && !is_space(str[i]))
+				i++;
+			if (is_space(str[i]))
 				i++;
 		}
 		else if (str[i])
+		{
+			if(flag==0)
+			{
+				len++;
+				flag=1;
+			}	
 			i++;
+		}
 	}
-	return (len + 1);
+	return (len );
 }
 
 // this fun it split the commonde based on spaces and it skipp the spaces inside quotes

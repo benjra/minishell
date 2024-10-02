@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/30 09:56:06 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:07:59 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,16 +110,16 @@ int	ft_ambigious(t_lsttoken *list)
 		while (temp->redirections)
 		{
 			if (temp->redirections->type == 5 && !*(temp->redirections->red))
-				return 1;
+				return (1);
 			else if (temp->redirections->type == 6
 				&& !*(temp->redirections->red))
-				return 1;
+				return (1);
 			else if (temp->redirections->type == 3
 				&& !*(temp->redirections->red))
-				return 1;
+				return (1);
 			else if (temp->redirections->type == 4
 				&& !*(temp->redirections->red))
-				return 1;
+				return (1);
 			temp->redirections = temp->redirections->next;
 		}
 		temp = temp->next;

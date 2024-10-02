@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/30 10:41:13 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:09:15 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char	*get_word(char *str, int *i) // this function get every word
 
 	while (str[last])
 	{
-		//(str[last] == '"' && str[last+1]=='"') || str[last] == '"' ||
 		if ((str[last] == '\'' && str[last + 1] == '\''))
 			last += 2;
 		if (str[last] == '\'')
@@ -104,58 +103,81 @@ char	*get_word(char *str, int *i) // this function get every word
 	}
 	res = ft_substr(str, *i, last - *i);
 	*i = last;
-	// printf("{%s}\n", res);
 	return (res);
 }
+
 // this function is the core of expander it expand a string
-char	*small_expand(char *args, t_name *env)
+char	**init_tmp_vars(char *args, char **exp_)
 {
-	int j;
-	char *tmp[3];
-	char *search_tmp;
-	char *exp_ ;
-	char *str;
-	
-	exp_ = ft_strdup("");
+	char	**tmp;
+
+	*exp_ = ft_strdup("");
+	tmp = (char **)malloc(sizeof(char *) * 3);
 	tmp[2] = ft_strdup(args);
-	j = 0;
-	while (tmp[2][j])
+	return (tmp);
+}
+char	*process_word(char *str, char *exp_, t_name *env)
+{
+	char	*search_tmp;
+	char	*tmp_0;
+	char	*new_exp_;
+
+	if (ft_strchr(str, '$') && str[0] != '\'')
 	{
-		str = get_word(tmp[2], &j);
+		search_tmp = search(str, env);
+		new_exp_ = ft_strjoin(exp_, search_tmp);
+		free(search_tmp);
+	}
+	else
+	{
+		tmp_0 = ins_quote(str);
+		new_exp_ = ft_strjoin(exp_, tmp_0);
+		free(tmp_0);
+	}
+	free(exp_);
+	return (new_exp_);
+}
+char	*loop_through_string(char *tmp2, char *exp_, t_name *env)
+{
+	int		j;
+	char	*str;
+	char	*tmp_0;
+
+	j = 0;
+	while (tmp2[j])
+	{
+		str = get_word(tmp2, &j);
 		if (*str == '"')
 		{
-			tmp[0] = ins_quote(str);
-			free(tmp[0]);
+			tmp_0 = ins_quote(str);
+			free(tmp_0);
 		}
-		tmp[1] = exp_;
-		if (ft_strchr(str, '$') && str[0] != '\'')
-		{
-			search_tmp = search(str, env);
-			exp_ = ft_strjoin(exp_, search_tmp);
-			free(search_tmp);
-		}
-		else
-		{
-			tmp[0] = ins_quote(str);
-			exp_ = ft_strjoin(exp_, tmp[0]);
-			free(tmp[0]);
-		}
-		free(tmp[1]);
+		exp_ = process_word(str, exp_, env);
 		free(str);
-		if (!tmp[2][j])
+		if (!tmp2[j])
 			break ;
 	}
+	return (exp_);
+}
+char	*small_expand(char *args, t_name *env)
+{
+	char	**tmp;
+	char	*exp_;
+
+	tmp = init_tmp_vars(args, &exp_);
+	exp_ = loop_through_string(tmp[2], exp_, env);
 	free(args);
 	free(tmp[2]);
+	free(tmp);
 	return (exp_);
 }
 
 // the main function of expander it expand exept inside the single quotes but it expand just the arguments of the command
 void	expander(t_lsttoken *tokens, t_name *env)
 {
-	t_lsttoken *tmp;
-	t_redir *tm;
-	int i;
+	t_lsttoken	*tmp;
+	t_redir		*tm;
+	int			i;
 
 	tmp = tokens;
 	while (tmp)

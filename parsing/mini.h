@@ -94,6 +94,14 @@ t_redir	*new_red(int type, char *red);
 void	red_addback(t_redir **lst, t_redir *new);
 t_redir	*last_red(t_redir *list);
 
+//norms
+void parse_and_add_token(t_token **list, char *str, char *c, int type);
+char	*ft_strchr_skip_quotes(const char *str, char *c);
+int	get_type(char *lst);
+void	check_symbols(char *str, t_token **list);
+t_token	*lstnews(int type, char *value);
+void	lstadd_backs(t_token **lst, t_token *new);
+t_token	*tails(t_token *list);
 
 //builtins
 int my_cd(t_name *env, char **argv);
