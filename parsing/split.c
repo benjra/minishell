@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/02 17:21:21 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/02 21:13:40 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,22 @@ int	is_space(char str)
 		return (1);
 	return (0);
 }
+
 int	countwrd(char *str)
 {
 	int	i;
 	int	len;
 	char c;
-	int flag;
-
-	flag=0;
+	int flag=0;
+	
 	i = 0;
 	len = 0;
 	while (str[i])
-	{
+	{  // echo "I'm" mk jkljo kjk
 		if (str[i] == '"' || str[i] == '\'')//should handle this function to count correctly 
 		{
 			flag=1;
-			len++;
+			// len++;
 			c = str[i++];
 			while (str[i] && str[i] != c)
 				i++;
@@ -65,7 +65,7 @@ int	countwrd(char *str)
 		{
 			flag=1;
 			len++;
-			i++;
+			// i++;
 			while (str[i] && !is_space(str[i]))
 				i++;
 			if (is_space(str[i]))
@@ -74,13 +74,14 @@ int	countwrd(char *str)
 		else if (str[i])
 		{
 			if(flag==0)
-			{
-				len++;
-				flag=1;
-			}	
+				{
+					flag=1;
+					len++;
+				}
 			i++;
 		}
 	}
+	printf("%d\n",len);
 	return (len );
 }
 
@@ -108,18 +109,11 @@ char	**split_string(char *str, int *count)
 			while (*str && *str != c)
 				str++;
 			if (*str == c)
-				str++;
-			if (start != str)
 			{
-				len = str - start;
-				token = malloc(len + 1);
-				ft_strncpy(token, start, len);
-				token[len] = '\0';
-				tokens[token_count++] = token;
+				str++;
 			}
-			start = str + 1;
 		}
-		else if (is_space(*str))
+		if (!*str || is_space(*str))
 		{
 			if (start != str)
 			{
@@ -130,8 +124,10 @@ char	**split_string(char *str, int *count)
 				tokens[token_count++] = token;
 			}
 			start = str + 1;
+			if (*str)
+				str++;
 		}
-		if (*str)
+		else if (*str)
 			str++;
 	}
 	if (start != str)
