@@ -6,21 +6,21 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:36 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/30 11:32:02 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:49:06 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
 int		ex = 0;
+
 void	handler(int signum)
 {
 	(void)signum;
 	write(0, "\n", 1);
-	rl_on_new_line(); // its make u to write on newline
+	rl_on_new_line();
 	rl_replace_line("", 0);
-	// its make u to replace the newline with string input
-	rl_redisplay(); // it
+	rl_redisplay();
 	ex = 130;
 }
 

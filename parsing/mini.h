@@ -67,7 +67,7 @@ void    program_name(char **en);
 t_name *fill_env(char **env);
 void parsing(char *str,t_name *env);
 // int pipe_frst(char *str);
-char **split_string(char *str, int *count);
+char **split_string(char *str);
 t_token *fill_list(char **lst);
 void parse_and_add_token(t_token **list, char *str, char *c, int type);
 t_lsttoken *fill_token(t_token *list);
@@ -81,10 +81,11 @@ void expander(t_lsttoken *tokens,t_name *env);
 char *ft_env(t_name *env,char *var);
 char *ins_quote(char *str);
 //free
-void free_tokens(char **tokens, int count) ;
+void free_tokens(char **tokens) ;
 void free_env(t_name *env);
 void freelist1(t_token *list);
 void	free_all(t_lsttoken *token);
+void	free_arg(char **args);
 
 //node list
 t_token	*lstnews(int type, char *value);
@@ -102,6 +103,22 @@ void	check_symbols(char *str, t_token **list);
 t_token	*lstnews(int type, char *value);
 void	lstadd_backs(t_token **lst, t_token *new);
 t_token	*tails(t_token *list);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
+int	is_space(char str);
+int	countwrd(char *str);
+t_lsttoken	*newnode(int type, char **args);
+void	add_back(t_lsttoken **lst, t_lsttoken *new);
+t_lsttoken	*last(t_lsttoken *list);
+int	double_symb(t_token *list);
+int	pipes_err(t_token *list);
+int	qoute(char *str);
+char	*get_specialcar(char *s);
+char	*get_var(int len, char *afterdoll);
+char	*search_env(int len, char *afterdoll, t_name *env);
+char	*search(char *arg, t_name *env);
+char	*get_word(char *str, int *i);
+
+
 
 //builtins
 int my_cd(t_name *env, char **argv);

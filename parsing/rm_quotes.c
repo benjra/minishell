@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rm_quotes.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/03 19:05:43 by bbenjrai          #+#    #+#             */
+/*   Updated: 2024/10/03 20:12:49 by bbenjrai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini.h"
 
 char	*handle_quote(char *str, int *len)
@@ -19,11 +31,14 @@ char	*handle_quote(char *str, int *len)
 
 char	*ins_quote(char *str)
 {
-	int i = 0;
-	int len = 0;
-	char *res = ft_strdup("");
-	char *tmp[2];
+	int		i;
+	int		len;
+	char	*res;
+	char	*tmp[2];
 
+	res = ft_strdup("");
+	i = 0;
+	len = 0;
 	while (str[len])
 	{
 		tmp[0] = res;

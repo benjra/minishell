@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/02 17:08:49 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:45:11 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,11 @@ char	*ft_strchr_skip_quotes(const char *str, char *c)
 			}
 		}
 		else if (ft_strncmp(str, c, ft_strlen(c)) && *str != in_quotes)
-			// to avoid the cases like when u want to search for an string
 			return ((char *)str);
 		str++;
 	}
 	return (NULL);
 }
-// filling the list every word and its type
 
 void	handle_operator_tokens(t_token **list, char *str)
 {
@@ -112,7 +110,6 @@ t_token	*fill_list(char **lst)
 			handle_operator_tokens(&list, lst[i]);
 		else
 			lstadd_backs(&list, lstnews(1, ft_strdup(lst[i])));
-				// Add tokens without operators
 		i++;
 	}
 	return (list);
