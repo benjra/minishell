@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 17:36:00 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/04 14:28:05 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:36:50 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,32 +55,64 @@ int	skip_quotes_in_count(char *str, int i)
 	return (i);
 }
 
-int	countwrd(char *str)
-{
-	int	i;
-	int	len;
-	int	flag;
+// int	countwrd(char *str)
+// {
+// 	int	i;
+// 	int	len;
+// 	int	flag;
 
-	i = 0;
-	len = 0;
-	flag = 0;
-	while (str[i])
-	{
-		i = skip_quotes_in_count(str, i);
-		if (is_space(str[i]))
-		{
-			len++;
-			while (str[i] && is_space(str[i]))
-				i++;
-		}
-		else if (str[i++])
-		{
-			if (flag == 0)
-			{
-				flag = 1;
-				len++;
-			}
-		}
-	}
-	return (len);
+// 	i = 0;
+// 	len = 0;
+// 	flag = 0;
+// 	while (str[i])
+// 	{
+// 		i = skip_quotes_in_count(str, i);
+// 		if (is_space(str[i]))
+// 		{
+// 			len++;
+// 			while (str[i] && is_space(str[i]))
+// 				i++;
+// 		}
+// 		else if (str[i++])
+// 		{
+// 			if (flag == 0)
+// 			{
+// 				flag = 1;
+// 				len++;
+// 			}
+// 		}
+// 	}
+// 	return (len);
+// }
+int    countwrd(char *str)
+{
+    int    i;
+    int    len;
+    int flag=0;
+    
+    i = 0;
+    len = 0;
+    while (str[i])
+    {  
+       	i = skip_quotes_in_count(str, i);
+        if (is_space(str[i]))
+        {
+            flag=1;
+            len++;
+            while (str[i] && !is_space(str[i]))
+                i++;
+            if (is_space(str[i]))
+                i++;
+        }
+        else if (str[i])
+        {
+            if(flag==0)
+                {
+                    flag=1;
+                    len++;
+                }
+            i++;
+        }
+    }
+    return (len );
 }
