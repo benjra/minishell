@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:06:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 20:51:54 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/05 16:29:43 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	parsing(char *str, t_name *env)
 	string = split_string(str);
 	list = fill_list(string);
 	free_arg(string);
+	
 	if (printf_err(list))
 	{
 		freelist1(list);
@@ -51,7 +52,12 @@ void	parsing(char *str, t_name *env)
 	list2 = fill_token(list);
 	freelist1(list);
 	expander(list2, env);
-	// ft_ambigious(list2);
+	// if (ft_ambigious(list2)) should handled in execution 
+	// {
+	// 	ex = 1;
+	// 	ft_putendl_fd("ambiguous redirect", 2);
+	// 	return ;
+	// }
 	current = list2;
 	set_num_cmds(current);
 	execute_args(*current, env);

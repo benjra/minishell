@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 18:57:10 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/05 10:57:57 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int	len(t_token *lst)
 			lst = lst->next;
 		}
 		else
+		{
 			i++;
-		lst = lst->next;
+			lst = lst->next;
+		}
 	}
 	return (i);
 }
@@ -40,6 +42,7 @@ t_lsttoken	*init_token(t_token *list)
 	if (!token)
 		return (NULL);
 	token->args = malloc((len(list) + 1) * sizeof(char *));
+	// printf("%d\n",len(list));
 	if (!token->args)
 		return (NULL);
 	token->args[len(list)] = NULL;
@@ -50,13 +53,17 @@ t_lsttoken	*init_token(t_token *list)
 void	handle_redirection(t_token **temp, t_lsttoken *token)
 {
 	t_redir	*redirections;
-
+	char *tmmp;
+	
+	tmmp=NULL;
 	if ((*temp)->next != NULL && (*temp)->type > 2 && (*temp)->type <= 6)
 	{
-		redirections = new_red((*temp)->type, ft_strdup((*temp)->next->value));
+		tmmp=ft_strdup((*temp)->next->value);
+		redirections = new_red((*temp)->type, tmmp);
 		red_addback(&(token->redirections), redirections);
 		(*temp) = (*temp)->next;
 	}
+	// free(tmmp);
 }
 
 void	add_new_token_node(t_token **temp, t_lsttoken **token, int *i)

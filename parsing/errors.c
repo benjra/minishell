@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 20:48:52 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/05 16:27:33 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,27 @@ int	handle_quotes(t_token *list)
 int	ft_ambigious(t_lsttoken *list)
 {
 	t_lsttoken	*temp;
+	t_redir *redirections;
 
 	temp = list;
 	while (temp)
 	{
-		while (temp->redirections)
+		redirections  = temp->redirections;
+		while (redirections)
 		{
-			if (temp->redirections->type == 5 && !*(temp->redirections->red))
+			// if (redirections->type == 5 && !*(redirections->red))
+			// 	return (1);
+			// else if (redirections->type == 6
+			// 	&& !*(redirections->red))
+			// 	return (1);
+			// else if (redirections->type == 3
+			// 	&& !*(redirections->red))
+			// 	return (1);
+			// else if (redirections->type == 4
+			// 	&& !*(redirections->red))
+			if (redirections->type <= 6  &&  redirections->type >= 3 && !*(redirections->red))
 				return (1);
-			else if (temp->redirections->type == 6
-				&& !*(temp->redirections->red))
-				return (1);
-			else if (temp->redirections->type == 3
-				&& !*(temp->redirections->red))
-				return (1);
-			else if (temp->redirections->type == 4
-				&& !*(temp->redirections->red))
-				return (1);
-			temp->redirections = temp->redirections->next;
+			redirections = redirections->next;
 		}
 		temp = temp->next;
 	}
@@ -72,5 +75,6 @@ int	printf_err(t_token *list)
 		ft_putendl_fd("syntax error!", 2);
 		return (1);
 	}
+	
 	return (0);
 }

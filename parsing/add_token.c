@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:46:52 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 20:24:43 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/04 21:26:48 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	handle_no_symbol_token(t_token **list, char *str, char *c)
 void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 {
 	char	*new;
-
+	
+	new=NULL;
 	new = ft_strchr_skip_quotes(str, c);
 	if (new && ft_strnstr(str, c, ft_strlen(str)) != NULL)
 		handle_symbol_token(list, str, c, type);

@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 20:23:10 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/05 16:17:38 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void	process_split(char **tokens, char *str, int *token_count)
 	start = str;
 	while (*str)
 	{
-		skip_quotes(&str);
-		if (!*str || is_space(*str))
+		if (*str == '"' || *str == '\'')
+			skip_quotes(&str);
+		else if (!*str || is_space(*str))
 		{
 			if (start != str)
 				add_token(tokens, start, str, token_count);

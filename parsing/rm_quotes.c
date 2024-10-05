@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:05:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 20:12:49 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/05 16:10:09 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*ins_quote(char *str)
 		else
 		{
 			i = len;
+			// """'hi'   f"
 			while (str[len] && str[len] != '"' && str[len] != '\'')
 				len++;
 			tmp[1] = ft_substr(str, i, len - i);

@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 19:45:11 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/05 11:09:10 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*ft_strchr_skip_quotes(const char *str, char *c)
 
 	i = 0;
 	end = 0;
+	in_quotes=0;
 	while (*str)
 	{
 		if (*str == '"' || *str == '\'')
