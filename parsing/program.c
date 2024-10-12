@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 19:05:58 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/12 09:34:08 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	program_name(char **en)
 			free_env(env);
 			free(cmd);
 			rl_clear_history();
-			exit(ex);
+			exit(gl_ex);
 		}
 		if (ft_strncmp(cmd, "", -1))
 		{

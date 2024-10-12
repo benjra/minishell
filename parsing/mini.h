@@ -15,7 +15,8 @@
 #include <errno.h>
 # include <string.h>
 
-extern int ex;
+extern int	gl_ex ;
+
 # define GREENB  "\033[42m"       //# Red
 # define BGreen "\033[1;32m"       //# Green      //# White
 # define RESET_COLOR "\e[m"

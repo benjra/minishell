@@ -6,13 +6,13 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:36 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 20:49:06 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/12 09:32:55 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int		ex = 0;
+int	gl_ex = 0 ;
 
 void	handler(int signum)
 {
@@ -21,7 +21,7 @@ void	handler(int signum)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	ex = 130;
+	gl_ex = 130;
 }
 
 int	main(int ac, char **av, char **env)

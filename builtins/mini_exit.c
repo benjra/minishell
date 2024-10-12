@@ -4,7 +4,7 @@ void	validate_exit(char **argv, int is_valid, int argc)
 {
     if (argc == 1)
     {
-        ex = 1;
+        gl_ex = 1;
         ft_putstr_fd("exit\n", 1);
         exit(0);
     }
@@ -22,7 +22,7 @@ void	validate_exit(char **argv, int is_valid, int argc)
     }
     else if (argv[1])
     {
-        ex = 1;
+        gl_ex = 1;
         exit(ft_atoi(argv[1]) % 256);
     }
 }

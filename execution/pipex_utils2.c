@@ -39,8 +39,8 @@ char	*check_path(char **p, char *cmd)
 	{
         ft_putstr_fd(cmd, 2);
 		ft_putstr_fd(": command not found\n", 2);
-        ex = 127;
-		exit(ex);
+        gl_ex = 127;
+		exit(gl_ex);
 	}
     while (p[i])
     {
@@ -55,8 +55,8 @@ char	*check_path(char **p, char *cmd)
     ft_putstr_fd(cmd, STDERR_FILENO);
     ft_putstr_fd(": command not found", STDERR_FILENO);
     ft_putstr_fd("\n", STDERR_FILENO);
-    ex = 127;
-    exit(ex);
+    gl_ex = 127;
+    exit(gl_ex);
 }
 
 char	*get_path1(char **cmd, t_name *ev)
