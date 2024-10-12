@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 17:36:00 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/04 14:36:50 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/07 09:47:50 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,10 @@ int    countwrd(char *str)
        	i = skip_quotes_in_count(str, i);
         if (is_space(str[i]))
         {
-            flag=1;
+            flag=0;
+            while (str[i] && is_space(str[i]))
+                i++;
             len++;
-            while (str[i] && !is_space(str[i]))
-                i++;
-            if (is_space(str[i]))
-                i++;
         }
         else if (str[i])
         {
@@ -114,5 +112,5 @@ int    countwrd(char *str)
             i++;
         }
     }
-    return (len );
+    return (len);
 }

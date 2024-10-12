@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/05 10:57:57 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/07 10:25:23 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ t_lsttoken	*init_token(t_token *list)
 	if (!token)
 		return (NULL);
 	token->args = malloc((len(list) + 1) * sizeof(char *));
-	// printf("%d\n",len(list));
 	if (!token->args)
 		return (NULL);
 	token->args[len(list)] = NULL;

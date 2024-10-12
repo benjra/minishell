@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/05 11:09:10 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/12 08:20:05 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	get_type(char *lst)
 		if (ft_strncmp(lst, ">", 1) == 0)
 			return (4);
 		else if (ft_strncmp(lst, "<", 1) == 0)
-			return (5);
+			return (3);
 	}
 	return (1);
 }

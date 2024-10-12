@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:06:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/05 16:29:43 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/07 08:49:25 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	parsing(char *str, t_name *env)
 	t_lsttoken	*list2;
 	t_lsttoken	*current;
 
-	(void)env;
 	string = split_string(str);
 	list = fill_list(string);
 	free_arg(string);
