@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/07 10:25:23 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/13 13:58:28 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_lsttoken	*init_token(t_token *list)
 	return (token);
 }
 
-void	handle_redirection(t_token **temp, t_lsttoken *token)
+int	handle_redirection(t_token **temp, t_lsttoken *token)
 {
 	t_redir	*redirections;
 	char *tmmp;
@@ -61,7 +61,9 @@ void	handle_redirection(t_token **temp, t_lsttoken *token)
 		redirections = new_red((*temp)->type, tmmp);
 		red_addback(&(token->redirections), redirections);
 		(*temp) = (*temp)->next;
+		return (1);
 	}
+	return (0);
 	// free(tmmp);
 }
 
@@ -89,8 +91,9 @@ t_lsttoken	*fill_token(t_token *list)
 	token[1] = token[0];
 	while (temp != NULL)
 	{
-		handle_redirection(&temp, token[0]);
-		if (temp->next != NULL && temp->type == 2)
+		if (handle_redirection(&temp, token[0]))
+			(void)0;
+		else if ((temp->next != NULL && temp->type == 2))
 			add_new_token_node(&temp, &token[0], &i);
 		else
 		{
