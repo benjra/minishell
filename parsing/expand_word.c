@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:40:57 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 21:00:25 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/13 10:38:18 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@ char	*get_word(char *str, int *i)
 			{
 				if (str[last] == '$' || !ft_isalnum(str[last]))
 					last++;
+				if(str[last] && str[last++]=='?')
+						break;
 				while (str[last] && (ft_isalnum(str[last]) || str[last] == '_'
 						|| str[last] == '?'))
+				{
 					last++;
+				}
 			}
 			break ;
 		}

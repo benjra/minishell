@@ -1,6 +1,6 @@
 NAME = minishell
 #-g -fsanitize=address
-CCFLGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CCFLGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 CC = cc
 LIBFT = libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:30 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/02 17:09:45 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/13 09:00:00 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,11 @@ t_name	*fill_env(char **env)
 	t_name	*lst;
 
 	i = 0;
-	lst = NULL;
-	while (env[i])
+	if (!env)
+		return  ft_calloc(1,sizeof(t_name));
+	else
+		lst = NULL;
+	while (env && env[i])
 	{
 		en = ft_strdup(env[i]);
 		value = ft_strchr(en, '=');

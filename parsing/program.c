@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/12 09:34:08 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/13 09:04:53 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@ void	program_name(char **en)
 {
 	t_name	*env;
 	char	*cmd;
-
-	env = fill_env(en);
+	
+	
+	if (en && *en)
+		env = fill_env(en);
+	else
+		env = ft_calloc(1, sizeof(t_name));
 	env->ev = en;
+
 	while (1)
 	{
 		cmd = readline("minishell$ ");
