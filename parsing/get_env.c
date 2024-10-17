@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_env.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/06 11:24:30 by bbenjrai          #+#    #+#             */
+/*   Updated: 2024/10/15 18:00:32 by assia            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini.h"
 
 t_name	*tail(t_name *list)
@@ -14,7 +26,6 @@ t_name	*tail(t_name *list)
 	return (temp);
 }
 
-
 void	lstadd_back(t_name **lst, t_name *new)
 {
 	if (!lst || !new)
@@ -24,6 +35,7 @@ void	lstadd_back(t_name **lst, t_name *new)
 	else
 		tail(*lst)->next = new;
 }
+
 t_name	*lstnew(char *name, char *value)
 {
 	t_name	*linked_lst;
@@ -34,27 +46,36 @@ t_name	*lstnew(char *name, char *value)
 		free(linked_lst);
 		return (NULL);
 	}
-		
-	linked_lst->name = name;
-	linked_lst->value = value;
+	linked_lst->name = ft_strdup(name);
+	linked_lst->value = ft_strdup(value);
 	linked_lst->next = NULL;
 	return (linked_lst);
 }
-t_name *fill_env(char **env)
+
+// this func fill alist from the double pointer **env and return the list
+t_name	*fill_env(char **env)
 {
-    char *name;
-    char *value;
-    int i=0;
-    t_name *lst;
-    lst=NULL;
-    while(env[i])
-    {
-		value=ft_strchr(env[i],'=');
+	char	*name;
+	char	*value;
+	char	*en;
+	int		i;
+	t_name	*lst;
+
+	i = 0;
+	if (!env)
+		return  ft_calloc(1,sizeof(t_name));
+	else
+		lst = NULL;
+	while (env && env[i])
+	{
+		en = ft_strdup(env[i]);
+		value = ft_strchr(en, '=');
 		*value = 0;
-        value++;
-		name=ft_strdup(env[i]);
-		lstadd_back(&lst,lstnew(name,value));
+		value++;
+		name = en;
+		lstadd_back(&lst, lstnew(name, value));
 		i++;
-    }
-	return(lst);
+		free(en);
+	}
+	return (lst);
 }
