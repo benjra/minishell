@@ -142,6 +142,14 @@ void		print_numeric_error(const char *str);
 void        my_unset(t_name **env, char **cmd);
 int	        is_valid_identifier(const char *var);
 void		update_or_add_env(t_name **env, const char *var, const char *value);
+t_name		*create_new_node(const char *var, const char *value);
+void		print_export(t_name *env);
+t_name		*bubble_sort_env(t_name *env);
+void		swap_nodes(t_name *a, t_name *b);
+void		update_node(t_name *node, const char *value);
+void		handle_no_cmd(t_name **env);
+void		process_cmd(t_name **env, char **cmd, int i);
+t_name		*copy_env(t_name *env);
 
 /********************** execution *************************/
 
@@ -195,5 +203,6 @@ void		append_file_prep(t_lsttoken *token, char *path, int is_builtin);
 void		out_file_prep(t_lsttoken *token, char *path, int is_builtin);
 void		in_file_prep(t_lsttoken *token, char *path, int is_builtin);
 void		child_process(t_lsttoken *token, int pipe_nb, int builtin_nb, t_name *env);
+
 
 #endif

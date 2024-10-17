@@ -35,7 +35,8 @@ SRC_FILES = parsing/minishell.c \
 	execution/pipex_utils6.c \
 	execution/pipex_utils7.c \
 	execution/pipex_utils8.c \
-	builtins/cd_utils.c
+	builtins/cd_utils.c	\
+	builtins/export_utils.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
