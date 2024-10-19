@@ -14,8 +14,8 @@ char	*get_env_in_herdoc(char *target, int flag, char *delimiter)
 		if (target[i] == '$' && y21n != 1)
 		{
 			if (target[i + 1] == '?')
-				output = ft_strjoin(output,
-						exit_status(ft_itoa(g_var.exit_s), &i));
+				output = ft_strjoin(output, exit_status(ft_itoa(g_var.exit_s),
+							&i));
 			else if (!ft_isalnum(target[i + 1]) && target[i + 1] != '_')
 				output = ft_strjoin(output, special_cases(target, &i));
 			else if (ft_isdigit(target[i + 1]) == 1)
@@ -73,11 +73,11 @@ void	my_heredoc(t_lsttoken *token)
 	{
 		signal(SIGINT, hd_sigint);
 		current_redir = token->redirections;
-        while (current_redir)
-        {
-            read_herdoc(current_redir->red);
-            current_redir = current_redir->next;
-        }
+		while (current_redir)
+		{
+			read_herdoc(current_redir->red);
+			current_redir = current_redir->next;
+		}
 		exit(0);
 	}
 	signal(SIGINT, SIG_IGN);
@@ -87,10 +87,10 @@ void	my_heredoc(t_lsttoken *token)
 
 void	mini_heredoc(t_lsttoken *token, t_name *env)
 {
-	t_lsttoken *current;
+	t_lsttoken	*current;
 	int			i;
-	(void)env;
 
+	(void)env;
 	if (!token)
 		return ;
 	current = token;
@@ -100,13 +100,13 @@ void	mini_heredoc(t_lsttoken *token, t_name *env)
 		g_var.exit_s = 0;
 		if (current->is_heredoc)
 		{
-		    g_var.pre_pipe_infd = -1;
-		    if (i > 0)
-		        g_var.pre_pipe_infd = current->previous->pipe_fd[0];
-		    my_heredoc(current);
-		    if (g_var.exit_s)
-		        break;
-		    execute_pipes(current, i, env);
+			g_var.pre_pipe_infd = -1;
+			if (i > 0)
+				g_var.pre_pipe_infd = current->previous->pipe_fd[0];
+			my_heredoc(current);
+			if (g_var.exit_s)
+				break ;
+			execute_pipes(current, i, env);
 		}
 		current = current->next;
 		i++;
@@ -116,10 +116,10 @@ void	mini_heredoc(t_lsttoken *token, t_name *env)
 
 void	execute_args(t_lsttoken *token, t_name *env)
 {
-    int    		i;
-	t_lsttoken *current;
+	int			i;
+	t_lsttoken	*current;
 
-    g_var.exit_s = 0;
+	g_var.exit_s = 0;
 	g_var.interactive = 0;
 	if (!token)
 		return ;
@@ -127,19 +127,18 @@ void	execute_args(t_lsttoken *token, t_name *env)
 	i = 0;
 	current = token;
 	while (current && g_var.exit_s == 0)
-    {
-        if (!current->is_heredoc)
-        {
-            g_var.pre_pipe_infd = -1;
-            if (i > 0)
-                g_var.pre_pipe_infd = current->previous->pipe_fd[0];
-            execute_pipes(current, i, env);
-        }
-        current = current->next;
-        i++;
-    }
-
-    if (g_var.pre_pipe_infd > 2)
-        close(g_var.pre_pipe_infd);
-    sig_wait(token);
+	{
+		if (!current->is_heredoc)
+		{
+			g_var.pre_pipe_infd = -1;
+			if (i > 0)
+				g_var.pre_pipe_infd = current->previous->pipe_fd[0];
+			execute_pipes(current, i, env);
+		}
+		current = current->next;
+		i++;
+	}
+	if (g_var.pre_pipe_infd > 2)
+		close(g_var.pre_pipe_infd);
+	sig_wait(token);
 }

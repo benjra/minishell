@@ -1,6 +1,7 @@
 #include "../parsing/mini.h"
 
-void	child_process(t_lsttoken *token, int pipe_nb, int builtin_nb, t_name *env)
+void	child_process(t_lsttoken *token, int pipe_nb, int builtin_nb,
+		t_name *env)
 {
 	int	fd;
 
@@ -48,15 +49,16 @@ void	in_file_prep(t_lsttoken *token, char *path, int is_builtin)
 	else
 	{
 		token->in_fd_set = 1;
-		if ((token->redirections->type != 6 || !g_var.is_heredoc_last) && !is_builtin)
+		if ((token->redirections->type != 6 || !g_var.is_heredoc_last)
+			&& !is_builtin)
 			dup2(fd, 0);
 		if (fd > 2)
 			close(fd);
 	}
-}	
+}
 
 void	out_file_prep(t_lsttoken *token, char *path, int is_builtin)
-{	
+{
 	int	fd;
 
 	fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0777);

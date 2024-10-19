@@ -63,7 +63,7 @@ t_name	*fill_env(char **env)
 
 	i = 0;
 	if (!env)
-		return  ft_calloc(1,sizeof(t_name));
+		return (ft_calloc(1, sizeof(t_name)));
 	else
 		lst = NULL;
 	while (env && env[i])

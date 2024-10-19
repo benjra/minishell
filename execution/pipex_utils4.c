@@ -66,9 +66,9 @@ void	free_str(void *ptr)
 		free(ptr);
 }
 
-int	should_not_be_expanded(char	*str)
+int	should_not_be_expanded(char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (str[i])

@@ -21,27 +21,28 @@ void	my_strncpy(char *dest, char *src, int n)
 
 void	check_cmd_path(t_lsttoken *token)
 {
-    struct stat	statbuf;
-    DIR *dir;
-    
-    if (stat(token->args[0], &statbuf) == 0)
-    {
-        dir = opendir(token->args[0]);
-        if (dir == NULL && !access(token->args[0], F_OK) && !access(token->args[0], X_OK))
-            token->cmd_path = token->args[0];
-        else if (dir != NULL)
-        {
-            closedir(dir);
-            ft_putstr_fd("minishell: ", 2);
-            ft_putstr_fd(token->args[0], 2);
-            ft_putstr_fd(" is a directory\n", 2);
-            exit(126);
-        }
-        else
-            print_perror(token->args[0], 1);
-    }
-    else
-        print_perror(token->args[0], 1);
+	struct stat	statbuf;
+	DIR			*dir;
+
+	if (stat(token->args[0], &statbuf) == 0)
+	{
+		dir = opendir(token->args[0]);
+		if (dir == NULL && !access(token->args[0], F_OK)
+			&& !access(token->args[0], X_OK))
+			token->cmd_path = token->args[0];
+		else if (dir != NULL)
+		{
+			closedir(dir);
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(token->args[0], 2);
+			ft_putstr_fd(" is a directory\n", 2);
+			exit(126);
+		}
+		else
+			print_perror(token->args[0], 1);
+	}
+	else
+		print_perror(token->args[0], 1);
 }
 
 int	get_var_index(char *key)

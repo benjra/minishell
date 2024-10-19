@@ -110,16 +110,16 @@ int	ft_ambigious(t_lsttoken *list)
 		while (temp->redirections)
 		{
 			if (temp->redirections->type == 5 && !*(temp->redirections->red))
-				return 1;
+				return (1);
 			else if (temp->redirections->type == 6
 				&& !*(temp->redirections->red))
-				return 1;
+				return (1);
 			else if (temp->redirections->type == 3
 				&& !*(temp->redirections->red))
-				return 1;
+				return (1);
 			else if (temp->redirections->type == 4
 				&& !*(temp->redirections->red))
-				return 1;
+				return (1);
 			temp->redirections = temp->redirections->next;
 		}
 		temp = temp->next;

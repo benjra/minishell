@@ -82,12 +82,12 @@ int	len(t_token *lst)
 int	handle_redirection(t_token **temp, t_lsttoken *token)
 {
 	t_redir	*redirections;
-	char *tmmp;
-	
-	tmmp=NULL;
+	char	*tmmp;
+
+	tmmp = NULL;
 	if ((*temp)->next != NULL && (*temp)->type > 2 && (*temp)->type <= 6)
 	{
-		tmmp=ft_strdup((*temp)->next->value);
+		tmmp = ft_strdup((*temp)->next->value);
 		redirections = new_red((*temp)->type, tmmp);
 		red_addback(&(token->redirections), redirections);
 		(*temp) = (*temp)->next;

@@ -6,8 +6,8 @@ char	*special_cases(char *target, int *i)
 	char	*variable;
 
 	output = "";
-	if (target[(*i)] == '$' && (target[(*i) + 1] == '\"'
-			|| target[(*i) + 1] == '\''))
+	if (target[(*i)] == '$' && (target[(*i) + 1] == '\"' || target[(*i)
+			+ 1] == '\''))
 		(*i)++;
 	variable = until_dollar(&target[(*i)]);
 	output = ft_strjoin(output, variable);
@@ -15,7 +15,7 @@ char	*special_cases(char *target, int *i)
 	return (output);
 }
 
-void	lista_add_front(t_alst	**lst, t_alst	*new)
+void	lista_add_front(t_alst **lst, t_alst *new)
 {
 	if (!new)
 		return ;
@@ -38,7 +38,7 @@ t_alst	*lista_new(void *content)
 
 void	hd_sigint(int sig)
 {
-	(void) sig;
+	(void)sig;
 	exit(1);
 }
 

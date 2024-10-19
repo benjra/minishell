@@ -38,5 +38,5 @@ char	*ft_env(t_name *env, char *var)
 		}
 		temp = temp->next;
 	}
-	return (ft_strdup(""));//
+	return (ft_strdup("")); //
 }

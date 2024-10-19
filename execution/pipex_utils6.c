@@ -12,8 +12,8 @@ int	validate_var_name(char *var)
 	i = -1;
 	while (var[++i])
 	{
-		if (!(ft_isalpha(var[i])
-				|| (ft_isdigit(var[i]) && i != 0) || var[i] == '_'))
+		if (!(ft_isalpha(var[i]) || (ft_isdigit(var[i]) && i != 0)
+				|| var[i] == '_'))
 			break ;
 	}
 	return (i);
@@ -22,29 +22,29 @@ int	validate_var_name(char *var)
 char	*my_dup(const char *s)
 {
 	void	*res;
-    size_t	i;
-    size_t	l;
-    char	*fif;
+	size_t	i;
+	size_t	l;
+	char	*fif;
 
-    l = ft_strlen(s);
-    res = malloc(l + 1);
-    if (!res)
+	l = ft_strlen(s);
+	res = malloc(l + 1);
+	if (!res)
 	{
 		perror("");
-		exit(errno);	
+		exit(errno);
 	}
 	lista_add_front(g_var.alist, lista_new(res));
 	fif = res;
 	if (!fif)
 		return (NULL);
-    i = 0;
-    while (s[i] != '\0')
-    {
-        fif[i] = s[i];
-        i++;
-    }
-    fif[i] = '\0';
-    return (fif);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		fif[i] = s[i];
+		i++;
+	}
+	fif[i] = '\0';
+	return (fif);
 }
 
 char	*until_dollar(char *str)

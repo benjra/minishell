@@ -111,7 +111,8 @@ char	*ft_strchr_skip_quotes(const char *str, char *c)
 					return (ft_substr(str, i, end));
 			}
 		}
-		else if (ft_strncmp(str, c, ft_strlen(c)) && *str != in_quotes) // to avoid the cases like when u want to search for an string
+		else if (ft_strncmp(str, c, ft_strlen(c)) && *str != in_quotes)
+			// to avoid the cases like when u want to search for an string
 			return ((char *)str);
 		str++;
 	}
@@ -120,9 +121,9 @@ char	*ft_strchr_skip_quotes(const char *str, char *c)
 
 void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 {
-	char *new;
-	int i;
-	int last;
+	char	*new;
+	int		i;
+	int		last;
 
 	last = 0;
 	i = 0;
@@ -141,7 +142,8 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 	}
 	else if (!new)
 	{
-		if (!ft_strncmp(str, c, ft_strlen(c)))// i want if just a normal word add it all not char by char
+		if (!ft_strncmp(str, c, ft_strlen(c)))
+			// i want if just a normal word add it all not char by char
 		{
 			while (ft_strnstr(str + last, c, ft_strlen(c)) != NULL)
 				last++;

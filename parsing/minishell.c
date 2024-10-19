@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "mini.h"
-t_var g_var;
+
+t_var	g_var;
 
 void	env_dup(char **env)
 {
@@ -33,15 +34,15 @@ void	handler(int signum)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	g_var.exit_s= 130;
+	g_var.exit_s = 130;
 }
 
 int	main(int ac, char **av, char **en)
 {
-	(void)av;
 	t_name	*env;
-	char 	*cmd;
+	char	*cmd;
 
+	(void)av;
 	if (ac != 1)
 	{
 		write(1, "there is no need for arguments here", 35);
@@ -61,7 +62,6 @@ int	main(int ac, char **av, char **en)
 			break ;
 		else if (ft_strncmp(cmd, "", -1))
 		{
-			
 			add_history(cmd);
 			parsing(cmd, env);
 		}

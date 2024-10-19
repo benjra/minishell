@@ -3,29 +3,29 @@
 void	sig_wait(t_lsttoken *token)
 {
 	int			i;
-	t_lsttoken *current;
+	t_lsttoken	*current;
 
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	i = 0;
 	current = token;
 	while (current && (g_var.size > 1 || check_builtin(token) == -1))
-    {
-        if (i == 0)
-        {
-            waitpid(g_var.last_child_id, &g_var.exit_s, 0);
-            if (WIFEXITED(g_var.exit_s))
-                g_var.exit_s = WEXITSTATUS(g_var.exit_s);
-            else if (g_var.exit_s == 3 || g_var.exit_s == 2)
-                g_var.exit_s += 128;
-        }
-        else
-        {
-            waitpid(-1, NULL, 0);
-        }
-        current = current->next;
-        i++;
-    }
+	{
+		if (i == 0)
+		{
+			waitpid(g_var.last_child_id, &g_var.exit_s, 0);
+			if (WIFEXITED(g_var.exit_s))
+				g_var.exit_s = WEXITSTATUS(g_var.exit_s);
+			else if (g_var.exit_s == 3 || g_var.exit_s == 2)
+				g_var.exit_s += 128;
+		}
+		else
+		{
+			waitpid(-1, NULL, 0);
+		}
+		current = current->next;
+		i++;
+	}
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 }
@@ -69,8 +69,8 @@ char	*gotta_expand(char *target, int flag, int *i)
 	char	*variable;
 
 	output = 0;
-	variable = ft_substr(&target[(*i)] + 1, 0,
-			validate_var_name(&target[(*i)] + 1));
+	variable = ft_substr(&target[(*i)] + 1, 0, validate_var_name(&target[(*i)]
+				+ 1));
 	idx = get_var_index(add_something(variable, "="));
 	if (idx != -1)
 	{

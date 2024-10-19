@@ -2,16 +2,16 @@
 
 void	count_total_cmds(t_lsttoken *head)
 {
-    int	tot_cmds;
+	int			tot_cmds;
+	t_lsttoken	*current;
 
 	tot_cmds = 0;
-    t_lsttoken *current = head;
-
-    while (current != NULL)
-    {
+	current = head;
+	while (current != NULL)
+	{
 		tot_cmds++;
-        current = current->next;
-    }
+		current = current->next;
+	}
 	g_var.size = tot_cmds;
 }
 void	alistclear(t_alst **lista)
@@ -49,9 +49,9 @@ void	parsing(char *str, t_name *env)
 	list2 = fill_token(list);
 	freelist1(list);
 	expander(list2, env);
-	current= list2;
+	current = list2;
 	init_g_var(&current);
-    count_total_cmds(current);
+	count_total_cmds(current);
 	execute_args(current, env);
 	alistclear(g_var.alist);
 	free_all(current);
