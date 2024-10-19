@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:40:57 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/19 18:54:38 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/19 20:54:10 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ char	*get_word(char *str, int *i)
 		}
 	}
 	res = ft_substr(str, *i, last - *i);
+	printf("%s--\n",str);
 	*i = last;
 	return (res);
+
 }
+

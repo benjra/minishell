@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:10 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/14 13:20:59 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:35:32 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ char	*ft_env(t_name *env, char *var)
 	char	*replace;
 
 	temp = env;
+	if (*var == 14)
+		return (ft_strdup(""));
 	while (temp)
 	{
 		if (ft_strncmp(temp->name, var, ft_strlen(var)) == 0
 			&& ft_strlen(var) == 0)
-		{
-			replace = ft_strdup("$");
-			return (replace);
-		}
+			return (ft_strdup("$"));
 		if (ft_strncmp(temp->name, var, -1) == 0)
 		{
 			replace = ft_strdup(temp->value);

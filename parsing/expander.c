@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 20:41:36 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:24:04 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,19 @@ char	*process_word(char *str, char *exp_, t_name *env)
 	char	*tmp_0;
 	char	*new_exp_;
 
-	if (ft_strchr(str, '$') && str[0] != '\'')
+	if (ft_strchr(str, '$'))
 	{
+		// 4adi t9aLBi 3la $ INSIDE THIS THEN JOIN the expand value to the last of word echo "'$HO''ME'" EXPAND HERE MORE 
+			
+		printf("--%s=--\n",str);
 		search_tmp = search(str, env);
 		new_exp_ = ft_strjoin(exp_, search_tmp);
 		free(search_tmp);
 	}
 	else
 	{
-		tmp_0 = ins_quote(str);
-		new_exp_ = ft_strjoin(exp_, tmp_0);
+		tmp_0 = str;
+		new_exp_ = ft_strjoin(exp_, str);
 		free(tmp_0);
 	}
 	free(exp_);
@@ -54,13 +57,20 @@ char	*loop_through_string(char *tmp2, char *exp_, t_name *env)
 	while (tmp2[j])
 	{
 		str = get_word(tmp2, &j);
-		if (*str == '"')
+		if (*str == '\'')
 		{
-			tmp_0 = ins_quote(str);
+			tmp_0 = exp_;
+			exp_ = ft_strjoin(exp_, str);
 			free(tmp_0);
 		}
-		exp_ = process_word(str, exp_, env);
-		free(str);
+		else if  (*str == '"')
+		{
+			tmp_0 = ins_quote(str);
+			exp_ = process_word(tmp_0, exp_, env);
+		}
+		else
+			exp_ = process_word(str, exp_, env);
+		// free(str);
 		if (!tmp2[j])
 			break ;
 	}

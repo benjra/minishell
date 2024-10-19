@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:37:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 20:39:24 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/19 21:43:27 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 
 	var = get_var(len, afterdoll);
 	tmp = var;
+	if (*afterdoll != '\'' && *afterdoll != '"')
+		*tmp = 14;
 	replace = ft_env(env, tmp);
-	*afterdoll += ft_strlen(tmp);
-	free(tmp);
+	*afterdoll += ft_strlen(var);
+	free(var);
 	if (ft_strchr(afterdoll, '$'))
 		search_env(ft_strlen(afterdoll), afterdoll, env);
 	return (replace);
