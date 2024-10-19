@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:05:43 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/05 16:10:09 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:00:19 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*handle_quote(char *str, int *len)
 	while (str[*len] && str[*len] != c)
 		(*len)++;
 	substr = ft_substr(str, i, *len - i);
-	if (str[*len])
+	if (str[*len] ==  c)
 		(*len)++;
 	return (substr);
 }
@@ -58,3 +58,4 @@ char	*ins_quote(char *str)
 	}
 	return (res);
 }
+

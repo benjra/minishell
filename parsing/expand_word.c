@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:40:57 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/13 10:38:18 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/14 13:11:07 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_word(char *str, int *i)
 	{
 		if ((str[last] == '\'' && str[last + 1] == '\''))
 			last += 2;
-		if (str[last] == '\'')
+		if (str[last] == '\'' || str[last] == '\"')
 		{
 			c = str[last++];
 			while (str[last] && (str[last] != c))

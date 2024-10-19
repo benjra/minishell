@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:06:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/13 13:13:09 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:30:26 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,26 @@ void	parsing(char *str, t_name *env)
 	// 	ft_putendl_fd("ambiguous redirect", 2);
 	// 	return ;
 	// }
-	int i;
 	current = list2;
-	while (current) 
-{
+	// int i;
+// 	while (current) 
+// {
 	
-	i = 0;
-	while (current->args != NULL && current->args[i] != NULL)
-	{
-		printf("%d",i);
-	    printf("args : ----%s  \n", current->args[i++]);
-	}
-	while (current->redirections != NULL)
-	{
-	    printf("red : -- %s \n", current->redirections->red);
-		current->redirections = current->redirections->next;
-	}
-	    current = current->next; 
+// 	i = 0;
+// 	while (current->args != NULL && current->args[i] != NULL)
+// 	{
+// 		printf("%d",i);
+// 	    printf("args : ----%s  \n", current->args[i++]);
+// 	}
+// 	while (current->redirections != NULL)
+// 	{
+// 	    printf("red : -- %s \n", current->redirections->red);
+// 		current->redirections = current->redirections->next;
+// 	}
+// 	    current = current->next; 
 	
 	// free_all(current);
-	}
+	// }
  
 	set_num_cmds(current);
 	execute_args(*current, env);
