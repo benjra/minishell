@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:40:57 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/19 20:54:10 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:34:17 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ char	*get_word(char *str, int *i)
 
 	c = 0;
 	last = *i;
+	if (!str)
+		return (ft_strdup(""));
 	while (str[last])
 	{
-		if ((str[last] == '\'' && str[last + 1] == '\''))
-			last += 2;
-		if (str[last] == '\'' || str[last] == '\"')
+		// if ((str[last] == '\'' && str[last + 1] == '\''))
+		// 	last += 2;
+		if (str[last] == '\'' || str[last] == '\"') //thats make me lost the word beffore expand inside dble quotes
 		{
 			c = str[last++];
 			while (str[last] && (str[last] != c))
@@ -54,9 +56,7 @@ char	*get_word(char *str, int *i)
 		}
 	}
 	res = ft_substr(str, *i, last - *i);
-	printf("%s--\n",str);
 	*i = last;
 	return (res);
-
 }
 
