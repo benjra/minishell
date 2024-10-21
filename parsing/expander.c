@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/20 20:35:34 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:12:20 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,8 @@ char	*process_word(char *str, char *exp_, t_name *env)
 
 	if (ft_strchr(str, '$'))
 	{
-		// 4adi t9aLBi 3la $ INSIDE THIS THEN JOIN the expand value to the last of word echo "'$HO''ME'" EXPAND HERE MORE 
-		// int i=0;
-		// while(str[i])
-		// {
-		// char *s=get_word(str,&i);
 		search_tmp = search(str, env);
 		new_exp_ = ft_strjoin(exp_, search_tmp);
-		// }
 		free(search_tmp);
 	}
 	else

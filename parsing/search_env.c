@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:37:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/20 20:43:55 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:47:51 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 	tmp = var;
 	// if (*afterdoll != '\'' && *afterdoll != '"')
 	// 	*tmp = 14;
-	replace = ft_env(env, tmp);
+	if(var==NULL && !afterdoll)
+		replace = ft_env(env, tmp);
+	else
+		replace = ft_env(env, "$");
 	afterdoll += ft_strlen(var);
 	free(var);
 	if (ft_strchr(afterdoll, '$'))
@@ -54,7 +57,6 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 		replace = ft_strjoin(tmp, afterdoll);
 		free(tmp);
 	}
-	printf("afterdoll 2= %s\n",afterdoll);//problem not here
 	return (replace);
 }
 
@@ -66,7 +68,7 @@ char	*search(char *arg, t_name *env)
 	char	*replace;
 
 	afterdol = ft_strchr(arg, '$');
-	printf("afterdoll = %s\n",afterdol);
+	// printf("afterdoll = %s\n",afterdol);
 	*afterdol = '\0';
 	afterdol++;
 	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
