@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_node.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:56:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/30 11:57:05 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/21 14:38:43 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	red_addback(t_redir **lst, t_redir *new)
 
 t_redir	*new_red(int type, char *red)
 {
-	t_redir *linked_lst;
+	t_redir	*linked_lst;
 
 	linked_lst = malloc(sizeof(t_redir));
 	if (!linked_lst)

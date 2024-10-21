@@ -5,7 +5,6 @@ CCFLGS = -Wall -Wextra -Werror
 CC = cc
 LIBFT = libft/libft.a
 SRC_FILES = parsing/minishell.c \
-	parsing/program.c \
 	parsing/get_env.c \
 	parsing/parsing.c \
 	parsing/split.c \
@@ -35,6 +34,7 @@ SRC_FILES = parsing/minishell.c \
 	execution/pipex_utils6.c \
 	execution/pipex_utils7.c \
 	execution/pipex_utils8.c \
+	execution/pipex_utils9.c \
 	builtins/cd_utils.c	\
 	builtins/export_utils.c
 

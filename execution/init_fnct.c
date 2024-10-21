@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_fnct.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 14:00:38 by amabchou          #+#    #+#             */
+/*   Updated: 2024/10/21 14:15:56 by amabchou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../parsing/mini.h"
 
 void	init_g_var(t_lsttoken **token)
@@ -18,4 +30,10 @@ void	init_g_var(t_lsttoken **token)
 		current->out_fd_set = 0;
 		current = current->next;
 	}
+}
+
+void	setup_signals(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/15 18:44:39 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/21 14:38:58 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	is_space(char str)
 		return (1);
 	return (0);
 }
+
 int	countwrd(char *str)
 {
 	int	i;

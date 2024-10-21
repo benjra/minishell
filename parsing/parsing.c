@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 14:35:52 by amabchou          #+#    #+#             */
+/*   Updated: 2024/10/21 14:36:06 by amabchou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini.h"
 
 void	count_total_cmds(t_lsttoken *head)
@@ -14,6 +26,7 @@ void	count_total_cmds(t_lsttoken *head)
 	}
 	g_var.size = tot_cmds;
 }
+
 void	alistclear(t_alst **lista)
 {
 	t_alst	*tmp;

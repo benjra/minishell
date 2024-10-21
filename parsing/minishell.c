@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:36 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/15 18:07:42 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/21 14:57:51 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-t_var	g_var;
+t_var			g_var;
 
 void	env_dup(char **env)
 {
@@ -27,6 +27,7 @@ void	env_dup(char **env)
 		g_var.envp[i] = ft_strdup(env[i]);
 	g_var.envp[i] = NULL;
 }
+
 void	handler(int signum)
 {
 	(void)signum;
@@ -37,24 +38,22 @@ void	handler(int signum)
 	g_var.exit_s = 130;
 }
 
-int	main(int ac, char **av, char **en)
+static t_name	*init_env(char **en)
 {
 	t_name	*env;
-	char	*cmd;
 
-	(void)av;
-	if (ac != 1)
-	{
-		write(1, "there is no need for arguments here", 35);
-		return (1);
-	}
-	signal(SIGINT, handler);
-	signal(SIGQUIT, SIG_IGN);
 	env_dup(en);
 	if (en && *en)
 		env = fill_env(en);
 	else
 		env = ft_calloc(1, sizeof(t_name));
+	return (env);
+}
+
+static void	main_loop(t_name *env)
+{
+	char	*cmd;
+
 	while (1)
 	{
 		cmd = readline("minishell$ ");
@@ -67,6 +66,22 @@ int	main(int ac, char **av, char **en)
 		}
 		free(cmd);
 	}
+}
+
+int	main(int ac, char **av, char **en)
+{
+	t_name	*env;
+
+	(void)av;
+	if (ac != 1)
+	{
+		write(1, "there is no need for arguments here", 35);
+		return (1);
+	}
+	signal(SIGINT, handler);
+	signal(SIGQUIT, SIG_IGN);
+	env = init_env(en);
+	main_loop(env);
 	free_env(env);
 	rl_clear_history();
 	printf("exit\n");

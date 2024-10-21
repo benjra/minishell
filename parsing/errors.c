@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/15 17:17:55 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/21 14:39:17 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
 int	double_symb(t_token *list)
-// this function handle the double symbol inside a commande
 {
-	t_token *tmp;
-	int typo;
-	int nextp;
+	t_token	*tmp;
+	int		typo;
+	int		nextp;
 
 	tmp = list;
 	while (tmp != NULL)
@@ -82,10 +81,9 @@ int	qoute(char *str)
 }
 
 int	handle_quotes(t_token *list)
-// this function handle if the clos quotes exist or not
 {
-	t_token *tmp;
-	int quote_exist;
+	t_token	*tmp;
+	int		quote_exist;
 
 	quote_exist = 0;
 	tmp = list;

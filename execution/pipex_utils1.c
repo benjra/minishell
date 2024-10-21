@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_utils1.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 14:00:41 by amabchou          #+#    #+#             */
+/*   Updated: 2024/10/21 14:47:02 by amabchou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../parsing/mini.h"
 
-void	exec_builtin(int builtin_nb, t_lsttoken *token, t_name *env)
+void	exec_builtin(int btn, t_lsttoken *token, t_name *env)
 {
-	if (builtin_nb == 1 && !g_var.red_error)
+	if (btn == 1 && !g_var.red_error)
 		my_cd(env, token->args);
-	else if (builtin_nb == 2 && !g_var.red_error)
+	else if (btn == 2 && !g_var.red_error)
 		my_echo(token->args);
-	else if (builtin_nb == 3 && !g_var.red_error)
+	else if (btn == 3 && !g_var.red_error)
 		my_env(env, token->args);
-	else if (builtin_nb == 4 && !g_var.red_error)
+	else if (btn == 4 && !g_var.red_error)
 		my_exit(token->args, token);
-	else if (builtin_nb == 5 && !g_var.red_error)
+	else if (btn == 5 && !g_var.red_error)
 		my_export(&env, token->args);
-	else if (builtin_nb == 6 && !g_var.red_error)
+	else if (btn == 6 && !g_var.red_error)
 		my_pwd(env, token->args);
-	else if (builtin_nb == 7 && !g_var.red_error)
+	else if (btn == 7 && !g_var.red_error)
 		my_unset(&env, token->args);
 	if (g_var.out_fd > 2)
 		close(g_var.out_fd);
@@ -54,27 +66,9 @@ int	check_path(char *path, int is_builtin)
 	i = ft_strlen(path);
 	while (i != 0 && path[i] != '/')
 		i--;
-	folders = malloc(i + 2);
-	if (!folders)
-	{
-		perror("");
-		exit(errno);
-	}
-	lista_add_front(g_var.alist, lista_new(folders));
-	my_strncpy(folders, path, i + 1);
+	folders = allocate_folders(path, i);
 	if (stat(folders, &statbuf) == -1)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		perror(path);
-		if (is_builtin)
-		{
-			g_var.red_error = 1;
-			g_var.exit_s = 1;
-			return (0);
-		}
-		else
-			exit(1);
-	}
+		return (handle_stat_error(path, is_builtin));
 	return (1);
 }
 
@@ -104,19 +98,19 @@ void	files_redirections(t_lsttoken *token, int builtin)
 
 void	execute_pipes(t_lsttoken *token, int pipe_nb, t_name *env)
 {
-	int	builtin_nb;
+	int	btn;
 
-	builtin_nb = check_builtin(token);
-	if (g_var.size == 1 && builtin_nb != -1)
+	btn = check_builtin(token);
+	if (g_var.size == 1 && btn != -1)
 	{
 		files_redirections(token, 1);
-		exec_builtin(builtin_nb, token, env);
+		exec_builtin(btn, token, env);
 	}
 	else
 	{
 		if (g_var.size != pipe_nb + 1)
 			pipe(token->pipe_fd);
-		child_process(token, pipe_nb, builtin_nb, env);
+		child_process(token, pipe_nb, btn, env);
 		if (token->pipe_fd[1] > 2)
 			close(token->pipe_fd[1]);
 		if (g_var.pre_pipe_infd > 2)

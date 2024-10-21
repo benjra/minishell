@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_utils4.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 14:00:50 by amabchou          #+#    #+#             */
+/*   Updated: 2024/10/21 14:12:00 by amabchou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../parsing/mini.h"
 
 char	*replace(char *str, char rip)
@@ -68,7 +80,7 @@ void	free_str(void *ptr)
 
 int	should_not_be_expanded(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

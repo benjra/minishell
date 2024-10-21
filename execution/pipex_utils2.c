@@ -1,34 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_utils2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 14:00:44 by amabchou          #+#    #+#             */
+/*   Updated: 2024/10/21 14:47:02 by amabchou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../parsing/mini.h"
 
-void	child_process(t_lsttoken *token, int pipe_nb, int builtin_nb,
+void	child_process(t_lsttoken *token, int pipe_nb, int btn,
 		t_name *env)
 {
-	int	fd;
-
 	g_var.last_child_id = fork();
 	if (g_var.last_child_id == 0)
 	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		files_redirections(token, builtin_nb != -1);
-		if (builtin_nb == -1)
-			validate_cmd(token);
-		if (token->is_heredoc && g_var.is_heredoc_last)
-		{
-			fd = open_heredoc_file(1);
-			dup2(fd, 0);
-			if (fd > 2)
-				close(fd);
-		}
-		else if (g_var.pre_pipe_infd != -1 && !token->in_fd_set)
-			dup2(g_var.pre_pipe_infd, 0);
-		if (g_var.size != pipe_nb + 1 && !token->out_fd_set)
-			dup2(token->pipe_fd[1], 1);
-		if (token->pipe_fd[1] > 2)
-			close(token->pipe_fd[1]);
-		if (token->pipe_fd[0] > 2)
-			close(token->pipe_fd[0]);
-		execs(token, builtin_nb, env);
+		setup_signals();
+		handle_file_redirections(token, btn);
+		handle_pipe_redirections(token, pipe_nb);
+		execs(token, btn, env);
 	}
 }
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_utils7.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 14:00:58 by amabchou          #+#    #+#             */
+/*   Updated: 2024/10/21 14:23:40 by amabchou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../parsing/mini.h"
 
 void	sig_wait(t_lsttoken *token)
@@ -11,7 +23,7 @@ void	sig_wait(t_lsttoken *token)
 	current = token;
 	while (current && (g_var.size > 1 || check_builtin(token) == -1))
 	{
-		if (i == 0)
+		if (i++ == 0)
 		{
 			waitpid(g_var.last_child_id, &g_var.exit_s, 0);
 			if (WIFEXITED(g_var.exit_s))
@@ -24,7 +36,6 @@ void	sig_wait(t_lsttoken *token)
 			waitpid(-1, NULL, 0);
 		}
 		current = current->next;
-		i++;
 	}
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);

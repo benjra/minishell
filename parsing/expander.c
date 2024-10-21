@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/15 20:56:45 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/21 14:37:37 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-char	*get_specialcar(char *s) // this fun get from a special caracter to end
+char	*get_specialcar(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] && ((s[i] != ' ' && (ft_isalnum(s[i]))) || s[i] == '_'
-			|| s[i] == '?')) // case of - underscore
+			|| s[i] == '?'))
 	{
 		i++;
 	}
@@ -26,58 +26,54 @@ char	*get_specialcar(char *s) // this fun get from a special caracter to end
 }
 
 char	*get_var(int len, char *afterdoll)
-// function foe getting the variable after dollar sign $
 {
-	char *var;
-	// var =ft_strdup("");
+	char	*var;
+
 	var = ft_substr(afterdoll, 0, len - ft_strlen(get_specialcar(afterdoll)));
 	return (var);
 }
 
 char	*search_env(int len, char *afterdoll, t_name *env)
-// function for retur the value of the variable inside the envierement else empty or 0
 {
-	char *replace;
-	char *var;
-	char *tmp;
+	char	*replace;
+	char	*var;
+	char	*tmp;
 
 	var = get_var(len, afterdoll);
 	tmp = var;
-	replace = ft_env(env, tmp); // get from envirement
+	replace = ft_env(env, tmp);
 	*afterdoll += ft_strlen(tmp);
 	free(tmp);
 	if (ft_strchr(afterdoll, '$'))
 		search_env(ft_strlen(afterdoll), afterdoll, env);
-	// recursion if a dollar sign exist in the rest of the string
 	return (replace);
 }
 
 char	*search(char *arg, t_name *env)
-// this function expande the variable from the env
 {
-	int ln_aftdoll;
-	int ln_befdoll;
-	char *afterdol;
-	char *replace;
+	int		ln_aftdoll;
+	int		ln_befdoll;
+	char	*afterdol;
+	char	*replace;
 
 	afterdol = ft_strchr(arg, '$');
 	*afterdol = '\0';
 	afterdol++;
 	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
 	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
-
 	replace = search_env(ln_aftdoll, afterdol, env);
 	return (replace);
 }
-char	*get_word(char *str, int *i) // this function get every word
+char	*get_word(char *str, int *i)
 {
-	char c = 0;
-	char *res;
-	int last = *i;
+	char	c;
+	char	*res;
+	int		last;
 
+	c = 0;
+	last = *i;
 	while (str[last])
 	{
-		//(str[last] == '"' && str[last+1]=='"') || str[last] == '"' ||
 		if ((str[last] == '\'' && str[last + 1] == '\''))
 			last += 2;
 		if (str[last] == '\'')

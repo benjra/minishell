@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:30 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/15 18:00:32 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/21 14:39:27 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_name	*lstnew(char *name, char *value)
 	return (linked_lst);
 }
 
-// this func fill alist from the double pointer **env and return the list
 t_name	*fill_env(char **env)
 {
 	char	*name;

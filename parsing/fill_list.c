@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/15 21:13:42 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/21 14:38:29 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ char	*ft_strchr_skip_quotes(const char *str, char *c)
 			}
 		}
 		else if (ft_strncmp(str, c, ft_strlen(c)) && *str != in_quotes)
-			// to avoid the cases like when u want to search for an string
 			return ((char *)str);
 		str++;
 	}
@@ -128,7 +127,7 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 	last = 0;
 	i = 0;
 	(void)type;
-	new = ft_strchr_skip_quotes(str, c); // skipp symbols inside quotes
+	new = ft_strchr_skip_quotes(str, c);
 	if (new &&ft_strnstr(str, c, ft_strlen(str)) != NULL)
 	{
 		new = ft_strnstr(str, c, -1);
@@ -143,7 +142,7 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 	else if (!new)
 	{
 		if (!ft_strncmp(str, c, ft_strlen(c)))
-			// i want if just a normal word add it all not char by char
+		// i want if just a normal word add it all not char by char
 		{
 			while (ft_strnstr(str + last, c, ft_strlen(c)) != NULL)
 				last++;

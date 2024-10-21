@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_utils8.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 14:01:01 by amabchou          #+#    #+#             */
+/*   Updated: 2024/10/21 14:47:02 by amabchou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../parsing/mini.h"
 
 char	*put_cmd_status(int status, char *cmd_path, char *cmd)
@@ -57,11 +69,11 @@ void	validate_cmd(t_lsttoken *token)
 		check_command_name(token);
 }
 
-void	execs(t_lsttoken *token, int builtin_nb, t_name *env)
+void	execs(t_lsttoken *token, int btn, t_name *env)
 {
-	if (builtin_nb != -1)
+	if (btn != -1)
 	{
-		exec_builtin(builtin_nb, token, env);
+		exec_builtin(btn, token, env);
 		exit(0);
 	}
 	else if (token->cmd_path)

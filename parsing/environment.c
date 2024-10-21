@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:10 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/15 18:30:24 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/21 14:40:04 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ char	*ft_env(t_name *env, char *var)
 		}
 		temp = temp->next;
 	}
-	return (ft_strdup("")); //
+	return (ft_strdup(""));
 }
