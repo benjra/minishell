@@ -40,33 +40,50 @@ int	is_space(char str)
 	return (0);
 }
 
-int	countwrd(char *str)
+int	skip_quotes_in_count(char *str, int i)
 {
-	int	i;
-	int	len;
+	char	c;
 
-	i = 0;
-	len = 0;
-	while (str[i])
+	if (str[i] == '"' || str[i] == '\'')
 	{
-		if (str[i] == '"' || str[i] == '\'')
-		{
+		c = str[i++];
+		while (str[i] && str[i] != c)
 			i++;
-			while (str[i] && !(str[i] == '"' || str[i] == '\''))
-				i++;
-			if (str[i])
-				i++;
-		}
-		else if (is_space(str[i]) || str[i] == '\0')
-		{
-			len++;
-			while (str[i] && is_space(str[i]))
-				i++;
-		}
-		else if (str[i])
+		if (str[i] == c)
 			i++;
 	}
-	return (len + 1);
+	return (i);
+}
+
+int    countwrd(char *str)
+{
+    int    i;
+    int    len;
+    int flag=0;
+    
+    i = 0;
+    len = 0;
+    while (str[i])
+    {  
+       	i = skip_quotes_in_count(str, i);
+        if (is_space(str[i]))
+        {
+            flag=0;
+            while (str[i] && is_space(str[i]))
+                i++;
+            len++;
+        }
+        else if (str[i])
+        {
+            if(flag==0)
+                {
+                    flag=1;
+                    len++;
+                }
+            i++;
+        }
+    }
+    return (len);
 }
 
 void	skip_quotes(char **str)

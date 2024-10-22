@@ -24,7 +24,7 @@ char	*handle_quote(char *str, int *len)
 	while (str[*len] && str[*len] != c)
 		(*len)++;
 	substr = ft_substr(str, i, *len - i);
-	if (str[*len])
+	if (str[*len] ==  c)
 		(*len)++;
 	return (substr);
 }
@@ -47,6 +47,7 @@ char	*ins_quote(char *str)
 		else
 		{
 			i = len;
+			// """'hi'   f"
 			while (str[len] && str[len] != '"' && str[len] != '\'')
 				len++;
 			tmp[1] = ft_substr(str, i, len - i);
@@ -57,3 +58,4 @@ char	*ins_quote(char *str)
 	}
 	return (res);
 }
+

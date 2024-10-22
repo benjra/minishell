@@ -118,41 +118,6 @@ char	*ft_strchr_skip_quotes(const char *str, char *c)
 	return (NULL);
 }
 
-void	parse_and_add_token(t_token **list, char *str, char *c, int type)
-{
-	char	*new;
-	int		i;
-	int		last;
-
-	last = 0;
-	i = 0;
-	(void)type;
-	new = ft_strchr_skip_quotes(str, c);
-	if (new &&ft_strnstr(str, c, ft_strlen(str)) != NULL)
-	{
-		new = ft_strnstr(str, c, -1);
-		*new = '\0';
-		if (*(str))
-			check_symbols(str, list);
-		lstadd_backs(list, lstnews(type, ft_strdup(c)));
-		new += ft_strlen(c);
-		if (*new)
-			check_symbols(new, list);
-	}
-	else if (!new)
-	{
-		if (!ft_strncmp(str, c, ft_strlen(c)))
-		// i want if just a normal word add it all not char by char
-		{
-			while (ft_strnstr(str + last, c, ft_strlen(c)) != NULL)
-				last++;
-			lstadd_backs(list, lstnews(get_type(str), ft_substr(str, i, last)));
-		}
-		else
-			lstadd_backs(list, lstnews(get_type(str), ft_strdup(str)));
-	}
-}
-
 void	handle_operator_tokens(t_token **list, char *str)
 {
 	if (ft_strnstr(str, ">>", -1) && ft_strncmp(str, ">>", -1))

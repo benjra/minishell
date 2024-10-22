@@ -1,6 +1,6 @@
 NAME = minishell
 #-g -fsanitize=address
-CCFLGS = -Wall -Wextra -Werror
+CCFLGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
 CC = cc
 LIBFT = libft/libft.a
@@ -10,6 +10,7 @@ SRC_FILES = parsing/minishell.c \
 	parsing/split.c \
 	parsing/fill_list.c \
 	parsing/redirection_node.c \
+	parsing/add_token.c \
 	parsing/tokens.c \
 	parsing/clear.c \
 	parsing/errors.c \

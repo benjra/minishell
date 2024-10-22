@@ -129,6 +129,12 @@ t_redir					*new_red(int type, char *red);
 void					red_addback(t_redir **lst, t_redir *new);
 t_redir					*last_red(t_redir *list);
 void					handler(int signum);
+void	handle_symbol_token(t_token **list, char *str, char *c, int type);
+void	handle_no_symbol_token(t_token **list, char *str, char *c);
+void	parse_and_add_token(t_token **list, char *str, char *c, int type);
+char	*ft_strchr_skip_quotes(const char *str, char *c);
+int	get_type(char *lst);
+void	check_symbols(char *str, t_token **list);
 
 /********************** builtins *************************/
 

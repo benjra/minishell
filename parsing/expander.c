@@ -33,6 +33,7 @@ char	*get_var(int len, char *afterdoll)
 	return (var);
 }
 
+
 char	*search_env(int len, char *afterdoll, t_name *env)
 {
 	char	*replace;
@@ -42,10 +43,17 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 	var = get_var(len, afterdoll);
 	tmp = var;
 	replace = ft_env(env, tmp);
-	*afterdoll += ft_strlen(tmp);
-	free(tmp);
+	
+	afterdoll += ft_strlen(var);
+	free(var);
 	if (ft_strchr(afterdoll, '$'))
 		search_env(ft_strlen(afterdoll), afterdoll, env);
+	else if (afterdoll)
+	{
+		tmp  = replace;
+		replace = ft_strjoin(tmp, afterdoll);
+		free(tmp);
+	}
 	return (replace);
 }
 
@@ -61,9 +69,13 @@ char	*search(char *arg, t_name *env)
 	afterdol++;
 	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
 	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
-	replace = search_env(ln_aftdoll, afterdol, env);
+	replace = ft_substr(arg, 0 , ln_befdoll);
+	char * tmp = replace;
+	replace = ft_strjoin(replace,search_env(ln_aftdoll, afterdol, env));
+	free(tmp);
 	return (replace);
 }
+
 char	*get_word(char *str, int *i)
 {
 	char	c;
@@ -72,11 +84,12 @@ char	*get_word(char *str, int *i)
 
 	c = 0;
 	last = *i;
+	if (!str)
+		return (ft_strdup(""));
 	while (str[last])
 	{
-		if ((str[last] == '\'' && str[last + 1] == '\''))
-			last += 2;
-		if (str[last] == '\'')
+		
+		if (str[last] == '\'' || str[last] == '\"') 
 		{
 			c = str[last++];
 			while (str[last] && (str[last] != c))
@@ -91,9 +104,16 @@ char	*get_word(char *str, int *i)
 			{
 				if (str[last] == '$' || !ft_isalnum(str[last]))
 					last++;
+				if(str[last] && str[last]=='?')
+				{
+						last++;	
+						break;
+				}
 				while (str[last] && (ft_isalnum(str[last]) || str[last] == '_'
 						|| str[last] == '?'))
+				{
 					last++;
+				}
 			}
 			break ;
 		}
@@ -119,7 +139,7 @@ char	*process_word(char *str, char *exp_, t_name *env)
 	char	*tmp_0;
 	char	*new_exp_;
 
-	if (ft_strchr(str, '$') && str[0] != '\'')
+	if (ft_strchr(str, '$'))
 	{
 		search_tmp = search(str, env);
 		new_exp_ = ft_strjoin(exp_, search_tmp);
@@ -127,8 +147,8 @@ char	*process_word(char *str, char *exp_, t_name *env)
 	}
 	else
 	{
-		tmp_0 = ins_quote(str);
-		new_exp_ = ft_strjoin(exp_, tmp_0);
+		tmp_0 = str;
+		new_exp_ = ft_strjoin(exp_, str);
 		free(tmp_0);
 	}
 	free(exp_);
@@ -145,13 +165,20 @@ char	*loop_through_string(char *tmp2, char *exp_, t_name *env)
 	while (tmp2[j])
 	{
 		str = get_word(tmp2, &j);
-		if (*str == '"')
+		if (*str == '\'')
 		{
 			tmp_0 = ins_quote(str);
+			exp_ = ft_strjoin(exp_, tmp_0);
 			free(tmp_0);
 		}
-		exp_ = process_word(str, exp_, env);
-		free(str);
+		else if  (*str == '"')
+		{
+			tmp_0 = ins_quote(str);
+			exp_ = process_word(tmp_0, exp_, env);
+		}
+		else
+			exp_ = process_word(str, exp_, env);
+		// free(str);
 		if (!tmp2[j])
 			break ;
 	}

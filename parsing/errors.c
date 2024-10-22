@@ -101,24 +101,17 @@ int	handle_quotes(t_token *list)
 int	ft_ambigious(t_lsttoken *list)
 {
 	t_lsttoken	*temp;
+	t_redir *redirections;
 
 	temp = list;
 	while (temp)
 	{
-		while (temp->redirections)
+		redirections  = temp->redirections;
+		while (redirections)
 		{
-			if (temp->redirections->type == 5 && !*(temp->redirections->red))
+			if (redirections->type <= 6  &&  redirections->type >= 3 && !*(redirections->red))
 				return (1);
-			else if (temp->redirections->type == 6
-				&& !*(temp->redirections->red))
-				return (1);
-			else if (temp->redirections->type == 3
-				&& !*(temp->redirections->red))
-				return (1);
-			else if (temp->redirections->type == 4
-				&& !*(temp->redirections->red))
-				return (1);
-			temp->redirections = temp->redirections->next;
+			redirections = redirections->next;
 		}
 		temp = temp->next;
 	}
