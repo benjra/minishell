@@ -3,71 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/21 14:38:58 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/05 16:17:38 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (dest == NULL || src == NULL)
-		return (NULL);
-	while (src[i] != '\0' && i < n)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
-}
-
-int	is_space(char str)
-{
-	if (str == ' ' || str == '\n' || str == '\t' || str == '\v' || str == '\f'
-		|| str == '\r')
-		return (1);
-	return (0);
-}
-
-int	countwrd(char *str)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	len = 0;
-	while (str[i])
-	{
-		if (str[i] == '"' || str[i] == '\'')
-		{
-			i++;
-			while (str[i] && !(str[i] == '"' || str[i] == '\''))
-				i++;
-			if (str[i])
-				i++;
-		}
-		else if (is_space(str[i]) || str[i] == '\0')
-		{
-			len++;
-			while (str[i] && is_space(str[i]))
-				i++;
-		}
-		else if (str[i])
-			i++;
-	}
-	return (len + 1);
-}
 
 void	skip_quotes(char **str)
 {

@@ -5,15 +5,23 @@ CCFLGS = -Wall -Wextra -Werror
 CC = cc
 LIBFT = libft/libft.a
 SRC_FILES = parsing/minishell.c \
+	parsing/program.c \
 	parsing/get_env.c \
 	parsing/parsing.c \
 	parsing/split.c \
 	parsing/fill_list.c \
 	parsing/redirection_node.c \
+	parsing/add_token.c \
+	parsing/node_list.c \
+	parsing/split_utils.c \
 	parsing/tokens.c \
+	parsing/tokens_list.c \
 	parsing/clear.c \
 	parsing/errors.c \
+	parsing/symbol_error.c \
 	parsing/expander.c \
+	parsing/search_env.c \
+	parsing/expand_word.c \
 	parsing/environment.c \
 	parsing/rm_quotes.c \
 	parsing/clear_all.c \

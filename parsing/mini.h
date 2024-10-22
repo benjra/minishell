@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:40:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:55:42 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:08:56 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
 # endif
+
 
 # define GREENB "\033[42m"
 # define BGREEN "\033[1;32m"
@@ -129,6 +130,31 @@ t_redir					*new_red(int type, char *red);
 void					red_addback(t_redir **lst, t_redir *new);
 t_redir					*last_red(t_redir *list);
 void					handler(int signum);
+void	program_name(char **en);
+
+
+//norms
+void parse_and_add_token(t_token **list, char *str, char *c, int type);
+char	*ft_strchr_skip_quotes(const char *str, char *c);
+int	get_type(char *lst);
+void	check_symbols(char *str, t_token **list);
+t_token	*lstnews(int type, char *value);
+void	lstadd_backs(t_token **lst, t_token *new);
+t_token	*tails(t_token *list);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
+int	is_space(char str);
+int	countwrd(char *str);
+t_lsttoken	*newnode(int type, char **args);
+void	add_back(t_lsttoken **lst, t_lsttoken *new);
+t_lsttoken	*last(t_lsttoken *list);
+int	double_symb(t_token *list);
+int	pipes_err(t_token *list);
+int	qoute(char *str);
+char	*get_specialcar(char *s);
+char	*get_var(int len, char *afterdoll);
+char	*search_env(int len, char *afterdoll, t_name *env);
+char	*search(char *arg, t_name *env);
+char	*get_word(char *str, int *i);
 
 /********************** builtins *************************/
 

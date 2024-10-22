@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection_node.c                                 :+:      :+:    :+:   */
+/*   node_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 11:56:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/03 20:13:27 by bbenjrai         ###   ########.fr       */
+/*   Created: 2024/10/01 12:06:29 by bbenjrai          #+#    #+#             */
+/*   Updated: 2024/10/01 12:07:41 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-t_redir	*last_red(t_redir *list)
+t_token	*tails(t_token *list)
 {
-	t_redir	*temp;
+	t_token	*temp;
 
+	temp = list;
 	if (!list)
 		return (NULL);
-	temp = list;
 	while (temp->next != NULL)
 	{
 		temp = temp->next;
@@ -26,33 +26,28 @@ t_redir	*last_red(t_redir *list)
 	return (temp);
 }
 
-void	red_addback(t_redir **lst, t_redir *new)
+void	lstadd_backs(t_token **lst, t_token *new)
 {
 	if (!lst || !new)
 		return ;
 	if (*lst == NULL)
 		*lst = new;
 	else
-	{
-		last_red(*lst)->next = new;
-		new->next = NULL;
-		new->previous = last_red(*lst);
-	}
+		tails(*lst)->next = new;
 }
 
-t_redir	*new_red(int type, char *red)
+t_token	*lstnews(int type, char *value)
 {
-	t_redir	*linked_lst;
+	t_token	*linked_lst;
 
-	linked_lst = malloc(sizeof(t_redir));
+	linked_lst = malloc(sizeof(t_token));
 	if (!linked_lst)
 	{
 		free(linked_lst);
 		return (NULL);
 	}
 	linked_lst->type = type;
-	linked_lst->red = red;
+	linked_lst->value = value;
 	linked_lst->next = NULL;
-	linked_lst->previous = NULL;
 	return (linked_lst);
 }

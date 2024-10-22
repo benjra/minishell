@@ -3,82 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/21 14:39:17 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/21 21:09:55 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-int	double_symb(t_token *list)
-{
-	t_token	*tmp;
-	int		typo;
-	int		nextp;
-
-	tmp = list;
-	while (tmp != NULL)
-	{
-		if (tmp->next != NULL)
-		{
-			typo = tmp->type;
-			nextp = tmp->next->type;
-			if (typo == 3 || typo == 4 || typo == 5 || typo == 6)
-			{
-				if (nextp == 2 || nextp == 3 || nextp == 4 || nextp == 5
-					|| nextp == 6)
-					return (1);
-			}
-		}
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-int	pipes_err(t_token *list)
-{
-	t_token	*tmp;
-
-	tmp = list;
-	if (list && list->type == 2)
-		return (1);
-	if (list && (tails(list)->type == 2 || tails(list)->type == 3
-			|| tails(list)->type == 4 || tails(list)->type == 5
-			|| tails(list)->type == 6))
-		return (2);
-	while (tmp != NULL)
-	{
-		if (tmp->type == 2 && (!tmp->next || tmp->next->type == 2))
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-int	qoute(char *str)
-{
-	int		i;
-	char	c;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '"' || str[i] == '\'')
-		{
-			c = str[i++];
-			while (str[i] && c != str[i])
-				i++;
-			if (!str[i])
-				return (1);
-			i++;
-		}
-		else
-			i++;
-	}
-	return (0);
-}
 
 int	handle_quotes(t_token *list)
 {
@@ -101,24 +33,27 @@ int	handle_quotes(t_token *list)
 int	ft_ambigious(t_lsttoken *list)
 {
 	t_lsttoken	*temp;
+	t_redir *redirections;
 
 	temp = list;
 	while (temp)
 	{
-		while (temp->redirections)
+		redirections  = temp->redirections;
+		while (redirections)
 		{
-			if (temp->redirections->type == 5 && !*(temp->redirections->red))
+			// if (redirections->type == 5 && !*(redirections->red))
+			// 	return (1);
+			// else if (redirections->type == 6
+			// 	&& !*(redirections->red))
+			// 	return (1);
+			// else if (redirections->type == 3
+			// 	&& !*(redirections->red))
+			// 	return (1);
+			// else if (redirections->type == 4
+			// 	&& !*(redirections->red))
+			if (redirections->type <= 6  &&  redirections->type >= 3 && !*(redirections->red))
 				return (1);
-			else if (temp->redirections->type == 6
-				&& !*(temp->redirections->red))
-				return (1);
-			else if (temp->redirections->type == 3
-				&& !*(temp->redirections->red))
-				return (1);
-			else if (temp->redirections->type == 4
-				&& !*(temp->redirections->red))
-				return (1);
-			temp->redirections = temp->redirections->next;
+			redirections = redirections->next;
 		}
 		temp = temp->next;
 	}

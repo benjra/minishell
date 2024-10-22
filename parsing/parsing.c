@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 14:35:52 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:36:06 by amabchou         ###   ########.fr       */
+/*   Created: 2024/10/03 19:06:14 by bbenjrai          #+#    #+#             */
+/*   Updated: 2024/10/22 08:12:06 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
 
 void	count_total_cmds(t_lsttoken *head)
 {
@@ -41,7 +42,6 @@ void	alistclear(t_alst **lista)
 		(*lista) = tmp;
 	}
 }
-
 void	parsing(char *str, t_name *env)
 {
 	char		**string;
@@ -54,6 +54,7 @@ void	parsing(char *str, t_name *env)
 	string = split_string(str);
 	list = fill_list(string);
 	free_arg(string);
+	
 	if (printf_err(list))
 	{
 		freelist1(list);
@@ -62,7 +63,34 @@ void	parsing(char *str, t_name *env)
 	list2 = fill_token(list);
 	freelist1(list);
 	expander(list2, env);
+	// if (ft_ambigious(list2)) should handled in execution 
+	// {
+	// 	ex = 1;
+	// 	ft_putendl_fd("ambiguous redirect", 2);
+	// 	return ;
+	// }
 	current = list2;
+
+// int i;
+// 	while (current) 
+// {
+	
+// 	i = 0;
+// 	while (current->args != NULL && current->args[i] != NULL)
+// 	{
+// 		printf("%d",i);
+// 	    printf("args : ----%s  \n", current->args[i++]);
+// 	}
+// 	while (current->redirections != NULL)
+// 	{
+// 	    printf("red : -- %s \n", current->redirections->red);
+// 		current->redirections = current->redirections->next;
+// 	}
+// 	    current = current->next; 
+	
+// 	free_all(current);
+// 	}
+
 	init_g_var(&current);
 	count_total_cmds(current);
 	execute_args(current, env);

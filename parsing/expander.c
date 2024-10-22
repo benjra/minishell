@@ -3,105 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/21 14:37:37 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/21 20:32:46 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-char	*get_specialcar(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && ((s[i] != ' ' && (ft_isalnum(s[i]))) || s[i] == '_'
-			|| s[i] == '?'))
-	{
-		i++;
-	}
-	return (s + i);
-}
-
-char	*get_var(int len, char *afterdoll)
-{
-	char	*var;
-
-	var = ft_substr(afterdoll, 0, len - ft_strlen(get_specialcar(afterdoll)));
-	return (var);
-}
-
-char	*search_env(int len, char *afterdoll, t_name *env)
-{
-	char	*replace;
-	char	*var;
-	char	*tmp;
-
-	var = get_var(len, afterdoll);
-	tmp = var;
-	replace = ft_env(env, tmp);
-	*afterdoll += ft_strlen(tmp);
-	free(tmp);
-	if (ft_strchr(afterdoll, '$'))
-		search_env(ft_strlen(afterdoll), afterdoll, env);
-	return (replace);
-}
-
-char	*search(char *arg, t_name *env)
-{
-	int		ln_aftdoll;
-	int		ln_befdoll;
-	char	*afterdol;
-	char	*replace;
-
-	afterdol = ft_strchr(arg, '$');
-	*afterdol = '\0';
-	afterdol++;
-	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
-	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
-	replace = search_env(ln_aftdoll, afterdol, env);
-	return (replace);
-}
-char	*get_word(char *str, int *i)
-{
-	char	c;
-	char	*res;
-	int		last;
-
-	c = 0;
-	last = *i;
-	while (str[last])
-	{
-		if ((str[last] == '\'' && str[last + 1] == '\''))
-			last += 2;
-		if (str[last] == '\'')
-		{
-			c = str[last++];
-			while (str[last] && (str[last] != c))
-				last++;
-			if (str[last])
-				last++;
-			break ;
-		}
-		else
-		{
-			if (str[last])
-			{
-				if (str[last] == '$' || !ft_isalnum(str[last]))
-					last++;
-				while (str[last] && (ft_isalnum(str[last]) || str[last] == '_'
-						|| str[last] == '?'))
-					last++;
-			}
-			break ;
-		}
-	}
-	res = ft_substr(str, *i, last - *i);
-	*i = last;
-	return (res);
-}
 
 char	**init_tmp_vars(char *args, char **exp_)
 {
@@ -119,7 +29,7 @@ char	*process_word(char *str, char *exp_, t_name *env)
 	char	*tmp_0;
 	char	*new_exp_;
 
-	if (ft_strchr(str, '$') && str[0] != '\'')
+	if (ft_strchr(str, '$'))
 	{
 		search_tmp = search(str, env);
 		new_exp_ = ft_strjoin(exp_, search_tmp);
@@ -127,8 +37,8 @@ char	*process_word(char *str, char *exp_, t_name *env)
 	}
 	else
 	{
-		tmp_0 = ins_quote(str);
-		new_exp_ = ft_strjoin(exp_, tmp_0);
+		tmp_0 = str;
+		new_exp_ = ft_strjoin(exp_, str);
 		free(tmp_0);
 	}
 	free(exp_);
@@ -145,13 +55,20 @@ char	*loop_through_string(char *tmp2, char *exp_, t_name *env)
 	while (tmp2[j])
 	{
 		str = get_word(tmp2, &j);
-		if (*str == '"')
+		if (*str == '\'')
 		{
 			tmp_0 = ins_quote(str);
+			exp_ = ft_strjoin(exp_, tmp_0);
 			free(tmp_0);
 		}
-		exp_ = process_word(str, exp_, env);
-		free(str);
+		else if  (*str == '"')
+		{
+			tmp_0 = ins_quote(str);
+			exp_ = process_word(tmp_0, exp_, env);
+		}
+		else
+			exp_ = process_word(str, exp_, env);
+		// free(str);
 		if (!tmp2[j])
 			break ;
 	}

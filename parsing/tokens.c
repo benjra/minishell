@@ -3,61 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/15 18:16:49 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/13 13:58:28 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-t_lsttoken	*last(t_lsttoken *list)
-{
-	t_lsttoken	*temp;
-
-	temp = list;
-	if (!list)
-		return (NULL);
-	while (temp->next != NULL)
-	{
-		temp = temp->next;
-	}
-	return (temp);
-}
-
-void	add_back(t_lsttoken **lst, t_lsttoken *new)
-{
-	if (!lst || !new)
-		return ;
-	if (*lst == NULL)
-	{
-		*lst = new;
-	}
-	else
-	{
-		last(*lst)->next = new;
-		new->next = NULL;
-		new->previous = last(*lst);
-	}
-}
-
-t_lsttoken	*newnode(int type, char **args)
-{
-	t_lsttoken	*linked_lst;
-
-	linked_lst = malloc(sizeof(t_lsttoken));
-	if (!linked_lst)
-	{
-		free(linked_lst);
-		return (NULL);
-	}
-	linked_lst->type = type;
-	linked_lst->args = args;
-	linked_lst->next = NULL;
-	linked_lst->previous = NULL;
-	return (linked_lst);
-}
 
 int	len(t_token *lst)
 {
@@ -73,37 +26,12 @@ int	len(t_token *lst)
 			lst = lst->next;
 		}
 		else
+		{
 			i++;
-		lst = lst->next;
+			lst = lst->next;
+		}
 	}
 	return (i);
-}
-
-int	handle_redirection(t_token **temp, t_lsttoken *token)
-{
-	t_redir	*redirections;
-	char	*tmmp;
-
-	tmmp = NULL;
-	if ((*temp)->next != NULL && (*temp)->type > 2 && (*temp)->type <= 6)
-	{
-		tmmp = ft_strdup((*temp)->next->value);
-		redirections = new_red((*temp)->type, tmmp);
-		red_addback(&(token->redirections), redirections);
-		(*temp) = (*temp)->next;
-		return (1);
-	}
-	return (0);
-}
-
-void	add_new_token_node(t_token **temp, t_lsttoken **token, int *i)
-{
-	add_back(token, newnode((*temp)->type, (*token)->args));
-	*token = (*token)->next;
-	(*token)->args = ft_calloc(len((*temp)->next) + 1, sizeof(char *));
-	(*token)->args[len((*temp)->next)] = NULL;
-	(*token)->redirections = NULL;
-	*i = 0;
 }
 
 t_lsttoken	*init_token(t_token *list)
@@ -119,6 +47,34 @@ t_lsttoken	*init_token(t_token *list)
 	token->args[len(list)] = NULL;
 	token->redirections = NULL;
 	return (token);
+}
+
+int	handle_redirection(t_token **temp, t_lsttoken *token)
+{
+	t_redir	*redirections;
+	char *tmmp;
+	
+	tmmp=NULL;
+	if ((*temp)->next != NULL && (*temp)->type > 2 && (*temp)->type <= 6)
+	{
+		tmmp=ft_strdup((*temp)->next->value);
+		redirections = new_red((*temp)->type, tmmp);
+		red_addback(&(token->redirections), redirections);
+		(*temp) = (*temp)->next;
+		return (1);
+	}
+	return (0);
+	// free(tmmp);
+}
+
+void	add_new_token_node(t_token **temp, t_lsttoken **token, int *i)
+{
+	add_back(token, newnode((*temp)->type, (*token)->args));
+	*token = (*token)->next;
+	(*token)->args = ft_calloc(len((*temp)->next) + 1, sizeof(char *));
+	(*token)->args[len((*temp)->next)] = NULL;
+	(*token)->redirections = NULL;
+	*i = 0;
 }
 
 t_lsttoken	*fill_token(t_token *list)
