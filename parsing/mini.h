@@ -56,6 +56,7 @@ typedef struct s_var
 	int					interactive;
 	int					out_fd;
 	int					size;
+	int	doll;
 	char				**envp;
 	int					pre_pipe_infd;
 	pid_t				last_child_id;

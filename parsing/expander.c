@@ -42,8 +42,10 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 
 	var = get_var(len, afterdoll);
 	tmp = var;
+	// if (*afterdoll != '\'' && *afterdoll != '"') //need to handle this case
+	// 	g_var.doll=1;
 	replace = ft_env(env, tmp);
-	
+	printf("afterdoll = %s\n",afterdoll);
 	afterdoll += ft_strlen(var);
 	free(var);
 	if (ft_strchr(afterdoll, '$'))

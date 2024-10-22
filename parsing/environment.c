@@ -23,7 +23,7 @@ char	*ft_env(t_name *env, char *var)
 	while (temp)
 	{
 		// if (ft_strncmp(temp->name, var, ft_strlen(var)) == 0
-		// 	&& ft_strlen(var) == 0)
+		// 	&& g_var.doll==1)
 		// 	return (ft_strdup("$"));
 		if (ft_strncmp(temp->name, var, -1) == 0)
 		{
