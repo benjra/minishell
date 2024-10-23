@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:40:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/23 15:06:14 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:29:28 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_H
 # define MINI_H
 
-# include "../libft/libft.h"
+# include "../our_libft/libft.h"
 # include <dirent.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -129,21 +129,25 @@ t_redir					*new_red(int type, char *red);
 void					red_addback(t_redir **lst, t_redir *new);
 t_redir					*last_red(t_redir *list);
 void					handler(int signum);
-void	handle_symbol_token(t_token **list, char *str, char *c, int type);
-void	handle_no_symbol_token(t_token **list, char *str, char *c);
-void	parse_and_add_token(t_token **list, char *str, char *c, int type);
-char	*ft_strchr_skip_quotes(const char *str, char *c);
-int	get_type(char *lst);
-void	check_symbols(char *str, t_token **list);
-int	double_symb(t_token *list);
-int    countwrd(char *str);
-int	skip_quotes_in_count(char *str, int i);
-int	is_space(char str);
-char	*ft_strncpy(char *dest, char *src, unsigned int n);
-void	skip_quotes(char **str);
-char	*get_word(char *str, int *i);
-char	*search_env(int len, char *afterdoll, t_name *env);
-char	*search(char *arg, t_name *env);
+void					handle_symbol_token(t_token **list, char *str, char *c,
+							int type);
+void					handle_no_symbol_token(t_token **list, char *str,
+							char *c);
+void					parse_and_add_token(t_token **list, char *str, char *c,
+							int type);
+char					*ft_strchr_skip_quotes(const char *str, char *c);
+int						get_type(char *lst);
+void					check_symbols(char *str, t_token **list);
+int						double_symb(t_token *list);
+int						countwrd(char *str);
+int						skip_quotes_in_count(char *str, int i);
+int						is_space(char str);
+char					*ft_strncpy(char *dest, char *src, unsigned int n);
+void					skip_quotes(char **str);
+char					*get_word(char *str, int *i);
+char					*search_env(int len, char *afterdoll, t_name *env);
+char					*search(char *arg, t_name *env);
+
 /********************** builtins *************************/
 
 void					my_cd(t_name *env, char **argv);

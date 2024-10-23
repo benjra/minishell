@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 11:46:52 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/04 21:26:48 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:40:18 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	handle_no_symbol_token(t_token **list, char *str, char *c)
 void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 {
 	char	*new;
-	
-	new=NULL;
+
+	new = NULL;
 	new = ft_strchr_skip_quotes(str, c);
 	if (new && ft_strnstr(str, c, ft_strlen(str)) != NULL)
 		handle_symbol_token(list, str, c, type);

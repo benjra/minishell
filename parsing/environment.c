@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:10 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/23 14:49:49 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:36:47 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
 
 char	*ft_env(t_name *env, char *var)
 {
@@ -19,11 +18,10 @@ char	*ft_env(t_name *env, char *var)
 	char	*replace;
 
 	temp = env;
-	
 	while (temp)
 	{
 		if (ft_strncmp(temp->name, var, ft_strlen(var)) == 0
-			&& ft_strlen(var)==0)
+			&& ft_strlen(var) == 0)
 			return (ft_strdup(""));
 		if (ft_strncmp(temp->name, var, -1) == 0)
 		{
@@ -32,7 +30,7 @@ char	*ft_env(t_name *env, char *var)
 		}
 		else if (ft_strncmp("?", var, ft_strlen(var)) == 0)
 		{
-			replace = ft_strdup(ft_itoa(g_var.exit_s));//leak
+			replace = ft_strdup(ft_itoa(g_var.exit_s)); // leak
 			return (replace);
 		}
 		temp = temp->next;

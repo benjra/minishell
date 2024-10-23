@@ -12,8 +12,7 @@
 
 #include "../parsing/mini.h"
 
-void	child_process(t_lsttoken *token, int pipe_nb, int btn,
-		t_name *env)
+void	child_process(t_lsttoken *token, int pipe_nb, int btn, t_name *env)
 {
 	g_var.last_child_id = fork();
 	if (g_var.last_child_id == 0)

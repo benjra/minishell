@@ -18,8 +18,8 @@ char	*special_cases(char *target, int *i)
 	char	*variable;
 
 	output = "";
-	if (target[(*i)] == '$' && (target[(*i) + 1] == '\"'
-			|| target[(*i) + 1] == '\''))
+	if (target[(*i)] == '$' && (target[(*i) + 1] == '\"' || target[(*i)
+			+ 1] == '\''))
 		(*i)++;
 	variable = until_dollar(&target[(*i)]);
 	output = ft_strjoin(output, variable);

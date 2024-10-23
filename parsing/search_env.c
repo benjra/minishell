@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:43:13 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/23 14:44:56 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:39:58 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 		search_env(ft_strlen(afterdoll), afterdoll, env);
 	else if (afterdoll)
 	{
-		tmp  = replace;
+		tmp = replace;
 		replace = ft_strjoin(tmp, afterdoll);
 		free(tmp);
 	}
@@ -61,15 +61,16 @@ char	*search(char *arg, t_name *env)
 	int		ln_befdoll;
 	char	*afterdol;
 	char	*replace;
+	char	*tmp;
 
 	afterdol = ft_strchr(arg, '$');
 	*afterdol = '\0';
 	afterdol++;
 	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
 	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
-	replace = ft_substr(arg, 0 , ln_befdoll);
-	char * tmp = replace;
-	replace = ft_strjoin(replace,search_env(ln_aftdoll, afterdol, env));
+	replace = ft_substr(arg, 0, ln_befdoll);
+	tmp = replace;
+	replace = ft_strjoin(replace, search_env(ln_aftdoll, afterdol, env));
 	free(tmp);
 	return (replace);
 }

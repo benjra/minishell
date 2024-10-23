@@ -24,7 +24,7 @@ char	*handle_quote(char *str, int *len)
 	while (str[*len] && str[*len] != c)
 		(*len)++;
 	substr = ft_substr(str, i, *len - i);
-	if (str[*len] ==  c)
+	if (str[*len] == c)
 		(*len)++;
 	return (substr);
 }
@@ -58,4 +58,3 @@ char	*ins_quote(char *str)
 	}
 	return (res);
 }
-

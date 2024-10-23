@@ -60,7 +60,7 @@ char	*loop_through_string(char *tmp2, char *exp_, t_name *env)
 			exp_ = ft_strjoin(exp_, tmp_0);
 			free(tmp_0);
 		}
-		else if  (*str == '"')
+		else if (*str == '"')
 		{
 			tmp_0 = ins_quote(str);
 			exp_ = process_word(tmp_0, exp_, env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_word.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:44:32 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/23 14:44:47 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/23 23:34:49 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ char	*get_word(char *str, int *i)
 		return (ft_strdup(""));
 	while (str[last])
 	{
-		
-		if (str[last] == '\'' || str[last] == '\"') 
+		if (str[last] == '\'' || str[last] == '\"')
 		{
 			c = str[last++];
 			while (str[last] && (str[last] != c))
@@ -40,10 +39,10 @@ char	*get_word(char *str, int *i)
 			{
 				if (str[last] == '$' || !ft_isalnum(str[last]))
 					last++;
-				if(str[last] && str[last]=='?')
+				if (str[last] && str[last] == '?')
 				{
-						last++;	
-						break;
+					last++;
+					break ;
 				}
 				while (str[last] && (ft_isalnum(str[last]) || str[last] == '_'
 						|| str[last] == '?'))

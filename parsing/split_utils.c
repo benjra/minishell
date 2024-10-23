@@ -12,7 +12,6 @@
 
 #include "mini.h"
 
-
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int	i;
@@ -56,35 +55,36 @@ int	skip_quotes_in_count(char *str, int i)
 	return (i);
 }
 
-int    countwrd(char *str)
+int	countwrd(char *str)
 {
-    int    i;
-    int    len;
-    int flag=0;
-    
-    i = 0;
-    len = 0;
-    while (str[i])
-    {  
-       	i = skip_quotes_in_count(str, i);
-        if (is_space(str[i]))
-        {
-            flag=0;
-            while (str[i] && is_space(str[i]))
-                i++;
-            len++;
-        }
-        else if (str[i])
-        {
-            if(flag==0)
-                {
-                    flag=1;
-                    len++;
-                }
-            i++;
-        }
-    }
-    return (len);
+	int	i;
+	int	len;
+	int	flag;
+
+	flag = 0;
+	i = 0;
+	len = 0;
+	while (str[i])
+	{
+		i = skip_quotes_in_count(str, i);
+		if (is_space(str[i]))
+		{
+			flag = 0;
+			while (str[i] && is_space(str[i]))
+				i++;
+			len++;
+		}
+		else if (str[i])
+		{
+			if (flag == 0)
+			{
+				flag = 1;
+				len++;
+			}
+			i++;
+		}
+	}
+	return (len);
 }
 
 void	skip_quotes(char **str)
