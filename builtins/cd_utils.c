@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 13:57:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 13:57:50 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/24 00:20:31 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	update_env_vars(t_name *env, const char *oldpwd, const char *newpwd)
 {
 	update_or_add_env(&env, "OLDPWD", oldpwd);
 	update_or_add_env(&env, "PWD", newpwd);
+	sync_env_array(env);
 	return (0);
 }
 

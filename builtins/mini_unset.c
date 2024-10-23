@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:00:33 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:00:36 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/24 00:05:10 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,5 @@ void	my_unset(t_name **env, char **cmd)
 			remove_env(env, cmd[i]);
 		i++;
 	}
+	sync_env_array(*env);
 }

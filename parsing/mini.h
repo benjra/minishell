@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:40:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/23 23:29:28 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/24 00:02:22 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,9 @@ void					skip_quotes(char **str);
 char					*get_word(char *str, int *i);
 char					*search_env(int len, char *afterdoll, t_name *env);
 char					*search(char *arg, t_name *env);
+void					free_env_array(char **env_array);
+char					**env_to_array(t_name *env);
+void					sync_env_array(t_name *env);
 
 /********************** builtins *************************/
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_export.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:00:19 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:00:20 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/24 00:05:00 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,5 @@ void	my_export(t_name **env, char **cmd)
 		process_cmd(env, cmd, i);
 		i++;
 	}
+	sync_env_array(*env);
 }

@@ -29,6 +29,7 @@ SRC_FILES = parsing/minishell.c \
 	builtins/mini_export.c \
 	builtins/mini_exit.c \
 	builtins/mini_unset.c \
+	builtins/env_utils.c \
 	execution/pipex.c \
 	execution/init_fnct.c \
 	execution/pipex_utils1.c \
