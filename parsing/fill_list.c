@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/21 14:38:29 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:47:21 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,46 +30,6 @@ int	get_type(char *lst)
 			return (3);
 	}
 	return (1);
-}
-
-t_token	*tails(t_token *list)
-{
-	t_token	*temp;
-
-	temp = list;
-	if (!list)
-		return (NULL);
-	while (temp->next != NULL)
-	{
-		temp = temp->next;
-	}
-	return (temp);
-}
-
-void	lstadd_backs(t_token **lst, t_token *new)
-{
-	if (!lst || !new)
-		return ;
-	if (*lst == NULL)
-		*lst = new;
-	else
-		tails(*lst)->next = new;
-}
-
-t_token	*lstnews(int type, char *value)
-{
-	t_token	*linked_lst;
-
-	linked_lst = malloc(sizeof(t_token));
-	if (!linked_lst)
-	{
-		free(linked_lst);
-		return (NULL);
-	}
-	linked_lst->type = type;
-	linked_lst->value = value;
-	linked_lst->next = NULL;
-	return (linked_lst);
 }
 
 void	check_symbols(char *str, t_token **list)

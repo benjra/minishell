@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:14 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/21 14:39:17 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:49:40 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
-
-int	double_symb(t_token *list)
-{
-	t_token	*tmp;
-	int		typo;
-	int		nextp;
-
-	tmp = list;
-	while (tmp != NULL)
-	{
-		if (tmp->next != NULL)
-		{
-			typo = tmp->type;
-			nextp = tmp->next->type;
-			if (typo == 3 || typo == 4 || typo == 5 || typo == 6)
-			{
-				if (nextp == 2 || nextp == 3 || nextp == 4 || nextp == 5
-					|| nextp == 6)
-					return (1);
-			}
-		}
-		tmp = tmp->next;
-	}
-	return (0);
-}
 
 int	pipes_err(t_token *list)
 {

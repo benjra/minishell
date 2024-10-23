@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:40:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:55:42 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:06:14 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_var
 	int					interactive;
 	int					out_fd;
 	int					size;
-	int	doll;
 	char				**envp;
 	int					pre_pipe_infd;
 	pid_t				last_child_id;
@@ -136,7 +135,15 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type);
 char	*ft_strchr_skip_quotes(const char *str, char *c);
 int	get_type(char *lst);
 void	check_symbols(char *str, t_token **list);
-
+int	double_symb(t_token *list);
+int    countwrd(char *str);
+int	skip_quotes_in_count(char *str, int i);
+int	is_space(char str);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
+void	skip_quotes(char **str);
+char	*get_word(char *str, int *i);
+char	*search_env(int len, char *afterdoll, t_name *env);
+char	*search(char *arg, t_name *env);
 /********************** builtins *************************/
 
 void					my_cd(t_name *env, char **argv);

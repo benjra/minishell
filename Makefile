@@ -9,6 +9,7 @@ SRC_FILES = parsing/minishell.c \
 	parsing/parsing.c \
 	parsing/split.c \
 	parsing/fill_list.c \
+	parsing/node_list.c \
 	parsing/redirection_node.c \
 	parsing/add_token.c \
 	parsing/tokens.c \
@@ -18,6 +19,9 @@ SRC_FILES = parsing/minishell.c \
 	parsing/environment.c \
 	parsing/rm_quotes.c \
 	parsing/clear_all.c \
+	parsing/get_word.c \
+	parsing/search_env.c \
+	parsing/split_utils.c \
 	builtins/mini_echo.c \
 	builtins/mini_cd.c \
 	builtins/mini_pwd.c \

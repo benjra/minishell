@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:10 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/21 14:40:04 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:49:49 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char	*ft_env(t_name *env, char *var)
 	
 	while (temp)
 	{
-		// if (ft_strncmp(temp->name, var, ft_strlen(var)) == 0
-		// 	&& g_var.doll==1)
-		// 	return (ft_strdup("$"));
+		if (ft_strncmp(temp->name, var, ft_strlen(var)) == 0
+			&& ft_strlen(var)==0)
+			return (ft_strdup(""));
 		if (ft_strncmp(temp->name, var, -1) == 0)
 		{
 			replace = ft_strdup(temp->value);
@@ -40,3 +40,27 @@ char	*ft_env(t_name *env, char *var)
 	return (ft_strdup(""));
 }
 
+int	double_symb(t_token *list)
+{
+	t_token	*tmp;
+	int		typo;
+	int		nextp;
+
+	tmp = list;
+	while (tmp != NULL)
+	{
+		if (tmp->next != NULL)
+		{
+			typo = tmp->type;
+			nextp = tmp->next->type;
+			if (typo == 3 || typo == 4 || typo == 5 || typo == 6)
+			{
+				if (nextp == 2 || nextp == 3 || nextp == 4 || nextp == 5
+					|| nextp == 6)
+					return (1);
+			}
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
