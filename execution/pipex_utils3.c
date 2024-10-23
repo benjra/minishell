@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:00:47 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:18:32 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/24 00:25:05 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*special_cases(char *target, int *i)
 
 	output = "";
 	if (target[(*i)] == '$' && (target[(*i) + 1] == '\"' || target[(*i)
-			+ 1] == '\''))
+				+ 1] == '\''))
 		(*i)++;
 	variable = until_dollar(&target[(*i)]);
 	output = ft_strjoin(output, variable);

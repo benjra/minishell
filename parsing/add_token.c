@@ -52,7 +52,7 @@ void	parse_and_add_token(t_token **list, char *str, char *c, int type)
 
 	new = NULL;
 	new = ft_strchr_skip_quotes(str, c);
-	if (new && ft_strnstr(str, c, ft_strlen(str)) != NULL)
+	if (new &&ft_strnstr(str, c, ft_strlen(str)) != NULL)
 		handle_symbol_token(list, str, c, type);
 	else
 		handle_no_symbol_token(list, str, c);
