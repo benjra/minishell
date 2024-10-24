@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:40:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/24 01:02:14 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/24 01:34:53 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,6 @@ void					child_process(t_lsttoken *token, int pipe_nb, int btn,
 char					*allocate_folders(char *path, int i);
 void					handle_malloc_error(void);
 int						handle_stat_error(char *path, int is_builtin);
-void					setup_signals(void);
 void					handle_pipe_redirections(t_lsttoken *token,
 							int pipe_nb);
 void					handle_file_redirections(t_lsttoken *token, int btn);

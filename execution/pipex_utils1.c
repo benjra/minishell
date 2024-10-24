@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:00:41 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/24 00:46:50 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/24 02:15:46 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	execute_pipes(t_lsttoken *token, int pipe_nb, t_name *env)
 			}
 		}
 		child_process(token, pipe_nb, btn, env);
+		printf("%d\n", g_var.pre_pipe_infd);
 		if (token->pipe_fd[1] > 2)
 			close(token->pipe_fd[1]);
 		if (g_var.pre_pipe_infd > 2)

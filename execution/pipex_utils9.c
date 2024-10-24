@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:08:01 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/24 00:43:49 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/24 01:45:33 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ void	handle_pipe_redirections(t_lsttoken *token, int pipe_nb)
 		dup2(token->pipe_fd[1], 1);
 	if (token->pipe_fd[1] > 2)
 		close(token->pipe_fd[1]);
-	if (g_var.pre_pipe_infd > 2)
-		close(g_var.pre_pipe_infd);
-	if (g_var.size != pipe_nb + 1 && token->pipe_fd[0] > 2)
+	if (token->pipe_fd[0] > 2)
 		close(token->pipe_fd[0]);
 }
