@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:00:41 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:47:02 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/24 00:46:50 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,13 @@ void	execute_pipes(t_lsttoken *token, int pipe_nb, t_name *env)
 	else
 	{
 		if (g_var.size != pipe_nb + 1)
-			pipe(token->pipe_fd);
+		{
+			if (pipe(token->pipe_fd) == -1)
+			{
+				perror("pipe");
+				exit(1);
+			}
+		}
 		child_process(token, pipe_nb, btn, env);
 		if (token->pipe_fd[1] > 2)
 			close(token->pipe_fd[1]);

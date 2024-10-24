@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:00:50 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:12:00 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/24 01:02:14 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*r_quotes(char *str)
 	return (replace(str, rip));
 }
 
-int	ft_fork(void)
+int	ffork(void)
 {
 	int	id;
 

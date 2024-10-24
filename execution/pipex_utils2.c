@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:00:44 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:47:02 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/24 01:19:09 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ void	child_process(t_lsttoken *token, int pipe_nb, int btn, t_name *env)
 		handle_file_redirections(token, btn);
 		handle_pipe_redirections(token, pipe_nb);
 		execs(token, btn, env);
+	}
+	else if (g_var.last_child_id > 0)
+	{
+		if (token->pipe_fd[1] > 2)
+			close(token->pipe_fd[1]);
+		if (g_var.pre_pipe_infd > 2)
+			close(g_var.pre_pipe_infd);
 	}
 }
 
@@ -41,8 +48,7 @@ void	in_file_prep(t_lsttoken *token, char *path, int is_builtin)
 	else
 	{
 		token->in_fd_set = 1;
-		if ((token->redirections->type != 6 || !g_var.is_heredoc_last)
-			&& !is_builtin)
+		if ((!token->is_heredoc || !g_var.is_heredoc_last) && !is_builtin)
 			dup2(fd, 0);
 		if (fd > 2)
 			close(fd);

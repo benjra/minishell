@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:40:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/24 00:02:22 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/24 01:02:14 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ void					hd_sigint(int sig);
 int						upto(char *str, char c);
 char					*r_quotes(char *str);
 char					*replace(char *str, char rip);
-int						ft_fork(void);
+int						ffork(void);
 void					free_str(void *ptr);
 int						should_not_be_expanded(char *str);
 void					print_perror(char *str, int exitt);

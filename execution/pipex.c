@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:01:04 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:01:14 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/24 01:06:35 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void	my_heredoc(t_lsttoken *token)
 	int		id;
 	t_redir	*current_redir;
 
-	id = ft_fork();
+	id = ffork();
 	if (id != 0)
 		g_var.heredoc_file = ft_strjoin("/tmp/heredoc_file", ft_itoa(id));
 	else
 		exit(0);
-	id = ft_fork();
+	id = ffork();
 	if (id == 0)
 	{
 		signal(SIGINT, hd_sigint);
@@ -102,7 +102,6 @@ void	mini_heredoc(t_lsttoken *token, t_name *env)
 	t_lsttoken	*current;
 	int			i;
 
-	(void)env;
 	if (!token)
 		return ;
 	current = token;
@@ -123,7 +122,6 @@ void	mini_heredoc(t_lsttoken *token, t_name *env)
 		current = current->next;
 		i++;
 	}
-	return ;
 }
 
 void	execute_args(t_lsttoken *token, t_name *env)
