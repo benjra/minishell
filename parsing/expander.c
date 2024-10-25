@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/23 14:44:26 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/25 12:26:54 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ char	*loop_through_string(char *tmp2, char *exp_, t_name *env)
 	char	*tmp_0;
 
 	j = 0;
+	if (!tmp2)
+		return ft_strdup("");
 	while (tmp2[j])
 	{
 		str = get_word(tmp2, &j);
+		printf("%s\n", str);
 		if (*str == '\'')
 		{
 			tmp_0 = ins_quote(str);

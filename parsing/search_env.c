@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:43:13 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/23 23:39:58 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/25 12:21:47 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ char	*search(char *arg, t_name *env)
 	char	*tmp;
 
 	afterdol = ft_strchr(arg, '$');
+		// if((*afterdol)+1 == '\'' || (*afterdol)+1=='"')
+		// {
+		// 	(*afterdol)++;
+			
+		// }
 	*afterdol = '\0';
 	afterdol++;
 	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
