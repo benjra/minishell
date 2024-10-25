@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:44:32 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/25 12:45:39 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/25 20:52:57 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,12 @@ char	*get_word(char *str, int *i)
 		{
 			if (last != *i)
 				break;
-			// if (str[last] == '$' || !ft_isalnum(str[last]))
-			// {
 			if (str[last + 1] == '\'' || str[last + 1] == '"')
 			{
 				ft_memmove(str +last, str+ last + 1, ft_strlen(str + last + 1)+1);
 				break ;
 			}
 			last++;
-			// }
-			
 			if (str[last] && (str[last] == '?' || ft_isdigit(str[last])))
 			{
 				last++;
@@ -65,7 +61,6 @@ char	*get_word(char *str, int *i)
 			last++;
 			
 	}
-	
 	res = ft_substr(str, *i, last - *i);
 	*i = last;
 	return (res);

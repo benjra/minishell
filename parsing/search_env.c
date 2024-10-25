@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:43:13 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/25 12:21:47 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/25 15:53:58 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,18 @@ char	*search(char *arg, t_name *env)
 	char	*afterdol;
 	char	*replace;
 	char	*tmp;
+	char *tt;
 
 	afterdol = ft_strchr(arg, '$');
-		// if((*afterdol)+1 == '\'' || (*afterdol)+1=='"')
-		// {
-		// 	(*afterdol)++;
-			
-		// }
 	*afterdol = '\0';
 	afterdol++;
 	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
 	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
 	replace = ft_substr(arg, 0, ln_befdoll);
-	tmp = replace;
-	replace = ft_strjoin(replace, search_env(ln_aftdoll, afterdol, env));
+	tmp = replace;/////////
+	tt=search_env(ln_aftdoll, afterdol, env);
+	replace = ft_strjoin(tmp, tt);
 	free(tmp);
+	free(tt);
 	return (replace);
 }

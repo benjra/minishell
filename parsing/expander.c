@@ -6,26 +6,25 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/25 12:26:54 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/25 20:52:39 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-char	**init_tmp_vars(char *args, char **exp_)
+char	*init_tmp_vars(char *args, char **exp_)
 {
-	char	**tmp;
+	char	*tmp;
 
 	*exp_ = ft_strdup("");
-	tmp = (char **)malloc(sizeof(char *) * 3);
-	tmp[2] = ft_strdup(args);
+	tmp = ft_strdup(args);
 	return (tmp);
 }
 
 char	*process_word(char *str, char *exp_, t_name *env)
 {
 	char	*search_tmp;
-	char	*tmp_0;
+	// char	*tmp_
 	char	*new_exp_;
 
 	if (ft_strchr(str, '$'))
@@ -36,10 +35,9 @@ char	*process_word(char *str, char *exp_, t_name *env)
 	}
 	else
 	{
-		tmp_0 = str;
 		new_exp_ = ft_strjoin(exp_, str);
-		free(tmp_0);
 	}
+	free(str);
 	free(exp_);
 	return (new_exp_);
 }
@@ -56,21 +54,23 @@ char	*loop_through_string(char *tmp2, char *exp_, t_name *env)
 	while (tmp2[j])
 	{
 		str = get_word(tmp2, &j);
-		printf("%s\n", str);
 		if (*str == '\'')
 		{
 			tmp_0 = ins_quote(str);
+			free(str);
+			str = exp_;
 			exp_ = ft_strjoin(exp_, tmp_0);
+			free(str);
 			free(tmp_0);
 		}
 		else if (*str == '"')
 		{
 			tmp_0 = ins_quote(str);
 			exp_ = process_word(tmp_0, exp_, env);
+			free(str);
 		}
 		else
 			exp_ = process_word(str, exp_, env);
-		// free(str);
 		if (!tmp2[j])
 			break ;
 	}
@@ -79,13 +79,12 @@ char	*loop_through_string(char *tmp2, char *exp_, t_name *env)
 
 char	*small_expand(char *args, t_name *env)
 {
-	char	**tmp;
+	char	*tmp;
 	char	*exp_;
 
 	tmp = init_tmp_vars(args, &exp_);
-	exp_ = loop_through_string(tmp[2], exp_, env);
+	exp_ = loop_through_string(tmp, exp_, env);
 	free(args);
-	free(tmp[2]);
 	free(tmp);
 	return (exp_);
 }

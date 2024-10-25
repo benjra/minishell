@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 11:16:19 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/09/29 16:47:14 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/25 15:43:28 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	free_arg(char **args)
 
 	temp = args;
 	i = 0;
+	if(!temp)
+		return ;
 	while (temp[i])
 	{
 		free(temp[i++]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:35:52 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:36:06 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/25 20:08:33 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	parsing(char *str, t_name *env)
 
 	g_var.alist = malloc(sizeof(t_alst *));
 	*(g_var.alist) = NULL;
-	string = split_string(str);
+	string = split_string(str);//leaks but i free here
 	list = fill_list(string);
 	free_arg(string);
 	if (printf_err(list))
