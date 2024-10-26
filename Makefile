@@ -13,15 +13,16 @@ SRC_FILES = parsing/minishell.c \
 	parsing/redirection_node.c \
 	parsing/add_token.c \
 	parsing/tokens.c \
-	parsing/clear.c \
 	parsing/errors.c \
-	parsing/expander.c \
+	parsing/expander_utils.c \
+	parsing/expand.c \
 	parsing/environment.c \
 	parsing/rm_quotes.c \
 	parsing/clear_all.c \
 	parsing/get_word.c \
 	parsing/search_env.c \
 	parsing/split_utils.c \
+	parsing/token_node.c \
 	builtins/mini_echo.c \
 	builtins/mini_cd.c \
 	builtins/mini_pwd.c \

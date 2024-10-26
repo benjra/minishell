@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/25 14:27:28 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/26 15:26:39 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,26 @@ void	add_token(char **tokens, char *start, char *str, int *token_count)
 	if (len > 0)
 	{
 		token = malloc(len + 1);
-		if(!token)
+		if (!token)
 			free(token);
 		ft_strncpy(token, start, len);
 		token[len] = '\0';
 		tokens[(*token_count)++] = token;
+	}
+}
+
+void	skip_quotes(char **str)
+{
+	char	c;
+
+	if (**str == '"' || **str == '\'')
+	{
+		c = **str;
+		(*str)++;
+		while (**str && **str != c)
+			(*str)++;
+		if (**str == c)
+			(*str)++;
 	}
 }
 

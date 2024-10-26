@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:29:06 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/21 14:29:08 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/10/26 14:36:45 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char	*ins_quote(char *str)
 		else
 		{
 			i = len;
-			// """'hi'   f"
 			while (str[len] && str[len] != '"' && str[len] != '\'')
 				len++;
 			tmp[1] = ft_substr(str, i, len - i);

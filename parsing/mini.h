@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:40:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/24 01:34:53 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/26 15:38:44 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,14 @@ char					*search(char *arg, t_name *env);
 void					free_env_array(char **env_array);
 char					**env_to_array(t_name *env);
 void					sync_env_array(t_name *env);
+t_lsttoken				*last(t_lsttoken *list);
+void					add_back(t_lsttoken **lst, t_lsttoken *new);
+t_lsttoken				*newnode(int type, char **args);
+char					*loop_through_string(char *tmp2, char *exp_,
+							t_name *env);
+void					normi_quotes(char *str, char **exp_, t_name *env);
+char					*process_word(char *str, char *exp_, t_name *env);
+char					*init_tmp_vars(char *args, char **exp_);
 
 /********************** builtins *************************/
 
