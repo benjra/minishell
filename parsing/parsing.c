@@ -1,92 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/21 14:35:52 by amabchou          #+#    #+#             */
+/*   Updated: 2024/10/21 14:36:06 by amabchou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini.h"
 
-// size_t	ft_strlcpy(char *dst, char *src, size_t n)
-// {
-// 	size_t	i;
-// 	size_t	srclen;
-
-// 	i = 0;
-// 	srclen = ft_strlen(src);
-// 	if (n != 0)
-// 	{
-// 		while (src[i] && i < n - 1)
-// 		{
-// 			dst[i] = src[i];
-// 			i++;
-// 		}
-// 		dst[i] = '\0';
-// 	}
-// 	return (srclen);
-// }
-
-
-// char	*ft_strtrim(char const *s1, char const *set)
-// {
-// 	int		len;
-// 	int		i;
-// 	char	*str;
-
-// 	if (!s1 || !set)
-// 		return (NULL);
-// 	i = 0;
-// 	len = ft_strlen((char *)s1) - 1;
-// 	while (ft_strchr(set, s1[i]) && i <= len)
-// 		i++;
-// 	if (i >= len)
-// 		return (ft_strdup(""));
-// 	while (ft_strchr(set, s1[len]) && len >= 0)
-// 		len--;
-// 	str = malloc((len - i + 2) * sizeof(char));
-// 	if (!str)
-// 		return (NULL);
-// 	ft_strlcpy(str, (char *)&s1[i], len - i + 2);
-// 	return (str);
-// }
-
-int pipe_frst(char *tmp)
+void	count_total_cmds(t_lsttoken *head)
 {
-    int i=0;
-    char *str;
-    str = ft_strtrim(tmp , "\t " );
-    i=ft_strlen(str);
-    if(str[i-1]=='|' || str[0]=='|')
-    {
-		return 0;
-	}
-    return 1;
-}
+	int			tot_cmds;
+	t_lsttoken	*current;
 
-int double_pipe(char *tmp)
-{
-	int i=0;
-    char *str; 
-    str = ft_strtrim(tmp , "\t " );
-	while(str[i])
+	tot_cmds = 0;
+	current = head;
+	while (current != NULL)
 	{
-		if(str[i]=='|' )
-		{
-				if(str[i+1]=='|')
-					return 0;
-				while(str[i+1] && (str[i+1]!=' ' || str[i+1]!='\t'))
-				{
-					i++;
-					if(str[i+1]=='|' )
-						return 0;
-				}
-		}
-		i++;
+		tot_cmds++;
+		current = current->next;
 	}
-	return 1;
+	g_var.size = tot_cmds;
 }
 
-
-void parsing(char *str)
+void	alistclear(t_alst **lista)
 {
-    // char **arr=ft_split(str);
-	char **string ;
-	string=ft_split(str,' ');
-    if(pipe_frst(str)==0 || double_pipe(str)==0)
-        printf("error near `|' \n");
-    else 
-        printf("good\n");
+	t_alst	*tmp;
+
+	while (*lista)
+	{
+		tmp = (*lista)->next;
+		if (*lista && (*lista)->content)
+			free((*lista)->content);
+		if (*lista)
+			free(*lista);
+		(*lista) = tmp;
+	}
+}
+
+void	parsing(char *str, t_name *env)
+{
+	char		**string;
+	t_token		*list;
+	t_lsttoken	*list2;
+	t_lsttoken	*current;
+
+	g_var.alist = malloc(sizeof(t_alst *));
+	*(g_var.alist) = NULL;
+	string = split_string(str);
+	list = fill_list(string);
+	free_arg(string);
+	if (printf_err(list))
+	{
+		freelist1(list);
+		return ;
+	}
+	list2 = fill_token(list);
+	freelist1(list);
+	expander(list2, env);
+	current = list2;
+	init_g_var(&current);
+	count_total_cmds(current);
+	execute_args(current, env);
+	alistclear(g_var.alist);
+	free_all(current);
 }
