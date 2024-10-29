@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:40:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/29 12:53:47 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/29 13:54:46 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,16 @@ char					*get_word(char *str, int *i);
 char					*search_env(int len, char *afterdoll, t_name *env);
 char					*search(char *arg, t_name *env);
 void					free_env_array(char **env_array);
+char					**env_to_array(t_name *env);
+void					sync_env_array(t_name *env);
+t_lsttoken				*last(t_lsttoken *list);
+void					add_back(t_lsttoken **lst, t_lsttoken *new);
+t_lsttoken				*newnode(int type, char **args);
+char					*loop_through_string(char *tmp2, char *exp_,
+							t_name *env);
+void					normi_quotes(char *str, char **exp_, t_name *env);
+char					*process_word(char *str, char *exp_, t_name *env);
+char					*init_tmp_vars(char *args, char **exp_);
 
 /********************** builtins *************************/
 
@@ -201,6 +211,7 @@ t_name					*create_and_init_node(const char *var,
 void					handle_invalid_identifier(const char *cmd);
 void					update_or_add_env_part1(t_name **env, const char *var,
 							t_name **prev, t_name **current);
+
 /********************** execution *************************/
 
 void					execute_args(t_lsttoken *token, t_name *env);

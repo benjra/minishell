@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:45:12 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/23 14:45:48 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/10/26 16:21:27 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ int	skip_quotes_in_count(char *str, int i)
 	return (i);
 }
 
+void	norme(char *str, int *i, int *len, int *flag)
+{
+	*flag = 0;
+	while (str[*i] && is_space(str[*i]))
+		(*i)++;
+	(*len)++;
+}
+
 int	countwrd(char *str)
 {
 	int	i;
@@ -69,10 +77,7 @@ int	countwrd(char *str)
 		i = skip_quotes_in_count(str, i);
 		if (is_space(str[i]))
 		{
-			flag = 0;
-			while (str[i] && is_space(str[i]))
-				i++;
-			len++;
+			norme(str, &i, &len, &flag);
 		}
 		else if (str[i])
 		{
@@ -85,19 +90,4 @@ int	countwrd(char *str)
 		}
 	}
 	return (len);
-}
-
-void	skip_quotes(char **str)
-{
-	char	c;
-
-	if (**str == '"' || **str == '\'')
-	{
-		c = **str;
-		(*str)++;
-		while (**str && **str != c)
-			(*str)++;
-		if (**str == c)
-			(*str)++;
-	}
 }

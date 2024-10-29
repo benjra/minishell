@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:10 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/26 00:31:10 by assia            ###   ########.fr       */
+/*   Updated: 2024/10/26 15:19:10 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_env(t_name *env, char *var)
 	{
 		if (ft_strncmp(temp->name, var, ft_strlen(var)) == 0
 			&& ft_strlen(var) == 0)
-			return (ft_strdup(""));
+			return (ft_strdup("$"));
 		if (ft_strncmp(temp->name, var, -1) == 0)
 		{
 			replace = ft_strdup(temp->value);
@@ -30,7 +30,7 @@ char	*ft_env(t_name *env, char *var)
 		}
 		else if (ft_strncmp("?", var, ft_strlen(var)) == 0)
 		{
-			replace = ft_strdup(ft_itoa(g_var.exit_s)); // leak
+			replace = ft_strdup(ft_itoa(g_var.exit_s));
 			return (replace);
 		}
 		temp = temp->next;
