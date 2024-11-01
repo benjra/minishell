@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 14:01:04 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/26 00:33:54 by assia            ###   ########.fr       */
+/*   Created: 2024/11/01 17:17:13 by amabchou          #+#    #+#             */
+/*   Updated: 2024/11/01 17:22:47 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void	execute_args(t_lsttoken *token, t_name *env)
 
 	g_var.exit_s = 0;
 	g_var.interactive = 0;
+	g_var.pre_pipe_infd = -1;
 	if (!token)
 		return ;
 	mini_heredoc(token, env);
@@ -140,9 +141,6 @@ void	execute_args(t_lsttoken *token, t_name *env)
 	{
 		if (!current->is_heredoc)
 		{
-			g_var.pre_pipe_infd = -1;
-			if (i > 0)
-				g_var.pre_pipe_infd = current->previous->pipe_fd[0];
 			execute_pipes(current, i, env);
 		}
 		current = current->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils7.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 14:00:58 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/26 00:45:37 by assia            ###   ########.fr       */
+/*   Created: 2024/11/01 17:16:51 by amabchou          #+#    #+#             */
+/*   Updated: 2024/11/01 17:16:52 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 void	sig_wait(t_lsttoken *token)
 {
-	int			i;
+	int			status;
 	t_lsttoken	*current;
 
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	i = -1;
 	current = token;
-	while (current && (g_var.size > 1 || check_builtin(token) == -1))
+	while (current)
 	{
-		if (++i == 0)
+		waitpid(current->pid, &status, 0);
+		if (WIFSIGNALED(status))
 		{
-			waitpid(g_var.last_child_id, &g_var.exit_s, 0);
-			if (WIFEXITED(g_var.exit_s))
-				g_var.exit_s = WEXITSTATUS(g_var.exit_s);
-			else if (g_var.exit_s == 3 || g_var.exit_s == 2)
-				g_var.exit_s += 128;
+			g_var.exit_s = 128 + WTERMSIG(status);
+			if (g_var.exit_s == 130)
+			{
+				write(1, "\n", 1);
+			}
+			else if (g_var.exit_s == 131)
+				write(1, "Quit\n", 6);
 		}
-		else
-		{
-			waitpid(-1, NULL, 0);
-		}
+		if (WIFEXITED(status))
+			g_var.exit_s = WEXITSTATUS(status);
 		current = current->next;
 	}
 	signal(SIGINT, handler);

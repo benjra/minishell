@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 14:40:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/29 13:54:46 by assia            ###   ########.fr       */
+/*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
+/*   Updated: 2024/11/01 17:18:23 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_var
 	int					interactive;
 	int					out_fd;
 	int					size;
+	int					i;
 	char				**envp;
 	int					pre_pipe_infd;
 	pid_t				last_child_id;

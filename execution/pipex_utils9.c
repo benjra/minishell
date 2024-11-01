@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils9.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 14:08:01 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/24 10:17:43 by assia            ###   ########.fr       */
+/*   Created: 2024/11/01 17:17:06 by amabchou          #+#    #+#             */
+/*   Updated: 2024/11/01 17:20:54 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,4 @@ void	handle_file_redirections(t_lsttoken *token, int btn)
 	}
 	else if (g_var.pre_pipe_infd != -1 && !token->in_fd_set)
 		dup2(g_var.pre_pipe_infd, 0);
-}
-
-void	handle_pipe_redirections(t_lsttoken *token, int pipe_nb)
-{
-	if (g_var.size != pipe_nb + 1 && !token->out_fd_set)
-		dup2(token->pipe_fd[1], 1);
-	if (token->pipe_fd[1] > 2)
-		close(token->pipe_fd[1]);
-	if (token->pipe_fd[0] > 2)
-		close(token->pipe_fd[0]);
 }
