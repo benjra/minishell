@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:35:52 by amabchou          #+#    #+#             */
-/*   Updated: 2024/10/26 15:18:52 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/01 18:17:22 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ void	alistclear(t_alst **lista)
 	}
 }
 
+void	setup_parsing(t_name *env, t_lsttoken *current)
+{
+	init_g_var(&current);
+	count_total_cmds(current);
+	execute_args(current, env);
+	alistclear(g_var.alist);
+	free(g_var.alist);
+	free_all(current);
+}
+
 void	parsing(char *str, t_name *env)
 {
 	char		**string;
@@ -57,15 +67,12 @@ void	parsing(char *str, t_name *env)
 	if (printf_err(list))
 	{
 		freelist1(list);
+		free(g_var.alist);
 		return ;
 	}
 	list2 = fill_token(list);
+	current = list2;
 	freelist1(list);
 	expander(list2, env);
-	current = list2;
-	init_g_var(&current);
-	count_total_cmds(current);
-	execute_args(current, env);
-	alistclear(g_var.alist);
-	free_all(current);
+	setup_parsing(env, current);
 }

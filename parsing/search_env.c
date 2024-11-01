@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:43:13 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/26 15:50:37 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/01 18:08:39 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 	char	*replace;
 	char	*var;
 	char	*tmp;
+	char	*result;
 
 	var = get_var(len, afterdoll);
 	tmp = var;
@@ -45,7 +46,13 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 	afterdoll += ft_strlen(var);
 	free(var);
 	if (ft_strchr(afterdoll, '$'))
-		search_env(ft_strlen(afterdoll), afterdoll, env);
+	{
+		result = search_env(ft_strlen(afterdoll), afterdoll, env);
+		tmp = replace;
+		replace = ft_strjoin(tmp, result);
+		free(tmp);
+		free(result);
+	}
 	else if (afterdoll)
 	{
 		tmp = replace;

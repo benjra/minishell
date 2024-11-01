@@ -6,35 +6,25 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:17:13 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/01 17:22:47 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/01 18:23:34 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing/mini.h"
 
-char	*get_env_in_herdoc(char *target, int flag, char *delimiter)
+char	*get_env_in_heredoc(char *target, int flag, char *delimiter)
 {
 	int		i;
 	char	*output;
 	int		y21n;
 
-	output = my_dup("");
 	i = 0;
+	output = my_dup("");
+	y21n = should_not_be_expanded(delimiter);
 	while ((size_t)i < ft_strlen(target))
 	{
-		y21n = should_not_be_expanded(delimiter);
 		if (target[i] == '$' && y21n != 1)
-		{
-			if (target[i + 1] == '?')
-				output = ft_strjoin(output, exit_status(ft_itoa(g_var.exit_s),
-							&i));
-			else if (!ft_isalnum(target[i + 1]) && target[i + 1] != '_')
-				output = ft_strjoin(output, special_cases(target, &i));
-			else if (ft_isdigit(target[i + 1]) == 1)
-				output = ft_strjoin(output, digit(target, &i));
-			else
-				output = ft_strjoin(output, gotta_expand(target, flag, &i));
-		}
+			output = handle_dollar_cases(target, output, flag, &i);
 		else
 			output = ft_strjoin(output, just_copy(target, &i));
 	}
@@ -56,7 +46,7 @@ void	read_herdoc(char *delimiter)
 	{
 		if (line)
 		{
-			expand = get_env_in_herdoc(line, 0, delimiter);
+			expand = get_env_in_heredoc(line, 0, delimiter);
 			write(fd, expand, ft_strlen(expand));
 			write(fd, "\n", 1);
 			free_str(expand);
@@ -73,28 +63,24 @@ void	read_herdoc(char *delimiter)
 void	my_heredoc(t_lsttoken *token)
 {
 	int		id;
-	t_redir	*current_redir;
+	int		child_pid;
+	char	*filename;
 
 	id = ffork();
 	if (id != 0)
-		g_var.heredoc_file = ft_strjoin("/tmp/heredoc_file", ft_itoa(id));
+	{
+		filename = setup_heredoc_filename(id);
+		g_var.heredoc_file = filename;
+	}
 	else
 		exit(0);
-	id = ffork();
-	if (id == 0)
-	{
-		signal(SIGINT, hd_sigint);
-		current_redir = token->redirections;
-		while (current_redir)
-		{
-			read_herdoc(current_redir->red);
-			current_redir = current_redir->next;
-		}
-		exit(0);
-	}
+	child_pid = ffork();
+	if (child_pid == 0)
+		process_heredoc_redirections(token);
 	signal(SIGINT, SIG_IGN);
-	waitpid(id, &g_var.exit_s, 0);
+	waitpid(child_pid, &g_var.exit_s, 0);
 	signal(SIGINT, handler);
+	free(filename);
 }
 
 void	mini_heredoc(t_lsttoken *token, t_name *env)

@@ -6,7 +6,7 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/01 17:18:23 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/01 18:24:16 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,7 @@ void					my_strncpy(char *dest, char *src, int n);
 void					check_cmd_path(t_lsttoken *token);
 void					check_command_name(t_lsttoken *token);
 int						get_var_index(char *key);
-char					*get_env_in_herdoc(char *target, int flag,
+char					*get_env_in_heredoc(char *target, int flag,
 							char *delimiter);
 void					read_herdoc(char *delimiter);
 void					my_heredoc(t_lsttoken *token);
@@ -277,5 +277,8 @@ int						handle_stat_error(char *path, int is_builtin);
 void					handle_pipe_redirections(t_lsttoken *token,
 							int pipe_nb);
 void					handle_file_redirections(t_lsttoken *token, int btn);
-
+char					*handle_dollar_cases(char *target, char *output,
+							int flag, int *i);
+void					process_heredoc_redirections(t_lsttoken *token);
+char					*setup_heredoc_filename(int id);
 #endif
