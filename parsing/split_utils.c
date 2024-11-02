@@ -89,5 +89,5 @@ int	countwrd(char *str)
 			i++;
 		}
 	}
-	return (len);
+	return (len + 1);
 }

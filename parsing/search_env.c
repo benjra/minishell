@@ -32,7 +32,6 @@ char	*get_var(int len, char *afterdoll)
 	var = ft_substr(afterdoll, 0, len - ft_strlen(get_specialcar(afterdoll)));
 	return (var);
 }
-
 char	*search_env(int len, char *afterdoll, t_name *env)
 {
 	char	*replace;
@@ -40,13 +39,15 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 	char	*tmp;
 	char	*result;
 
+	if(*afterdoll=='$')
+		afterdoll++;
 	var = get_var(len, afterdoll);
 	tmp = var;
 	replace = ft_env(env, tmp);
-	afterdoll += ft_strlen(var);
+	afterdoll += ft_strlen(var); 
 	free(var);
 	if (ft_strchr(afterdoll, '$'))
-	{
+	{	
 		result = search_env(ft_strlen(afterdoll), afterdoll, env);
 		tmp = replace;
 		replace = ft_strjoin(tmp, result);
@@ -71,9 +72,8 @@ char	*search(char *arg, t_name *env)
 	char	*tmp[2];
 
 	afterdol = ft_strchr(arg, '$');
-	*afterdol = '\0';
 	afterdol++;
-	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
+	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol) -1;
 	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
 	replace = ft_substr(arg, 0, ln_befdoll);
 	tmp[0] = replace;

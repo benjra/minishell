@@ -57,6 +57,7 @@ typedef struct s_var
 	int					out_fd;
 	int					size;
 	int					i;
+	int					flag;
 	char				**envp;
 	int					pre_pipe_infd;
 	pid_t				last_child_id;

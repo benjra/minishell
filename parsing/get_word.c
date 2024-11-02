@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "mini.h"
-
-int	handle_quotes_word(char *str, int *last, char *c)
+int	handle_quotes_word(char *str, int *last, char *c, int flag)
 {
 	if (str[*last] == '\'' || str[*last] == '\"')
 	{
+		if (!flag)
+			return (1);
 		*c = str[*last];
 		(*last)++;
 		while (str[*last] && str[*last] != *c)
@@ -56,14 +57,18 @@ char	*get_word(char *str, int *i)
 	char	c;
 	int		last;
 	char	*res;
+	int		flag;
 
+	flag = 0;
 	c = 0;
 	last = *i;
 	if (!str)
 		return (ft_strdup(""));
+	if (str[last] == '\'' || str[last] == '\"')
+		flag = 1;
 	while (str[last])
 	{
-		if (handle_quotes_word(str, &last, &c) || handle_dollar(str, &last))
+		if (handle_quotes_word(str, &last, &c, flag) || handle_dollar(str, &last))
 		{
 			if (last != *i)
 				break ;
