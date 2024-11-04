@@ -23,6 +23,7 @@ SRC_FILES = parsing/minishell.c \
 	parsing/search_env.c \
 	parsing/split_utils.c \
 	parsing/token_node.c \
+	parsing/strnstr1.c \
 	builtins/mini_echo.c \
 	builtins/mini_cd.c \
 	builtins/mini_pwd.c \

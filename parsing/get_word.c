@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "mini.h"
+
 int	handle_quotes_word(char *str, int *last, char *c, int flag)
 {
 	if (str[*last] == '\'' || str[*last] == '\"')
@@ -52,6 +53,15 @@ int	handle_dollar(char *str, int *last)
 	return (0);
 }
 
+int	norminet(char *str, int *last, char *c, int flag)
+{
+	if (handle_quotes_word(str, last, c, flag) || handle_dollar(str, last))
+	{
+		return (1);
+	}
+	return (0);
+}
+
 char	*get_word(char *str, int *i)
 {
 	char	c;
@@ -59,24 +69,22 @@ char	*get_word(char *str, int *i)
 	char	*res;
 	int		flag;
 
-	flag = 0;
 	c = 0;
 	last = *i;
+	flag = 0;
 	if (!str)
 		return (ft_strdup(""));
 	if (str[last] == '\'' || str[last] == '\"')
 		flag = 1;
 	while (str[last])
 	{
-		if (handle_quotes_word(str, &last, &c, flag) || handle_dollar(str, &last))
+		if (norminet(str, &last, &c, flag))
 		{
 			if (last != *i)
 				break ;
 		}
 		else
-		{
 			last++;
-		}
 	}
 	res = ft_substr(str, *i, last - *i);
 	*i = last;
