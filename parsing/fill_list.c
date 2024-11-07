@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/23 14:47:21 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/07 20:36:58 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	check_symbols(char *str, t_token **list)
 	else if (ft_strnstr1(str, "|", -1) && ft_strncmp(str, "|", -1))
 		parse_and_add_token(list, str, "|", 2);
 	else if (ft_strnstr1(str, "<", -1) && ft_strncmp(str, "<", -1)
-		&& ft_strncmp(str, "<<", -1))
+		&& ft_strncmp(str, "<<", -1))			
 		parse_and_add_token(list, str, "<", 3);
 	else if (ft_strnstr1(str, ">", -1) && ft_strncmp(str, ">", -1)
 		&& ft_strncmp(str, ">>", -1))

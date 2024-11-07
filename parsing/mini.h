@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/04 17:03:53 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/07 20:33:54 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ char					*loop_through_string(char *tmp2, char *exp_,
 void					normi_quotes(char *str, char **exp_, t_name *env);
 char					*process_word(char *str, char *exp_, t_name *env);
 char					*init_tmp_vars(char *args, char **exp_);
-char	*ft_strnstr1(const char *haystack, const char *needle, int len);
+char	*ft_strnstr1(const char *haystack, const char *needle, size_t len);
 
 /********************** builtins *************************/
 
