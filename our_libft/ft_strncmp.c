@@ -6,11 +6,11 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:49:55 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/21 14:26:38 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/12 11:03:24 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" // for size_t
+#include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
