@@ -6,7 +6,7 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:36 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/21 14:57:51 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/13 11:15:29 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_name	*init_env(char **en)
 static void	main_loop(t_name *env)
 {
 	char	*cmd;
-
+	
 	g_var.flag = 1;
 	while (1)
 	{

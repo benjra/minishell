@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils7.c                                     :+:      :+:    :+:   */
+/*   putils3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oait-bou <oait-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 17:16:51 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/01 17:16:52 by amabchou         ###   ########.fr       */
+/*   Created: 2024/11/12 08:52:14 by amabchou          #+#    #+#             */
+/*   Updated: 2024/11/13 11:55:50 by oait-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,21 @@ void	sig_wait(t_lsttoken *token)
 	while (current)
 	{
 		waitpid(current->pid, &status, 0);
-		if (WIFSIGNALED(status))
-		{
-			g_var.exit_s = 128 + WTERMSIG(status);
-			if (g_var.exit_s == 130)
-			{
-				write(1, "\n", 1);
-			}
-			else if (g_var.exit_s == 131)
-				write(1, "Quit\n", 6);
-		}
-		if (WIFEXITED(status))
-			g_var.exit_s = WEXITSTATUS(status);
 		current = current->next;
 	}
+			g_var.exit_s = 128 + WTERMSIG(status);
+			if (WTERMSIG(status) + 128 == 130)
+			{
+				g_var.exit_s = 128 + WTERMSIG(status);
+				write(1, "\n", 1);
+			}
+			else if (WTERMSIG(status) + 128 == 131)
+			{
+				g_var.exit_s = 128 + WTERMSIG(status);
+				write(1, "Quit\n", 6);
+			}
+			else
+			  g_var.exit_s = WEXITSTATUS(status);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 }

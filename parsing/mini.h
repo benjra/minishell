@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/07 20:33:54 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/14 09:29:48 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,23 @@ typedef struct s_alist
 }						t_alst;
 typedef struct s_var
 {
-	char				*heredoc_file;
 	int					exit_s;
 	int					interactive;
 	int					out_fd;
 	int					size;
-	int					i;
 	int					flag;
+	int					i;
 	char				**envp;
 	int					pre_pipe_infd;
 	pid_t				last_child_id;
 	int					is_heredoc_last;
 	int					red_error;
 	t_alst				**alist;
+	char 				*fd;
+	int					btn;
+	char				**hd_files;
 }						t_var;
+
 
 extern t_var			g_var;
 
@@ -160,7 +163,7 @@ char					*loop_through_string(char *tmp2, char *exp_,
 void					normi_quotes(char *str, char **exp_, t_name *env);
 char					*process_word(char *str, char *exp_, t_name *env);
 char					*init_tmp_vars(char *args, char **exp_);
-char	*ft_strnstr1(const char *haystack, const char *needle, size_t len);
+char					*ft_strnstr1(const char *haystack, const char *needle, size_t len);
 
 /********************** builtins *************************/
 
@@ -241,29 +244,21 @@ int						upto(char *str, char c);
 char					*r_quotes(char *str);
 char					*replace(char *str, char rip);
 int						ffork(void);
-void					free_str(void *ptr);
 int						should_not_be_expanded(char *str);
 void					print_perror(char *str, int exitt);
 void					my_strncpy(char *dest, char *src, int n);
 void					check_cmd_path(t_lsttoken *token);
 void					check_command_name(t_lsttoken *token);
 int						get_var_index(char *key);
-char					*get_env_in_heredoc(char *target, int flag,
-							char *delimiter);
-void					read_herdoc(char *delimiter);
-void					my_heredoc(t_lsttoken *token);
-void					mini_heredoc(t_lsttoken *token, t_name *env);
 void					exec_builtin(int btn, t_lsttoken *token, t_name *env);
 int						check_file_errors(char *path, int builtin);
 int						check_path(char *path, int is_builtin);
-void					files_redirections(t_lsttoken *token, int builtin);
 void					execute_pipes(t_lsttoken *token, int pipe_nb,
 							t_name *env);
 char					*put_cmd_status(int status, char *cmd_path, char *cmd);
 char					*get_cmd_path(char *cmd, char **exec_programs_dirs);
 void					validate_cmd(t_lsttoken *token);
 void					execs(t_lsttoken *token, int btn, t_name *env);
-int						open_heredoc_file(int read_only);
 int						check_builtin(t_lsttoken *token);
 void					append_file_prep(t_lsttoken *token, char *path,
 							int is_builtin);
@@ -281,6 +276,5 @@ void					handle_pipe_redirections(t_lsttoken *token,
 void					handle_file_redirections(t_lsttoken *token, int btn);
 char					*handle_dollar_cases(char *target, char *output,
 							int flag, int *i);
-void					process_heredoc_redirections(t_lsttoken *token);
-char					*setup_heredoc_filename(int id);
+
 #endif

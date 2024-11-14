@@ -45,7 +45,7 @@ void	normi_quotes(char *str, char **exp_, t_name *env)
 {
 	char	*tmp_0;
 
-	if (g_var.flag == 1 && *str == '\'')
+	if (*str == '\'')
 	{
 		tmp_0 = ins_quote(str);
 		free(str);
@@ -56,9 +56,8 @@ void	normi_quotes(char *str, char **exp_, t_name *env)
 	}
 	else if (*str == '"')
 	{
-		g_var.flag = 0;
 		tmp_0 = ins_quote(str);
-		*exp_ = loop_through_string(tmp_0, *exp_, env);
+		*exp_ = process_word(tmp_0, *exp_, env);
 		free(str);
 	}
 	else

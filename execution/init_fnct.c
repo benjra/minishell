@@ -6,38 +6,11 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:15:17 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/01 18:23:08 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:45:26 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing/mini.h"
-
-char	*setup_heredoc_filename(int id)
-{
-	char	*id_str;
-	char	*filename;
-
-	id_str = ft_itoa(id);
-	if (!id_str)
-		return (NULL);
-	filename = ft_strjoin("/tmp/heredoc_file", id_str);
-	free(id_str);
-	return (filename);
-}
-
-void	process_heredoc_redirections(t_lsttoken *token)
-{
-	t_redir	*current_redir;
-
-	signal(SIGINT, hd_sigint);
-	current_redir = token->redirections;
-	while (current_redir)
-	{
-		read_herdoc(current_redir->red);
-		current_redir = current_redir->next;
-	}
-	exit(0);
-}
 
 void	init_g_var(t_lsttoken **token)
 {

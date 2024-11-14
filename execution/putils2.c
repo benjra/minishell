@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils8.c                                     :+:      :+:    :+:   */
+/*   putils2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 17:16:58 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/01 17:17:00 by amabchou         ###   ########.fr       */
+/*   Created: 2024/11/12 08:52:07 by amabchou          #+#    #+#             */
+/*   Updated: 2024/11/13 10:56:19 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,20 +88,4 @@ void	execs(t_lsttoken *token, int btn, t_name *env)
 	}
 	else
 		exit(0);
-}
-
-int	open_heredoc_file(int read_only)
-{
-	int	fd;
-
-	if (read_only)
-		fd = open(g_var.heredoc_file, O_RDWR, 0004);
-	else
-		fd = open(g_var.heredoc_file, O_CREAT | O_RDWR | O_TRUNC, 0777);
-	if (fd == -1)
-	{
-		perror("");
-		exit(1);
-	}
-	return (fd);
 }

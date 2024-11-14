@@ -6,7 +6,7 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:35:52 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/12 10:40:28 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:45:10 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	parsing(char *str, t_name *env)
 		return ;
 	}
 	list2 = fill_token(list);
-	current = list2;
 	freelist1(list);
 	expander(list2, env);
 	current = list2;

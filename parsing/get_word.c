@@ -12,12 +12,10 @@
 
 #include "mini.h"
 
-int	handle_quotes_word(char *str, int *last, char *c, int flag)
+int	handle_quotes_word(char *str, int *last, char *c)
 {
 	if (str[*last] == '\'' || str[*last] == '\"')
 	{
-		if (!flag)
-			return (1);
 		*c = str[*last];
 		(*last)++;
 		while (str[*last] && str[*last] != *c)
@@ -53,38 +51,27 @@ int	handle_dollar(char *str, int *last)
 	return (0);
 }
 
-int	norminet(char *str, int *last, char *c, int flag)
-{
-	if (handle_quotes_word(str, last, c, flag) || handle_dollar(str, last))
-	{
-		return (1);
-	}
-	return (0);
-}
-
 char	*get_word(char *str, int *i)
 {
 	char	c;
 	int		last;
 	char	*res;
-	int		flag;
 
 	c = 0;
 	last = *i;
-	flag = 0;
 	if (!str)
 		return (ft_strdup(""));
-	if (str[last] == '\'' || str[last] == '\"')
-		flag = 1;
 	while (str[last])
 	{
-		if (norminet(str, &last, &c, flag))
+		if (handle_quotes_word(str, &last, &c) || handle_dollar(str, &last))
 		{
 			if (last != *i)
 				break ;
 		}
 		else
+		{
 			last++;
+		}
 	}
 	res = ft_substr(str, *i, last - *i);
 	*i = last;

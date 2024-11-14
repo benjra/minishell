@@ -33,13 +33,6 @@ char	*get_var(int len, char *afterdoll)
 	return (var);
 }
 
-void	normi(char **replace, char *tmp, char *afterdoll)
-{
-	tmp = *replace;
-	*replace = ft_strjoin(tmp, afterdoll);
-	free(tmp);
-}
-
 char	*search_env(int len, char *afterdoll, t_name *env)
 {
 	char	*replace;
@@ -47,8 +40,6 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 	char	*tmp;
 	char	*result;
 
-	if (*afterdoll == '$')
-		afterdoll++;
 	var = get_var(len, afterdoll);
 	tmp = var;
 	replace = ft_env(env, tmp);
@@ -63,7 +54,11 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 		free(result);
 	}
 	else if (afterdoll)
-		normi(&replace, tmp, afterdoll);
+	{
+		tmp = replace;
+		replace = ft_strjoin(tmp, afterdoll);
+		free(tmp);
+	}
 	return (replace);
 }
 
@@ -76,13 +71,10 @@ char	*search(char *arg, t_name *env)
 	char	*tmp[2];
 
 	afterdol = ft_strchr(arg, '$');
+	*afterdol = '\0';
 	afterdol++;
-	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol) - 1;
+	ln_befdoll = ft_strlen(arg) - ft_strlen(afterdol);
 	ln_aftdoll = ft_strlen(arg) - ln_befdoll;
-	if (*arg == '\'')
-		ln_aftdoll = ft_strlen(arg) - ln_befdoll - 1;
-	else
-		ln_aftdoll = ft_strlen(arg) - ln_befdoll;
 	replace = ft_substr(arg, 0, ln_befdoll);
 	tmp[0] = replace;
 	tmp[1] = search_env(ln_aftdoll, afterdol, env);

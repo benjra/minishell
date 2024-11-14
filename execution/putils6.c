@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils4.c                                     :+:      :+:    :+:   */
+/*   putils6.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 17:16:32 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/01 17:16:33 by amabchou         ###   ########.fr       */
+/*   Created: 2024/11/12 08:52:34 by amabchou          #+#    #+#             */
+/*   Updated: 2024/11/14 09:28:59 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,6 @@ int	ffork(void)
 	return (id);
 }
 
-void	free_str(void *ptr)
-{
-	if (ptr)
-		free(ptr);
-}
-
 int	should_not_be_expanded(char *str)
 {
 	int	i;
@@ -86,9 +80,7 @@ int	should_not_be_expanded(char *str)
 	while (str[i])
 	{
 		if (str[i] == 39 || str[i] == 34)
-		{
 			return (1);
-		}
 		i++;
 	}
 	return (-1);

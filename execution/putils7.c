@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils3.c                                     :+:      :+:    :+:   */
+/*   putils7.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 17:16:26 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/01 17:24:20 by amabchou         ###   ########.fr       */
+/*   Created: 2024/11/12 08:52:41 by amabchou          #+#    #+#             */
+/*   Updated: 2024/11/12 10:22:50 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ t_alst	*lista_new(void *content)
 void	hd_sigint(int sig)
 {
 	(void)sig;
-	exit(1);
+	free_env_array(g_var.envp);
+	rl_clear_history();
+	exit(130);
 }
 
 int	upto(char *str, char c)

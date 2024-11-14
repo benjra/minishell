@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils1.c                                     :+:      :+:    :+:   */
+/*   putils9.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oait-bou <oait-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 17:16:12 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/01 17:23:08 by amabchou         ###   ########.fr       */
+/*   Created: 2024/11/12 08:52:56 by amabchou          #+#    #+#             */
+/*   Updated: 2024/11/13 12:03:01 by oait-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	check_path(char *path, int is_builtin)
 	return (1);
 }
 
-void	files_redirections(t_lsttoken *token, int builtin)
+void files_redirections(t_lsttoken *token, int builtin)
 {
 	char	*path;
 	t_redir	*curr_red;
@@ -92,19 +92,23 @@ void	files_redirections(t_lsttoken *token, int builtin)
 			out_file_prep(token, path, builtin);
 		else if (curr_red->type == 5)
 			append_file_prep(token, path, builtin);
+		else if (curr_red->type == 6)
+		{
+			int b = open(g_var.fd, O_RDONLY);
+			dup2(b,0);
+			close (b);
+		}
 		curr_red = curr_red->next;
 	}
 }
 
 void	execute_pipes(t_lsttoken *token, int pipe_nb, t_name *env)
 {
-	int	btn;
-
-	btn = check_builtin(token);
-	if (g_var.size == 1 && btn != -1)
+	g_var.btn = check_builtin(token);
+	if (g_var.size == 1 && g_var.btn != -1)
 	{
 		files_redirections(token, 1);
-		exec_builtin(btn, token, env);
+		exec_builtin(g_var.btn, token, env);
 	}
 	else
 	{
@@ -116,7 +120,12 @@ void	execute_pipes(t_lsttoken *token, int pipe_nb, t_name *env)
 				exit(1);
 			}
 		}
-		child_process(token, pipe_nb, btn, env);
+		else
+		{
+			token->pipe_fd[0] = 0;
+			token->pipe_fd[1] = 0;
+		}
+		child_process(token, pipe_nb, g_var.btn, env);
 		if (token->pipe_fd[1] > 2)
 			close(token->pipe_fd[1]);
 		if (g_var.pre_pipe_infd > 2)
