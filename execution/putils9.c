@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   putils9.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oait-bou <oait-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 08:52:56 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/13 12:03:01 by oait-bou         ###   ########.fr       */
+/*   Updated: 2024/11/14 11:40:40 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void files_redirections(t_lsttoken *token, int builtin)
 		path = curr_red->red;
 		if (check_file_errors(path, builtin))
 			break ;
-		path = r_quotes(curr_red->red);
+		// path = r_quotes(curr_red->red);
+		path = curr_red->red;
 		if (!check_path(path, builtin))
 			break ;
 		if (curr_red->type == 3)

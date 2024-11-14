@@ -6,7 +6,7 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 08:51:54 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/14 09:32:26 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/14 10:49:54 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ int	wait_heredoc(int pid)
 
 int	ft_heredoc(int i,t_lsttoken *token, t_name *env)
 {
-	char *len;
+	char	*len;
 	t_redir *file;
-	char *name;
-	int b;
-	int id;
+	char 	*name;
+	int 	b;
+	int		id;
+	char	*num;
 
 	file = token->redirections;
 	if (count_heredoc(token) > 16)
@@ -67,7 +68,13 @@ int	ft_heredoc(int i,t_lsttoken *token, t_name *env)
 	{
 		if (file->type == 6)
 		{
-			name =ft_strjoin("file",ft_itoa (i));
+			num = ft_itoa(i);
+			if (!num)
+				return (1);
+			name =ft_strjoin("file",num);
+			free(num);
+			if (!name)
+				return (1);
 			id = ffork();
 			if (id == 0)
 			{
@@ -75,15 +82,23 @@ int	ft_heredoc(int i,t_lsttoken *token, t_name *env)
 				b = open (name,O_RDWR | O_CREAT | O_TRUNC, 0777);
 				while ((len = readline("> ")))
 				{
-					if (!ft_strcmp(len,file->red)) //i need to free here
+					if (!ft_strcmp(len,file->red))
+					{
+						free(len);
+						close (b);
 						exit (1);
+					}
 					len = ft_strjoin(len,"\n");
 					write(b,len,ft_strlen (len));
+					free(len);
 				}
 				close (b);
 			}
 			if (wait_heredoc(id))
+			{
+				free(name);
 				return (1);
+			}
 		}
 		file = file->next;
 	}
@@ -106,6 +121,8 @@ void	execute_args(t_lsttoken *token, t_name *env)
 	g_var.fd = NULL;
 	current = token;
 	g_var.hd_files = ft_calloc(17, sizeof(char *));
+	if (!g_var.hd_files)
+		return ;
 	signal(SIGINT, SIG_IGN);
 	while (current && g_var.exit_s == 0)
 	{
