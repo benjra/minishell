@@ -3,19 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   strnstr1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:03:00 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/12 11:37:56 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:52:23 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	quote(const char **haystack)
+int	quote(char **haystack)
 {
 	char	c;
 
+	if(!haystack || !*haystack)
+	{
+		return (0);	
+	}
 	c = **haystack;
 	(*haystack)++;
 	while (**haystack && **haystack != c)
@@ -38,7 +42,7 @@ char	*ft_strnstr1(const char *haystack, const char *needle, size_t len)
 	{
 		if (haystack[i] == '\'' || haystack[i] == '"')
 		{
-			quote(&haystack + i);
+			quote((char **)&haystack[i]);
 			if (!haystack[i])
 				return (NULL);
 		}
@@ -47,9 +51,7 @@ char	*ft_strnstr1(const char *haystack, const char *needle, size_t len)
 		{
 			j++;
 			if (needle[j] == '\0')
-			{
 				return ((char *)haystack + i);
-			}
 		}
 		i++;
 	}
