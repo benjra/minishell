@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   strnstr1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:03:00 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/14 12:52:23 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:04:28 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
-int	quote(char **haystack)
+int	quote(const char *haystack, size_t *i)
 {
 	char	c;
 
-	if(!haystack || !*haystack)
+	if (!haystack || !haystack[(*i)])
 	{
-		return (0);	
+		return (0);
 	}
-	c = **haystack;
-	(*haystack)++;
-	while (**haystack && **haystack != c)
-		(*haystack)++;
-	if (**haystack == c)
-		(*haystack)++;
+	c = haystack[(*i)];
+	(*i)++;
+	while (haystack[(*i)] && haystack[(*i)] != c)
+		(*i)++;
+	if (haystack[(*i)] == c)
+		(*i)++;
 	return (1);
 }
 
@@ -42,7 +42,7 @@ char	*ft_strnstr1(const char *haystack, const char *needle, size_t len)
 	{
 		if (haystack[i] == '\'' || haystack[i] == '"')
 		{
-			quote((char **)&haystack[i]);
+			quote(haystack, &i);
 			if (!haystack[i])
 				return (NULL);
 		}

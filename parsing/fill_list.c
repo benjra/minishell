@@ -41,7 +41,7 @@ void	check_symbols(char *str, t_token **list)
 	else if (ft_strnstr1(str, "|", -1) && ft_strncmp(str, "|", -1))
 		parse_and_add_token(list, str, "|", 2);
 	else if (ft_strnstr1(str, "<", -1) && ft_strncmp(str, "<", -1)
-		&& ft_strncmp(str, "<<", -1))			
+		&& ft_strncmp(str, "<<", -1))
 		parse_and_add_token(list, str, "<", 3);
 	else if (ft_strnstr1(str, ">", -1) && ft_strncmp(str, ">", -1)
 		&& ft_strncmp(str, ">>", -1))

@@ -1,6 +1,6 @@
 NAME = minishell
 #-g -fsanitize=address
-CCFLGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CCFLGS = -Wall -Wextra -Werror #-g3 #-fsanitize=address
 
 CC = cc
 LIBFT = our_libft/libft.a
@@ -32,17 +32,15 @@ SRC_FILES = parsing/minishell.c \
 	builtins/mini_exit.c \
 	builtins/mini_unset.c \
 	builtins/env_utils.c \
-	execution/init_fnct.c \
-	execution/putils0.c \
-	execution/putils1.c \
-	execution/putils2.c \
-	execution/putils3.c \
-	execution/putils4.c \
-	execution/putils5.c \
-	execution/putils6.c \
-	execution/putils7.c \
-	execution/putils8.c \
-	execution/putils9.c \
+	execution/handle_args.c \
+	execution/handle_hd.c \
+	execution/args_utils0.c \
+	execution/args_utils1.c \
+	execution/args_utils2.c \
+	execution/args_utils3.c \
+	execution/args_utils4.c \
+	execution/hd_utils0.c \
+	execution/hd_utils1.c \
 	builtins/cd_utils.c	\
 	builtins/export_utils1.c \
 	builtins/export_utils2.c \

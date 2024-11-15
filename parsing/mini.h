@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/14 14:04:00 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:59:21 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ typedef struct s_var
 	int					is_heredoc_last;
 	int					red_error;
 	t_alst				**alist;
-	char 				*fd;
+	char				*fd;
 	int					btn;
 	char				**hd_files;
 }						t_var;
-
 
 extern t_var			g_var;
 
@@ -89,8 +88,8 @@ typedef struct s_redir
 {
 	int					type;
 	char				*red;
-	int	expand;
 	struct s_redir		*next;
+	int					expand;
 	struct s_redir		*previous;
 }						t_redir;
 
@@ -164,7 +163,9 @@ char					*loop_through_string(char *tmp2, char *exp_,
 void					normi_quotes(char *str, char **exp_, t_name *env);
 char					*process_word(char *str, char *exp_, t_name *env);
 char					*init_tmp_vars(char *args, char **exp_);
-char					*ft_strnstr1(const char *haystack, const char *needle, size_t len);
+char					*ft_strnstr1(const char *haystack, const char *needle,
+							size_t len);
+char					*small_expand(char *args, t_name *env);
 
 /********************** builtins *************************/
 
@@ -228,30 +229,15 @@ t_alst					*lista_new(void *content);
 void					files_redirections(t_lsttoken *token, int builtin);
 void					exec_builtin(int btn, t_lsttoken *token, t_name *env);
 void					sig_wait(t_lsttoken *token);
-char					*just_copy(char *target, int *i);
-char					*digit(char *target, int *i);
-char					*gotta_expand(char *target, int flag, int *i);
-char					*get_var_val(int var_index);
-char					*add_something(char *str, char *add);
-int						validate_var_name(char *var);
-char					*my_dup(const char *s);
 char					*until_dollar(char *str);
-char					*exit_status(char *variable, int *i);
-char					*special_cases(char *target, int *i);
-void					lista_add_front(t_alst **lst, t_alst *new);
-t_alst					*lista_new(void *content);
 void					hd_sigint(int sig);
-int						upto(char *str, char c);
 char					*r_quotes(char *str);
 char					*replace(char *str, char rip);
-int						ffork(void);
-int						should_not_be_expanded(char *str);
 void					print_perror(char *str, int exitt);
 void					my_strncpy(char *dest, char *src, int n);
 void					check_cmd_path(t_lsttoken *token);
 void					check_command_name(t_lsttoken *token);
 int						get_var_index(char *key);
-void					exec_builtin(int btn, t_lsttoken *token, t_name *env);
 int						check_file_errors(char *path, int builtin);
 int						check_path(char *path, int is_builtin);
 void					execute_pipes(t_lsttoken *token, int pipe_nb,
@@ -270,12 +256,15 @@ void					in_file_prep(t_lsttoken *token, char *path,
 void					child_process(t_lsttoken *token, int pipe_nb, int btn,
 							t_name *env);
 char					*allocate_folders(char *path, int i);
-void					handle_malloc_error(void);
 int						handle_stat_error(char *path, int is_builtin);
 void					handle_pipe_redirections(t_lsttoken *token,
 							int pipe_nb);
 void					handle_file_redirections(t_lsttoken *token, int btn);
-char					*handle_dollar_cases(char *target, char *output,
-							int flag, int *i);
+char					*hdfile(int i);
+void					free_heredoc(int exit_s, char *s, t_name *env,
+							t_lsttoken *token);
+char					*hdexpand(char *l);
+int						ft_heredoc(int i, t_lsttoken *token, t_name *env);
+void					handle_signals(int mode);
 
 #endif

@@ -1,39 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   putils8.c                                          :+:      :+:    :+:   */
+/*   args_utils3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 08:52:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/12 08:52:51 by amabchou         ###   ########.fr       */
+/*   Created: 2024/11/15 09:56:48 by amabchou          #+#    #+#             */
+/*   Updated: 2024/11/15 09:56:53 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing/mini.h"
-
-void	child_process(t_lsttoken *token, int pipe_nb, int btn, t_name *env)
-{
-	(void)pipe_nb;
-	g_var.last_child_id = fork();
-	if (g_var.last_child_id == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-		if (g_var.pre_pipe_infd != -1)
-			dup2(g_var.pre_pipe_infd, STDIN_FILENO);
-		if (token->pipe_fd[1] > 2)
-			dup2(token->pipe_fd[1], STDOUT_FILENO);
-		if (g_var.pre_pipe_infd > 2)
-			close(g_var.pre_pipe_infd);
-		if (token->pipe_fd[0] > 2)
-			close(token->pipe_fd[0]);
-		if (token->pipe_fd[1] > 2)
-			close(token->pipe_fd[1]);
-		handle_file_redirections(token, btn);
-		execs(token, btn, env);
-	}
-}
 
 void	in_file_prep(t_lsttoken *token, char *path, int is_builtin)
 {
@@ -115,22 +92,41 @@ void	append_file_prep(t_lsttoken *token, char *path, int is_builtin)
 	}
 }
 
-int	check_builtin(t_lsttoken *token)
+int	check_path(char *path, int is_builtin)
 {
-	if (!ft_strcmp("cd", token->args[0]))
+	char		*folders;
+	struct stat	statbuf;
+	int			i;
+
+	if (ft_strchr(path, '/') == 0)
 		return (1);
-	else if (!ft_strcmp("echo", token->args[0]))
-		return (2);
-	else if (!ft_strcmp("env", token->args[0]))
-		return (3);
-	else if (!ft_strcmp("exit", token->args[0]))
-		return (4);
-	else if (!ft_strcmp("export", token->args[0]))
-		return (5);
-	else if (!ft_strcmp("pwd", token->args[0]))
-		return (6);
-	else if (!ft_strcmp("unset", token->args[0]))
-		return (7);
-	else
-		return (-1);
+	i = ft_strlen(path);
+	while (i != 0 && path[i] != '/')
+		i--;
+	folders = allocate_folders(path, i);
+	if (stat(folders, &statbuf) == -1)
+		return (handle_stat_error(path, is_builtin));
+	return (1);
+}
+
+int	check_file_errors(char *path, int builtin)
+{
+	if (path && (path[0] == '$' || (path[0] == '"' && path[1] == '$')))
+	{
+		g_var.red_error = 1;
+		g_var.exit_s = 1;
+		if (path[0] == '$' && path[1])
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(path, 2);
+			ft_putstr_fd(" ambiguous redirect\n", 2);
+		}
+		else
+			ft_putstr_fd("minishell: No such file or directory\n", 2);
+		if (builtin)
+			return (1);
+		else
+			exit(1);
+	}
+	return (0);
 }

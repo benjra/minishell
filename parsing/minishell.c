@@ -53,7 +53,7 @@ static t_name	*init_env(char **en)
 static void	main_loop(t_name *env)
 {
 	char	*cmd;
-	
+
 	g_var.flag = 1;
 	while (1)
 	{
