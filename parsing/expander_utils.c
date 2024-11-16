@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/26 16:20:58 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/16 09:26:44 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,18 @@ char	*process_word(char *str, char *exp_, t_name *env)
 {
 	char	*search_tmp;
 	char	*new_exp_;
-
+	char	*ss;
+	
 	if (ft_strchr(str, '$'))
 	{
 		search_tmp = search(str, env);
-		new_exp_ = ft_strjoin(exp_, search_tmp);
+		ss = ft_strchr(str, '$');
+		ss = ft_substr(str , 0 , ss - str);
+		new_exp_ = ft_strjoin(exp_, ss);
+		free(ss);
+		ss = new_exp_;
+		new_exp_ = ft_strjoin(new_exp_, search_tmp);
+		free(ss);
 		free(search_tmp);
 	}
 	else
