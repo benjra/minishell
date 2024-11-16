@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_hd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:21:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/15 18:17:25 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:30:32 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	handle_heredoc_child(char *name, t_redir *file, t_name *env)
 		len = ft_strjoin(len, "\n");
 		if (file->expand)
 		{
-			len = small_expand(len, env);
+			len = small_expand__(len, env);
 			write(b, len, ft_strlen(len));
 		}
 		else

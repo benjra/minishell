@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:44:32 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/26 16:22:55 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:32:43 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,31 @@ char	*get_word(char *str, int *i)
 	while (str[last])
 	{
 		if (handle_quotes_word(str, &last, &c) || handle_dollar(str, &last))
+		{
+			if (last != *i)
+				break ;
+		}
+		else
+		{
+			last++;
+		}
+	}
+	res = ft_substr(str, *i, last - *i);
+	*i = last;
+	return (res);
+}
+
+char	*get_word__(char *str, int *i)
+{
+	int		last;
+	char	*res;
+
+	last = *i;
+	if (!str)
+		return (ft_strdup(""));
+	while (str[last])
+	{
+		if (handle_dollar(str, &last))
 		{
 			if (last != *i)
 				break ;

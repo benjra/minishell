@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/15 14:59:21 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:32:20 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,4 +267,7 @@ char					*hdexpand(char *l);
 int						ft_heredoc(int i, t_lsttoken *token, t_name *env);
 void					handle_signals(int mode);
 
+
+char	*small_expand__(char *args, t_name *env);
+char	*get_word__(char *str, int *i);
 #endif
