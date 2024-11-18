@@ -267,7 +267,6 @@ char					*hdexpand(char *l);
 int						ft_heredoc(int i, t_lsttoken *token, t_name *env);
 void					handle_signals(int mode);
 
-
-char	*small_expand__(char *args, t_name *env);
-char	*get_word__(char *str, int *i);
+char					*small_expand__(char *args, t_name *env);
+char					*get_word__(char *str, int *i);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_hd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:21:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/16 12:30:32 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:38:11 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	handle_heredoc_child(char *name, t_redir *file, t_name *env)
 {
 	int		b;
 	char	*len;
-	(void) env;
 
 	signal(SIGINT, hd_sigint);
 	b = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);

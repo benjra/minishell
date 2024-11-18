@@ -39,7 +39,7 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 	char	*var;
 	char	*tmp;
 	char	*result;
-	char *ss;
+	char	*ss;
 
 	var = get_var(len, afterdoll);
 	tmp = var;
@@ -49,9 +49,9 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 	if (ft_strchr(afterdoll, '$'))
 	{
 		ss = afterdoll;
-		afterdoll=ft_strchr(afterdoll,'$');
+		afterdoll = ft_strchr(afterdoll, '$');
 		afterdoll++;
-		ss = ft_substr(ss, 0,afterdoll - ss);
+		ss = ft_substr(ss, 0, afterdoll - ss);
 		replace = ft_strjoin(replace, ss);
 		free(ss);
 		result = search_env(ft_strlen(afterdoll), afterdoll, env);

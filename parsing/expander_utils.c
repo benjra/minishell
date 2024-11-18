@@ -51,9 +51,10 @@ char	*process_word(char *str, char *exp_, t_name *env)
 void	normi_quotes(char *str, char **exp_, t_name *env)
 {
 	char	*tmp_0;
-	int i=0;
-	char *tmp2;
+	int		i;
+	char	*tmp2;
 
+	i = 0;
 	if (*str == '\'')
 	{
 		tmp_0 = ins_quote(str);
@@ -66,10 +67,10 @@ void	normi_quotes(char *str, char **exp_, t_name *env)
 	else if (*str == '"')
 	{
 		tmp2 = ins_quote(str);
-		while(tmp2[i])
+		while (tmp2[i])
 		{
-		tmp_0=get_word(tmp2,&i);
-		*exp_ = process_word(tmp_0, *exp_, env);//here the problem
+			tmp_0 = get_word(tmp2, &i);
+			*exp_ = process_word(tmp_0, *exp_, env); // here the problem
 		}
 		free(str);
 	}
