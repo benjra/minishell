@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:35:52 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/13 13:45:10 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:16:30 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void	parsing(char *str, t_name *env)
 	list2 = fill_token(list);
 	freelist1(list);
 	expander(list2, env);
-	current = list2;
+	current = list2; // list2 need free after use
 	setup_parsing(env, current);
 }

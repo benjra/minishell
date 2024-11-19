@@ -50,30 +50,30 @@ void	check_symbols(char *str, t_token **list)
 		lstadd_backs(list, lstnews(get_type(str), ft_strdup(str)));
 }
 
-char *ft_strchr_skip_quotes(const char *s, char *c)
+char	*ft_strchr_skip_quotes(const char *s, char *c)
 {
-    int in_quotes;
-    char quote_char;
+	int		in_quotes;
+	char	quote_char;
 
 	in_quotes = 0;
 	quote_char = '\0';
-    while (*s)
-    {
-        if ((*s == '\'' || *s == '\"') && (in_quotes == 0 || *s == quote_char))
-        {
-            if (in_quotes)
-                in_quotes = 0;
-            else
-            {
-                in_quotes = 1;
-                quote_char = *s;
-            }
-        }
-        else if (*s == *c && !in_quotes)
-            return ((char *)s);
-        s++;
-    }
-    return (NULL);
+	while (*s)
+	{
+		if ((*s == '\'' || *s == '\"') && (in_quotes == 0 || *s == quote_char))
+		{
+			if (in_quotes)
+				in_quotes = 0;
+			else
+			{
+				in_quotes = 1;
+				quote_char = *s;
+			}
+		}
+		else if (*s == *c && !in_quotes)
+			return ((char *)s);
+		s++;
+	}
+	return (NULL);
 }
 
 t_token	*fill_list(char **lst)

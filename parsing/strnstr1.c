@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:03:00 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/19 12:12:13 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:18:10 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*ft_strnstr1(const char *haystack, const char *needle, size_t len)
 	}
 	return (NULL);
 }
+
 char	*ft_strchr1(const char *s, int c)
 {
 	size_t	i;

@@ -6,11 +6,17 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/19 12:13:05 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:25:55 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+void	norm_free(char *s1, char *s2)
+{
+	free(s1);
+	free(s2);
+}
 
 char	*init_tmp_vars(char *args, char **exp_)
 {
@@ -61,8 +67,7 @@ void	normi_quotes(char *str, char **exp_, t_name *env)
 		free(str);
 		str = *exp_;
 		*exp_ = ft_strjoin(*exp_, tmp_0);
-		free(str);
-		free(tmp_0);
+		norm_free(str, tmp_0);
 	}
 	else if (ft_strchr1(str, '"') || ft_strchr1(str, '\''))
 	{
@@ -72,8 +77,7 @@ void	normi_quotes(char *str, char **exp_, t_name *env)
 			tmp_0 = get_word(tmp2, &i);
 			*exp_ = process_word(tmp_0, *exp_, env); // here the problem
 		}
-		free(str);
-		free(tmp2);
+		norm_free(str, tmp2);
 	}
 	else
 		*exp_ = process_word(str, *exp_, env);
