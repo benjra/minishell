@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/19 14:25:55 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/19 20:19:00 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	normi_quotes(char *str, char **exp_, t_name *env)
 		while (tmp2[i])
 		{
 			tmp_0 = get_word(tmp2, &i);
-			*exp_ = process_word(tmp_0, *exp_, env); // here the problem
+			*exp_ = process_word(tmp_0, *exp_, env);
 		}
 		norm_free(str, tmp2);
 	}

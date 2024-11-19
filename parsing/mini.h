@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/19 12:12:25 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/19 21:18:26 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ char					*ft_strnstr1(const char *haystack, const char *needle,
 							size_t len);
 char					*small_expand(char *args, t_name *env);
 char	*ft_strchr1(const char *s, int c);
+void	norm_free(char *s1, char *s2);
 /********************** builtins *************************/
 
 void					my_cd(t_name *env, char **argv);

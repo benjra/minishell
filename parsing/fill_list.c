@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/19 10:23:36 by assia            ###   ########.fr       */
+/*   Updated: 2024/11/19 21:09:27 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,6 @@ void	check_symbols(char *str, t_token **list)
 		parse_and_add_token(list, str, ">", 4);
 	else
 		lstadd_backs(list, lstnews(get_type(str), ft_strdup(str)));
-}
-
-char	*ft_strchr_skip_quotes(const char *s, char *c)
-{
-	int		in_quotes;
-	char	quote_char;
-
-	in_quotes = 0;
-	quote_char = '\0';
-	while (*s)
-	{
-		if ((*s == '\'' || *s == '\"') && (in_quotes == 0 || *s == quote_char))
-		{
-			if (in_quotes)
-				in_quotes = 0;
-			else
-			{
-				in_quotes = 1;
-				quote_char = *s;
-			}
-		}
-		else if (*s == *c && !in_quotes)
-			return ((char *)s);
-		s++;
-	}
-	return (NULL);
 }
 
 t_token	*fill_list(char **lst)

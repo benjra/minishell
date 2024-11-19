@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:43:13 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/17 13:02:57 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/19 21:38:55 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ char	*get_var(int len, char *afterdoll)
 	return (var);
 }
 
+char	*norm_join(char *afterdoll, char *replace)
+{
+	char	*tmp;
+
+	tmp = replace;
+	replace = ft_strjoin(tmp, afterdoll);
+	free(tmp);
+	return (replace);
+}
+
 char	*search_env(int len, char *afterdoll, t_name *env)
 {
 	char	*replace;
@@ -53,19 +63,12 @@ char	*search_env(int len, char *afterdoll, t_name *env)
 		afterdoll++;
 		ss = ft_substr(ss, 0, afterdoll - ss);
 		replace = ft_strjoin(replace, ss);
-		free(ss);
 		result = search_env(ft_strlen(afterdoll), afterdoll, env);
-		tmp = replace;
-		replace = ft_strjoin(tmp, result);
-		free(tmp);
-		free(result);
+		replace = norm_join(result, replace);
+		norm_free(ss, result);
 	}
 	else if (afterdoll)
-	{
-		tmp = replace;
-		replace = ft_strjoin(tmp, afterdoll);
-		free(tmp);
-	}
+		replace = norm_join(afterdoll, replace);
 	return (replace);
 }
 
