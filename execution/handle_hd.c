@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:21:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/18 17:38:11 by assia            ###   ########.fr       */
+/*   Updated: 2024/11/19 11:11:47 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,21 @@ static void	handle_heredoc_child(char *name, t_redir *file, t_name *env)
 {
 	int		b;
 	char	*len;
+	char	*tmp;
 
 	signal(SIGINT, hd_sigint);
 	b = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
+	if (b == -1)
+    {
+        perror("open");
+        exit(1);
+    }
 	while (1)
 	{
 		len = readline("> ");
 		if (!len)
 		{
-			printf("bash : EOF! \n");
+			printf("minishell: warning: heredoc delimited by EOF! \n");
 			break ;
 		}
 		if (!ft_strcmp(len, file->red))
@@ -63,15 +69,27 @@ static void	handle_heredoc_child(char *name, t_redir *file, t_name *env)
 			close(b);
 			exit(1);
 		}
-		len = ft_strjoin(len, "\n");
+		tmp = ft_strjoin(len, "\n");
+		free(len);
+		len = tmp;
+		if (!len)
+        {
+            perror("ft_strjoin");
+            close(b);
+            exit(1);
+        }
 		if (file->expand)
 		{
 			len = small_expand__(len, env);
-			write(b, len, ft_strlen(len));
+			if (!len)
+            {
+                perror("small_expand__");
+                close(b);
+                exit(1);
+            }
 		}
-		else
-			write(b, len, ft_strlen(len));
-		// free(len);
+		write(b, len, ft_strlen(len));
+		free(len);
 	}
 	close(b);
 	exit(0);
@@ -98,6 +116,7 @@ int	ft_heredoc(int i, t_lsttoken *token, t_name *env)
 	char	*name;
 
 	file = token->redirections;
+	name = NULL;
 	if (count_heredoc(token) > 16)
 		free_heredoc(2, "Max number of heredocs has been exceeded", env, token);
 	while (file)

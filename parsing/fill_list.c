@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/12 11:58:38 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/19 10:23:36 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,30 @@ void	check_symbols(char *str, t_token **list)
 		lstadd_backs(list, lstnews(get_type(str), ft_strdup(str)));
 }
 
-char	*ft_strchr_skip_quotes(const char *str, char *c)
+char *ft_strchr_skip_quotes(const char *s, char *c)
 {
-	char	in_quotes;
-	int		i;
-	int		end;
+    int in_quotes;
+    char quote_char;
 
-	i = 0;
-	end = 0;
-	while (*str)
-	{
-		if (*str == '"' || *str == '\'')
-		{
-			in_quotes = *str;
-			while (*str++ && *str != in_quotes)
-			{
-				str++;
-				end++;
-				if (*str == in_quotes)
-					return (ft_substr(str, i, end));
-			}
-		}
-		else if (ft_strncmp(str, c, ft_strlen(c)) && *str != in_quotes)
-			return ((char *)str);
-		str++;
-	}
-	return (NULL);
+	in_quotes = 0;
+	quote_char = '\0';
+    while (*s)
+    {
+        if ((*s == '\'' || *s == '\"') && (in_quotes == 0 || *s == quote_char))
+        {
+            if (in_quotes)
+                in_quotes = 0;
+            else
+            {
+                in_quotes = 1;
+                quote_char = *s;
+            }
+        }
+        else if (*s == *c && !in_quotes)
+            return ((char *)s);
+        s++;
+    }
+    return (NULL);
 }
 
 t_token	*fill_list(char **lst)
