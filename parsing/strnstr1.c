@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strnstr1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 17:03:00 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/14 16:04:28 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:12:13 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,25 @@ char	*ft_strnstr1(const char *haystack, const char *needle, size_t len)
 		i++;
 	}
 	return (NULL);
+}
+char	*ft_strchr1(const char *s, int c)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != (const char)c)
+	{
+		if (s[i] == '\'' || s[i] == '"')
+		{
+			quote(s, &i);
+			if (!s[i])
+				return (NULL);
+		}
+		if (s[i] == '\0')
+		{
+			return (0);
+		}
+		i++;
+	}
+	return ((char *)s + i);
 }

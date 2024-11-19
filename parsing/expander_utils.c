@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/18 20:18:12 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:13:05 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	normi_quotes(char *str, char **exp_, t_name *env)
 		free(str);
 		free(tmp_0);
 	}
-	else if (*str == '"')
+	else if (ft_strchr1(str, '"') || ft_strchr1(str, '\''))
 	{
 		tmp2 = ins_quote(str);
 		while (tmp2[i])
