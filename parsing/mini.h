@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/19 21:18:26 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/20 09:26:13 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,8 +254,7 @@ void					out_file_prep(t_lsttoken *token, char *path,
 							int is_builtin);
 void					in_file_prep(t_lsttoken *token, char *path,
 							int is_builtin);
-void					child_process(t_lsttoken *token, int pipe_nb, int btn,
-							t_name *env);
+void					child_process(t_lsttoken *token, int btn, t_name *env);
 char					*allocate_folders(char *path, int i);
 int						handle_stat_error(char *path, int is_builtin);
 void					handle_pipe_redirections(t_lsttoken *token,

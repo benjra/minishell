@@ -6,7 +6,7 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 10:37:32 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/15 10:52:26 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/20 10:08:39 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,37 @@ void	sig_wait(t_lsttoken *token)
 
 	handle_signals(0);
 	current = token;
+	status = 0;
 	while (current)
 	{
-		waitpid(current->pid, &status, 0);
+		if (waitpid(current->pid, &status, 0) == -1)
+        {
+            perror("waitpid");
+            g_var.exit_s = 1;
+            return ;
+        }
+		
 		current = current->next;
 	}
+	// if (WIFSIGNALED(status)) // Check if the process was terminated by a signal
+    // {
+    //     g_var.exit_s = 128 + WTERMSIG(status);
+    //     if (WTERMSIG(status) == SIGINT) // Handle SIGINT (Ctrl+C)
+    //     {
+    //         write(1, "\n", 1);
+    //     }
+    //     else if (WTERMSIG(status) == SIGQUIT) // Handle SIGQUIT (Ctrl+\)
+    //     {
+    //         write(1, "Quit\n", 5);
+    //     }
+    // }
+    // else if (WIFEXITED(status)) // Check if the process exited normally
+    // {
+    //     g_var.exit_s = WEXITSTATUS(status);
+    // }
+
+    // handle_signals(1);
+
 	g_var.exit_s = 128 + WTERMSIG(status);
 	if (WTERMSIG(status) + 128 == 130)
 	{

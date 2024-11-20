@@ -6,7 +6,7 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:55:28 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/15 09:55:30 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/20 09:32:28 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	check_builtin(t_lsttoken *token)
 	else if (!ft_strcmp("unset", token->args[0]))
 		return (7);
 	else
+		// return 0;
 		return (-1);
 }
 
@@ -82,6 +83,7 @@ void	handle_pipe_creation(t_lsttoken *token, int pipe_nb)
 void	execute_pipes(t_lsttoken *token, int pipe_nb, t_name *env)
 {
 	g_var.btn = check_builtin(token);
+	// printf("g_var.size: %d, g_var.btn: %d\n", g_var.size, g_var.btn);
 	if (g_var.size == 1 && g_var.btn != -1)
 	{
 		files_redirections(token, 1);
@@ -90,7 +92,7 @@ void	execute_pipes(t_lsttoken *token, int pipe_nb, t_name *env)
 	else
 	{
 		handle_pipe_creation(token, pipe_nb);
-		child_process(token, pipe_nb, g_var.btn, env);
+		child_process(token, g_var.btn, env);
 		handle_file_descriptors(token);
 	}
 }
