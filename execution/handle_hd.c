@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_hd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:21:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/19 11:11:47 by assia            ###   ########.fr       */
+/*   Updated: 2024/11/20 13:28:58 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,46 +51,11 @@ static void	handle_heredoc_child(char *name, t_redir *file, t_name *env)
 	signal(SIGINT, hd_sigint);
 	b = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (b == -1)
-    {
-        perror("open");
-        exit(1);
-    }
-	while (1)
 	{
-		len = readline("> ");
-		if (!len)
-		{
-			printf("minishell: warning: heredoc delimited by EOF! \n");
-			break ;
-		}
-		if (!ft_strcmp(len, file->red))
-		{
-			free(len);
-			close(b);
-			exit(1);
-		}
-		tmp = ft_strjoin(len, "\n");
-		free(len);
-		len = tmp;
-		if (!len)
-        {
-            perror("ft_strjoin");
-            close(b);
-            exit(1);
-        }
-		if (file->expand)
-		{
-			len = small_expand__(len, env);
-			if (!len)
-            {
-                perror("small_expand__");
-                close(b);
-                exit(1);
-            }
-		}
-		write(b, len, ft_strlen(len));
-		free(len);
+		perror("open");
+		exit(1);
 	}
+	read_heredoc(file, env, b);
 	close(b);
 	exit(0);
 }

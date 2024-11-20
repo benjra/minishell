@@ -6,7 +6,7 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/20 09:26:13 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/20 13:30:48 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct s_var
 	int					red_error;
 	t_alst				**alist;
 	char				*fd;
-	int					btn;
 	char				**hd_files;
 }						t_var;
 
@@ -106,6 +105,7 @@ typedef struct s_lsttoken
 	int					out_fd_set;
 	int					pipe_fd[2];
 	pid_t				pid;
+	int					builtin;
 }						t_lsttoken;
 
 /********************** parsing *************************/
@@ -166,8 +166,9 @@ char					*init_tmp_vars(char *args, char **exp_);
 char					*ft_strnstr1(const char *haystack, const char *needle,
 							size_t len);
 char					*small_expand(char *args, t_name *env);
-char	*ft_strchr1(const char *s, int c);
-void	norm_free(char *s1, char *s2);
+char					*ft_strchr1(const char *s, int c);
+void					norm_free(char *s1, char *s2);
+
 /********************** builtins *************************/
 
 void					my_cd(t_name *env, char **argv);
@@ -269,4 +270,7 @@ void					handle_signals(int mode);
 
 char					*small_expand__(char *args, t_name *env);
 char					*get_word__(char *str, int *i);
+char					*join_and_expand(char *len, t_redir *file, t_name *env);
+void					read_heredoc(t_redir *file, t_name *env, int b);
+
 #endif
