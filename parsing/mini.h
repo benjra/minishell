@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/20 13:30:48 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/20 20:45:38 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,6 @@
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
 # endif
-
-# define GREENB "\033[42m"
-# define BGREEN "\033[1;32m"
-# define RESET_COLOR "\e[m"
 
 typedef struct s_name
 {

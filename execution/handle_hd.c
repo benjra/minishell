@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_hd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:21:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/20 13:28:58 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/20 13:48:18 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static int	wait_heredoc(int pid)
 static void	handle_heredoc_child(char *name, t_redir *file, t_name *env)
 {
 	int		b;
-	char	*len;
-	char	*tmp;
+	// char	*len;
+	// char	*tmp;
 
 	signal(SIGINT, hd_sigint);
 	b = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);

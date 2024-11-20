@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:25 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/19 21:09:27 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/20 20:48:51 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ int	get_type(char *lst)
 		|| ft_strncmp(lst, ">>", 2) == 0)
 	{
 		if (ft_strncmp(lst, "|", 1) == 0)
-			return (2);
+			return (TOKEN_PIPE);
 		else if (ft_strncmp(lst, "<<", 2) == 0)
-			return (6);
+			return (TOKEN_REDIR_HEREDOC);
 		else if (ft_strncmp(lst, ">>", 2) == 0)
-			return (5);
+			return (TOKEN_REDIR_APPEND);
 		if (ft_strncmp(lst, ">", 1) == 0)
-			return (4);
+			return (TOKEN_REDIR_OUT);
 		else if (ft_strncmp(lst, "<", 1) == 0)
-			return (3);
+			return (TOKEN_REDIR_IN);
 	}
 	return (1);
 }
@@ -35,17 +35,17 @@ int	get_type(char *lst)
 void	check_symbols(char *str, t_token **list)
 {
 	if (ft_strnstr1(str, ">>", -1) && ft_strncmp(str, ">>", -1))
-		parse_and_add_token(list, str, ">>", 5);
+		parse_and_add_token(list, str, ">>", TOKEN_REDIR_APPEND);
 	else if (ft_strnstr1(str, "<<", -1) && ft_strncmp(str, "<<", -1))
-		parse_and_add_token(list, str, "<<", 6);
+		parse_and_add_token(list, str, "<<", TOKEN_REDIR_HEREDOC);
 	else if (ft_strnstr1(str, "|", -1) && ft_strncmp(str, "|", -1))
-		parse_and_add_token(list, str, "|", 2);
+		parse_and_add_token(list, str, "|", TOKEN_PIPE);
 	else if (ft_strnstr1(str, "<", -1) && ft_strncmp(str, "<", -1)
 		&& ft_strncmp(str, "<<", -1))
-		parse_and_add_token(list, str, "<", 3);
+		parse_and_add_token(list, str, "<", TOKEN_REDIR_IN);
 	else if (ft_strnstr1(str, ">", -1) && ft_strncmp(str, ">", -1)
 		&& ft_strncmp(str, ">>", -1))
-		parse_and_add_token(list, str, ">", 4);
+		parse_and_add_token(list, str, ">", TOKEN_REDIR_OUT);
 	else
 		lstadd_backs(list, lstnews(get_type(str), ft_strdup(str)));
 }
@@ -63,7 +63,7 @@ t_token	*fill_list(char **lst)
 			|| ft_strchr(lst[i], '>'))
 			check_symbols(lst[i], &list);
 		else
-			lstadd_backs(&list, lstnews(1, ft_strdup(lst[i])));
+			lstadd_backs(&list, lstnews(TOKEN_WORD, ft_strdup(lst[i])));
 		i++;
 	}
 	return (list);
