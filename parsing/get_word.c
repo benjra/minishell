@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:44:32 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/17 22:01:45 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:10:19 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int	handle_dollar(char *str, int *last)
 			(*last)++;
 			return (1);
 		}
-		while (str[*last] && (ft_isalnum(str[*last]) || str[*last] == '_'
-				|| str[*last] == '?'))
+		while (str[*last] && (ft_isalnum(str[*last]) || str[*last] == '_'))
 			(*last)++;
 		return (1);
 	}
