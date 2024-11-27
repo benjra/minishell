@@ -6,12 +6,31 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/20 19:32:06 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:34:18 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
 
+char	*ft_strdup2(const char *s1)
+{
+	int		i;
+	char	*str;
+	char	*s2;
+
+	s2 = (char *)s1;
+	i = 0;
+	str = ft_malloc(sizeof(char) * ft_strlen(s2) + 1,0);
+	if (str == 0)
+		return (0);
+	while (s2[i])
+	{
+		str[i] = s2[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
 int	len(t_token *lst)
 {
 	int	i;
@@ -32,7 +51,7 @@ int	len(t_token *lst)
 	return (i);
 }
 
-int	handle_redirection(t_token **temp, t_lsttoken *token)
+char *handle_redirection(t_token **temp, t_lsttoken *token)
 {
 	t_redir	*redirections;
 	char	*tmmp;
@@ -40,13 +59,14 @@ int	handle_redirection(t_token **temp, t_lsttoken *token)
 	tmmp = NULL;
 	if ((*temp)->next != NULL && (*temp)->type > 2 && (*temp)->type <= 6)
 	{
-		tmmp = ft_strdup((*temp)->next->value);
+		tmmp = ft_strdup2((*temp)->next->value);
 		redirections = new_red((*temp)->type, tmmp);
+		// free(tmmp);
 		red_addback(&(token->redirections), redirections);
 		(*temp) = (*temp)->next;
-		return (1);
+		return (tmmp);
 	}
-	return (0);
+	return (tmmp);
 }
 
 void	add_new_token_node(t_token **temp, t_lsttoken **token, int *i)
@@ -79,6 +99,7 @@ t_lsttoken	*fill_token(t_token *list)
 	t_token		*temp;
 	t_lsttoken	*token[2];
 	int			i;
+	char *tmp;
 
 	temp = list;
 	i = 0;
@@ -88,8 +109,8 @@ t_lsttoken	*fill_token(t_token *list)
 	token[1] = token[0];
 	while (temp != NULL)
 	{
-		if (handle_redirection(&temp, token[0]))
-			(void)0;
+		if (tmp=handle_redirection(&temp, token[0]))
+				(void)0;
 		else if ((temp->next != NULL && temp->type == 2))
 			add_new_token_node(&temp, &token[0], &i);
 		else
@@ -99,6 +120,8 @@ t_lsttoken	*fill_token(t_token *list)
 		}
 		if (temp != NULL)
 			temp = temp->next;
+		// if(tmp)
+			// free(tmp);
 	}
 	return (token[1]);
 }

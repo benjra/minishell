@@ -1,6 +1,6 @@
 NAME = minishell
 #-g -fsanitize=address
-CCFLGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+CCFLGS = #-g3 -fsanitize=address
 
 CC = cc
 LIBFT = our_libft/libft.a
@@ -45,7 +45,8 @@ SRC_FILES = parsing/minishell.c \
 	builtins/cd_utils.c	\
 	builtins/export_utils1.c \
 	builtins/export_utils2.c \
-	builtins/export_utils3.c
+	builtins/export_utils3.c \
+	parsing/malloc.c
 
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

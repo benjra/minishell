@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_node.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:56:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/10/21 14:38:43 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:32:19 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ t_redir	*new_red(int type, char *red)
 		return (NULL);
 	}
 	linked_lst->type = type;
-	linked_lst->red = red;
+	linked_lst->red =red;
+	// free(red);
 	linked_lst->next = NULL;
 	linked_lst->previous = NULL;
 	return (linked_lst);

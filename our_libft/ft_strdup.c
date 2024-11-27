@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:47:18 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/19 20:32:54 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:33:18 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,4 @@ char	*ft_strdup(const char *s1)
 	str[i] = '\0';
 	return (str);
 }
+
