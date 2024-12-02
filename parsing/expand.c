@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:32:51 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/27 16:23:19 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/02 22:11:41 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	expand_redirections(t_lsttoken *token, t_name *env)
 	while (tm)
 	{
 		if (tm->type != TOKEN_REDIR_HEREDOC)
-			tm->red = small_expand(tm->red, env);
+			tm->red = small_expand(ft_strdup(tm->red), env);
 		else
 		{
 			if (has_quotes(tm->red))

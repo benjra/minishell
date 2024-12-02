@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bouchrabenjraife07@gmail.com>    +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 20:53:31 by bbenjrai          #+#    #+#             */
-/*   Updated: 2023/11/29 11:49:52 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/02 20:35:36 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strchr(const char *s, int c)
 	int	i;
 
 	i = 0;
+	if(!s)
+		return NULL;
 	while (s[i] != (const char)c)
 	{
 		if (s[i] == '\0')

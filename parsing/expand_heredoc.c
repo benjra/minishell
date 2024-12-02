@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 10:05:12 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/20 19:45:49 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:52:02 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*small_expand__(char *args, t_name *env)
 	char	*exp_;
 
 	tmp = init_tmp_vars(args, &exp_);
-	exp_ = loop_through_string__(tmp, exp_, env);
+	exp_ = loop_through_string__(tmp, exp_, env); 
 	free(args);
 	free(tmp);
 	return (exp_);

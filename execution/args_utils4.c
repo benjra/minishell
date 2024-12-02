@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_utils4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:57:54 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/15 09:57:56 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:06:05 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_alst	*lista_new(void *content)
 
 void	validate_cmd(t_lsttoken *token)
 {
+	if(!token->args[0])
+		return ;
 	if (ft_strchr(token->args[0], '/'))
 		check_cmd_path(token);
 	else
@@ -54,8 +56,11 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 	temp = NULL;
 	while (exec_programs_dirs[++i] && cmd && cmd[0] && status)
 	{
+		if(cmd_path)
+			free(cmd_path);
 		temp = ft_strjoin(exec_programs_dirs[i], "/");
 		cmd_path = ft_strjoin(temp, cmd);
+		free(temp);
 		if (access(cmd_path, F_OK))
 			status = 1;
 		else if (access(cmd_path, X_OK))

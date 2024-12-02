@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:55:22 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/15 09:55:24 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/02 22:20:25 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,22 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 {
 	if (status)
 	{
-		if (status == 1 && cmd && cmd[0] != '$')
+		if (status == 1 && cmd && cmd[0] != '$') // this (cmd[0] != '$') make  leak in this case "$(" "$"
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": command not found\n", 2);
+			free(cmd_path);
 			exit(127);
 		}
-		else if (cmd && cmd[0] != '$')
+		else if (cmd && cmd[0] != '$') // this (cmd[0] != '$') make  leak in this case "$(" "$"
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": permission denied\n", 2);
 			exit(126);
 		}
-		return (NULL);
+		return (free(cmd_path),NULL);
 	}
 	else
 		return (cmd_path);

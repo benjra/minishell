@@ -1,5 +1,5 @@
 NAME = libft.a
-CCF = cc -Wall -Wextra -Werror
+CCF = cc -Wall -Wextra -Werror 
 Fun = ft_atoi.c \
 		ft_bzero.c \
 		ft_calloc.c \

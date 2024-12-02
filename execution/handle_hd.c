@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:21:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/20 13:48:18 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/02 22:14:29 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	ft_heredoc(int i, t_lsttoken *token, t_name *env)
 		free_heredoc(2, "Max number of heredocs has been exceeded", env, token);
 	while (file)
 	{
+		if(name)
+			free(name);
 		if (file->type == 6)
 		{
 			name = hdfile(i);

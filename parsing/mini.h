@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/27 16:31:33 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:25:20 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ char					*ft_strnstr1(const char *haystack, const char *needle,
 char					*small_expand(char *args, t_name *env);
 char					*ft_strchr1(const char *s, int c);
 void					norm_free(char *s1, char *s2);
+// char	*ft_strdup2(const char *s1);
+// void	*ft_malloc(int size, int c);
 void	free_red(t_redir *redi);
 
 typedef struct s_malloc

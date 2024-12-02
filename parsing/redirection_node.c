@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:56:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/27 14:32:19 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/02 22:01:43 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_redir	*new_red(int type, char *red)
 	}
 	linked_lst->type = type;
 	linked_lst->red =red;
-	// free(red);
 	linked_lst->next = NULL;
 	linked_lst->previous = NULL;
 	return (linked_lst);
