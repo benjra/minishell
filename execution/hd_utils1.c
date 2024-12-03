@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hd_utils1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 10:37:38 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/20 13:48:26 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/03 02:39:10 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	read_heredoc(t_redir *file, t_name *env, int b)
 {
 	char	*len;
-	// char	*tmp;
 
 	while (1)
 	{
