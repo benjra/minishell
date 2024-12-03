@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_utils3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:56:48 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/15 09:56:53 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/03 01:39:37 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,13 @@ int	check_path(char *path, int is_builtin)
 
 int	check_file_errors(char *path, int builtin)
 {
+	ft_putstr_fd(path, 2); //prints my path :)
+	ft_putstr_fd("\n", 2);
 	if (path && (path[0] == '$' || (path[0] == '"' && path[1] == '$')))
 	{
 		g_var.red_error = 1;
 		g_var.exit_s = 1;
+		
 		if (path[0] == '$' && path[1])
 		{
 			ft_putstr_fd("minishell: ", 2);

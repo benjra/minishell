@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/27 16:34:18 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/03 01:38:40 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_lsttoken	*fill_token(t_token *list)
 	token[1] = token[0];
 	while (temp != NULL)
 	{
-		if (tmp=handle_redirection(&temp, token[0]))
+		if ((tmp = handle_redirection(&temp, token[0])))
 				(void)0;
 		else if ((temp->next != NULL && temp->type == 2))
 			add_new_token_node(&temp, &token[0], &i);
