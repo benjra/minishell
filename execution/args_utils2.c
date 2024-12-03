@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:55:22 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/03 01:25:58 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/03 20:41:13 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,12 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 {
 	if (status)
 	{
-		if (status == 1 && cmd && cmd[0] != '$') // this (cmd[0] != '$') make  leak in this case "$(" "$"
+		if (cmd && cmd[0] == '$')
+		{
+			free(cmd_path);
+			return (NULL);
+		}
+		if (status == 1 && cmd)
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(cmd, 2);
@@ -82,15 +87,16 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 			free(cmd_path);
 			exit(127);
 		}
-		else if (cmd && cmd[0] != '$') // this (cmd[0] != '$') make  leak in this case "$(" "$"
+		else if (cmd)
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": permission denied\n", 2);
+			free(cmd_path);
 			exit(126);
 		}
-		return (free(cmd_path),NULL);
+		free(cmd_path);
+		return (NULL);
 	}
-	else
-		return (cmd_path);
+	return (cmd_path);
 }

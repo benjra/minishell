@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_utils1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:03:33 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/15 09:03:35 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/03 20:47:26 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,10 @@ void	check_command_name(t_lsttoken *token)
 	{
 		execps_paths = ft_split(g_var.envp[i] + 5, ':');
 		token->cmd_path = get_cmd_path(token->args[0], execps_paths);
+		i = 0;
+		while (execps_paths[i])
+			free(execps_paths[i++]);
+		free(execps_paths);
 	}
 	else
 		check_cmd_path(token);

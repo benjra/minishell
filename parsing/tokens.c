@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/12/03 12:01:52 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/03 21:08:25 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+char	*ft_strdup2(const char *s1)
+{
+	int		i;
+	char	*str;
+	char	*s2;
+
+	s2 = (char *)s1;
+	i = 0;
+	str = ft_malloc(sizeof(char) * ft_strlen(s2) + 1, 0);
+	if (str == 0)
+		return (0);
+	while (s2[i])
+	{
+		str[i] = s2[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
 
 int	len(t_token *lst)
 {
@@ -42,6 +62,7 @@ char	*handle_redirection(t_token **temp, t_lsttoken *token)
 	{
 		tmmp = ft_strdup2((*temp)->next->value);
 		redirections = new_red((*temp)->type, tmmp);
+		// free(tmmp);
 		red_addback(&(token->redirections), redirections);
 		(*temp) = (*temp)->next;
 		return (tmmp);
@@ -79,6 +100,7 @@ t_lsttoken	*fill_token(t_token *list)
 	t_token		*temp;
 	t_lsttoken	*token[2];
 	int			i;
+	char		*tmp;
 
 	temp = list;
 	i = 0;
@@ -88,7 +110,7 @@ t_lsttoken	*fill_token(t_token *list)
 	token[1] = token[0];
 	while (temp != NULL)
 	{
-		if (handle_redirection(&temp, token[0]))
+		if ((tmp = handle_redirection(&temp, token[0])))
 			(void)0;
 		else if ((temp->next != NULL && temp->type == 2))
 			add_new_token_node(&temp, &token[0], &i);
@@ -99,6 +121,8 @@ t_lsttoken	*fill_token(t_token *list)
 		}
 		if (temp != NULL)
 			temp = temp->next;
+		// if(tmp)
+		// free(tmp);
 	}
 	return (token[1]);
 }

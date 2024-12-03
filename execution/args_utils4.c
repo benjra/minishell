@@ -35,7 +35,7 @@ t_alst	*lista_new(void *content)
 
 void	validate_cmd(t_lsttoken *token)
 {
-	if(!token->args[0])
+	if (!token->args[0])
 		return ;
 	if (ft_strchr(token->args[0], '/'))
 		check_cmd_path(token);
@@ -56,7 +56,7 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 	temp = NULL;
 	while (exec_programs_dirs[++i] && cmd && cmd[0] && status)
 	{
-		if(cmd_path)
+		if (cmd_path)
 			free(cmd_path);
 		temp = ft_strjoin(exec_programs_dirs[i], "/");
 		cmd_path = ft_strjoin(temp, cmd);

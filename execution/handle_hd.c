@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_hd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:21:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/02 22:14:29 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/03 20:51:59 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ static int	wait_heredoc(int pid)
 
 static void	handle_heredoc_child(char *name, t_redir *file, t_name *env)
 {
-	int		b;
-	// char	*len;
-	// char	*tmp;
+	int	b;
 
 	signal(SIGINT, hd_sigint);
 	b = open(name, O_RDWR | O_CREAT | O_TRUNC, 0777);
@@ -86,7 +84,7 @@ int	ft_heredoc(int i, t_lsttoken *token, t_name *env)
 		free_heredoc(2, "Max number of heredocs has been exceeded", env, token);
 	while (file)
 	{
-		if(name)
+		if (name)
 			free(name);
 		if (file->type == 6)
 		{
