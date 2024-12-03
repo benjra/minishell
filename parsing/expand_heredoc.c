@@ -34,7 +34,7 @@ char	*small_expand__(char *args, t_name *env)
 	char	*exp_;
 
 	tmp = init_tmp_vars(args, &exp_);
-	exp_ = loop_through_string__(tmp, exp_, env); 
+	exp_ = loop_through_string__(tmp, exp_, env);
 	free(args);
 	free(tmp);
 	return (exp_);

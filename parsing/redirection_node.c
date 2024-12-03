@@ -51,7 +51,7 @@ t_redir	*new_red(int type, char *red)
 		return (NULL);
 	}
 	linked_lst->type = type;
-	linked_lst->red =red;
+	linked_lst->red = red;
 	linked_lst->next = NULL;
 	linked_lst->previous = NULL;
 	return (linked_lst);
