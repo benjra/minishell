@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:55:22 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/03 23:26:21 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/04 14:07:32 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,37 +74,25 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 {
 	if (status)
 	{
-		if (cmd && cmd[0] == '$' && cmd[1] != '\0')
-        {
-            free(cmd_path);
-            exit(0);
-        }
-		else if (cmd && cmd[0] == '$' && cmd[1] == '\0')
+		if (status == 1 && cmd)
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": command not found\n", 2);
 			free(cmd_path);
-			exit(127);
-		}
-		else if (status == 1 && cmd)
-		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(cmd, 2);
-			ft_putstr_fd(": command not found\n", 2);
-			free(cmd_path);
-			exit(127);
+			if(cmd[0]=='$')
+				exit(127);
+			exit(0);
 		}
 		else if (cmd)
 		{
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": permission denied\n", 2);
-			free(cmd_path);
 			exit(126);
 		}
-		free(cmd_path);
-		return (NULL);
+		return (free(cmd_path),NULL);
 	}
-	return (cmd_path);
+	else
+		return (cmd_path);
 }
