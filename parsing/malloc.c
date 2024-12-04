@@ -1,4 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   malloc.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/04 15:07:57 by bbenjrai          #+#    #+#             */
+/*   Updated: 2024/12/04 15:07:58 by bbenjrai         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini.h"
+
+char	*ft_strdup2(const char *s1)
+{
+	int		i;
+	char	*str;
+	char	*s2;
+
+	s2 = (char *)s1;
+	i = 0;
+	str = ft_malloc(sizeof(char) * ft_strlen(s2) + 1, 0);
+	if (str == 0)
+		return (0);
+	while (s2[i])
+	{
+		str[i] = s2[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
 
 void	*add_new_malloc(t_malloc *ptr, int size)
 {
@@ -21,6 +53,7 @@ void	*add_new_malloc(t_malloc *ptr, int size)
 	tmp->next = new;
 	return (new->content);
 }
+
 void	ft_free_list(t_malloc *ptr)
 {
 	t_malloc	*tmp;
@@ -37,6 +70,7 @@ void	ft_free_list(t_malloc *ptr)
 		ptr = tmp;
 	}
 }
+
 void	*ft_malloc(int size, int c)
 {
 	static t_malloc	*ptr = 0;

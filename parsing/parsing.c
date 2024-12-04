@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:35:52 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/02 22:15:35 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:08:48 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	parsing(char *str, t_name *env)
 	t_token		*list;
 	t_lsttoken	*list2;
 
-	// t_lsttoken	*current;
 	g_var.alist = malloc(sizeof(t_alst *));
 	*(g_var.alist) = NULL;
 	string = split_string(str);
@@ -75,6 +74,5 @@ void	parsing(char *str, t_name *env)
 	list2 = fill_token(list);
 	freelist1(list);
 	expander(list2, env);
-	// current = list2;
 	setup_parsing(env, list2);
 }
