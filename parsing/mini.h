@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/04 15:09:52 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:19:40 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_var
 	t_alst				**alist;
 	char				*fd;
 	char				**hd_files;
+	int	is_expanded;
 }						t_var;
 
 extern t_var			g_var;

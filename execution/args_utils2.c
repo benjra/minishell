@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:55:22 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/04 14:07:32 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:40:20 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": command not found\n", 2);
 			free(cmd_path);
-			if(cmd[0]=='$')
+			printf("cmode %s %ld\n",cmd,ft_strlen(cmd));//need to add flag here
+			if(g_var.is_expanded==1  || cmd[0]=='$')
 				exit(127);
 			exit(0);
 		}
