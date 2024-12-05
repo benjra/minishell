@@ -80,8 +80,9 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": command not found\n", 2);
 			free(cmd_path);
-			printf("cmode %s %ld\n",cmd,ft_strlen(cmd));//need to add flag here
-			if(g_var.is_expanded==1  || cmd[0]=='$')
+			printf("cmode %s %ld\n", cmd, ft_strlen(cmd));
+				// need to add flag here
+			if (g_var.is_expanded == 1 || cmd[0] == '$')
 				exit(127);
 			exit(0);
 		}
@@ -92,7 +93,7 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 			ft_putstr_fd(": permission denied\n", 2);
 			exit(126);
 		}
-		return (free(cmd_path),NULL);
+		return (free(cmd_path), NULL);
 	}
 	else
 		return (cmd_path);

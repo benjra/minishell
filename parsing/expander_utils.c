@@ -72,8 +72,8 @@ void	normi_quotes(char *str, char **exp_, t_name *env)
 	else if (ft_strchr1(str, '"') || ft_strchr1(str, '\''))
 	{
 		tmp2 = ins_quote(str);
-		if(!tmp2[i])
-			g_var.is_expanded=1;
+		if (!tmp2[i])
+			g_var.is_expanded = 1;
 		while (tmp2[i])
 		{
 			tmp_0 = get_word(tmp2, &i);

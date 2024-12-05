@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:13:27 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/01 17:13:29 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:19:26 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static t_name	*process_env_node(t_name *current, t_name **last_node)
 	t_name	*new_node;
 	int		has_value;
 
+	if (!current || !current->name)
+		return (NULL);
 	has_value = 0;
 	if (current->value != NULL)
 		has_value = 1;
@@ -42,6 +44,8 @@ t_name	*copy_env(t_name *env)
 	t_name	*last_node;
 	t_name	*new_node;
 
+	if (!env)
+		return (NULL);
 	init_copy_env(&new_env, &last_node);
 	current = env;
 	while (current)
