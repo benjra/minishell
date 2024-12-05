@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:36 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/11/13 11:15:29 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/05 21:09:10 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	main_loop(t_name *env)
 	char	*cmd;
 
 	g_var.flag = 1;
+	g_var.env=env;
 	while (1)
 	{
 		cmd = readline("minishell$ ");
@@ -65,6 +66,7 @@ static void	main_loop(t_name *env)
 			add_history(cmd);
 			parsing(cmd, env);
 		}
+		env=g_var.env;
 		free(cmd);
 	}
 }
@@ -83,7 +85,7 @@ int	main(int ac, char **av, char **en)
 	signal(SIGQUIT, SIG_IGN);
 	env = init_env(en);
 	main_loop(env);
-	free_env(env);
+	free_env(g_var.env);
 	rl_clear_history();
 	printf("exit\n");
 	exit(g_var.exit_s);

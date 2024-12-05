@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_unset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:15:04 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/01 17:15:06 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/05 21:09:52 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	is_valid_identifier(const char *str)
 			return (0);
 	return (1);
 }
-
 void	remove_env(t_name **env, const char *var)
 {
 	t_name	*current;
@@ -51,7 +50,10 @@ void	remove_env(t_name **env, const char *var)
 			if (prev)
 				prev->next = current->next;
 			else
+			{
 				*env = current->next;
+				g_var.env = (*env);
+			}
 			free(current->name);
 			free(current->value);
 			free(current);
