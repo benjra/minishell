@@ -6,7 +6,7 @@
 /*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/06 02:11:34 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/06 02:20:17 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_alist
 	void				*content;
 	struct s_alist		*next;
 }						t_alst;
+
 typedef struct s_var
 {
 	int					exit_s;
@@ -105,6 +106,13 @@ typedef struct s_lsttoken
 	pid_t				pid;
 	int					builtin;
 }						t_lsttoken;
+
+typedef struct s_malloc
+{
+	void				*content;
+	struct s_malloc		*next;
+
+}						t_malloc;
 
 /********************** parsing *************************/
 
@@ -171,12 +179,7 @@ void					*ft_malloc(int size, int c);
 char					*ft_strdup2(const char *s1);
 void					handle_single_quote(char *str, char **exp_,
 							char *tmp_0);
-typedef struct s_malloc
-{
-	void				*content;
-	struct s_malloc		*next;
 
-}						t_malloc;
 /********************** builtins *************************/
 
 void					my_cd(t_name *env, char **argv);
