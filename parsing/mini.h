@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/05 21:08:12 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/06 02:11:34 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_var
 	char				*fd;
 	char				**hd_files;
 	t_name				*env;
-	int	is_expanded;
+	int					is_expanded;
 }						t_var;
 
 extern t_var			g_var;
@@ -168,8 +168,9 @@ char					*ft_strchr1(const char *s, int c);
 void					norm_free(char *s1, char *s2);
 void					free_red(t_redir *redi);
 void					*ft_malloc(int size, int c);
-char	*ft_strdup2(const char *s1);
-
+char					*ft_strdup2(const char *s1);
+void					handle_single_quote(char *str, char **exp_,
+							char *tmp_0);
 typedef struct s_malloc
 {
 	void				*content;

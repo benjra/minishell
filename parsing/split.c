@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:49 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/12/04 15:16:27 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/06 02:11:20 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,12 @@ char	**split_string(char *str)
 	process_split(tokens, str, &token_count);
 	tokens[token_count] = NULL;
 	return (tokens);
+}
+
+void	handle_single_quote(char *str, char **exp_, char *tmp_0)
+{
+	free(str);
+	str = *exp_;
+	*exp_ = ft_strjoin(*exp_, tmp_0);
+	norm_free(str, tmp_0);
 }

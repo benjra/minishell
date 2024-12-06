@@ -55,7 +55,7 @@ static void	main_loop(t_name *env)
 	char	*cmd;
 
 	g_var.flag = 1;
-	g_var.env=env;
+	g_var.env = env;
 	while (1)
 	{
 		cmd = readline("minishell$ ");
@@ -66,7 +66,7 @@ static void	main_loop(t_name *env)
 			add_history(cmd);
 			parsing(cmd, env);
 		}
-		env=g_var.env;
+		env = g_var.env;
 		free(cmd);
 	}
 }

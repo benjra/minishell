@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/12/05 12:42:58 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/06 02:12:06 by amabchou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ void	normi_quotes(char *str, char **exp_, t_name *env)
 	if (*str == '\'')
 	{
 		tmp_0 = ins_quote(str);
-		free(str);
-		str = *exp_;
-		*exp_ = ft_strjoin(*exp_, tmp_0);
-		norm_free(str, tmp_0);
+		handle_single_quote(str, exp_, tmp_0);
 	}
 	else if (ft_strchr1(str, '"') || ft_strchr1(str, '\''))
 	{
