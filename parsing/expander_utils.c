@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/12/06 02:12:06 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/06 13:03:12 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char	*process_word(char *str, char *exp_, t_name *env)
 	else
 	{
 		new_exp_ = ft_strjoin(exp_, str);
+
 	}
 	free(str);
 	free(exp_);
@@ -69,8 +70,7 @@ void	normi_quotes(char *str, char **exp_, t_name *env)
 	else if (ft_strchr1(str, '"') || ft_strchr1(str, '\''))
 	{
 		tmp2 = ins_quote(str);
-		if (!tmp2[i])
-			g_var.is_expanded = 1;
+		
 		while (tmp2[i])
 		{
 			tmp_0 = get_word(tmp2, &i);
@@ -92,6 +92,8 @@ char	*loop_through_string(char *tmp2, char *exp_, t_name *env)
 		return (ft_strdup(""));
 	while (tmp2[j])
 	{
+		if (!(ft_strchr(tmp2, '$')))
+			g_var.is_expanded = 1;
 		str = get_word(tmp2, &j);
 		normi_quotes(str, &exp_, env);
 	}
