@@ -54,7 +54,7 @@ void	add_new_token_node(t_token **temp, t_lsttoken **token, int *i)
 	add_back(token, newnode((*temp)->type, (*token)->args));
 	*token = (*token)->next;
 	(*token)->args = ft_calloc(len((*temp)->next) + 1, sizeof(char *));
-	(*token)->args[len((*temp)->next)+1] = NULL;
+	(*token)->args[len((*temp)->next) + 1] = NULL;
 	(*token)->redirections = NULL;
 	*i = 0;
 }
