@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 02:19:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/09 08:26:40 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/09 11:11:16 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,33 @@ void	handle_wait_status(int status)
 	}
 	else
 		g_var.exit_s = WEXITSTATUS(status);
+}
+
+void	my_error(char *cmd)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": command not found\n", 2);
+}
+
+void	files_redirections_norm(t_lsttoken *token, t_redir *red, int builtin)
+{
+	int	b;
+
+	if (red->type == 3)
+	{
+		in_file_prep(token, red->red, builtin);
+		if (g_var.red_error)
+			return ;
+	}
+	else if (red->type == 4)
+		out_file_prep(token, red->red, builtin);
+	else if (red->type == 5)
+		append_file_prep(token, red->red, builtin);
+	else if (red->type == 6)
+	{
+		b = open(g_var.fd, O_RDONLY);
+		dup2(b, 0);
+		close(b);
+	}
 }

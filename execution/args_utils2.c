@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:55:22 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/09 10:51:08 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/09 11:01:51 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 				free(cmd_path);
 				exit(0);
 			}
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(cmd, 2);
-			ft_putstr_fd(": command not found\n", 2);
+			my_error(cmd);
 			free(cmd_path);
 			exit(127);
 		}

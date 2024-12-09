@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/09 08:24:52 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/09 11:13:26 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,4 +284,8 @@ char					*get_word__(char *str, int *i);
 char					*join_and_expand(char *len, t_redir *file, t_name *env);
 void					read_heredoc(t_redir *file, t_name *env, int b);
 void					handle_wait_status(int status);
+void					my_error(char *cmd);
+void					files_redirections_norm(t_lsttoken *token, t_redir *red,
+							int builtin);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:57:54 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/09 09:50:24 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/09 11:12:11 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 void	files_redirections(t_lsttoken *token, int builtin)
 {
 	t_redir	*curr_red;
-	int		b;
 
 	curr_red = token->redirections;
 	while (curr_red)
@@ -83,22 +82,7 @@ void	files_redirections(t_lsttoken *token, int builtin)
 			break ;
 		if (!check_path(curr_red->red, builtin))
 			break ;
-		if (curr_red->type == 3)
-		{
-			in_file_prep(token, curr_red->red, builtin);
-			if (g_var.red_error)
-				return ;
-		}
-		else if (curr_red->type == 4)
-			out_file_prep(token, curr_red->red, builtin);
-		else if (curr_red->type == 5)
-			append_file_prep(token, curr_red->red, builtin);
-		else if (curr_red->type == 6)
-		{
-			b = open(g_var.fd, O_RDONLY);
-			dup2(b, 0);
-			close(b);
-		}
+		files_redirections_norm(token, curr_red, builtin);
 		curr_red = curr_red->next;
 	}
 }
