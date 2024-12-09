@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_utils1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 02:18:34 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/06 02:18:37 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/09 09:14:34 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@ void	print_perror(char *str, int exitt)
 {
 	ft_putstr_fd("minishell: ", 2);
 	perror(str);
-	g_var.exit_s = 127;
+	if (errno == ENOENT)
+		g_var.exit_s = 127;
+	else if (errno == EACCES)
+		g_var.exit_s = 126;
+	else
+		g_var.exit_s = errno;
 	if (exitt)
-		exit(127);
+		exit(g_var.exit_s);
 }
 
 void	my_strncpy(char *dest, char *src, int n)
@@ -47,7 +52,7 @@ void	check_cmd_path(t_lsttoken *token)
 			closedir(dir);
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(token->args[0], 2);
-			ft_putstr_fd(" is a directory\n", 2);
+			ft_putstr_fd(" Is a directory\n", 2);
 			exit(126);
 		}
 		else

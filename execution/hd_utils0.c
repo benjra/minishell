@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hd_utils0.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 10:37:32 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/20 13:25:35 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/09 08:25:13 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,16 @@ void	sig_wait(t_lsttoken *token)
 
 	handle_signals(0);
 	current = token;
-	status = 0;
-	while (current)
+	if (!((g_var.size == 1) && (current->builtin != -1)))
 	{
-		waitpid(current->pid, &status, 0);
-		current = current->next;
+		status = 0;
+		while (current)
+		{
+			waitpid(current->pid, &status, 0);
+			current = current->next;
+		}
+		handle_wait_status(status);
 	}
-	g_var.exit_s = 128 + WTERMSIG(status);
-	if (WTERMSIG(status) + 128 == 130)
-	{
-		g_var.exit_s = 128 + WTERMSIG(status);
-		write(1, "\n", 1);
-	}
-	else if (WTERMSIG(status) + 128 == 131)
-	{
-		g_var.exit_s = 128 + WTERMSIG(status);
-		write(1, "Quit\n", 6);
-	}
-	else
-		g_var.exit_s = WEXITSTATUS(status);
 	handle_signals(1);
 }
 

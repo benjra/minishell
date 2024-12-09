@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:54 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/12/08 14:41:03 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/08 18:52:09 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	add_new_token_node(t_token **temp, t_lsttoken **token, int *i)
 	add_back(token, newnode((*temp)->type, (*token)->args));
 	*token = (*token)->next;
 	(*token)->args = ft_calloc(len((*temp)->next) + 1, sizeof(char *));
-	(*token)->args[len((*temp)->next) + 1] = NULL;
+	(*token)->args[len((*temp)->next)] = NULL;
 	(*token)->redirections = NULL;
 	*i = 0;
 }

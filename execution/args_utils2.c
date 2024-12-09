@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:55:22 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/06 12:59:30 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:51:08 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,16 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 	{
 		if (status == 1 && cmd)
 		{
+			if (g_var.is_expanded == 0 && ft_strlen(cmd) == 0)
+			{
+				free(cmd_path);
+				exit(0);
+			}
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": command not found\n", 2);
 			free(cmd_path);
-			if (g_var.is_expanded != 0 || cmd[0] == '$')
-				exit(127);
-			exit(0);
+			exit(127);
 		}
 		else if (cmd)
 		{

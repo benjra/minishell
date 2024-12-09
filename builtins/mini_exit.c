@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:14:25 by amabchou          #+#    #+#             */
-/*   Updated: 2024/11/01 17:14:26 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/09 09:17:19 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	my_exit(char **av, t_lsttoken *token)
 	else if (av[2])
 	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		g_var.exit_s = 1;
 		return ;
 	}
 	else

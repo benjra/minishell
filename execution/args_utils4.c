@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_utils4.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:57:54 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/02 21:06:05 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/09 09:50:24 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,11 @@ void	files_redirections(t_lsttoken *token, int builtin)
 		if (!check_path(curr_red->red, builtin))
 			break ;
 		if (curr_red->type == 3)
+		{
 			in_file_prep(token, curr_red->red, builtin);
+			if (g_var.red_error)
+				return ;
+		}
 		else if (curr_red->type == 4)
 			out_file_prep(token, curr_red->red, builtin);
 		else if (curr_red->type == 5)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:20 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/12/06 13:07:20 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/09 10:24:02 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ char	*loop_through_string(char *tmp2, char *exp_, t_name *env)
 	{
 		if (!(ft_strchr(tmp2, '$')))
 			g_var.is_expanded = 1;
+		else
+			g_var.is_expanded = 0;
 		str = get_word(tmp2, &j);
 		normi_quotes(str, &exp_, env);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 02:18:57 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/06 02:19:00 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/08 19:39:53 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	execs(t_lsttoken *token, int btn, t_name *env)
 	if (btn != -1)
 	{
 		exec_builtin(btn, token, env);
-		exit(0);
+		exit(g_var.exit_s);
 	}
 	else if (token->cmd_path)
 	{
