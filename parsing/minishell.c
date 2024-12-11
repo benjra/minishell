@@ -6,7 +6,7 @@
 /*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:36 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/12/05 21:09:10 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:27:36 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static t_name	*init_env(char **en)
 	t_name	*env;
 
 	env_dup(en);
+	if (!en || !*en)
+		return (NULL);
 	if (en && *en)
 		env = fill_env(en);
 	else
