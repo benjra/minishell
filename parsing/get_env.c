@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:30 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/12/06 02:16:30 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:15:15 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_name	*lstnew(char *name, char *value)
 	return (linked_lst);
 }
 
-static t_name	*init_empty_env(void)
+t_name	*init_empty_env(void)
 {
 	t_name	*lst;
 	char	pwd[4096];
@@ -85,8 +85,6 @@ t_name	*fill_env(char **env)
 	int		i;
 	t_name	*lst;
 
-	if (!env)
-		return (init_empty_env());
 	lst = NULL;
 	i = 0;
 	while (env && env[i])

@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 02:19:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/09 11:11:16 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 11:27:39 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ char	*join_and_expand(char *len, t_redir *file, t_name *env)
 	if (!len)
 	{
 		perror("ft_strjoin");
+		free_env(g_var.env);	
+		free_env_array(g_var.envp);
+		free_all(g_var.token);
+		ft_malloc(0, -1);
 		exit(1);
 	}
 	if (file->expand)
@@ -53,6 +57,10 @@ char	*join_and_expand(char *len, t_redir *file, t_name *env)
 		if (!len)
 		{
 			perror("small_expand__");
+			free_env(g_var.env);	
+			free_env_array(g_var.envp);
+			free_all(g_var.token);
+			ft_malloc(0, -1);
 			exit(1);
 		}
 	}
@@ -102,5 +110,7 @@ void	files_redirections_norm(t_lsttoken *token, t_redir *red, int builtin)
 		b = open(g_var.fd, O_RDONLY);
 		dup2(b, 0);
 		close(b);
+		if (g_var.fd)
+			unlink(g_var.fd);
 	}
 }

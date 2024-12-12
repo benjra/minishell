@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/09 11:13:26 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 11:17:27 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,42 +31,6 @@
 # ifndef PATH_MAX
 #  define PATH_MAX 4096
 # endif
-
-typedef struct s_name
-{
-	char				**ev;
-	char				*name;
-	char				*value;
-	struct s_name		*next;
-}						t_name;
-
-typedef struct s_alist
-{
-	void				*content;
-	struct s_alist		*next;
-}						t_alst;
-
-typedef struct s_var
-{
-	int					exit_s;
-	int					interactive;
-	int					out_fd;
-	int					size;
-	int					flag;
-	int					i;
-	char				**envp;
-	int					pre_pipe_infd;
-	pid_t				last_child_id;
-	int					is_heredoc_last;
-	int					red_error;
-	t_alst				**alist;
-	char				*fd;
-	char				**hd_files;
-	t_name				*env;
-	int					is_expanded;
-}						t_var;
-
-extern t_var			g_var;
 
 # define TOKEN_WORD 1 // For Commands
 # define TOKEN_PIPE 2 // For '|'
@@ -113,6 +77,43 @@ typedef struct s_malloc
 	struct s_malloc		*next;
 
 }						t_malloc;
+
+typedef struct s_name
+{
+	char				**ev;
+	char				*name;
+	char				*value;
+	struct s_name		*next;
+}						t_name;
+
+typedef struct s_alist
+{
+	void				*content;
+	struct s_alist		*next;
+}						t_alst;
+
+typedef struct s_var
+{
+	int					exit_s;
+	int					interactive;
+	int					out_fd;
+	int					size;
+	int					flag;
+	int					i;
+	char				**envp;
+	int					pre_pipe_infd;
+	pid_t				last_child_id;
+	int					is_heredoc_last;
+	int					red_error;
+	t_alst				**alist;
+	char				*fd;
+	char				**hd_files;
+	t_name				*env;
+	int					is_expanded;
+	t_lsttoken			*token;
+}						t_var;
+
+extern t_var			g_var;
 
 /********************** parsing *************************/
 
@@ -287,5 +288,5 @@ void					handle_wait_status(int status);
 void					my_error(char *cmd);
 void					files_redirections_norm(t_lsttoken *token, t_redir *red,
 							int builtin);
-
+t_name					*init_empty_env(void);
 #endif

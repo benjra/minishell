@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 02:18:57 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/08 19:39:53 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 11:39:09 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	execs(t_lsttoken *token, int btn, t_name *env)
 	if (btn != -1)
 	{
 		exec_builtin(btn, token, env);
+		free_env_array(g_var.envp);
+		free_env(g_var.env);	
+		free_all(g_var.token);
+		ft_malloc(0, -1);
 		exit(g_var.exit_s);
 	}
 	else if (token->cmd_path)
@@ -55,6 +59,10 @@ void	execs(t_lsttoken *token, int btn, t_name *env)
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(strerror(errno), 2);
 			ft_putstr_fd("\n", 2);
+			free_env_array(g_var.envp);
+			free_env(g_var.env);	
+			free_all(g_var.token);
+			ft_malloc(0, -1);
 			exit(errno);
 		}
 	}
@@ -68,28 +76,34 @@ static int	init_execute_args(void)
 	g_var.interactive = 0;
 	g_var.pre_pipe_infd = -1;
 	g_var.fd = NULL;
-	g_var.hd_files = ft_calloc(17, sizeof(char *));
-	if (!g_var.hd_files)
-		return (1);
+
 	signal(SIGINT, SIG_IGN);
 	return (0);
 }
-
+// void    free_hdfiles(void)
+// {
+//     int i;
+    
+//     i = 0;
+//     if (!g_var.hd_files)
+//         return ; 
+//     while (g_var.hd_files[i])
+//     {
+//         if (access(g_var.hd_files[i], F_OK) == 0)
+//             unlink(g_var.hd_files[i]);
+//         free(g_var.hd_files[i]);
+//         i++;
+//     }
+//     free(g_var.hd_files);
+//     g_var.hd_files = NULL;
+// }
 static void	cleanup_execute_args(t_lsttoken *token, int i)
 {
-	int	j;
+	(void) i;
 
 	if (g_var.pre_pipe_infd > 2)
 		close(g_var.pre_pipe_infd);
 	sig_wait(token);
-	j = 0;
-	while (g_var.hd_files[j] && j < i)
-	{
-		if (g_var.hd_files[j])
-			unlink(g_var.hd_files[j]);
-		j++;
-	}
-	free(g_var.hd_files);
 }
 
 void	execute_args(t_lsttoken *token, t_name *env)
@@ -110,7 +124,6 @@ void	execute_args(t_lsttoken *token, t_name *env)
 				unlink(g_var.fd);
 			return ;
 		}
-		g_var.hd_files[i] = g_var.fd;
 		execute_pipes(current, i, env);
 		current = current->next;
 		i++;

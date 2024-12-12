@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 11:24:36 by bbenjrai          #+#    #+#             */
-/*   Updated: 2024/12/11 15:27:36 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:21:14 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ void	handler(int signum)
 	g_var.exit_s = 130;
 }
 
+
 static t_name	*init_env(char **en)
 {
 	t_name	*env;
 
+	if (!en || !*en) 
+		return (init_empty_env());
 	env_dup(en);
-	if (!en || !*en)
-		return (NULL);
 	if (en && *en)
 		env = fill_env(en);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:35:52 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/11 15:25:51 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:06:03 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	alistclear(t_alst **lista)
 
 void	setup_parsing(t_name *env, t_lsttoken *current)
 {
+	g_var.token = current;
 	init_g_var(&current);
 	count_total_cmds(current);
 	execute_args(current, env);
@@ -51,7 +52,6 @@ void	setup_parsing(t_name *env, t_lsttoken *current)
 	free(g_var.alist);
 	ft_malloc(0, -1);
 	free_all(current);
-	free(g_var.fd);
 }
 
 void	parsing(char *str, t_name *env)

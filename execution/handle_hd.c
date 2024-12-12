@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_hd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amabchou <amabchou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:21:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/06 02:05:35 by amabchou         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:36:51 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,18 @@ static void	handle_heredoc_child(char *name, t_redir *file, t_name *env)
 	if (b == -1)
 	{
 		perror("open");
+		free_env_array(g_var.envp);
+		free_env(g_var.env);	
+		free_all(g_var.token);
+		ft_malloc(0, -1);
 		exit(1);
 	}
 	read_heredoc(file, env, b);
 	close(b);
+	free_env(g_var.env);	
+	free_env_array(g_var.envp);
+	free_all(g_var.token);
+	ft_malloc(0, -1);
 	exit(0);
 }
 
@@ -66,6 +74,10 @@ static int	handle_fork(char *name, t_redir *file, t_name *env)
 	if (id == -1)
 	{
 		perror("");
+		free_env_array(g_var.envp);
+		free_env(g_var.env);	
+		free_all(g_var.token);
+		ft_malloc(0, -1);
 		exit(1);
 	}
 	if (id == 0)
@@ -84,18 +96,15 @@ int	ft_heredoc(int i, t_lsttoken *token, t_name *env)
 		free_heredoc(2, "Max number of heredocs has been exceeded", env, token);
 	while (file)
 	{
-		if (name)
-			free(name);
 		if (file->type == 6)
 		{
 			name = hdfile(i);
-			if (!name)
+			g_var.fd=name;
+			free(name);
+			if (handle_fork(g_var.fd, file, env))
 				return (1);
-			if (handle_fork(name, file, env))
-				return (free(name), 1);
 		}
-		file = file->next;
+		file = file->next;	
 	}
-	g_var.fd = name;
 	return (0);
 }
