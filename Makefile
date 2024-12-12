@@ -1,6 +1,6 @@
 NAME = minishell
 
-CCFLGS =  -Werror -Wextra -Wall -g3 -fsanitize=address
+CCFLGS =  -Werror -Wextra -Wall -g3 #-fsanitize=address
 
 CC = cc
 LIBFT = our_libft/libft.a
@@ -55,7 +55,7 @@ OBJ_FILES = $(SRC_FILES:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ_FILES) $(LIBFT)
+$(NAME): $(OBJ_FILES) $(LIBFT) 
 	$(CC) $(CCFLGS) $(OBJ_FILES) $(LIBFT) -lreadline  -o $(NAME)
 
 $(LIBFT):

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_hd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:21:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/12 13:06:25 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:47:14 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,10 @@ int	ft_heredoc(int i, t_lsttoken *token, t_name *env)
 		{
 			name = hdfile(i);
 			g_var.fd = name;
-			free(name);
 			if (handle_fork(g_var.fd, file, env))
 				return (1);
+			if (file->next)
+				free(name);
 		}
 		file = file->next;
 	}

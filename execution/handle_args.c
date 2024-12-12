@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 02:18:57 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/12 13:05:48 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:37:22 by bbenjrai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,13 @@ void	execute_args(t_lsttoken *token, t_name *env)
 		{
 			if (g_var.fd)
 				unlink(g_var.fd);
+			free(g_var.fd);
 			return ;
 		}
 		execute_pipes(current, i, env);
 		current = current->next;
 		i++;
+		free(g_var.fd);
 	}
 	cleanup_execute_args(token);
 }
