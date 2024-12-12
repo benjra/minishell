@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbenjrai <bbenjrai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 02:18:57 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/12 13:37:22 by bbenjrai         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:51:07 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	execs(t_lsttoken *token, int btn, t_name *env)
 static int	init_execute_args(void)
 {
 	g_var.exit_s = 0;
+	g_var.red_builtin = 0;
 	g_var.interactive = 0;
 	g_var.pre_pipe_infd = -1;
 	g_var.fd = NULL;

@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/12 13:11:25 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 15:57:04 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_var
 	t_name				*env;
 	int					is_expanded;
 	t_lsttoken			*token;
+	int					red_builtin;
 }						t_var;
 
 extern t_var			g_var;

@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:57:54 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/09 11:12:11 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 16:07:06 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	files_redirections(t_lsttoken *token, int builtin)
 	curr_red = token->redirections;
 	while (curr_red)
 	{
+		if (g_var.red_builtin && g_var.size == 1)
+			break ;
 		if (check_file_errors(curr_red->red, builtin))
 			break ;
 		if (!check_path(curr_red->red, builtin))

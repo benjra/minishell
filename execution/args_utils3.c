@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 02:18:46 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/12 10:58:14 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 16:37:42 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	in_file_prep(t_lsttoken *token, char *path, int is_builtin)
 		perror(path);
 		if (!is_builtin || g_var.size > 1)
 			exit(1);
+		else
+			g_var.red_builtin = 1;
 	}
 	else
 	{
@@ -53,14 +55,9 @@ void	out_file_prep(t_lsttoken *token, char *path, int is_builtin)
 	else
 	{
 		token->out_fd_set = 1;
-		if (!is_builtin || g_var.size > 1)
-		{
-			dup2(fd, 1);
-			if (fd > 2)
-				close(fd);
-		}
-		else
-			g_var.out_fd = fd;
+		dup2(fd, 1);
+		if (fd > 2)
+			close(fd);
 	}
 }
 
@@ -81,14 +78,9 @@ void	append_file_prep(t_lsttoken *token, char *path, int is_builtin)
 	else
 	{
 		token->out_fd_set = 1;
-		if (!is_builtin || g_var.size > 1)
-		{
-			dup2(fd, 1);
-			if (fd > 2)
-				close(fd);
-		}
-		else
-			g_var.out_fd = fd;
+		dup2(fd, 1);
+		if (fd > 2)
+			close(fd);
 	}
 }
 

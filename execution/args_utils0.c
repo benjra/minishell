@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 09:55:28 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/09 10:25:14 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 16:31:33 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,20 @@ void	handle_pipe_creation(t_lsttoken *token, int pipe_nb)
 
 void	execute_pipes(t_lsttoken *token, int pipe_nb, t_name *env)
 {
+	int	stdout_backup;
+
+	stdout_backup = -1;
 	token->builtin = check_builtin(token);
 	if (g_var.size == 1 && token->builtin != -1)
 	{
+		stdout_backup = dup(STDOUT_FILENO);
 		files_redirections(token, 1);
 		exec_builtin(token->builtin, token, env);
+		if (stdout_backup != -1)
+		{
+			dup2(stdout_backup, STDOUT_FILENO);
+			close(stdout_backup);
+		}
 	}
 	else
 	{
