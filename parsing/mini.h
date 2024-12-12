@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/12 13:06:36 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:11:25 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,4 +288,5 @@ void					my_error(char *cmd);
 void					files_redirections_norm(t_lsttoken *token, t_redir *red,
 							int builtin);
 t_name					*init_empty_env(void);
+void					freee(void);
 #endif

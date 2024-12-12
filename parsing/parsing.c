@@ -6,11 +6,19 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:35:52 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/12 11:06:03 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:11:36 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini.h"
+
+void	freee(void)
+{
+	free_env(g_var.env);
+	free_env_array(g_var.envp);
+	free_all(g_var.token);
+	ft_malloc(0, -1);
+}
 
 void	count_total_cmds(t_lsttoken *head)
 {

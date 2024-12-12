@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 02:19:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/12 11:27:39 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:11:16 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ char	*join_and_expand(char *len, t_redir *file, t_name *env)
 	if (!len)
 	{
 		perror("ft_strjoin");
-		free_env(g_var.env);
-		free_env_array(g_var.envp);
-		free_all(g_var.token);
-		ft_malloc(0, -1);
+		freee();
 		exit(1);
 	}
 	if (file->expand)
