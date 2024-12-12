@@ -45,7 +45,7 @@ char	*join_and_expand(char *len, t_redir *file, t_name *env)
 	if (!len)
 	{
 		perror("ft_strjoin");
-		free_env(g_var.env);	
+		free_env(g_var.env);
 		free_env_array(g_var.envp);
 		free_all(g_var.token);
 		ft_malloc(0, -1);
@@ -57,7 +57,7 @@ char	*join_and_expand(char *len, t_redir *file, t_name *env)
 		if (!len)
 		{
 			perror("small_expand__");
-			free_env(g_var.env);	
+			free_env(g_var.env);
 			free_env_array(g_var.envp);
 			free_all(g_var.token);
 			ft_malloc(0, -1);

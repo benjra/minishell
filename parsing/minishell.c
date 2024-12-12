@@ -38,12 +38,11 @@ void	handler(int signum)
 	g_var.exit_s = 130;
 }
 
-
 static t_name	*init_env(char **en)
 {
 	t_name	*env;
 
-	if (!en || !*en) 
+	if (!en || !*en)
 		return (init_empty_env());
 	env_dup(en);
 	if (en && *en)

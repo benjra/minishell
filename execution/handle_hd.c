@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:21:11 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/12 11:36:51 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:06:25 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ static void	handle_heredoc_child(char *name, t_redir *file, t_name *env)
 	{
 		perror("open");
 		free_env_array(g_var.envp);
-		free_env(g_var.env);	
+		free_env(g_var.env);
 		free_all(g_var.token);
 		ft_malloc(0, -1);
 		exit(1);
 	}
 	read_heredoc(file, env, b);
 	close(b);
-	free_env(g_var.env);	
+	free_env(g_var.env);
 	free_env_array(g_var.envp);
 	free_all(g_var.token);
 	ft_malloc(0, -1);
@@ -75,7 +75,7 @@ static int	handle_fork(char *name, t_redir *file, t_name *env)
 	{
 		perror("");
 		free_env_array(g_var.envp);
-		free_env(g_var.env);	
+		free_env(g_var.env);
 		free_all(g_var.token);
 		ft_malloc(0, -1);
 		exit(1);
@@ -93,18 +93,18 @@ int	ft_heredoc(int i, t_lsttoken *token, t_name *env)
 	file = token->redirections;
 	name = NULL;
 	if (count_heredoc(token) > 16)
-		free_heredoc(2, "Max number of heredocs has been exceeded", env, token);
+		free_heredoc(2, "Max number of heredocs has been exceeded");
 	while (file)
 	{
 		if (file->type == 6)
 		{
 			name = hdfile(i);
-			g_var.fd=name;
+			g_var.fd = name;
 			free(name);
 			if (handle_fork(g_var.fd, file, env))
 				return (1);
 		}
-		file = file->next;	
+		file = file->next;
 	}
 	return (0);
 }

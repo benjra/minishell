@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 10:37:32 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/12 11:34:04 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:06:15 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,13 @@ void	sig_wait(t_lsttoken *token)
 	handle_signals(1);
 }
 
-void	free_heredoc(int exit_s, char *s, t_name *env, t_lsttoken *token)
+void	free_heredoc(int exit_s, char *s)
 {
-	(void) token;
-	(void) env;
 	if (s)
 		ft_putstr_fd(s, 1);
 	free(g_var.alist);
 	free_env_array(g_var.envp);
-	free_env(g_var.env);	
+	free_env(g_var.env);
 	free_all(g_var.token);
 	ft_malloc(0, -1);
 	rl_clear_history();
@@ -66,7 +64,7 @@ void	hd_sigint(int sig)
 {
 	(void)sig;
 	free_env_array(g_var.envp);
-	free_env(g_var.env);	
+	free_env(g_var.env);
 	free_all(g_var.token);
 	ft_malloc(0, -1);
 	rl_clear_history();

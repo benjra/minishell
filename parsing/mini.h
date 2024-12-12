@@ -6,7 +6,7 @@
 /*   By: assia <assia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 17:18:20 by amabchou          #+#    #+#             */
-/*   Updated: 2024/12/12 11:17:27 by assia            ###   ########.fr       */
+/*   Updated: 2024/12/12 13:06:36 by assia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,8 +274,7 @@ void					handle_pipe_redirections(t_lsttoken *token,
 							int pipe_nb);
 void					handle_file_redirections(t_lsttoken *token, int btn);
 char					*hdfile(int i);
-void					free_heredoc(int exit_s, char *s, t_name *env,
-							t_lsttoken *token);
+void					free_heredoc(int exit_s, char *s);
 char					*hdexpand(char *l);
 int						ft_heredoc(int i, t_lsttoken *token, t_name *env);
 void					handle_signals(int mode);
